@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>使用vscode编写markdown的一些小插件 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="markdown,vscode">
+    <meta name="description" content="vscode与markdownvscode是一款非常轻量级的编辑器，你可以通过安装甚至自己编写一些小的插件来满足各种不同的使用需求，使用起来非常简洁方便。vscode 官方网站（无需翻墙）：https:&#x2F;&#x2F;code.visualstudio.com&#x2F;vscode 下载链接：https:&#x2F;&#x2F;code.visualstudio.com&#x2F;Download  Markdown是一种轻量级标记语言，它以纯文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用vscode编写markdown的一些小插件">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="vscode与markdownvscode是一款非常轻量级的编辑器，你可以通过安装甚至自己编写一些小的插件来满足各种不同的使用需求，使用起来非常简洁方便。vscode 官方网站（无需翻墙）：https:&#x2F;&#x2F;code.visualstudio.com&#x2F;vscode 下载链接：https:&#x2F;&#x2F;code.visualstudio.com&#x2F;Download  Markdown是一种轻量级标记语言，它以纯文">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B61.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B62.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B63.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B64.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B65.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B66.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B67.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B68.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B69.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B610.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B611.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B612.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B613.png">
+<meta property="article:published_time" content="2019-01-22T12:32:21.000Z">
+<meta property="article:modified_time" content="2019-02-20T03:09:28.000Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="markdown">
+<meta property="article:tag" content="vscode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B61.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用vscode编写markdown的一些小插件</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用vscode编写markdown的一些小插件</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-22T12:32:21.000Z" itemprop="datePublished" class="page-time">
+  2019-01-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/markdown/">markdown</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#vscode与markdown"><span class="post-toc-number">1.</span> <span class="post-toc-text">vscode与markdown</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用vscode编写markdown"><span class="post-toc-number">2.</span> <span class="post-toc-text">使用vscode编写markdown</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在不使用插件的情况下编写markdown"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">在不使用插件的情况下编写markdown</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用插件Markdown-Preview-Enhanced"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">使用插件Markdown Preview Enhanced</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用插件-Maridown-pdf-将-md文件转换成其他格式"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">使用插件 Maridown pdf 将.md文件转换成其他格式</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-使用vscode编写markdown的一些小插件"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用vscode编写markdown的一些小插件</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-22 20:32:21" datetime="2019-01-22T12:32:21.000Z"  itemprop="datePublished">2019-01-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/markdown/">markdown</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="vscode与markdown"><a href="#vscode与markdown" class="headerlink" title="vscode与markdown"></a>vscode与markdown</h2><p>vscode是一款非常轻量级的编辑器，你可以通过安装甚至自己编写一些小的插件来满足各种不同的使用需求，使用起来非常简洁方便。<br>vscode 官方网站（无需翻墙）：<a href="https://code.visualstudio.com/" target="_blank" rel="noopener">https://code.visualstudio.com/</a><br>vscode 下载链接：<a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">https://code.visualstudio.com/Download</a></p>
+<blockquote>
+<p>Markdown是一种轻量级标记语言，它以纯文本形式(易读、易写、易更改)编写文档，并最终以HTML格式发布。<br>Markdown也可以理解为将以MARKDOWN语法编写的语言转换成HTML内容的工具。</p>
+</blockquote>
+<p>markdown的好处在于：</p>
+<blockquote>
+<ul>
+<li>它是易读（看起来舒服）、易写（语法简单）、易更改纯文本。处处体现着极简主义的影子</li>
+<li>兼容HTML，可以转换为HTML格式发布</li>
+<li>跨平台使用</li>
+<li>越来越多的网站支持Markdown</li>
+<li>更方便清晰地组织你的电子邮件</li>
+</ul>
+</blockquote>
+<p>markdown 的中文文档：<a href="https://markdown-zh.readthedocs.io/en/latest/" target="_blank" rel="noopener">https://markdown-zh.readthedocs.io/en/latest/</a></p>
+<h2 id="使用vscode编写markdown"><a href="#使用vscode编写markdown" class="headerlink" title="使用vscode编写markdown"></a>使用vscode编写markdown</h2><p>理论上，vscode 在没有安装任何插件的情况下是可以直接编写markdown文档的，但是为了能够得到一些更加丰富的功能和有好多体验，可以通过增添新的插件对其功能进行完善。</p>
+<h3 id="在不使用插件的情况下编写markdown"><a href="#在不使用插件的情况下编写markdown" class="headerlink" title="在不使用插件的情况下编写markdown"></a>在不使用插件的情况下编写markdown</h3><p>1.首先创建一个markdown文档：在vscode工作区中新建一个以.md为后缀的文档，即可创建一个markdown文档。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B61.png" alt="创建新的markdown文档" title="">
+                </div>
+                <div class="image-caption">创建新的markdown文档</div>
+            </figure>
+
+<p>接下来就可以编辑文档内容了。比如以下面的内容为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Helo world</span><br><span class="line">欢迎来到 [小天才的GitHub主页] (https:&#x2F;&#x2F;github.com&#x2F;mhz2180572509 &quot;小天才的GitHub主页&quot;)</span><br></pre></td></tr></table></figure>
+<p>2.同步预览：点击工作区右上角的同步预览按钮，即可实时浏览所写的内容。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B62.png" alt="点击预览按钮" title="">
+                </div>
+                <div class="image-caption">点击预览按钮</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B63.png" alt="分屏同步预览" title="">
+                </div>
+                <div class="image-caption">分屏同步预览</div>
+            </figure>
+
+<h3 id="使用插件Markdown-Preview-Enhanced"><a href="#使用插件Markdown-Preview-Enhanced" class="headerlink" title="使用插件Markdown Preview Enhanced"></a>使用插件Markdown Preview Enhanced</h3><p>Markdown Preview Enhanced是一个很好用的完善预览功能的插件，可以更加形象的展示所编写的pdf格式的文档样式。在插件库中搜索markdown即可找到该插件，然后点击安装后重新加载。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B64.png" alt="安装Markdown Preview Enhanced插件" title="">
+                </div>
+                <div class="image-caption">安装Markdown Preview Enhanced插件</div>
+            </figure>
+
+<p>你会发现工作区的右上角多了一个预览按钮，这个按钮就是Markdown Preview Enhanced插件产生的，尝试点击之后看到更加接近pdf文件格式的预览效果。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B65.png" alt="Markdown Preview Enhanced插件启动按钮" title="">
+                </div>
+                <div class="image-caption">Markdown Preview Enhanced插件启动按钮</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B66.png" alt="使用Markdown Preview Enhanced预览" title="">
+                </div>
+                <div class="image-caption">使用Markdown Preview Enhanced预览</div>
+            </figure>
+
+<p>你同样可以直接在编辑界面右键即可开启Markdown Preview Enhanced插件的预览功能。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B67.png" alt="右键开启Markdown Preview Enhanced预览功能" title="">
+                </div>
+                <div class="image-caption">右键开启Markdown Preview Enhanced预览功能</div>
+            </figure>
+
+<p>你还可以通过快捷键打开：先按（Ctrl+k）然后紧接着按（v）即可</p>
+<p>Markdown Preview Enhanced的官方网站：<a href="https://shd101wyy.github.io/markdown-preview-enhanced/#/" target="_blank" rel="noopener">https://shd101wyy.github.io/markdown-preview-enhanced/#/</a></p>
+<h3 id="使用插件-Maridown-pdf-将-md文件转换成其他格式"><a href="#使用插件-Maridown-pdf-将-md文件转换成其他格式" class="headerlink" title="使用插件 Maridown pdf 将.md文件转换成其他格式"></a>使用插件 Maridown pdf 将.md文件转换成其他格式</h3><p>Maridown pdf插件可以简单的将编写的.md文件转换成其他格式的文件，一样地，在插件库中搜索安装 Maridown pdf 插件即可使用。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B68.png" alt="安装Maridown pdf插件" title="">
+                </div>
+                <div class="image-caption">安装Maridown pdf插件</div>
+            </figure>
+<p>在编写.md文件的工作区直接右键即可看到由Maridown pdf插件产生的功能项，选择需要转换的格式即可生成需要的文件，生成的文件将会直接保存在.md的文件目录下。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B69.png" alt="右键选择生成文件格式" title="">
+                </div>
+                <div class="image-caption">右键选择生成文件格式</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B610.png" alt="生成破地方文件" title="">
+                </div>
+                <div class="image-caption">生成破地方文件</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B611.png" alt="已经生成的pdf文件" title="">
+                </div>
+                <div class="image-caption">已经生成的pdf文件</div>
+            </figure>
+
+<p>（温馨提示：如果希望在vscdoe中直接打开浏览pdf格式的二进制文件，可以通过安装 vscode-pdf 插件来达到该目的）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B612.png" alt="vscode-pdf插件" title="">
+                </div>
+                <div class="image-caption">vscode-pdf插件</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B613.png" alt="在vscode中打开浏览pdf文件" title="">
+                </div>
+                <div class="image-caption">在vscode中打开浏览pdf文件</div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-02-20T03:09:28.000Z" itemprop="dateUpdated">2019-02-20 11:09:28</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/&title=《使用vscode编写markdown的一些小插件》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/&title=《使用vscode编写markdown的一些小插件》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用vscode编写markdown的一些小插件》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">OpenGL学习笔记（一）使用VS2017和CMake配置GLFW和GLAD</h4>
+      </a>
+    </div>
+  
+
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/&title=《使用vscode编写markdown的一些小插件》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/&title=《使用vscode编写markdown的一些小插件》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用vscode编写markdown的一些小插件》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEh0lEQVR42u3aS27jMBAFwNz/0h5gVhNMZL/XpAFTKa0CWxbJUgCyP19f8fX4e/3/yb/X1f2Pi+tqlOdPu/okmefz3264MGHChAnTRzI9nl5Xy16Hzpf9vpkka8eECRMmTPdgSh43u//55JKjQD5isv23a8GECRMmTL+Hae/CVl7J+vaPCRMmTJgw5Y9bOTq0mdU8+5p/iwkTJkyYfgNTPliy0ealypyjPYjkgfHmXDgmTJgwYfowplkAeY+/N1+YMGHChOnDmB7L1/pYeTGybS1qQ+XL52PChAkTpmOZ8sB1vWlmdlpJWnCev7xZMF/H7pgwYcKE6SOZ2oJlvtE+X1ibus0p29VFT8aECRMmTLdgWlnwSkG0LTEmr2p20HlR78WECRMmTLdgWmmIWfmkLUDOXttwXZgwYcKE6XCm2aabb/DvwGqXvZQyxoQJEyZMhzPlrTZt4rUNO/NEbR5s56nkyydgwoQJE6ZjmXKatuTZpmvzBeRNQivERT4YEyZMmDB9MFO7De8CykuP66ne2f3f7sSECRMmTIcztQnZ/PMk0M0Lk0lQPQt9oxZVTJgwYcJ0LNNKWLse+uatNkkqOQdNYtvifIQJEyZMmD6YKQ8RdxEkE80PK23wXM8HEyZMmDDdjikPF4tKaVl0nAXhbcEyej4mTJgwYTqcaW8hM0/OthvzSiq5De9fVH0xYcKECdPhTPmmm5O9o9w4S9rmLxUTJkyYMN2DaVZEbKHz7blYwEIat4DGhAkTJkyHM7XBbR6mtn+3Kd1ZU0573MGECRMmTKcztSHr+5LCs/A4/+0wgMeECRMmTIczzRaWJGdnT5iF3y19MWdMmDBhwnQ4U76pr5QkZynXJBje1UQbhb6YMGHChOkWTCuNpDllcixo0fOkcPEvggkTJkyYbsHUNsesh6A5TfKS8l/VZVFMmDBhwnQ4095NehZCr8wtTwHPXgAmTJgwYTqXqd0g22ntTQTnQfjshb34FSZMmDBhOpAp3yxn5cn2aXufn//2BRYmTJgwYTqWaXYgSFLD+bdt6TRf2Ozby9ExYcKECdOBTLPi4my6s4TvSglzFn6/OApgwoQJE6ajmJI2nVlg2RYv9wbAeWq4GBETJkyYMB3IlIemsztXNuNZq80szC7OTZgwYcKE6VimWei4a4PPm3LyEXOaFy8bEyZMmDDdiGmW8H0EVx6ytgtrE831QQQTJkyYMN2CKV9YG5quj7L3yFKXOTFhwoQJ0y2YZlNpJ5GHwW2DzuzgEh0vMGHChAnTsUwzoLxxpw2Gdx1B2nnWCWVMmDBhwnQI06O8ZsPMCop5Sjc5UsxKp9/OTZgwYcKE6UCmlWXPWm1Wyo0zsl3jYsKECROmc5ny8LJNiebb7WyTztPBbar3hzlgwoQJE6bDmWYNLiscu0LoXWciTJgwYcKEaX1bnYXQLUEy2/Y4ggkTJkyYfgNTMkDbQJOndNvjxa77MWHChAnTPZjaLXOWFJ413Ky8njzc/cpvxYQJEyZMRzGtNO6sPKGdbp5WXp//EA4TJkyYMH0W0x9KCkOUl+/ztgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

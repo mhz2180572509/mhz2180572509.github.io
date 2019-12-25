@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>入门Unity3d | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,Unity3D">
+    <meta name="description" content="Play 和 Edit 模式Scene 窗口                                                                                             Scene窗口               Scene窗口可以看成一个“容器”，整个游戏的所有东西（如地图、道具、角色等）都会包含在这个“容器”中，也就是说我们可以通过S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="入门Unity3d">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="Play 和 Edit 模式Scene 窗口                                                                                             Scene窗口               Scene窗口可以看成一个“容器”，整个游戏的所有东西（如地图、道具、角色等）都会包含在这个“容器”中，也就是说我们可以通过S">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%B8%801.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%B8%802.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%B8%803.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%B8%804.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%B8%805.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%B8%806.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%B8%807.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%B8%808.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%B8%809.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%B8%8010.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%B8%8011.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%B8%8012.png">
+<meta property="article:published_time" content="2019-02-09T14:21:27.000Z">
+<meta property="article:modified_time" content="2019-02-20T03:09:32.000Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="Unity3D">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/unity3d%E4%B8%801.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">入门Unity3d</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">入门Unity3d</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-02-09T14:21:27.000Z" itemprop="datePublished" class="page-time">
+  2019-02-09
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Unity3D/">Unity3D</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Play-和-Edit-模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">Play 和 Edit 模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Scene-窗口"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Scene 窗口</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Game-窗口"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Game 窗口</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#GameObjects-和-Components"><span class="post-toc-number">2.</span> <span class="post-toc-text">GameObjects 和 Components</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为GameObject添加Components"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">为GameObject添加Components</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#更改Components的参数值"><span class="post-toc-number">3.</span> <span class="post-toc-text">更改Components的参数值</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Transform"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Transform</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Prefabs"><span class="post-toc-number">4.</span> <span class="post-toc-text">Prefabs</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Assets"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Assets</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#将Prefabs实例化"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">将Prefabs实例化</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#untiy的几个重要的视窗（View）"><span class="post-toc-number">5.</span> <span class="post-toc-text">untiy的几个重要的视窗（View）</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-入门Unity3d"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">入门Unity3d</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-02-09 22:21:27" datetime="2019-02-09T14:21:27.000Z"  itemprop="datePublished">2019-02-09</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Unity3D/">Unity3D</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Play-和-Edit-模式"><a href="#Play-和-Edit-模式" class="headerlink" title="Play 和 Edit 模式"></a>Play 和 Edit 模式</h1><h2 id="Scene-窗口"><a href="#Scene-窗口" class="headerlink" title="Scene 窗口"></a>Scene 窗口</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%B8%801.png" alt="Scene窗口" title="">
+                </div>
+                <div class="image-caption">Scene窗口</div>
+            </figure>
+
+<p>Scene窗口可以看成一个“容器”，整个游戏的所有东西（如地图、道具、角色等）都会包含在这个“容器”中，也就是说我们可以通过Scene窗口看到整个游戏世界，通过一些操作（如后续陈述）我们可以改变观看这个世界的角度、远近等，还可以拖动任何一个可动的元素，调整其位置角度大小，从而通过Scene窗口观察和安排游戏内容，称这个模式为Edit模式。</p>
+<h2 id="Game-窗口"><a href="#Game-窗口" class="headerlink" title="Game 窗口"></a>Game 窗口</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%B8%802.png" alt="Game窗口" title="">
+                </div>
+                <div class="image-caption">Game窗口</div>
+            </figure>
+
+<p>Game窗口所展示的内容即“玩家”看到的内容，也就是说Game窗口是从玩家角度来看我们的游戏世界的。因为玩家所看到的内容是取决于Camera的角度和视野的，所以尽管我们可以在Scene窗口中随意变化观察的角度，但是Game窗口的内容却只取决于Camera所看到的内容。<br>同时如果运行游戏的话还可以在Game窗口中直接“玩”我们的游戏，从而达到调试的目的。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%B8%803.png" alt="运行游戏" title="">
+                </div>
+                <div class="image-caption">运行游戏</div>
+            </figure>
+
+<p>上方的这个按钮即可运行游戏，就进入了Play模式，然后我们就可以“玩”/调试我们的游戏了。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%B8%804.png" alt="游戏开始运行" title="">
+                </div>
+                <div class="image-caption">游戏开始运行</div>
+            </figure>
+
+<p>再次点击此按钮退出Play模式</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%B8%805.png" alt="退出运行中的游戏" title="">
+                </div>
+                <div class="image-caption">退出运行中的游戏</div>
+            </figure>
+
+<h1 id="GameObjects-和-Components"><a href="#GameObjects-和-Components" class="headerlink" title="GameObjects 和 Components"></a>GameObjects 和 Components</h1><p>所有Scene窗口中可见的东西都可以成为GameObject（游戏对象），GameObjects是搭建游戏的最基础的模块，但是任何一个GameObject本身并没有任何作用，他的属性以及行为都是由这个GameObject所拥有的Components（元件）决定的，Components从属于GameObject，从而告诉了每一个GameObjects应该表现哪些行为以及拥有哪些属性。</p>
+<h2 id="为GameObject添加Components"><a href="#为GameObject添加Components" class="headerlink" title="为GameObject添加Components"></a>为GameObject添加Components</h2><p>举个例子：如果我们给某个GameObject添加一个Rigidbody（刚体）的Components，那么这个GameObject就拥有了刚体的物理特性（比如受到重力等），Rigidbody是集成与unity中的，不需要我们规定其相关逻辑，只要我们给某个GameObject添加了这种Component，那么他就有了刚体该有的属性。<br>首先在Scene窗口中选中一个GameObject，然后这个GameObject的所有信息、其拥有的所有Components就会被显示在Inspector窗口中，在这个窗口中，我们可以管理这个GameObject的所有Components。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%B8%806.png" alt="在Scene窗口中选中GameObject" title="">
+                </div>
+                <div class="image-caption">在Scene窗口中选中GameObject</div>
+            </figure>
+
+<p>另外，在Hierarchy窗口中，列出了所有Scene中的GameObjects以及他们的层级关系，点击此处的任何一个GameObject也可以选中它，并且点击选中后，对应的Scene窗口中该GameObject也会高亮，两者相互呼应。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%B8%807.png" alt="在Hierarchy面板中选中GameObject" title="">
+                </div>
+                <div class="image-caption">在Hierarchy面板中选中GameObject</div>
+            </figure>
+
+<p>此处就为此GameObject添加一个Rigidbody，点击最下方的Add Component，在Physics中可以找到Rigidbody一项。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%B8%808.png" alt="添加Rigidbody" title="">
+                </div>
+                <div class="image-caption">添加Rigidbody</div>
+            </figure>
+
+<p>添加完成后出现了Rigidbody</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%B8%809.png" alt="添加后的Rigidbody" title="">
+                </div>
+                <div class="image-caption">添加后的Rigidbody</div>
+            </figure>
+
+<h1 id="更改Components的参数值"><a href="#更改Components的参数值" class="headerlink" title="更改Components的参数值"></a>更改Components的参数值</h1><p>每个Components都有可能会有很多可以设置的values（参数值），通过设置这些参数值，就可以改变该Component的属性从而改变GameObject的属性，比如上图中的Mass、Drag、Angular Drag等都可以改变参数值。</p>
+<h2 id="Transform"><a href="#Transform" class="headerlink" title="Transform"></a>Transform</h2><p>任何一个GameObject都拥有Transform的Component，Transform规定了它的Position（位置）、Rotation（旋转角度）、Scale（放缩大小），他们的值可以通过在Inspector中直接修改来设置也可以通过在Scene窗口中直接拖拽、旋转来设置。</p>
+<h1 id="Prefabs"><a href="#Prefabs" class="headerlink" title="Prefabs"></a>Prefabs</h1><p>有些在Scene窗口中出现的GameObjects我们以后可能会经常用到，比如游戏中的一面墙，我们为其设置好了很多Components以及其对应的值，我们肯定不希望每一面墙都重新添加一遍这些Components并重新设置参数值，那么此时我们就可以将一些GameObjects保存成为Prefabs（预设体），下次用到可以拿来即用，也就是说Prefabs可以生成很多的同样的GameObjects。</p>
+<h2 id="Assets"><a href="#Assets" class="headerlink" title="Assets"></a>Assets</h2><p>我们可以找到Project窗口，这个窗口中所列出和管理的东西统称为assets（资产），assects可以是3D models（3D模型）、audio files（音频文件）、scripts（脚本）等等，显然，Prefabs也是一种assets，这些资产可以看成是游戏的原材料，我们的游戏中想要有的东西都可以从这里找到。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%B8%8010.png" alt="Project面板" title="">
+                </div>
+                <div class="image-caption">Project面板</div>
+            </figure>
+
+<h2 id="将Prefabs实例化"><a href="#将Prefabs实例化" class="headerlink" title="将Prefabs实例化"></a>将Prefabs实例化</h2><p>可以通过将任何一个prefab拖动至Hierarchy窗口中，这样就会创建了该prefab的一个实例（instance），可以认为是复制了一份prefab成为了GameObject添加到了游戏的Hierarchy中。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%B8%8011.png" alt="实例化Prefab" title="">
+                </div>
+                <div class="image-caption">实例化Prefab</div>
+            </figure>
+
+<h1 id="untiy的几个重要的视窗（View）"><a href="#untiy的几个重要的视窗（View）" class="headerlink" title="untiy的几个重要的视窗（View）"></a>untiy的几个重要的视窗（View）</h1><p>在上述内容中我们间接地提到了unity的几个重要的视窗（View），在此做一个总结。</p>
+<p>这些视窗的位置可以随意调节，比如下图是我比较喜欢的一种安排方式，不过也需要根据不同需求随时做一些调整。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%B8%8012.png" alt="Unity编辑器的视窗分布" title="">
+                </div>
+                <div class="image-caption">Unity编辑器的视窗分布</div>
+            </figure>
+
+<ol>
+<li>Scene窗口用来看游戏的全局，可是换地查看和管理所有的GameObjects</li>
+<li>Hierarchy窗口展示了Scene窗口中的所有GameObjects以及它们的层级关系</li>
+<li>Game窗口展示了真正游戏的所见内容，可以在这里进行游戏调试</li>
+<li>Inspector窗口列出了所选中的GameObject的所有Components，这里可以对他们进行管理并且更改参数值</li>
+<li>Projects窗口列出了所有assets</li>
+<li>Console窗口即是控制台所打印的信息，可以用来调试C#脚本或者其他内容</li>
+<li>有时需要在Unity的商店中下载资源，就需要用到Assets Store窗口</li>
+</ol>
+<p>参考资料：<a href="https://unity3d.com/learn/tutorials/s/interactive-tutorials" target="_blank" rel="noopener">https://unity3d.com/learn/tutorials/s/interactive-tutorials</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-02-20T03:09:32.000Z" itemprop="dateUpdated">2019-02-20 11:09:32</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity3D/" rel="tag">Unity3D</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/&title=《入门Unity3d》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/&title=《入门Unity3d》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《入门Unity3d》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">从“滚球游戏”初步体验Unity3D</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/01/31/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AA%97%E5%8F%A3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">OpenGL学习笔记（二）创建一个窗口</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/&title=《入门Unity3d》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/&title=《入门Unity3d》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《入门Unity3d》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqElEQVR42u3aQY6DMAwFUO5/6Rlpth3g206gi8eqqijkpVJs2T6O+Pr5u86++fycXGdPTt64+MLDw8NrLb26iOoSr5//ec9kE/Hw8PCe4VUXl9x5vTU3y7p8bx5O8PDw8N7l5blrkppfb0oeMPDw8PC+mZeXA5JDv/ouPDw8vG/jJcWI3nInmEdrLXh4eHgxr9oA+4bPG/t7eHh4eIOuerUZlh/ivfJuebV4eHh4G3jV8abJuEBS8F3bZsPDw8PbwctHoKpFgXzjkkU3QxceHh7eBl61FJs3/nvBphoeJi03PDw8vB4vESeBoXf//M7r7/Hw8PB28HrH+iSl7kWqPDwc1f8HDw8Pr8jLW1CrCg3J5vYGBQqtLzw8PLwBLzncJ2l0rxBcbZ4VUmo8PDy8Rbx80TePaC0935RySMDDw8PbwJscx72CbzVU9Iom/1Sp8fDw8BbxemWIvMGfjwtUy76jWjUeHh7egFdtXM3HsKoliV7KjoeHh7eP1yvCVrtLyeJ2fIOHh4e3g1ctmFZT2949+QZFkxF4eHh4S3nL0tb40M+XmF94eHh4T/LyQateQ6uXrOeAGzYeHh7eBt7k/Jy3xFYl9DdpNx4eHt4GXrWp3xsIeKH1hYeHh7etqz5JgnvFgiT8zEe48PDw8N7i9Uq0q2rMk/QdDw8PbwdvWTN+PAqQlHevk/vTX+Hh4eEt5eWPzsuyPeTkV6erwsPDw3ucN2n/rwoV+UhB1NnDw8PDG/MmiXISHnrF4vy9eHh4eG/x8mCwKv2tblC1RYeHh4f3DG9VKjxfVi+ORQMEeHh4eI/zqrNMecmjWubYEhjw8PDwtvGSQ79aJs5ba0lDrjB0hYeHhzfgPXlk96jN1B8PDw9vA29SeK0uKB84SMLAserCw8PDS3m/L1uxhvpGNlYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

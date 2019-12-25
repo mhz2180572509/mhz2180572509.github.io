@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>安装好Ubuntu双系统后的一些事情 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,技术指南">
+    <meta name="description" content="创建root管理权限root管理权限即Linux系统的超级管理权限，他几乎可以做所有操作，新的Linux系统是需要设置root权限的，必须先设置root密码，这个密码可以和你登陆系统的密码不同。 打开命令行后输入：sudo passwd 然后会提示创建新的密码，输入过程中不会显示（Ubuntu之于密码都是这么处理的），然后会第二次输入确认密码，之后回车就可以创建了。这时候输入命令：su，即可进入超">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装好Ubuntu双系统后的一些事情">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="创建root管理权限root管理权限即Linux系统的超级管理权限，他几乎可以做所有操作，新的Linux系统是需要设置root权限的，必须先设置root密码，这个密码可以和你登陆系统的密码不同。 打开命令行后输入：sudo passwd 然后会提示创建新的密码，输入过程中不会显示（Ubuntu之于密码都是这么处理的），然后会第二次输入确认密码，之后回车就可以创建了。这时候输入命令：su，即可进入超">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C4.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C5.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C6.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C7.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C8.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C9.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C10.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C11.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C12.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C13.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C14.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C15.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C16.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C17.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C18.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C19.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C20.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C21.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C22.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C23.png">
+<meta property="article:published_time" content="2019-02-20T04:44:01.000Z">
+<meta property="article:modified_time" content="2019-02-20T05:15:42.000Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="技术指南">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">安装好Ubuntu双系统后的一些事情</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">安装好Ubuntu双系统后的一些事情</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-02-20T04:44:01.000Z" itemprop="datePublished" class="page-time">
+  2019-02-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#创建root管理权限"><span class="post-toc-number">1.</span> <span class="post-toc-text">创建root管理权限</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#之去掉桌面的垃圾桶图标"><span class="post-toc-number">2.</span> <span class="post-toc-text">之去掉桌面的垃圾桶图标</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装拼音输入法"><span class="post-toc-number">3.</span> <span class="post-toc-text">安装拼音输入法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#开机启动引导页面的优化与美化"><span class="post-toc-number">4.</span> <span class="post-toc-text">开机启动引导页面的优化与美化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优化设置"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">优化设置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#页面美化"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">页面美化</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-安装好Ubuntu双系统后的一些事情"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">安装好Ubuntu双系统后的一些事情</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-02-20 12:44:01" datetime="2019-02-20T04:44:01.000Z"  itemprop="datePublished">2019-02-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="创建root管理权限"><a href="#创建root管理权限" class="headerlink" title="创建root管理权限"></a>创建root管理权限</h1><p>root管理权限即Linux系统的超级管理权限，他几乎可以做所有操作，新的Linux系统是需要设置root权限的，必须先设置root密码，这个密码可以和你登陆系统的密码不同。</p>
+<p>打开命令行后输入：<code>sudo passwd</code></p>
+<p>然后会提示创建新的密码，输入过程中不会显示（Ubuntu之于密码都是这么处理的），然后会第二次输入确认密码，之后回车就可以创建了。这时候输入命令：<code>su</code>，即可进入超级管理权限哦（你可能会注意到，超级管理权限的命令行前是#打头，普通权限是$打头），输入命令：<code>exit</code>，即可退出超级管理权限.</p>
+<h1 id="之去掉桌面的垃圾桶图标"><a href="#之去掉桌面的垃圾桶图标" class="headerlink" title="之去掉桌面的垃圾桶图标"></a>之去掉桌面的垃圾桶图标</h1><p>很多人是不是看到干干净净的桌面上有一个回收站的图标深感不满，本教程关于如何去掉桌面上的回收站图标。</p>
+<p>首先在应用商店中搜索寻找到“GNOME Tweaks”</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>确认是这个软件后点击“安装”:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>安装完成后打开，在里边找到“桌面”也就是“Desktop”选项设置，右侧的“回收站”也就是“Trash”一项就可以选择是否显示了。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h1 id="安装拼音输入法"><a href="#安装拼音输入法" class="headerlink" title="安装拼音输入法"></a>安装拼音输入法</h1><p>打开设置</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>找到“地区和语言”设置项，点击右边的“管理已经安装的语言”</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C5.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>这时候可能会弹出下边的窗口，可以点开细节查看发现是一些小语种，再次建议可以选择不安装，除非你有特殊需求，否则是没什么作用的。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C6.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>此处选择“安装/删除语言”选项，点开这个选项时留意一下下边的是否是“IBus”，如果不是更改成为“IBus”（默认应该是这个选项）。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C7.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>点开后找到汉语（简体）也就是“Chinese(simplified)”，在后边打勾，然后别忘了点击“应用”，也就是“Apply”</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C8.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>此时可以关闭这个设置卡，回到刚刚的设置，点击下边的“+”号。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C9.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>此时，应该就可以看到“Chinese”了，<strong>双击</strong>这一行。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C10.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>这时可以看到有我们安装的拼音输入法了，下边也有五笔输入，可以自行选择。选好后，点击右上角的“添加”，也就是“Add”，即可。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C11.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>回到桌面，可以找到自己的两个输入法了，并且通过Shift键也可以在两个输入法之间切换。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C12.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h1 id="开机启动引导页面的优化与美化"><a href="#开机启动引导页面的优化与美化" class="headerlink" title="开机启动引导页面的优化与美化"></a>开机启动引导页面的优化与美化</h1><p>不出意外地，安装好Ubuntu和Windows的双系统后应该是由Ubuntu的grub引导启动的，也就是开机的时候要我们选择进入那个系统的那个黑底白字的难看至极的页面，这篇文章的目的就是对grub引导进行设置和美化。</p>
+<h2 id="优化设置"><a href="#优化设置" class="headerlink" title="优化设置"></a>优化设置</h2><p>grub引导的设置文件是 /etc/default/grub ，对其进行修改可以得到我们想要的结果。</p>
+<p>在命令行中输入：如果你会使用vim： <code>sudo vim /etc/default/grub</code></p>
+<p>或者如果你不会使用vim：<code>sudo gedit /etc/default/grub</code></p>
+<p>然后我们就可以对设置文件进行编辑了</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C13.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>一般我们需要更改其中的 GRUB_DEFAULT（默认启动项：这个编号是你开机时看到的若干个启动项从上到下的依次编号，记住！程序员世界的编号从来都是从0开始的，意思是，第一项是0，第二项是1，以此类推）、GRUB_TIMEOUT_STYLE（是否显示倒计时，hidden的属性表示不会显示倒计时）、GRUB_TIMEOUT（等待时间，单位是秒）、GRUB_GFXMODE（屏幕的显示像素，可以不用管这一项）</p>
+<p>按照自己的需求更改，其他的很多配置如果你还需要更改可以去查询每一项的具体含义和属性值。</p>
+<p><strong>注意一点，如果你更改的属性语句前边有#符号，一定要将其去掉这一句才会起作用。</strong></p>
+<p>完成后记得保存离开，然后再命令行输入： <code>sudo update-grub</code> ，对刚才的设置进行更新。整体下来大概是这个样子：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C14.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="页面美化"><a href="#页面美化" class="headerlink" title="页面美化"></a>页面美化</h2><p>这个黑底白字的启动引导页面说实话还是极其丑陋的，不过好在我们可以对其进行美化。如果你是可以完成自己修改源码或者加上样式的大神，不用我多说，但是如果你想省事或者不会自己写页面样式，可以去这里下载一款你喜欢的风格的页面样式给自己使用就好： （可能需要翻墙，如果需要请移步我的其他有关科学上网的文章），点击左侧的GRUB Themes</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C15.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>这里你就可以看到各种各样的主题了，选择自己喜欢的一个，我以这个“Poly lignt”为例，选择它并下载。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C16.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C17.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>如果你实在无法打开这个页面，可以来我的百度云分享的这个文件出下载：<a href="https://pan.baidu.com/s/1HEhEGK_qK9-0o826CePqrQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1HEhEGK_qK9-0o826CePqrQ</a> 提取码：x1hl </p>
+<p>下载好后得到了一个压缩包，将其解压</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C18.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>创建一个文件夹：<code>sudo mkdir /boot/grub/themes/</code></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C19.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>将整个解压出来的文件夹拷贝到刚刚创建的文件夹下：<code>sudo cp -R poly-light-master /boot/grub/themes/</code></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C20.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>接下来编辑文件：/etc/grub.d/00_header，即输入命令：<code>sudo gedit /etc/grub.d/00_header</code></p>
+<p>如果你发现自己更改内容之后无法保存文件，说明你权限不够，可以进入root权限再次编辑</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C21.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>在打开的 00_header 文件中，加入如下两行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRUB_THEME&#x3D;”&#x2F;boot&#x2F;grub&#x2F;themes&#x2F;poly-light-master&#x2F;theme.txt”</span><br><span class="line">GRUB_GFXMODE&#x3D;”1920×1080”</span><br></pre></td></tr></table></figure>
+
+<p>第一句根据你下载的主题改成自己刚刚拷贝到themes文件夹下的主题包中的theme.txt文件，第二句是你屏幕的分辨率。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C22.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>保存后记得要更新一下grub： <code>sudo update-grub</code></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu%E4%BA%8C23.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>好了，此时再次重启你的电脑就可以看到好看的开机页面啦！</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-02-20T05:15:42.000Z" itemprop="dateUpdated">2019-02-20 13:15:42</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/" rel="tag">技术指南</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/&title=《安装好Ubuntu双系统后的一些事情》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/&title=《安装好Ubuntu双系统后的一些事情》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《安装好Ubuntu双系统后的一些事情》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/02/20/Unity%E4%B8%AD%E4%BD%BF%E7%94%A8Playground%E6%A1%86%E6%9E%B6%E8%BD%BB%E6%9D%BE%E5%88%B6%E4%BD%9C2D%E6%B8%B8%E6%88%8F/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Unity中使用Playground框架轻松制作2D游戏</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/&title=《安装好Ubuntu双系统后的一些事情》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/&title=《安装好Ubuntu双系统后的一些事情》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《安装好Ubuntu双系统后的一些事情》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAAE+CAAAAAAxUyPsAAAFRklEQVR42u3awY4TMRAE0Pz/T4PECQlmpqrbCUh5c1qFMLafV9p2tV+v+Plx8fz+r1ff/PPz/JtXoySzmq3r9Y4HHz58+PDhCyZxv/gruKv3349+/3kOOmNNtvDyPfjw4cOHD9+IL1lAPukWPZl6vvi2TGk3Bh8+fPjw4fs83+Ywn//cxhP7t+HDhw8fPnz/G19ClqfcSayQb1Ibx8/CCHz48OHDh2/PNysCcuh26vnn+aw2Yx3odeDDhw8fPnzlLazv+fnwgw8fPnz48AV/nmcBdx4unA0CkiKjLVAe3owPHz58+PBNNIqgfBPZt0uNgvLFsX8zB3z48OHDh2/PtzlI338nWfY+nsj5Zlfxol4HPnz48OHDF5x2E6zkkD9rvW+ANhfR2pk8JC748OHDhw/fiC8pL04Nv1nwhqZtJFyuDh8+fPjw4RvxzRre+UTbSKJ9Z7INeWshD+7x4cOHDx++lq9FSZaxbwC0GzMrlXLih8YDPnz48OHDF/PlDey2FZ20AWYbk5dEp67HXXLjw4cPHz58JV9bguQN8pZpFtPnhVf7f+vtxIcPHz58+IJVtAvbt6g3kUT++R4oijPw4cOHDx++EV8eds+a68mW5KVG24DPv5PPcNgrwIcPHz58X89XhNGjZvYmbthsXh7Zzzb+oVmODx8+fPjwXYw7a36/Rk+ysM2lsbxV37YHLrcQHz58+PDhK/nyEiQPGvINyEOKtkmQb0NbvuDDhw8fPnx7vvY4fap9nr8/LzXa0KElLhaMDx8+fPjwLY7xSaEw+8Ofv+1sKz1nulw7Pnz48OHDV/LN/vOmWT5rgefh/tl2QtGGx4cPHz58+AK+zZBtuL+5HLaJOWblzoG6Dx8+fPjw4buoQGaVziZe35RKeXy/3+aoMMKHDx8+fPhGWXoOlC8vIW7HncUHbfu/viiADx8+fPjwxXxn/5Bvwvp8e9oFt+3zYd2HDx8+fPjw3a43v6Q1i8uH8feopZ2XX5v4Hh8+fPjw4dvw5QPMJhoNfws624b8PXlsEcX0+PDhw4cPXxAW5ECzBc8uru23eRZGFNfp8OHDhw8fvpKv5WiZ8uti7WW4/PpaEgq0I+LDhw8fPnwbvhlce71slmcks2pb47Pi7CGsx4cPHz58+AK+2dW0WbHSXlm7Z2rLoFksUjTI8eHDhw8fvpivbYpvpjJrZm8iifYiXdEGwIcPHz58+BZ8s4W1B/4ZYtsUf0eU8JcZ4sOHDx8+fAu+OuNffD/HzYP+NobIw4jLOeDDhw8fPnyH+Nrl7dvqbeGSLHgT/Uej4MOHDx8+fCO+WZN4z3E2Rm8bDPtx8eHDhw8fvhnf5uCdhwVtS+DdgcXsm0WvAx8+fPjw4Qv6vJtj9qxRPWvS5y38/JP6ogA+fPjw4cM34muvgm0KglOBQv629teiCCbw4cOHDx++ku/U4bk93m+uqc2ihH1Y//DLhA8fPnz48AV8eSmQ4G4Ki1PN7AR6tuV1ZIAPHz58+PDdhvXJAMnRvT2uzwqmHGID9/BOfPjw4cOHb803a1RvooRZCzyPDzYN+4dIBR8+fPjw4Sv52rZ30mbetMPzn/NP6nLkULmDDx8+fPjwXc0kKVZamnZJbUC/b6u3BdPDLT98+PDhw4ev5GsP5G1k0C6maFevS67Vgw8fPnz48H2E71RW0Tbd27BgdhGtuBCADx8+fPjw/VO+GdwsrJ8VOm1E8tHCBR8+fPjwfQ1f8rq2XNg01Nvl5SFFvpGH2+T48OHDhw/fKJHOW9rt4jexQrKRSYn2joYBPnz48OHD9+v5CWP5aWgJq4CHAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

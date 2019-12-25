@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【WEB JS PHP】屏幕截图粘贴上传+文字识别+一键复制识别结果 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="WEB,文字识别,项目应用">
+    <meta name="description" content="今天为大家带来一款我自己写的小应用，由于最近在学习网课，而个人又是OneNote笔记爱好者，不做笔记就觉得课程学习不完整，但是懒就懒在实在不想打字啊，所以想到了直接截图用文字识别嘛，于是经过几个小时的鼓捣，这个小应用就诞生了！本着好东西要分享的原则，特意把代码贴出来并且非常欢迎大家使用我写的这个小工具~ 功能介绍当我们使用QQ、Tim、微信或者电脑自身的截图功能获取了截图后，不需要将图片保存成文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【WEB JS PHP】屏幕截图粘贴上传+文字识别+一键复制识别结果">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="今天为大家带来一款我自己写的小应用，由于最近在学习网课，而个人又是OneNote笔记爱好者，不做笔记就觉得课程学习不完整，但是懒就懒在实在不想打字啊，所以想到了直接截图用文字识别嘛，于是经过几个小时的鼓捣，这个小应用就诞生了！本着好东西要分享的原则，特意把代码贴出来并且非常欢迎大家使用我写的这个小工具~ 功能介绍当我们使用QQ、Tim、微信或者电脑自身的截图功能获取了截图后，不需要将图片保存成文件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/PasteOCR1.gif">
+<meta property="og:image" content="http://cdn.littlegenius.xin/PasteOCR2.gif">
+<meta property="og:image" content="http://cdn.littlegenius.xin/PasteOCR3.gif">
+<meta property="article:published_time" content="2019-04-23T07:22:17.000Z">
+<meta property="article:modified_time" content="2019-08-05T03:47:52.000Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="WEB">
+<meta property="article:tag" content="文字识别">
+<meta property="article:tag" content="项目应用">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/PasteOCR1.gif">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【WEB JS PHP】屏幕截图粘贴上传+文字识别+一键复制识别结果</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【WEB JS PHP】屏幕截图粘贴上传+文字识别+一键复制识别结果</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-23T07:22:17.000Z" itemprop="datePublished" class="page-time">
+  2019-04-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%8E%A8%E9%80%81/">推送</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#功能介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">功能介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基本原理与流程"><span class="post-toc-number">2.</span> <span class="post-toc-text">基本原理与流程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#实例与使用"><span class="post-toc-number">3.</span> <span class="post-toc-text">实例与使用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#代码实现"><span class="post-toc-number">4.</span> <span class="post-toc-text">代码实现</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【推送】屏幕截图一键粘贴-识别图中的文字-一键复制识别结果"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【WEB JS PHP】屏幕截图粘贴上传+文字识别+一键复制识别结果</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-23 15:22:17" datetime="2019-04-23T07:22:17.000Z"  itemprop="datePublished">2019-04-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%8E%A8%E9%80%81/">推送</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>今天为大家带来一款我自己写的小应用，由于最近在学习网课，而个人又是OneNote笔记爱好者，不做笔记就觉得课程学习不完整，但是懒就懒在实在不想打字啊，所以想到了直接截图用文字识别嘛，于是经过几个小时的鼓捣，这个小应用就诞生了！本着好东西要分享的原则，特意把代码贴出来并且非常欢迎大家使用我写的这个小工具~</p>
+<h1 id="功能介绍"><a href="#功能介绍" class="headerlink" title="功能介绍"></a>功能介绍</h1><p>当我们使用QQ、Tim、微信或者电脑自身的截图功能获取了截图后，不需要将图片保存成文件，只需在页面中的输入框中直接使用Ctrl+V或者右键粘贴就能得到剪贴板中的图片了。同时，我们会将你粘贴的图片上传到后台，调用百度AI的OCR（文字识别）接口，将图片中的文字识别并提取出来，将识别结果显示到页面上。最后，你可是一手动修改你认为识别不正确的地方，然后点击下边的按钮一键复制所有的识别结果，粘贴到你想要粘贴的任何部分！</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/PasteOCR1.gif" alt="截取并识别视频中的文字" title="">
+                </div>
+                <div class="image-caption">截取并识别视频中的文字</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/PasteOCR2.gif" alt="截取并识别不可复制的文字内容" title="">
+                </div>
+                <div class="image-caption">截取并识别不可复制的文字内容</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/PasteOCR3.gif" alt="截取并识别图片中的文字" title="">
+                </div>
+                <div class="image-caption">截取并识别图片中的文字</div>
+            </figure>
+
+<h1 id="基本原理与流程"><a href="#基本原理与流程" class="headerlink" title="基本原理与流程"></a>基本原理与流程</h1><ul>
+<li>使用OCR接口前，需要先请求access_token，为了避免重复请求，将其保存在session中</li>
+<li>使用JavaScript检测粘贴事件，并使用Clipboard技术获取剪贴板中的图片的Base64编码</li>
+<li>显然，获取到的Base64编码是可以用来在页面中显示图片的</li>
+<li>使用AJAX技术将Base64编码传送到后台</li>
+<li>后台获取得到图片的Base64，进行预处理，包括去掉头部信息、将AJAX传送过程中自动转换的‘+’符号从空格转换回来等</li>
+<li>将格式化好的图片的Base64编码请求百度的OCR接口返回文字识别结果</li>
+<li>将多个零散的是被内容拼合成一个完整的字符串并返回给前端，显示在页面上</li>
+<li>完成一键复制功能</li>
+</ul>
+<h1 id="实例与使用"><a href="#实例与使用" class="headerlink" title="实例与使用"></a>实例与使用</h1><p>本仓库中的代码省略了所有的样式，只保留了最简单的代码内容，一个比较好的可以运行的实例请参考笔者的个人项目。</p>
+<p>也欢迎你收藏笔者的网站，随意使用，希望在一些情况下可以帮到你！</p>
+<p><a href="https://www.littlegenius.xin/PasteOCR/" target="_blank" rel="noopener">笔者个人的项目实例</a></p>
+<p>本项目申请使用了百度OCR接口中的“通用文字识别”接口，对于准确率来讲，个人使用基本满意，可以识别中英文和文字不是正向的图片（即文字方向旋转也生效），不能识别手写文字，每日识别次数上线为50000次。</p>
+<p>如果你有任何提议或问题，欢迎使用邮件和我联系：<a href="mailto:&#109;&#x68;&#122;&#x32;&#49;&#x38;&#x30;&#x35;&#55;&#x32;&#53;&#x30;&#57;&#64;&#x31;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;">&#109;&#x68;&#122;&#x32;&#49;&#x38;&#x30;&#x35;&#55;&#x32;&#53;&#x30;&#57;&#64;&#x31;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;</a></p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>具体的完整的代码实现就在这里啦：<a href="https://github.com/mhz2180572509/PasteImagetoOCR" target="_blank" rel="noopener">https://github.com/mhz2180572509/PasteImagetoOCR</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-05T03:47:52.000Z" itemprop="dateUpdated">2019-08-05 11:47:52</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEB/" rel="tag">WEB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E8%AF%86%E5%88%AB/" rel="tag">文字识别</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E5%BA%94%E7%94%A8/" rel="tag">项目应用</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/&title=《【WEB JS PHP】屏幕截图粘贴上传+文字识别+一键复制识别结果》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/&title=《【WEB JS PHP】屏幕截图粘贴上传+文字识别+一键复制识别结果》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【WEB JS PHP】屏幕截图粘贴上传+文字识别+一键复制识别结果》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Unity3D基础脚本编程</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/&title=《【WEB JS PHP】屏幕截图粘贴上传+文字识别+一键复制识别结果》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/&title=《【WEB JS PHP】屏幕截图粘贴上传+文字识别+一键复制识别结果》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【WEB JS PHP】屏幕截图粘贴上传+文字识别+一键复制识别结果》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZ4AAAGeCAAAAACBFzjTAAAIYklEQVR42u3awZLaQBIEUP//T3sve/DGGJyZJS7L4zQhQLTq9USkqvTrV/z6/eP18/ifR1596893f34+OfL+PK9W8v5s+ec/cZ4HXnjw4MGDBw+er+H5/faVFzFf+saWlyzBSzbQq289Vc+kDnjw4MGDBw8ePFtwTOJjHseT8iXFzTk3tss68wq8PI4HDx48ePDgwXPg2eLpvbV6J89X+FST9IEz48GDBw8ePHjwHIa1+YC5xWsbjttcODmeb8ct+uPBgwcPHjx48Fx4nhq+3h8EbFuxbehPNs09WG+/jgcPHjx48ODB856njaT+vv/98EtZ8eDBg8ffeL6A5/fhtQ1x85DaNlXz48mAPA/BbXu0OBsePHjw4MGDB8+P7+ahMH83L9zWDN1G4O0muDRDt3bzX86GBw8ePHjw4MHzgqcNtZcomW+IS7HucfwS6x9okuLBgwcPHjx48EzD7KSx2A7FE4Z8uL5tvq3Qly3yMBgePHjw4MGD5wt4kotMWp/3qHoZ9+bM2xm2ofW2tv/5Gw8ePHjw4MGD54VFO1puwZ4dWl9C+SWOt0PxJI5H14IHDx48ePDg+Xqe+4C2JUzC6BZn88v+xOt+LS//Y/DgwYMHDx48eMpB9Tbk3i4pCcpJEN8ao9tDkG1zuQj0ePDgwYMHDx4806B3azheovllpJ2fsx3h52dL2qPFMBsPHjx48ODB8/U8bekvP39vL27D6U8MrTfO/AgePHjw4MGDB09S6K2U+Sg3IbzE4su2yI8n52lvLYr7Hjx48ODBgwfPF/PkZUoWnbdHW/58IJ18/hK126K3DwTgwYMHDx48ePC0jb9tmN1iPPX5rV27tTjzW4ht0I4HDx48ePDgwfM+xeVgybeSMLqF9adCc469bdw89OPBgwcPHjx48Gz9unZgvI2Tn7qAJOa2TdV20zz1EEBUbTx48ODBgwfPV/JsAO0jd1ujcAu19+i83STkM+hig+LBgwcPHjx48MTdtksA/URovgyzL0E83wptBK9bwHjw4MGDBw8ePNPgeQvQeXDfxsZb2E0awZdmbgs2zuHx4MGDBw8ePP/XPFsETN7d4LcjeVmfumHYWsN13MeDBw8ePHjw4PnBk49+2wJdLqBtnuYj52dbovlq25rjwYMHDx48ePC8n5MmETBvg7YxdBtm58cvDd/tMc32ZgMPHjx48ODBgyfvueWj2TvnvUmaF/p+/u0mYTvy37/x4MGDBw8ePHjedt7aiJkcaduL7bt5YM0br9tmajdQHtbx4MGDBw8ePHja9l8r37ZHkzNvjc7819vI+9RtwMtnDfDgwYMHDx48eIJgug2P8yLmkX0rcc7TRvC8GdqG9X9sUzx48ODBgwcPnvJhu5atDa9JEX+Vr3Zsf7+d2FYY/d/gwYMHDx48eL6S59kRcvL5TwzLk7i/xe7LtntgYI8HDx48ePDgwfODpx3Bbku8lyYfD+dheltDsrZtpP2XYI0HDx48ePDgwRM08vJgnZcgGXgnJd6CdTt6f2q0/0CHEw8ePHjw4MGDZ2LI251tqG2bofdhdj6kvw/F2+2FBw8ePHjw4MHznucyJE7OmQPnhWvjbx6F82okG7Edq+PBgwcPHjx48CQ/vMXENljn7ch2AHwfw7dXlG+pOqDjwYMHDx48ePA89DP5ILyN5lvTdovabSi/hPjxXwIPHjx48ODBg+ehIHsPu8mq8r/zQfi2qu1mox2Q48GDBw8ePHjwtKdoL+weoC/NyjYW3xuj+ZA7v83AgwcPHjx48OD5ef4Npm19tgPmJG6eBsNB+zIPvvltRn0DgAcPHjx48ODB8+K32oW2RdnC+la+ZA2XyNu2dPN2869tN+HBgwcPHjx4voBni9Fba/LZRmQ7qE5Kdh9Rt8P1f8DjwYMHDx48ePAEPbdLtN2Kcm+AtgG9bQpvYX2rMB48ePDgwYMHT9J5uwTKNojnEXaL+/cxeXLO+8OL//h1PHjw4MGDBw+euLW3XV4+Hm4f47uE4+2q7zcSY3DHgwcPHjx48OApw1/eatyAW56nwnde0Mtre+wSDx48ePDgwYOnnZa2eBtkTpisMN8uW/BNztAOs8eONR48ePDgwYPny3iiYBcvrh1R5+W+rKddbX58O5KMxvHgwYMHDx48eN7ztF9uw+uzobkdP+flzo+3W7zlx4MHDx48ePDg2Ya4SSMvaUfeo3Y+tG6LlW+4pMV5b5jiwYMHDx48ePDkw+xLm/Je9E9E53xLtcfb4F5cER48ePDgwYMHzwfajsnSt/DaBuK2FZt8Kzme1DC/McCDBw8ePHjw4Ak+UzcK799tg/sFvi1cfgOQV6bdWHjw4MGDBw8ePJ/G2M62jY3rIXE5sL8c3wb8ePDgwYMHDx48+ZfvTclLK3MbZm9D6Pvnt/8MPHjw4MGDBw+ep2aj+QN8easxfzivfYyvLfT2ajd6exV/+RU8ePDgwYMHD56y3E8Nj9vRbxuyt1K2nPebhGLlePDgwYMHDx485WNzTxVri7njlL5tPk5D67wFnN+u4MGDBw8ePHjw/DzP1hDc2o7t5W1BuW3CtjcG22faLY4HDx48ePDgwVNmywcg7w8mto9O5uPkfJx/H4Q/+/AiHjx48ODBg+ebeZ6KknkrMC/oU+3ap5qw20pO7+LBgwcPHjx48PzguRfx0s27/Pqzw+n8PMl388/gwYMHDx48ePA8y5O0F/Pm43YkiaRbEzMfwz91yxE1RvHgwYMHDx48eM7BOh85b6PuyzC4HU63G+4+wC7COh48ePDgwYMHT1nKJDI+1aBso3MSyi/Xso3et3dfBms8ePDgwYMHD55zQS9N1U8MkluGC89Wt/zWAg8ePHjw4MGD54/XfwDCklD4G8DOTAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

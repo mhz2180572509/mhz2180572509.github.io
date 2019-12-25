@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【C++温故知新】（二）指针 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,C++">
+    <meta name="description" content="指针指针是一个变量，存储的是值的地址 12&amp;Value &#x3D;&gt; Address&#x2F;Pointer*Pointer&#x2F;Address &#x3D;&gt; Value 例如： 12int myInt &#x3D; 10;     &#x2F;&#x2F;Valueint *myPoint &#x3D; &amp;myInt;     &#x2F;&#x2F;Pointer  上边的写法是将 myInt 的地址赋给了指针 myPoint ，前边的 * 可以和 i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C++温故知新】（二）指针">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="指针指针是一个变量，存储的是值的地址 12&amp;Value &#x3D;&gt; Address&#x2F;Pointer*Pointer&#x2F;Address &#x3D;&gt; Value 例如： 12int myInt &#x3D; 10;     &#x2F;&#x2F;Valueint *myPoint &#x3D; &amp;myInt;     &#x2F;&#x2F;Pointer  上边的写法是将 myInt 的地址赋给了指针 myPoint ，前边的 * 可以和 i">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-05T03:28:06.000Z">
+<meta property="article:modified_time" content="2019-08-06T07:54:04.000Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【C++温故知新】（二）指针</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【C++温故知新】（二）指针</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-05T03:28:06.000Z" itemprop="datePublished" class="page-time">
+  2019-08-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#指针"><span class="post-toc-number">1.</span> <span class="post-toc-text">指针</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指针的声明"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">指针的声明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态分配内存"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">动态分配内存</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#指针与数组"><span class="post-toc-number">2.</span> <span class="post-toc-text">指针与数组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用new创建动态数组"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">使用new创建动态数组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态数组的创建与释放"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">动态数组的创建与释放</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态数组的使用"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">动态数组的使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组名与指针"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">数组名与指针</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#指针算术"><span class="post-toc-number">3.</span> <span class="post-toc-text">指针算术</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#指针和字符串"><span class="post-toc-number">4.</span> <span class="post-toc-text">指针和字符串</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#指针与结构"><span class="post-toc-number">5.</span> <span class="post-toc-text">指针与结构</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#存储方式"><span class="post-toc-number">6.</span> <span class="post-toc-text">存储方式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#指针与const"><span class="post-toc-number">7.</span> <span class="post-toc-text">指针与const</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指针指向常规变量"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">指针指向常规变量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常规指针指向变量"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">常规指针指向变量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指向常规对象的常规指针"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">指向常规对象的常规指针</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常规指针指向常规变量"><span class="post-toc-number">7.4.</span> <span class="post-toc-text">常规指针指向常规变量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一种不允许的情况"><span class="post-toc-number">7.5.</span> <span class="post-toc-text">一种不允许的情况</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指针、数组与函数的参数传递"><span class="post-toc-number">7.6.</span> <span class="post-toc-text">指针、数组与函数的参数传递</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【C-温故知新】二指针"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【C++温故知新】（二）指针</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-05 11:28:06" datetime="2019-08-05T03:28:06.000Z"  itemprop="datePublished">2019-08-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><p>指针是一个变量，存储的是值的地址</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&amp;Value =&gt; Address/Pointer</span><br><span class="line">*Pointer/Address =&gt; Value</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> myInt = <span class="number">10</span>;     <span class="comment">//Value</span></span><br><span class="line"><span class="keyword">int</span> *myPoint = &amp;myInt;     <span class="comment">//Pointer</span></span><br></pre></td></tr></table></figure>
+
+<p>上边的写法是将 <code>myInt</code> 的地址赋给了指针 <code>myPoint</code> ，前边的 * 可以和 int 一同理解为一个整体，表示一个整型的指针。</p>
+<h2 id="指针的声明"><a href="#指针的声明" class="headerlink" title="指针的声明"></a>指针的声明</h2><p>• <code>int *myPoint;</code><br>• <code>int * myPoint;</code><br>• <code>int* myPoint;</code></p>
+<h2 id="动态分配内存"><a href="#动态分配内存" class="headerlink" title="动态分配内存"></a>动态分配内存</h2><ul>
+<li>使用new来分配内存<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typeName * pointer_name = <span class="keyword">new</span> typeName;</span><br></pre></td></tr></table></figure></li>
+<li>使用delete释放内存<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> pointer_name;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>总结</strong>：使用 * 声明指针，指向某值的地址，使用 <code>&amp;Value</code> 获得值的地址，使用 <code>new</code> 会动态分配空间，使用 <code>delete</code> 释放动态分配的空间</p>
+<h1 id="指针与数组"><a href="#指针与数组" class="headerlink" title="指针与数组"></a>指针与数组</h1><h2 id="使用new创建动态数组"><a href="#使用new创建动态数组" class="headerlink" title="使用new创建动态数组"></a>使用new创建动态数组</h2><p>动态数组表示在运行过程中创建。如果不使用 new 来声明数组，那么数组会在编译的时候就被分配相应的内存，不论是否有值都会占据相应的存储空间，成为静态联编（static binding），类似于使用值存储；使用 new 来声明数组，数组会在程序运行时创建，成为动态联编（dynamic binding），类似于使用链表存储。</p>
+<h2 id="动态数组的创建与释放"><a href="#动态数组的创建与释放" class="headerlink" title="动态数组的创建与释放"></a>动态数组的创建与释放</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typeName * pointer_name = <span class="keyword">new</span> typeName [num_elements];</span><br><span class="line"><span class="keyword">delete</span> [] pointer_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="动态数组的使用"><a href="#动态数组的使用" class="headerlink" title="动态数组的使用"></a>动态数组的使用</h2><p>pointer_name 为指向数组第一个值的指针，调用数组第n个元素可以：</p>
+<ul>
+<li><code>pointer_name[n];</code></li>
+<li><code>pointer_name+n; pointer_name[0];</code></li>
+</ul>
+<h2 id="数组名与指针"><a href="#数组名与指针" class="headerlink" title="数组名与指针"></a>数组名与指针</h2><p>数组名即为指向该数组第一个元素的指针，即存在：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arrayName = &amp;arrayName[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<p>所以以下两个情况等价：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> myInt[<span class="number">3</span>] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>* myPoint=myInt;  &lt;==&gt;  <span class="keyword">int</span>* myPoint = &amp;myInt[<span class="number">0</span>]</span><br><span class="line">myPoint[<span class="number">0</span>]  &lt;==&gt;  *myPoint</span><br><span class="line">myPoint[<span class="number">2</span>]  &lt;==&gt;  *(myPoint+<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<p>但是只有指针才可以有运算，数组名不可以有运算，例如在上边的代码中，<code>myPoint+1</code> 是合法的，但是 <code>myInt+1</code> 是不合法的</p>
+<h1 id="指针算术"><a href="#指针算术" class="headerlink" title="指针算术"></a>指针算术</h1><p>将指针加一，等于将指针增加的量指向其类型的字节数。比如一个指向double类型的指针加一，其数值其实增加8，以指到下一个地址去。</p>
+<p>还可以将一个指针减去另一个指针，获得两个指针的差。这种运算将得到一个整数，仅当两个指针指向同一个数组(也可以指向超出结尾的一个位置)时，这种运算才有意义；这将得到两个元素的间隔。</p>
+<h1 id="指针和字符串"><a href="#指针和字符串" class="headerlink" title="指针和字符串"></a>指针和字符串</h1><p>在C++的 <code>cout</code> 以及其他多数表达式中，<code>char</code>数组名、<code>char</code>指针以及用引号引起来的字符串常量都被解释为字符串中第一个字符的地址。</p>
+<p>由于数组名是数组中第一个元素的指针，所以在字符串数组中，如果直接打印数组名，将会一直打印所有的内容，直到出现\0才结束，如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> myChar[<span class="number">10</span>] = <span class="string">"hello"</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; myChar;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码将打印 <code>hello</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> myChar[<span class="number">10</span>] = <span class="string">"hello"</span>;</span><br><span class="line"><span class="keyword">char</span>* myPointer = myChar;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; myPointer;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码将打印 <code>hello</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> myChar[<span class="number">10</span>] = <span class="string">"hell\0o"</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; myChar;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码将只打印 <code>hell</code></p>
+<h1 id="指针与结构"><a href="#指针与结构" class="headerlink" title="指针与结构"></a>指针与结构</h1><p>使用 <code>new</code> 可以创建动态结构，使用指针调用动态结构中的某一项需要使用 <code>-&gt;</code>，（使用结构名来调用某一项使用的是 <code>.</code> ）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">myStruct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> myInt;</span><br><span class="line">    <span class="keyword">double</span> myDouble;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">myStruct * myPointer = <span class="keyword">new</span> myStruct;</span><br><span class="line">myPointer-&gt;myInt = <span class="number">10</span>;</span><br><span class="line">myPointer-&gt;myDouble = <span class="number">10.2</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="存储方式"><a href="#存储方式" class="headerlink" title="存储方式"></a>存储方式</h1><p>根据用于分配内存的方法,C++管理数据内存的方式可以分为 自动存储、静态存储和动态存储(有时也叫作自由存储空间或堆)。(C++11新增了线程存储)</p>
+<ul>
+<li>自动存储：<br>在函数内部定义的常规变量使用自动存储空间，被称为自动变量(automatic variable)，它们在所属的函数被调用时自动产生，在该函数结束时消亡。自动变量是一个局部变量，其作用域为包含它的代码块。代码块是被包含在花括号中的一段代码。自动变量通常存储在栈中，即执行代码块时，其中的变量将依次加入到栈中，而在离开代码块时，将按相反的顺序释放这些变量。</li>
+<li>静态存储：<br>静态存储是整个程序执行期间都存在的存储方式。使变量成为静态的方式有两种：一种是在函数外面定义它；另一种是在声明变量时使用关键字 static 定义。</li>
+<li>动态存储：<br>使用 new 和 delete 运算符可以提供一种比自动变量和静态变量更灵活的方法。它们管理了一个内存池，这在C++中被称为自由存储空间(free store)或堆(heap)。该内存池同用于静态变量和自动变量的内存是分开的。因此，数据的生命周期不完全受程序或函数的生存时间控制。</li>
+</ul>
+<h1 id="指针与const"><a href="#指针与const" class="headerlink" title="指针与const"></a>指针与const</h1><p>对于将const应用于指针，这个问题是很微妙又复杂的，因为存在两种情况：</p>
+<ul>
+<li>将const作用于指针指向的值，使指针指向一个常量对象，这样可以防止使用指针来修改其指向的值，但是指针所指的位置可以随意更改，即可以更换指针指向的变量，但是那个const的变量本身是无法修改的</li>
+<li>将const作用于指针本身，这样可以防止改变指针指向的位置，但是该位置所存储的值是可以改变的，即可以通过指针指向的变量修改该地址存储的值</li>
+</ul>
+<h2 id="指针指向常规变量"><a href="#指针指向常规变量" class="headerlink" title="指针指向常规变量"></a>指针指向常规变量</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> myInt=<span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> * pt = &amp;myInt;</span><br></pre></td></tr></table></figure>
+<p>这里的<code>pt</code>是一个指向 const int（10）的指针，因此无法使用<code>pt</code>来修改这个值，即 <code>*pt</code> 的值为const，不能被修改，如  <code>*pt+=1</code> 是不行的。</p>
+<p>但是在这里，<code>myInt</code>本身并不是const的常量，而是对于<code>pt</code>而言，这个值是常量，也就是说无法利用<code>pt</code>来修改<code>myInt</code>的值，但是可以直接修改<code>myInt</code>本身：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*pt = <span class="number">20</span>;     <span class="comment">// 不合法的</span></span><br><span class="line">myInt = <span class="number">20</span>;     <span class="comment">// 合法的</span></span><br></pre></td></tr></table></figure>
+
+<p>但是这种情况下，可以将一个新的地址赋给<code>pt</code>，这就也很微妙，虽然<code>pt</code>无法改变其所指向的地址存储的值，但是可以改变其所指向的地址，比如可以将一个新的地址赋给<code>pt</code>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> anotherInt = <span class="number">30</span>;</span><br><span class="line">pt = &amp;anotherInt;</span><br></pre></td></tr></table></figure>
+<p>尽管改了新的地址，但是由于<code>pt</code>本身是一个指向常量的指针，所以依然无法改变新的地址存储的值（这里的30）</p>
+<h2 id="常规指针指向变量"><a href="#常规指针指向变量" class="headerlink" title="常规指针指向变量"></a>常规指针指向变量</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> myInt=<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span>* <span class="keyword">const</span> pt = &amp;myInt;</span><br></pre></td></tr></table></figure>
+<p>当const的位置改变，这种情况下，表示<code>pt</code>指针是一个const的常规指针，它只能指向<code>myInt</code>而不能改变指向的地址，也就是不能再对其赋一个新的值，但是由于<code>myInt</code>本身是一个变量，所以可以通过<code>myInt</code>改变10这个值，也可以通过<code>pt</code>来改变这个值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*pt=<span class="number">20</span>；     <span class="comment">// 合法的</span></span><br><span class="line">pt=&amp;anotherInt;     <span class="comment">// 不合法的</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="指向常规对象的常规指针"><a href="#指向常规对象的常规指针" class="headerlink" title="指向常规对象的常规指针"></a>指向常规对象的常规指针</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> myInt = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>* <span class="keyword">const</span> pt = &amp;myInt;</span><br></pre></td></tr></table></figure>
+<p>这是前两种情况的组合，此时<code>pt</code>只能指向<code>myInt</code>，并且<code>pt</code>不能用来修改<code>myInt</code>的值，即 <code>pt</code> 和 <code>*pt</code> 都是const。</p>
+<h2 id="常规指针指向常规变量"><a href="#常规指针指向常规变量" class="headerlink" title="常规指针指向常规变量"></a>常规指针指向常规变量</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> myInt=<span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>* pt = $myInt;</span><br></pre></td></tr></table></figure>
+<p>此时既不能使用<code>myInt</code>更改10这个值，也不能使用<code>pt</code>来修改10这个值。</p>
+<h2 id="一种不允许的情况"><a href="#一种不允许的情况" class="headerlink" title="一种不允许的情况"></a>一种不允许的情况</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> myInt = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span>* pt = &amp;myInt;</span><br></pre></td></tr></table></figure>
+<p>这种情况是不允许的，因为如果这个赋值成立，那么const的状态就很奇怪了，<code>myInt</code>本身是常量，却可以使用<code>pt</code>指针来修改，所以这种情况是不合法的</p>
+<h2 id="指针、数组与函数的参数传递"><a href="#指针、数组与函数的参数传递" class="headerlink" title="指针、数组与函数的参数传递"></a>指针、数组与函数的参数传递</h2><p>我们知道，函数对于传递数组作为参数，根据函数是否有权限改变数组的值，通常有两种声明方式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">functionModify</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> <span class="built_in">size</span>)</span></span>;	<span class="comment">// 1号函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">functionNoChange</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> arr[], <span class="keyword">int</span> <span class="built_in">size</span>)</span></span>;	<span class="comment">// 2号函数</span></span><br></pre></td></tr></table></figure>
+
+<p>此时，如果我们有两个数组：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cosnt <span class="keyword">int</span> array1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;	<span class="comment">// 1号数组</span></span><br><span class="line"><span class="keyword">int</span> array2 = &#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;	<span class="comment">// 2号数组</span></span><br></pre></td></tr></table></figure>
+
+<p>很明显，一个是常量数组，一个是变量数组。两种数组对于两个函数的关系是这样的：</p>
+<ul>
+<li>禁止将常量数组的地址赋给非常量指针，即：1号数组不能传递给2号函数，只能传递给1号函数</li>
+<li>可以将非常量数组赋给常量或非常量指针，即：2号数组可以被传递给1和2号函数</li>
+</ul>
+<p>因此，在设计函数时，要尽可能地使用const，因为将指针参数声明为指向常量数据的指针可以：</p>
+<ul>
+<li>避免由于无意间修改数据而导致的编程错误</li>
+<li>使用const使得函数能够处理const和非const实参，否则将只能接受非const数据</li>
+</ul>
+<p>所以，如果条件允许，则应<strong>将指针形参声明为指向const的指针</strong></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-06T07:54:04.000Z" itemprop="dateUpdated">2019-08-06 15:54:04</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/&title=《【C++温故知新】（二）指针》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/&title=《【C++温故知新】（二）指针》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（二）指针》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%89%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%88%86%E6%94%AF/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">【C++温故知新】（三）循环与分支</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【C++温故知新】（一）数据类型</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/&title=《【C++温故知新】（二）指针》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/&title=《【C++温故知新】（二）指针》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（二）指针》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEi0lEQVR42u3aQW7jMBAEwP3/p73A3haJ7e4ZBTCV0slwLJEsBSCnyT9/4uvx72p/+fXzs2++/vXrM/Mn5/defGHChAkTpo9kery8Nh19/fsZbjKK9kVGLwwTJkyYMB3OlD+ubSB/Ae3Unkz8+St5Y4IJEyZMmH4B07OBJXVi3mILulleYMKECRMmTG3hOiuM23A570NCjwkTJkyYfgNT/rhZHNw+M29rthf5g1k4JkyYMGH6MKb9cZxzP//g+SZMmDBhwvQBTI/y2oSt7cTchr/70T1tBRMmTJgwHcuUl6Z5/JqjtHPxVb8cPgcTJkyYMB3IlE/zbYybbGfmW6Ftcb55Yd/8FRMmTJgwHcs0C3aTAzrJ9Py6xM1/s+nzBXEwJkyYMGH6eKa8W/nioJ2Y2yl8tlDI0Z8mBJgwYcKE6Sim9lBmDpRvdrbl6L4krtvFhAkTJky3YNoMvi0mrypK82L7giwcEyZMmDAdyLTfRGyXAm232kh3lmoX6JgwYcKE6SimffP5lN+WoHkr7RPaZQQmTJgwYTqXKZ9626n02rB1U3jPNjvfrJswYcKECdMhTLPtxjYOzr/ZxL7tUmCYhWPChAkTpgOZ8kh0Q7M5xNPGtckokgUEJkyYMGE6nWl2XGb2ue16/pu2lTaGxoQJEyZM92DKj7bkk/1mYK/b2pS7bXiNCRMmTJhOZ8pj0NlxnHybcxbFzvo26y0mTJgwYTqLKQ9P64nz0ue3x4Zmi4Cn48KECRMmTIcztZFoftfsm3Y7c1+0Y8KECROmezMlHdoc5Xk9eed3tUuT2YYrJkyYMGG6E1Pe8D7qncW7sw3LqzZHMWHChAnT6UybqXcT3eb37pcXs7b++wYTJkyYMB3L1G4T5kVmu/poI+D8VbW9xYQJEyZMd2JquzI7wHrVve3knQfHb47+YMKECROmGzHlU+mslM2j4dkCYrZoqENeTJgwYcJ0CFOyWZgfcJltQ7bos0XMZomACRMmTJjux9R+zuPdzWDaPuRlcJ18Y8KECROmA5naonfzTQuaF8OzHd2oYMaECRMmTMcytVN13sDrQebf54dv2tk8Ka0xYcKECdO5TPmj8y3DfLLfRMazxURb9GLChAkTpnswzWLTWYFaR6ujqHe2dfp0kYEJEyZMmI5lqiPOctjtpB51N35V+biikWLChAkTpmOZZkdb2uFtDtNstjN/JAvHhAkTJkyHMLUbkElJuS8184i2DW2HB48wYcKECdMtmPbFZLtc2MfE+avaPB8TJkyYMJ3LtAHahLNFqLrYztwvEYa5OCZMmDBh+himR3nNYt98GO0Evy/ao3IaEyZMmDAdy7SZkmfhbxvRJmFxu3m53/LEhAkTJkxnMc1K2c2G5VUld1Ie51H1m38OTJgwYcJ0OFMbkuabl8M1SBnyXtvuN3dhwoQJE6ZfwNSWr7MrL6fzxcrs3uGCABMmTJgwHc7UHpqZDaZta7MNGRXqmDBhwoTpcKY85G0P2exB22J7f1TogiwcEyZMmDB9DNM+Zp0Fr/stzw3oJnTGhAkTJkyHMP0Fppz7zZKmChgAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

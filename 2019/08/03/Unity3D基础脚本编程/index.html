@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Unity3D基础脚本编程 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,Unity3D">
+    <meta name="description" content="Unity3D脚本编程笔记–基础的脚本知识从脚本开始将脚本添加给GameObject有三种方法可以将脚本添加给一个GameObject让其成为它的Component。  将创建的脚本文件直接拖动给目标GameObject 将脚本文件拖动到该GameObject的Inspector面板中 在该GameObject的Inspector面板中最下方选择Add Component然后创建一个新的脚本，直接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity3D基础脚本编程">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="Unity3D脚本编程笔记–基础的脚本知识从脚本开始将脚本添加给GameObject有三种方法可以将脚本添加给一个GameObject让其成为它的Component。  将创建的脚本文件直接拖动给目标GameObject 将脚本文件拖动到该GameObject的Inspector面板中 在该GameObject的Inspector面板中最下方选择Add Component然后创建一个新的脚本，直接">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Unity3DScripts1-1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Unity3DScripts1-2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Unity3DScripts1-3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Unity3DScripts1-4.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Unity3DScripts1-5.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Unity3DScripts1-7.png">
+<meta property="article:published_time" content="2019-08-03T11:35:44.000Z">
+<meta property="article:modified_time" content="2019-08-03T12:15:10.000Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="Unity3D">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/Unity3DScripts1-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Unity3D基础脚本编程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Unity3D基础脚本编程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-03T11:35:44.000Z" itemprop="datePublished" class="page-time">
+  2019-08-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Unity3D/">Unity3D</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Unity3D脚本编程笔记–基础的脚本知识"><span class="post-toc-number">1.</span> <span class="post-toc-text">Unity3D脚本编程笔记–基础的脚本知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从脚本开始"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">从脚本开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#将脚本添加给GameObject"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">将脚本添加给GameObject</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#访问限定词"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">访问限定词</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#几个周期函数"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">几个周期函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Unity3D中的向量"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Unity3D中的向量</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#向量运算"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">向量运算</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GameObject与Component"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">GameObject与Component</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取Component"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">获取Component</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#控制Component是否可用"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">控制Component是否可用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取GameObject"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">获取GameObject</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#控制GameObject是否可用"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">控制GameObject是否可用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#判断GameObject是否可用"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text">判断GameObject是否可用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取Transform"><span class="post-toc-number">1.3.6.</span> <span class="post-toc-text">获取Transform</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#移动（Translate）和旋转（Rotate）"><span class="post-toc-number">1.3.7.</span> <span class="post-toc-text">移动（Translate）和旋转（Rotate）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#销毁（Destroy）"><span class="post-toc-number">1.3.8.</span> <span class="post-toc-text">销毁（Destroy）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取输入"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">获取输入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取按键输入"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">获取按键输入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取水平-竖直轴向输入"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">获取水平&#x2F;竖直轴向输入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取鼠标输入"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">获取鼠标输入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DeltaTime"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">DeltaTime</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据类型"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类（Classes）"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">类（Classes）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实例化预设体（Instantiate-Prefab）"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">实例化预设体（Instantiate Prefab）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数组（Arrays）"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">数组（Arrays）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">其他</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#调用（Invoke）"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">调用（Invoke）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线性插值（Linear-Interplotation）"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">线性插值（Linear Interplotation）</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Unity3D基础脚本编程"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Unity3D基础脚本编程</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-03 19:35:44" datetime="2019-08-03T11:35:44.000Z"  itemprop="datePublished">2019-08-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Unity3D/">Unity3D</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Unity3D脚本编程笔记–基础的脚本知识"><a href="#Unity3D脚本编程笔记–基础的脚本知识" class="headerlink" title="Unity3D脚本编程笔记–基础的脚本知识"></a>Unity3D脚本编程笔记–基础的脚本知识</h1><h2 id="从脚本开始"><a href="#从脚本开始" class="headerlink" title="从脚本开始"></a>从脚本开始</h2><h3 id="将脚本添加给GameObject"><a href="#将脚本添加给GameObject" class="headerlink" title="将脚本添加给GameObject"></a>将脚本添加给GameObject</h3><p>有三种方法可以将脚本添加给一个GameObject让其成为它的Component。</p>
+<ul>
+<li>将创建的脚本文件直接拖动给目标GameObject</li>
+<li>将脚本文件拖动到该GameObject的Inspector面板中</li>
+<li>在该GameObject的Inspector面板中最下方选择Add Component然后创建一个新的脚本，直接添加给该GameObject</li>
+</ul>
+<h3 id="访问限定词"><a href="#访问限定词" class="headerlink" title="访问限定词"></a>访问限定词</h3><ul>
+<li><code>public</code> 修饰的变量在Inspector面板中可见并且可以直接进行调整</li>
+<li><code>private</code> 修饰的变量只能在脚本程序中使用，在Inspector面板中不可见</li>
+<li><code>public</code> 修饰的变量或者方法，在其他类中使用该类的实例，可以访问该类下的这些变量与方法</li>
+<li><code>private</code> 修饰的变量只能在本类中使用和调用，不能被其实例访问</li>
+</ul>
+<h3 id="几个周期函数"><a href="#几个周期函数" class="headerlink" title="几个周期函数"></a>几个周期函数</h3><ul>
+<li><code>Awake()</code><ul>
+<li>在脚本被初始化的时候调用，尽管该脚本可能已经被禁用</li>
+<li>在整个脚本的生命周期中只调用一次</li>
+</ul>
+</li>
+<li><code>Start()</code><ul>
+<li>在脚本第一次要Update之前，必须是在该脚本是enable的情况下</li>
+<li>在整个脚本的生命周期中只调用一次</li>
+</ul>
+</li>
+<li><code>Update()</code><ul>
+<li>在每一帧出现时调用</li>
+<li>每次更新的时间间隔不同</li>
+<li>一般用于：<ul>
+<li>移动非物理化物体的时候</li>
+<li>简单的定时器</li>
+<li>接收到输入的时候</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>FixedUpdate()</code><ul>
+<li>每次物理操作之后调用</li>
+<li>两次更新时间间隔一致</li>
+<li>一般用于：<ul>
+<li>调整物理物体（Rigidbody，刚体）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Unity3D中的向量"><a href="#Unity3D中的向量" class="headerlink" title="Unity3D中的向量"></a>Unity3D中的向量</h2><h3 id="向量运算"><a href="#向量运算" class="headerlink" title="向量运算"></a>向量运算</h3><ul>
+<li><p>二维向量 <code>Vector2</code></p>
+<ul>
+<li>向量的模：<code>magnitude</code></li>
+<li>向量的分量：<code>x  y</code></li>
+<li>判定向量相等：<code>Equals</code></li>
+<li>向量单位化：<code>Normalize</code></li>
+<li>向量转化成字符串：<code>ToString</code><blockquote>
+<p>完整Vector2参考：<a href="https://docs.unity3d.com/ScriptReference/Vector2.html?_ga=2.148748272.693619093.1552224779-1809290818.1551791741" target="_blank" rel="noopener">https://docs.unity3d.com/ScriptReference/Vector2.html?_ga=2.148748272.693619093.1552224779-1809290818.1551791741</a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>三维向量 <code>Vector3</code></p>
+<ul>
+<li>向量的模：<code>magnitude</code></li>
+<li>计算向量的模的平方，单纯为了比较大小，比计算模速度快：<code>sqrMagnitude</code></li>
+<li>判定向量相等：<code>Equals</code></li>
+<li>向量转化成字符串：<code>ToString</code></li>
+<li>向量的内积（点乘）运算：<code>Dot</code><br>  <code>Vector3.Dot(VectorA, VectorB)</code><br>  <img src="http://cdn.littlegenius.xin/Unity3DScripts1-1.png" alt="向量的内积（点乘）"></li>
+<li>向量的外积（叉乘）运算：<code>Cross</code><br>  <code>Vector3.Cross(VectorA, VectorB)</code><br>  <img src="http://cdn.littlegenius.xin/Unity3DScripts1-2.png" alt="右手坐标系">  <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Unity3DScripts1-3.png" alt="向量的外积（叉乘）" title="">
+                </div>
+                <div class="image-caption">向量的外积（叉乘）</div>
+            </figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="GameObject与Component"><a href="#GameObject与Component" class="headerlink" title="GameObject与Component"></a>GameObject与Component</h2><h3 id="获取Component"><a href="#获取Component" class="headerlink" title="获取Component"></a>获取Component</h3><ul>
+<li>获取同GameObject下的Component<br>  <code>ComponentType componentName = GetComponent&lt;ComponentType&gt;();</code></li>
+<li>获取其他GameObject下的Compnent<ul>
+<li>先声明一个public变量，然后将其他GameObject的相应的Component拖动到该变量处赋值</li>
+<li>先找到该GameObject再获取Component<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GameObject gameObjectName = GameObject.Find(<span class="string">"  "</span>);</span><br><span class="line">ComponentType componentName = gameObjectName.GetComponent&lt;ComponentType&gt;();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="控制Component是否可用"><a href="#控制Component是否可用" class="headerlink" title="控制Component是否可用"></a>控制Component是否可用</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// if  componentName  is a component got already</span></span><br><span class="line">componentName.enabled=<span class="literal">false</span>;     <span class="comment">//disable the component</span></span><br><span class="line">componentName.enabled=<span class="literal">true</span>;     <span class="comment">//enable the component</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="获取GameObject"><a href="#获取GameObject" class="headerlink" title="获取GameObject"></a>获取GameObject</h3><ul>
+<li>获取脚本所属GameObject：直接使用 <code>gameObject</code></li>
+<li>获取其他/一般的GameObject</li>
+<li>声明一个public变量，将目标GameObject拖到该参数处为其赋值</li>
+<li>使用Find方法<br>  <code>GameObject gameObjectName = GameObject.Find(&quot;  &quot;);</code></li>
+<li>使用FindGameObjectsWithTag或者FindWithTag获取：为GameObject添加Tag可以在Instector面板中完成  <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Unity3DScripts1-4.png" alt="为GameObject添加Tag" title="">
+                </div>
+                <div class="image-caption">为GameObject添加Tag</div>
+            </figure>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ComponentType componentName = GameObject.FindGameObjectsWithTag(<span class="string">"tag"</span>);</span><br><span class="line">ComponentType componentName = GameObject.FindWithTag(<span class="string">"tag"</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="控制GameObject是否可用"><a href="#控制GameObject是否可用" class="headerlink" title="控制GameObject是否可用"></a>控制GameObject是否可用</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// if  gameObjectName  is a GameObject got already</span></span><br><span class="line">gameObjectName.SetActive(<span class="literal">false</span>);     <span class="comment">//disable the GameObject</span></span><br><span class="line">gameObjectName.SetActive(<span class="literal">true</span>);     <span class="comment">//enable the GameObject</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="判断GameObject是否可用"><a href="#判断GameObject是否可用" class="headerlink" title="判断GameObject是否可用"></a>判断GameObject是否可用</h3><p><code>// if  gameObjectName  is a GameObject got already</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">语法</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">gameObjectName.activeSelf</td>
+<td align="center">判断其本身是否active，其父物体为disable，但是其本身可能还是active</td>
+</tr>
+<tr>
+<td align="center">gameObjectName.activeInHierarchy</td>
+<td align="center">判断其所在分级是否active，即其父物体是否active</td>
+</tr>
+</tbody></table>
+<h3 id="获取Transform"><a href="#获取Transform" class="headerlink" title="获取Transform"></a>获取Transform</h3><ul>
+<li>获取脚本所在GameObject的Transform：直接使用 <code>transform</code></li>
+<li>获取其他GameObject的Transform：先使用上述方法得到GameObject，然后使用 <code>gameObjectName.transform</code></li>
+</ul>
+<h3 id="移动（Translate）和旋转（Rotate）"><a href="#移动（Translate）和旋转（Rotate）" class="headerlink" title="移动（Translate）和旋转（Rotate）"></a>移动（Translate）和旋转（Rotate）</h3><ul>
+<li><code>Translate</code>：Transform的方法，以一个Vector3为参数，按照Vector3所描述的方向与大小移动</li>
+<li><code>Rotate</code>：Transform的方法，以一个Vector3为参数，按照Vector3所描述的方向与大小旋转</li>
+<li><code>LookAt</code>：摄像机跟踪目标：<code>Transform.LookAt()</code>：以一个transform为参数，使得摄像机的transform跟随参数的transform变动，即实现跟踪</li>
+</ul>
+<h3 id="销毁（Destroy）"><a href="#销毁（Destroy）" class="headerlink" title="销毁（Destroy）"></a>销毁（Destroy）</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Destory(GameObject/Component);</span><br><span class="line">Destory(GameObject/Component,DelaySecond);</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取输入"><a href="#获取输入" class="headerlink" title="获取输入"></a>获取输入</h2><h3 id="获取按键输入"><a href="#获取按键输入" class="headerlink" title="获取按键输入"></a>获取按键输入</h3><ul>
+<li><code>ButtonInput</code>：获取键钮，在 <strong>Edit -&gt; Project Settings -&gt; Input</strong> 中可以看到各种预设好的按键，读取这些键钮的名称作为GetButton的参数</li>
+</ul>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input.GetButtonDown(<span class="string">"name"</span>);     <span class="comment">// 键钮按下时的一帧为true</span></span><br><span class="line">Input.GetButton(<span class="string">"name"</span>);     <span class="comment">// 键钮按下时保持为true</span></span><br><span class="line">Input.GetButtonUp(<span class="string">"name"</span>);     <span class="comment">// 键钮按下然后释放后的状态下保持为true</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>KeyInput</code>：获取键钮<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input.GetKeyDown(KeyCode.name);     <span class="comment">// 键钮按下时的一帧为true</span></span><br><span class="line">Input.GetKey(KeyCode.name<span class="string">");     // 键钮按下时保持为true</span></span><br><span class="line"><span class="string">Input.GetKeyUp(KeyCode.name"</span>);     <span class="comment">// 键钮按下然后释放后的状态下保持为true</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>KeyCode完整参考：<a href="https://docs.unity3d.com/ScriptReference/KeyCode.html" target="_blank" rel="noopener">https://docs.unity3d.com/ScriptReference/KeyCode.html</a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="获取水平-竖直轴向输入"><a href="#获取水平-竖直轴向输入" class="headerlink" title="获取水平/竖直轴向输入"></a>获取水平/竖直轴向输入</h3><p>使用以下函数均可传入一个参数的两个值：“horizontal”、“vertical”来分别表示水平和竖直方向的运动</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input.GetAxisRaw() <span class="comment">//在参数设置的方向上返回 -1 或 1 两个值中的一个，即即止即停</span></span><br><span class="line">Input.GetAxis() <span class="comment">//在参数设置的方向上返回一个 -1 到 1 之间的float值，即有一定的缓冲变动的效果</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="获取鼠标输入"><a href="#获取鼠标输入" class="headerlink" title="获取鼠标输入"></a>获取鼠标输入</h3><ul>
+<li><code>OnMouseDown()</code>：当鼠标点击GUIElement或者Collider时触发</li>
+<li><code>OnMouseDrag()</code>：当鼠标点击GUIElement或者Collider并仍然按住时触发</li>
+<li><code>OnMouseEnter()</code>：当鼠标进入GUIElement或者Collider时触发</li>
+<li><code>OnMouseExit()</code>：当鼠标离开GUIElement或者Collider时触发</li>
+<li><code>OnMouseOver()</code>：只要鼠标在GUIElement或者Collider上时的每一帧都会触发</li>
+<li><code>OnMouseUp()</code>：当鼠标被释放时触发</li>
+<li><code>OnMouseUpAsButton()</code>：当鼠标在点击了GUIElement或者Collider后并且释放时触发</li>
+</ul>
+<h3 id="DeltaTime"><a href="#DeltaTime" class="headerlink" title="DeltaTime"></a>DeltaTime</h3><p><code>DeltaTime</code>是指的每两个 <code>Update()</code> 函数或者 <code>FixedUpdate()</code> 函数调用之间的时间间隔，使用 <code>Time.deltaTime</code> 获得</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Unity3DScripts1-5.png" alt="数据类型" title="">
+                </div>
+                <div class="image-caption">数据类型</div>
+            </figure>
+
+<h3 id="类（Classes）"><a href="#类（Classes）" class="headerlink" title="类（Classes）"></a>类（Classes）</h3><ul>
+<li>脚本名称和类名需要相同</li>
+<li>详细情况与C#类一致</li>
+</ul>
+<h3 id="实例化预设体（Instantiate-Prefab）"><a href="#实例化预设体（Instantiate-Prefab）" class="headerlink" title="实例化预设体（Instantiate Prefab）"></a>实例化预设体（Instantiate Prefab）</h3><p>使用 <code>Instantiate</code> 来创建某个预设体（Prefab）的复制品（Clones）：<br>首先使用public变量来获取目标Prefab：<code>public PrefabType prefabName</code></p>
+<ul>
+<li><code>Instantiate(prefabName)</code>：从prefabName的预设体创建一个克隆体生成在坐标原点处</li>
+<li><code>Instantiate(prefabName,Position,Rotation)</code>：规定预设体的位置与角度</li>
+<li><code>Type reference</code>：<code>reference = Instantiate(prefabName,Position,Rotation) as Type;</code>：将预设体生成在指定位置与角度并且进行类型转换成Type类型</li>
+</ul>
+<blockquote>
+<p>Instantiate完整参考：<a href="https://docs.unity3d.com/ScriptReference/Object.Instantiate.html?_ga=2.116872129.693619093.1552224779-1809290818.1551791741" target="_blank" rel="noopener">https://docs.unity3d.com/ScriptReference/Object.Instantiate.html?_ga=2.116872129.693619093.1552224779-1809290818.1551791741</a></p>
+</blockquote>
+<h3 id="数组（Arrays）"><a href="#数组（Arrays）" class="headerlink" title="数组（Arrays）"></a>数组（Arrays）</h3><p>在Unity的脚本中声明一个 <code>public</code> 类型的数组变量，不需要传入具体的大小，这样的数组可以在Inspector处直接更改数组大小，并且随着数组大小的改变还会自动为你添加每一个数组的参数值。<br>然后使用 <code>foreach</code> 循环或者 <code>for</code> 循环可以很方便的遍历整个数组。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> GameObject[] gameObjects;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Debug.Log(<span class="string">"Using For"</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; gameObjects.Length; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		Debug.Log(gameObjects[i].name);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	Debug.Log(<span class="string">"Using Foreach"</span>);</span><br><span class="line">	<span class="keyword">foreach</span>(GameObject items <span class="keyword">in</span> gameObjects)</span><br><span class="line">	&#123;</span><br><span class="line">		Debug.Log(items.name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Unity3DScripts1-7.png" alt="使用public的数组赋值" title="">
+                </div>
+                <div class="image-caption">使用public的数组赋值</div>
+            </figure>
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="调用（Invoke）"><a href="#调用（Invoke）" class="headerlink" title="调用（Invoke）"></a>调用（Invoke）</h3><p><code>Invoke()</code>函数可以在一定时间后以及每一定时间间隔内调用某个方法，要求该方法必须是 0个参数，<code>void</code>返回值的函数。</p>
+<p>比如我们有一个函数 <code>LogHello</code>：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LogHello</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Debug.Log(<span class="string">"Hello World!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>Invoke</code> 来调用该方法：</p>
+<ul>
+<li><code>Invoke(&quot;LogHello&quot;, delayTime)</code>：第一个参数为要调用的方法的名称（字符串），第二个参数为要推迟多少时间调用该方法（单位：s）</li>
+<li><code>InvokeRepeating(&quot;LogHello&quot;, delayTime, gapTime)</code>：前两个参数同上，第三个参数规定在第一次调用后每隔多长时间调用一次（单位：s）</li>
+<li><code>CancelInvoke(&quot;LogHello&quot;)</code>：传入要停止<code>Invoke</code>的方法名称（字符串）</li>
+</ul>
+<h3 id="线性插值（Linear-Interplotation）"><a href="#线性插值（Linear-Interplotation）" class="headerlink" title="线性插值（Linear Interplotation）"></a>线性插值（Linear Interplotation）</h3><p>线性插值是在两个给定值之间找到一个百分比的值。比如在3和5之间找到一个50%处的值，即f4</p>
+<ul>
+<li><code>Mathf.Lerp</code>：三个float类型参数，前两个规定起止值，最后一个规定百分比，返回一个float类型的值<br>  <code>float result = Mathf.Lerp (3f, 5f, 0.5f);     // result = 4</code></li>
+<li><code>Color.Lerp</code>：返回两个颜色值的百分比处的插值结果</li>
+<li><code>Vector3.Lerp</code>：返回两个三维向量的百分比处的插值结果</li>
+<li><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vector3 <span class="keyword">from</span> = <span class="keyword">new</span> Vector3 (<span class="number">1f</span>, <span class="number">2f</span>, <span class="number">3f</span>);`</span><br><span class="line">Vector3 to = <span class="keyword">new</span> Vector3 (<span class="number">5f</span>, <span class="number">6f</span>, <span class="number">7f</span>);</span><br><span class="line">Vector3 result = Vector3.Lerp (<span class="keyword">from</span>, to, <span class="number">0.75f</span>);     <span class="comment">// result = (4, 5, 6)</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-03T12:15:10.000Z" itemprop="dateUpdated">2019-08-03 20:15:10</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity3D/" rel="tag">Unity3D</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/&title=《Unity3D基础脚本编程》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/&title=《Unity3D基础脚本编程》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Unity3D基础脚本编程》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">【C++温故知新】（一）数据类型</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【WEB JS PHP】屏幕截图粘贴上传+文字识别+一键复制识别结果</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/&title=《Unity3D基础脚本编程》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/&title=《Unity3D基础脚本编程》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Unity3D基础脚本编程》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADKklEQVR42u3aQXIaUQwEUN//0s42KYdJtzSk4PNmRWEY5n0vVFLr6yu+vn+7fr7z86/X98l/69H9H72++cLGxsZ+E3b+M9c/fH0E7fvJE+ZP8pf7Y2NjYx/Hvi42m4KRFLnkiDfFDBsbGxs7f6yc1ALaFgUbGxsbe8O+bjyuYZv2BhsbG/uT2W1hyJH5Y+UP/V9nadjY2Ngvz84HQ6//+in5NjY2NvYLs7/La1OW2iI3CwwiBTY2NvZB7M1CZD48yo9gVj7b58fGxsY+iT0bHiXRwn5Z594D+uMdbGxs7EPZ+RG0MUDekOTx86pkYmNjYx/ETm7aDuXbIpQPsDZrQNjY2Nhns9uGpD2C9nDbUdcw+sXGxsY+jj2LVNvRUts2zJql6CixsbGxP4CdR6qzZZp9kLCKGbCxsbGPYM9GOcnnnxEezKIFbGxs7E9gz6iztch9s9Ee5des3mJjY2O/LXtz6zYk3hxNxHv0GWxsbOzj2JtydVcJ3DQb9T8JGxsb+zj2ZqEnGeUnd2vHUrM9nHobCBsbG/vl2bOmYlZUZoOke0MIbGxs7E9gt43B/shmyHyRKCpg2NjY2EewZ683sW6evW4WQ+tsBBsbG/ut2HeNeGYtR15K8wWjqJRiY2NjH8fOG4bZ2Oh5gW5+TPXyJTY2NvabsJ/RSMyOLB9XbRoYbGxs7PPYSXvQLlYmx3fXOs6wpGFjY2MfxE6WJtt6OBsq5YOk/Lt5YIyNjY397uw2uG1H+W17kxSzvLhG+TY2Njb2cex8sXIT1uYtRxv9RsUPGxsb+2PYySeTQ9n3SbMw4OG3sLGxsY9jJ6P/NsqdfXJ2cHkJxMbGxj6VPQtl20alHQMlsBaPjY2NfRL7u7zyRqUNa+vyUzY5RUaBjY2N/Vbsu8LU2ci+HRjlx3TXnbGxsbHfhd2u0eTDnVnjMVvQLJZ1sLGxsQ9l54UhB18XlU2s2x73MN/GxsbGPpQ9+5k2oJ1FyMWTY2NjY388e7amk7c394YN/8i3sbGxsY9g5yuYSQDQhgT5YKhd3LwhHsDGxsZ+efZsMLSJAZKjSQ6xPUpsbGzs49i/AMgkxdGfDdi0AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

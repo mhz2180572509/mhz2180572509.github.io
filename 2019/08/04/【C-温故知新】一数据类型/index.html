@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【C++温故知新】（一）数据类型 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,C++">
+    <meta name="description" content="基本的内置数据类型基本数据类型   类型 关键字    布尔型 bool   字符型 char   整型 int   浮点型 float   双浮点型 double   无类型 void   宽字符型 wchar_t   基本的数据类型可以使用如下的四种修饰符修饰：  signed unsigned short long  类型别名使用typedef为某种数据类型起一个别名： 1typedef t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C++温故知新】（一）数据类型">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="基本的内置数据类型基本数据类型   类型 关键字    布尔型 bool   字符型 char   整型 int   浮点型 float   双浮点型 double   无类型 void   宽字符型 wchar_t   基本的数据类型可以使用如下的四种修饰符修饰：  signed unsigned short long  类型别名使用typedef为某种数据类型起一个别名： 1typedef t">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-04T09:59:56.000Z">
+<meta property="article:modified_time" content="2019-08-05T03:38:24.000Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【C++温故知新】（一）数据类型</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【C++温故知新】（一）数据类型</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-04T09:59:56.000Z" itemprop="datePublished" class="page-time">
+  2019-08-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基本的内置数据类型"><span class="post-toc-number">1.</span> <span class="post-toc-text">基本的内置数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本数据类型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">基本数据类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类型别名"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">类型别名</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#转义序列"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">转义序列</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#复合数据类型"><span class="post-toc-number">2.</span> <span class="post-toc-text">复合数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">数组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数组的声明与初始化方式"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">数组的声明与初始化方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取数组长度："><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">获取数组长度：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字符串"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">字符串</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#C风格的字符串"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">C风格的字符串</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串的输入"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">字符串的输入</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#string类"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">string类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#string的声明与初始化"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">string的声明与初始化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#string的赋值、拼接与附加"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">string的赋值、拼接与附加</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#string类输入"><span class="post-toc-number">2.3.3.</span> <span class="post-toc-text">string类输入</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结构体（struct）"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">结构体（struct）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结构体的定义"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">结构体的定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结构体的声明与初始化"><span class="post-toc-number">2.4.2.</span> <span class="post-toc-text">结构体的声明与初始化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结构体数组"><span class="post-toc-number">2.4.3.</span> <span class="post-toc-text">结构体数组</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#共用体（union）"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">共用体（union）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#枚举（enum）"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">枚举（enum）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#枚举的声明"><span class="post-toc-number">2.6.1.</span> <span class="post-toc-text">枚举的声明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#枚举的值"><span class="post-toc-number">2.6.2.</span> <span class="post-toc-text">枚举的值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#枚举值的范围的计算方式："><span class="post-toc-number">2.6.3.</span> <span class="post-toc-text">枚举值的范围的计算方式：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#vector模板类"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">vector模板类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#array模板类"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">array模板类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二维数组"><span class="post-toc-number">2.9.</span> <span class="post-toc-text">二维数组</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【C-温故知新】一数据类型"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【C++温故知新】（一）数据类型</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-04 17:59:56" datetime="2019-08-04T09:59:56.000Z"  itemprop="datePublished">2019-08-04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="基本的内置数据类型"><a href="#基本的内置数据类型" class="headerlink" title="基本的内置数据类型"></a>基本的内置数据类型</h1><h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">关键字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">布尔型</td>
+<td align="center">bool</td>
+</tr>
+<tr>
+<td align="center">字符型</td>
+<td align="center">char</td>
+</tr>
+<tr>
+<td align="center">整型</td>
+<td align="center">int</td>
+</tr>
+<tr>
+<td align="center">浮点型</td>
+<td align="center">float</td>
+</tr>
+<tr>
+<td align="center">双浮点型</td>
+<td align="center">double</td>
+</tr>
+<tr>
+<td align="center">无类型</td>
+<td align="center">void</td>
+</tr>
+<tr>
+<td align="center">宽字符型</td>
+<td align="center">wchar_t</td>
+</tr>
+</tbody></table>
+<p>基本的数据类型可以使用如下的四种修饰符修饰：</p>
+<ul>
+<li><code>signed</code></li>
+<li><code>unsigned</code></li>
+<li><code>short</code></li>
+<li><code>long</code></li>
+</ul>
+<h2 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h2><p>使用<code>typedef</code>为某种数据类型起一个别名：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> typerName newTypeName</span><br></pre></td></tr></table></figure>
+
+<h2 id="转义序列"><a href="#转义序列" class="headerlink" title="转义序列"></a>转义序列</h2><table>
+<thead>
+<tr>
+<th align="center">字符名称</th>
+<th align="center">C++代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">换行符</td>
+<td align="center">\n</td>
+</tr>
+<tr>
+<td align="center">水平制表符</td>
+<td align="center">\t</td>
+</tr>
+<tr>
+<td align="center">垂直制表符</td>
+<td align="center">\v</td>
+</tr>
+<tr>
+<td align="center">退格</td>
+<td align="center">\b</td>
+</tr>
+<tr>
+<td align="center">回车/返回行首</td>
+<td align="center">\r</td>
+</tr>
+<tr>
+<td align="center">振铃</td>
+<td align="center">\a</td>
+</tr>
+<tr>
+<td align="center">反斜杠</td>
+<td align="center">\</td>
+</tr>
+<tr>
+<td align="center">问号</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">单引号</td>
+<td align="center">&#39;</td>
+</tr>
+<tr>
+<td align="center">双引号</td>
+<td align="center">&#39;‘</td>
+</tr>
+</tbody></table>
+<h1 id="复合数据类型"><a href="#复合数据类型" class="headerlink" title="复合数据类型"></a>复合数据类型</h1><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="数组的声明与初始化方式"><a href="#数组的声明与初始化方式" class="headerlink" title="数组的声明与初始化方式"></a>数组的声明与初始化方式</h3><ul>
+<li><code>int array[3];array[0] = 1;array[1] = 2;array[2] = 3;</code></li>
+<li><code>int array[3] = {1,2,3}</code></li>
+<li><code>int array[5] = {1,2}    // 1,2,0,0,0</code></li>
+<li><code>int array[5] = {0}    // 0,0,0,0,0</code></li>
+<li><code>int array[] = {1,2,3}    // size of the array is 3</code></li>
+</ul>
+<h3 id="获取数组长度："><a href="#获取数组长度：" class="headerlink" title="获取数组长度："></a>获取数组长度：</h3><p><code>sizeof array / sizeof (int)</code></p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="C风格的字符串"><a href="#C风格的字符串" class="headerlink" title="C风格的字符串"></a>C风格的字符串</h3><p>使用char数组存储字符串：一种C风格的字符串表达形式，需要使用 <code>&#39;\0&#39;</code> 做结尾才可以成为一个字符串</p>
+<ul>
+<li><code>char string1[5] = {&#39;h&#39;,&#39;e&#39;,&#39;l&#39;,&#39;l&#39;,&#39;o&#39;};    // not a string</code></li>
+<li><code>char string1[6] = {&#39;h&#39;,&#39;e&#39;,&#39;l&#39;,&#39;l&#39;,&#39;o&#39;,&#39;\0&#39;};    // a string</code></li>
+<li><code>char string2[6]=&quot;hello&quot;;    // &#39;\0&#39;可以被编辑器理解到并自行添加到末尾</code></li>
+<li><code>char string3[] = &quot;hello&quot;;    // 编辑器可以自己确定数组的大小（6）</code></li>
+</ul>
+<p>获取一个C风格字符串的长度（不包括末尾的\0）：<code>strlen(string1)</code></p>
+<h3 id="字符串的输入"><a href="#字符串的输入" class="headerlink" title="字符串的输入"></a>字符串的输入</h3><p>已知：<code>char hello[20];</code></p>
+<ul>
+<li><code>cin &gt;&gt; hello</code>：cin使用空白（空格、制表符和换行符）来确定字符串的结束位置，也就是说在cin读取到任何空白的时候都会结束输入，将剩余的部分保留在输入队列（输入流）中等待下一个输入命令来读取，（注意cin会读取掉该空白符，即空白符不再留在输入队列中），所以使用cin只能读取相应大小（比如此处的20）以内并且不含有空白符的字符串</li>
+<li><code>cin.getline(hello,20)</code>：面向行的输入，它使用回车键输入的换行符来确定输入结尾，第二个参数表示其最多读取的字符个数+1后的值，即此处最多读取19个字符，所以这种方法读取指定长度的字符后或者遇到换行符后结束读取。</li>
+<li><code>cin.get()</code>：<ul>
+<li><code>cin.get(hello,20)</code>：和 <code>cin.getline(hello,20)</code> 效果相同，唯一不同的地方是，<code>cin.get()</code> 会将读取到的换行符保留在输入流中，不是将其读入或者丢弃。此时如果进行下一次 <code>cin.get()</code> 或者是 <code>cin.getline()</code> 都会使得被保留的换行符结束它们，使得他们什么都读不到（除了那个被保留在输入队列队首的换行符）。</li>
+<li><code>cin.get(hello,20); cin.get(); cin.get(hello,20);</code> ：在使用完一次 <code>cin.get(arrayName,arraySize)</code> 后再次使用 <code>cin.get()</code> 将那个换行符读进来可以解决这个问题。</li>
+<li><code>cin.get(hello,20).get()</code>：上一种方法的简写</li>
+<li><code>(cin &gt;&gt; something).get()</code>：在<code>cin</code>后追加<code>get()</code>的简写</li>
+<li>同理，<code>cin,getline(hello,20).getline(hello,20)</code>：连续使用 <code>cin.getline()</code> 读取两次的简写模式</li>
+</ul>
+</li>
+</ul>
+<h2 id="string类"><a href="#string类" class="headerlink" title="string类"></a>string类</h2><p>使用 string 类前必须包含 string 头文件：<code>#include&lt;string&gt;</code></p>
+<h3 id="string的声明与初始化"><a href="#string的声明与初始化" class="headerlink" title="string的声明与初始化"></a>string的声明与初始化</h3><ul>
+<li><code>string myString;</code></li>
+<li><code>string myString = &quot;hello world!&quot;;</code></li>
+<li><code>string mystring = {&quot;hello world!&quot;};</code></li>
+<li><code>string myString1 = &quot;hello world!&quot;;string myString2 = myString1;</code></li>
+</ul>
+<h3 id="string的赋值、拼接与附加"><a href="#string的赋值、拼接与附加" class="headerlink" title="string的赋值、拼接与附加"></a>string的赋值、拼接与附加</h3><ul>
+<li><code>string myString1 = &quot;hello world!&quot;;string myString2 = myString1;</code></li>
+<li><code>string myString3;</code></li>
+<li><code>myString3 = myString1 + myString2;</code></li>
+<li><code>myString1 += myString2;</code></li>
+</ul>
+<h3 id="string类输入"><a href="#string类输入" class="headerlink" title="string类输入"></a>string类输入</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getline(<span class="built_in">cin</span>,stringName)</span><br></pre></td></tr></table></figure>
+
+<h2 id="结构体（struct）"><a href="#结构体（struct）" class="headerlink" title="结构体（struct）"></a>结构体（struct）</h2><h3 id="结构体的定义"><a href="#结构体的定义" class="headerlink" title="结构体的定义"></a>结构体的定义</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">structType</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	dataType dateName1;</span><br><span class="line">	dataType dataName2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="结构体的声明与初始化"><a href="#结构体的声明与初始化" class="headerlink" title="结构体的声明与初始化"></a>结构体的声明与初始化</h3><ul>
+<li><code>structType structName1;</code></li>
+<li><code>structType structName1 = {data1,data2};</code></li>
+<li><code>structType structName2 = structName1;</code></li>
+<li><code>structName1.dataName1 = data1;</code></li>
+<li>在定义完结构体后直接声明一个结构体：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">structType</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	dataType dateName1;</span><br><span class="line">	dataType dataName2;</span><br><span class="line">&#125;structName=&#123;</span><br><span class="line">	data1,</span><br><span class="line">	data2</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>只声明一个结构，可以不提前定义结构体：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    dataType dateName1;</span><br><span class="line">    dataType dataName2;</span><br><span class="line">&#125;structName;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="结构体数组"><a href="#结构体数组" class="headerlink" title="结构体数组"></a>结构体数组</h3><p>假设已经定义了结构体结构：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">structType</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	dataType dateName1;</span><br><span class="line">	dataType dataName2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>初始化一个结构体数组：</p>
+<ul>
+<li>先声明再逐个初始化<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">structType structArrayName[<span class="number">2</span>];</span><br><span class="line">structArrayName[<span class="number">0</span>]=&#123;data1,data2&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>声明的同时初始化<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">structArrayName[<span class="number">2</span>]=</span><br><span class="line">&#123;</span><br><span class="line">	&#123;data1,data2&#125;,</span><br><span class="line">	&#123;data1,data2&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="共用体（union）"><a href="#共用体（union）" class="headerlink" title="共用体（union）"></a>共用体（union）</h2><p>共用体和结构体类似，但是不同点在于结构体可以同时存储多种数据结构，但是共用体<strong>只能在同一时间存储一种数据结构</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> myUnion</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> myInt;</span><br><span class="line">	<span class="keyword">double</span> myDouble;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">myUnion union1;</span><br><span class="line">union1.myInt = <span class="number">1</span>;     <span class="comment">// 此时union1存储的是整数1</span></span><br><span class="line">union1.myDouble = <span class="number">1.1</span>;     <span class="comment">// 此时union1存储的是双精度的浮点数1.1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="枚举（enum）"><a href="#枚举（enum）" class="headerlink" title="枚举（enum）"></a>枚举（enum）</h2><h3 id="枚举的声明"><a href="#枚举的声明" class="headerlink" title="枚举的声明"></a>枚举的声明</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> colors &#123;red,blue,green,yellow&#125;;     <span class="comment">// red=0, blue=1, green=2, yellow=3</span></span><br><span class="line">colors myColor = red;     <span class="comment">// myColor = 0</span></span><br><span class="line">colors myColor = colors(<span class="number">2</span>)     <span class="comment">// myColor = green = 2</span></span><br></pre></td></tr></table></figure>
+<p>即枚举变量只能付给已经定义的几个值中的一个，不能赋予其他值</p>
+<h3 id="枚举的值"><a href="#枚举的值" class="headerlink" title="枚举的值"></a>枚举的值</h3><ul>
+<li>可以在每一个枚举变量后为其赋值，如果没有赋值的话该枚举值是前一个值+1<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> numbers &#123;one=<span class="number">1</span>, two=<span class="number">2</span>, four=<span class="number">4</span>, eight=<span class="number">8</span>&#125;</span><br><span class="line"><span class="keyword">enum</span> numbers &#123;one=<span class="number">1</span>, two=<span class="number">2</span>, four=<span class="number">4</span>, five, eight=<span class="number">8</span>&#125;     <span class="comment">// five = 5</span></span><br></pre></td></tr></table></figure></li>
+<li>枚举的值实际上定义了一个范围，比如 <code>enum numbers {one=1, two=2, four=4, eight=8}</code> 中，如下的语句是合法的：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">numbers myNumber = numbers(<span class="number">6</span>);</span><br></pre></td></tr></table></figure>
+虽然6没有被定义，但是却在定义的枚举值的范围内，是合法的。</li>
+</ul>
+<h3 id="枚举值的范围的计算方式："><a href="#枚举值的范围的计算方式：" class="headerlink" title="枚举值的范围的计算方式："></a>枚举值的范围的计算方式：</h3><ul>
+<li>计算上限：找到定义的枚举值的最大值（比如100）；找到比这个最大值大的最小的一个2的幂（比如比100大的最小的是2的7次幂128）；将这个2的幂数减一（127）即为上限</li>
+<li>计算下限：</li>
+<li>如果已经定义的枚举值的最小值比0大或等于0，则下限是0</li>
+<li>如果已经定义的枚举值的最小值比0小，则和计算上限的方式类似：先找到比这个定义的最小值（比如-6）小的，最大的2的次幂（-8）；将这个次幂数加一（-7）即为下限</li>
+</ul>
+<h2 id="vector模板类"><a href="#vector模板类" class="headerlink" title="vector模板类"></a>vector模板类</h2><p>使用vector模板类需要引入头文件：<code>#include&lt;vector&gt;</code><br><code>vector</code>可以存储n个（n可以为变量）该类型的数据：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;dataType&gt; vt(dataSize);     <span class="comment">// dataSize大小的dataType数据类型的对象</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vi;     <span class="comment">// 0大小的整型数组</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>优点：可以动态改变长度</li>
+<li>缺点：效率比数组稍低</li>
+</ul>
+<h2 id="array模板类"><a href="#array模板类" class="headerlink" title="array模板类"></a>array模板类</h2><p>使用array模板类需要引入头文件：<code>#include&lt;array&gt;</code><br><code>array</code>模板类可以存储固定长度的某种数据类型的一个数组：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">array</span>&lt;dataType, arraySize&gt; arrayName;</span><br><span class="line"><span class="built_in">array</span>&lt;<span class="keyword">int</span>,5&gt; arrayInt;     <span class="comment">// 创建一个5个int值的数组对象</span></span><br><span class="line"><span class="built_in">array</span>&lt;<span class="keyword">double</span>,3&gt; arrayDouble = &#123;<span class="number">1.1</span>,<span class="number">1.2</span>,<span class="number">1.3</span>&#125;;     <span class="comment">// 创建并初始化了一个3个double值的数组对象</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>有点：效率较快</li>
+<li>缺点：只能声明固定长度的数组</li>
+</ul>
+<h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">dataType arrayName [row] [column]=</span><br><span class="line">&#123;</span><br><span class="line">    &#123;datas&#125;,</span><br><span class="line">    &#123;datas&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">dataType arrayName [row] [column];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; column; j++)</span><br><span class="line">    &#123;</span><br><span class="line">    	arrayName[i][j]=data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-05T03:38:24.000Z" itemprop="dateUpdated">2019-08-05 11:38:24</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/&title=《【C++温故知新】（一）数据类型》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/&title=《【C++温故知新】（一）数据类型》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（一）数据类型》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%8C%E6%8C%87%E9%92%88/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">【C++温故知新】（二）指针</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/03/Unity3D%E5%9F%BA%E7%A1%80%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Unity3D基础脚本编程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/&title=《【C++温故知新】（一）数据类型》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/&title=《【C++温故知新】（一）数据类型》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（一）数据类型》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/04/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEcUlEQVR42u3aS24cORAFQN//0hpgVgNYar2XyR6IpaiVYJRZZPSC+fvzJ34+/n2Sf//4z5O/+ffz1Tt/r5av8PosBx5MmDBhwvQjmdrtnqI8+zPkBAnxJ+tgwoQJE6bLmdrlXl+3ryFm13kCtNnJNyaYMGHChOkXMCXJ5D50eH28BG62c0yYMGHChCn/2HArb0ink4ADEyZMmDD9BqZ2ufxjr7nz1HrTmGzXx4QJEyZMT2JqB3ee9PfhBxMmTJgw/TCmj/LJW4ztpTsr77Yl49mDCRMmTJjuZUrSwrb8mlzAs5R18+aBdTBhwoQJ04VMSVkzv+zbEvCmfLxpjtbFa0yYMGHCdDnTbDQnDyZeJ7qzY8yGjdofBhMmTJgwPYMpL7AmZBumdtRmHygkAQ0mTJgwYXoG0yyVbYOGWXF5XyZefRcTJkyYMF3LlHTrToUIxQVcBhl5qXqWomPChAkTptuZ2mS1Hdlph1k3Jd02WKm/iwkTJkyYLmRqU9N8W/kKs4v//wkjMGHChAnTvUz5JXqqFLtJWWffykvAX54XEyZMmDA9gmk2KJOkx3lIkY/XnB0D+gYOEyZMmDBdyzRLdNsU9+wwzaag3IYOmDBhwoTpeUz7v/PLOG9MzsaD2p0kPzAmTJgwYbqLaZOstgXcTYG4bay2w0ZFvxcTJkyYMF3F1JZxZyizQGTfvMyHjaL9Y8KECROmC5lml2WbRu6/ku9hEwR8CYoJEyZMmB7BNGsxtu/kF/PrN2eUbdEZEyZMmDDdzrRvWLZl3Jy1DSbaNfNzYcKECROmZzPlhdFT6fG+YXnqW5gwYcKE6UlMs6s3/79tytr+hMk13xaUMWHChAnT7Uz7jc7ebMd3Niiz4jImTJgwYXoS06xBeLbAWqSgcXgxa69+8l1MmDBhwvQIpnZ0pj3YjLu95tt2aVSYxoQJEyZM1zK1Jde2NZinoAnirNQ7Kw1jwoQJE6ZnMJ1KINuRmuRfzhZ581GeqBaOCRMmTJguYZq1IVug5NmEGm2huQ0sMGHChAnTvUz5gWfNzrwlmQcEm4ZlnlpjwoQJE6YnMe2P1DYR81CjrVWf2s+XRV5MmDBhwnQhU5t8vuPAsxGfTZE3SZsxYcKECdPzmGYf25Ru2+GbvOictz+/EcCECRMmTJcztQd+jZX3UfOk9N3tzG92hQkTJkyYHsHUHilpOuYtw81Yz6l0+st3MGHChAnTI5g2yWSL1a6Z7zAq2pbrY8KECROme5laoChRLC/vfNNtO/MdIQImTJgwYbqL6aN8WpokVd5c8LOQIi9hfzK4gwkTJkyYrmI6dSXPWoYt9ywcmf20mDBhwoTpSUztqGibdrZwbZvz9SFnpWpMmDBhwvQ8pn2RdNY4PFXkzflmX8SECRMmTL+BqU13k0u6DUfaRHqThGPChAkTJkwzjlmZ+MBRN0EMJkyYMGG6nKm9kvNLuiikxpueBSjtDle1cEyYMGHC9GOYNmXW2Yjnvjm6GcR5RxkaEyZMmDD9SKZ/ADx9lSb3ErGhAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

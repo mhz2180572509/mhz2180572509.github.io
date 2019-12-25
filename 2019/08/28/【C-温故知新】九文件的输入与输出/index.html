@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【C++温故知新】（九）文件的输入与输出 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,C++">
+    <meta name="description" content="文件的输入与输出也是基于流（stream）的，和cout、cin的操作类似。 文件的写入基本条件 必须包含头文件 fstream  头文件 fstream 定义了一个用于处理输出的 ofstream 类 需要声明一个或多个 ofstream 变量（对象），并命名 必须指明名称空间 std 需要将 ofstream 对象与文件关联起来。方法之一是使用 open() 方法 使用完文件后，应使用方法 c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C++温故知新】（九）文件的输入与输出">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="文件的输入与输出也是基于流（stream）的，和cout、cin的操作类似。 文件的写入基本条件 必须包含头文件 fstream  头文件 fstream 定义了一个用于处理输出的 ofstream 类 需要声明一个或多个 ofstream 变量（对象），并命名 必须指明名称空间 std 需要将 ofstream 对象与文件关联起来。方法之一是使用 open() 方法 使用完文件后，应使用方法 c">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-28T14:47:10.000Z">
+<meta property="article:modified_time" content="2019-08-28T15:19:38.344Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【C++温故知新】（九）文件的输入与输出</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【C++温故知新】（九）文件的输入与输出</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-28T14:47:10.000Z" itemprop="datePublished" class="page-time">
+  2019-08-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件的写入"><span class="post-toc-number">1.</span> <span class="post-toc-text">文件的写入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本条件"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">基本条件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一个文件写入的实例"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">一个文件写入的实例</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件的读取"><span class="post-toc-number">2.</span> <span class="post-toc-text">文件的读取</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本条件-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">基本条件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一个文件读取的实例"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">一个文件读取的实例</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【C-温故知新】九文件的输入与输出"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【C++温故知新】（九）文件的输入与输出</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-28 22:47:10" datetime="2019-08-28T14:47:10.000Z"  itemprop="datePublished">2019-08-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>文件的输入与输出也是基于<strong>流</strong>（stream）的，和<code>cout</code>、<code>cin</code>的操作类似。</p>
+<h1 id="文件的写入"><a href="#文件的写入" class="headerlink" title="文件的写入"></a>文件的写入</h1><h2 id="基本条件"><a href="#基本条件" class="headerlink" title="基本条件"></a>基本条件</h2><ul>
+<li>必须包含头文件 <code>fstream</code> </li>
+<li>头文件 <code>fstream</code> 定义了一个用于处理输出的 <code>ofstream</code> 类</li>
+<li>需要声明一个或多个 <code>ofstream</code> 变量（对象），并命名</li>
+<li>必须指明名称空间 <code>std</code></li>
+<li>需要将 <code>ofstream</code> 对象与文件关联起来。方法之一是使用 <code>open()</code> 方法</li>
+<li>使用完文件后，应使用方法 <code>close()</code> 将其关闭</li>
+<li>可结合使用 <code>ofstream</code> 对象和运算符 <code>&lt;&lt;</code> 来输出各种类型的数据</li>
+</ul>
+<h2 id="一个文件写入的实例"><a href="#一个文件写入的实例" class="headerlink" title="一个文件写入的实例"></a>一个文件写入的实例</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> myString = <span class="string">"hello world!"</span>;</span><br><span class="line"></span><br><span class="line">    ofstream ourFile;</span><br><span class="line">    outFile.<span class="built_in">open</span>(<span class="string">"myFile.txt"</span>);</span><br><span class="line">    outFile &lt;&lt; myString;</span><br><span class="line">    outFile.<span class="built_in">close</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="文件的读取"><a href="#文件的读取" class="headerlink" title="文件的读取"></a>文件的读取</h1><h2 id="基本条件-1"><a href="#基本条件-1" class="headerlink" title="基本条件"></a>基本条件</h2><ul>
+<li>必须包含头文件 <code>fstream</code></li>
+<li>头文件 <code>fstream</code> 定义了一个用于处理输入的 <code>ifstream</code> 类</li>
+<li>需要声明一个或多个 <code>ifstream</code> 变量（对象），并命名</li>
+<li>需要将 <code>ifstream</code> 对象与文件关联起来。方法之一是使用 <code>open()</code> 方法</li>
+<li>读取完文件后，应使用方法 <code>close()</code> 将其关闭</li>
+<li>可结合使用 <code>ifstream</code> 对象和运算符 <code>&gt;&gt;</code> 来读取各种类型的数据</li>
+<li>可以使用 <code>ifstream</code> 对象和 <code>get()</code> 方法来读取一个字符，使用 <code>ifstream</code> 对象和 <code>getline()</code> 来读取一行字符</li>
+<li>可以结合使用 <code>ifstream</code> 和 <code>cof()</code>、<code>fai()</code> 等方法来判断输入是否成功</li>
+<li><code>ifstream</code> 对象本身被用作测试条件时，如果最后一个读取操作成功，它将被转换为布尔值 <code>true</code>，否则被转换为 <code>false</code></li>
+</ul>
+<h2 id="一个文件读取的实例"><a href="#一个文件读取的实例" class="headerlink" title="一个文件读取的实例"></a>一个文件读取的实例</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> fileName = <span class="string">"myFile.txt"</span>;</span><br><span class="line"></span><br><span class="line">    ifstream inFile;</span><br><span class="line">    inFile.<span class="built_in">open</span>(fileName);</span><br><span class="line">    <span class="keyword">if</span> (!inFile.is_open())</span><br><span class="line">    	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Can't open the file: "</span> &lt;&lt; fileName;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">string</span> readText;</span><br><span class="line">    inFile &gt;&gt; readText;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (inFile.eof())</span><br><span class="line">    	<span class="built_in">cout</span> &lt;&lt; <span class="string">"End of file reached.\n"</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (inFile.fail())</span><br><span class="line">    	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Input terminated by data mismatch.\n"</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Input terminated for other reasons.\n"</span>;</span><br><span class="line"></span><br><span class="line">    inFile.<span class="built_in">close</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-28T15:19:38.344Z" itemprop="dateUpdated">2019-08-28 23:19:38</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/&title=《【C++温故知新】（九）文件的输入与输出》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/&title=《【C++温故知新】（九）文件的输入与输出》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（九）文件的输入与输出》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">【数据结构】（六）不相交集类</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【C++温故知新】（八）异常处理</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/&title=《【C++温故知新】（九）文件的输入与输出》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/&title=《【C++温故知新】（九）文件的输入与输出》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（九）文件的输入与输出》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAAE+CAAAAAAxUyPsAAAFP0lEQVR42u3cy67iMBAEUP7/p5ntSJBQ1W2YxZysrngk9glSyt3WfTzi4/lyvL7++vn7v69euT/z/ajux3b/yv21Vgc+fPjw4cMXDCK5zDM+7idwNar8JrX0959P5oIPHz58+PBt+JIJJA/79ltXZ8gjRXtLTt1UfPjw4cOH75d8yakTiDbotN89VdrAhw8fPnz4/hXfZmJ5fMlvz+ymtnEKHz58+PDhO8vXhoC8sJ5HlrwksQ9SmyYEPnz48OHDt+HLG8n/z9+HD3z48OHDh69c2OfRpG2i54Emn0XL9Bwd+PDhw4cP30jj0Q7xbIt9thTPF/PJbV454MOHDx8+fLHDJrLkEWGzCaxtErTE+ba2y98dPnz48OHDN+JrW9T3k29xZwv+fejJb9uHigs+fPjw4cO3iC+zovlmW9isgH5qQ1sbevDhw4cPH74Z37cf+W0ze9NKz1HyM9e/FHz48OHDh2/UbM6X5Xkoaa8yg97PLp8pPnz48OHDt+HLl9+zLWIt9Knrnt2a9qZkgA8fPnz48MV87cXyBfYsymzKAZsm+v4G48OHDx8+fInDrMzdLsg3TetvNL9nzf4318WHDx8+fPhGfPtLtuEg+Vbyblus34zqsuKCDx8+fPjwlXzJF9ppnC2p5+2EPGy1nyxKBvjw4cOHD1/A1w49X3jPYkHySt4Cz2NQ0TzAhw8fPnz45n3nA9PetJyLwZVTagv67Q8CHz58+PDhy/najWWbFvWscd6Glc0GtcO9Dnz48OHDhy/tUO/+GXR8G1qIWdmiTm15sR4fPnz48OEb8bUN6X3UOFVc2DfOD7T88eHDhw8fvgVfGwJm727K5TOOJGDlBQV8+PDhw4dvxncqEOSXzMvieTxqz9ZeN/rd4cOHDx8+fIf42kZyvvCeNa1nkWhf+LjcZYAPHz58+PCVfPv29mahvini5+32fGNcHVzw4cOHDx++br6ronkbR+phLcoQSVg51h7Ahw8fPnz4Yr5NI3kz9FNh5TdnGP6C8OHDhw8fvnULeTaspNDfniGPSkkp4Vke+PDhw4cPX8vX7rNKHvZt6z1vurfXzUshm8iFDx8+fPjwzfj2MSIJOrOI0BYm2u1us7iGDx8+fPjw7fmSSc62qeVT2pyn/cymSY8PHz58+PCd4stPmhfH22L9ph+dh6d8I10RXPDhw4cPH76Ld5MgkpTLc9w89OS3My/rt2P7cH58+PDhw4ev5JstzmcbyPLiwqkG+b54UdwMfPjw4cOHb1udrv91V362vHzQIu4b9vnWAXz48OHDh6/lm23Yyh/q+XK9neRskT8rhVxeCx8+fPjw4Sv58s1Ybckgf2VWSpgt7HOIWbMfHz58+PDhu+fbt8DzR/6pwHGqfX4giuHDhw8fPnyjVXyecfJB56+3DYN2VKdmdzl+fPjw4cOHr+RL3m4DytlG+Kxt3xbr20YFPnz48OHD1/LNHvN5uXzfANg00fOolIz8zZnx4cOHDx++Ed+mzTxrOe9LCWfL8bMr4sOHDx8+fHu+fQhoy+6zAv2sedC21T/cZnz48OHDh+9bCaEufCdF/LarkJ//VMQ5FXfw4cOHDx++v7+bhJVZA7sdYhtH2tt5H0SSkb95Fx8+fPjw4Rvxtc3jNi7MlvHthPN2wr4Igg8fPnz48P2SL2+x5+dJsFrKdptavs0OHz58+PDh+w1fvjhvadpCwKw9cHhbAD58+PDhwzfi25S/2/iSB5FZYSKfyyxaDXsd+PDhw4cP36IinQ8ueda3n2lDTA7dlhXw4cOHDx++mO8PR3zlJPgNwmkAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

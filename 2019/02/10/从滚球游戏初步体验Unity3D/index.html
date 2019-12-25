@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>从“滚球游戏”初步体验Unity3D | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,Unity3D">
+    <meta name="description" content="从创建项目开始创建一个项目打开unity，在Projects中可以查看当前的本地项目或者云端项目，点击New project或者右上角的New都可以新建项目。                                                                                              创建一个项目              然后在1处填写">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从“滚球游戏”初步体验Unity3D">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="从创建项目开始创建一个项目打开unity，在Projects中可以查看当前的本地项目或者云端项目，点击New project或者右上角的New都可以新建项目。                                                                                              创建一个项目              然后在1处填写">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C4.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C5.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C6.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C7.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C8.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C9.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C10.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C11.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C12.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C13.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C14.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C15.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C16.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C17.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C18.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C19.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C20.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C21.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C22.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C23.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C24.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C25.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C26.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C27.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C28.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C29.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C30.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C31.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C32.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C33.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C34.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C35.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C36.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C37.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C38.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C39.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C40.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C41.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C42.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C43.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C44.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C45.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C46.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C47.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C48.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C49.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C50.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C51.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C52.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C53.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C54.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C55.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C56.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C57.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C58.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C59.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C60.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C61.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C62.png">
+<meta property="article:published_time" content="2019-02-10T09:45:39.000Z">
+<meta property="article:modified_time" content="2019-02-20T03:09:08.000Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="Unity3D">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/unity3d%E4%BA%8C1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">从“滚球游戏”初步体验Unity3D</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">从“滚球游戏”初步体验Unity3D</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-02-10T09:45:39.000Z" itemprop="datePublished" class="page-time">
+  2019-02-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Unity3D/">Unity3D</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#从创建项目开始"><span class="post-toc-number">1.</span> <span class="post-toc-text">从创建项目开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建一个项目"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">创建一个项目</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#保存Scene并管理Assets"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">保存Scene并管理Assets</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#创建游戏场景"><span class="post-toc-number">2.</span> <span class="post-toc-text">创建游戏场景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建Plane"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">创建Plane</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#改变Transform"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">改变Transform</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#直接赋值"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">直接赋值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#拖动输入框调节"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">拖动输入框调节</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在Scene窗口中改变"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">在Scene窗口中改变</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#创建游戏对象"><span class="post-toc-number">3.</span> <span class="post-toc-text">创建游戏对象</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建Sphere"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">创建Sphere</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于光源"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">关于光源</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建Material"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">创建Material</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#让小球滚动起来"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">让小球滚动起来</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#让小球拥有成为刚体"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">让小球拥有成为刚体</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为小球添加控制脚本"><span class="post-toc-number">3.4.2.</span> <span class="post-toc-text">为小球添加控制脚本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#打开脚本"><span class="post-toc-number">3.4.3.</span> <span class="post-toc-text">打开脚本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开始编写脚本"><span class="post-toc-number">3.4.4.</span> <span class="post-toc-text">开始编写脚本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#完整的代码："><span class="post-toc-number">3.4.5.</span> <span class="post-toc-text">完整的代码：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#设置摄像机"><span class="post-toc-number">4.</span> <span class="post-toc-text">设置摄像机</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#完整的代码：-1"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">完整的代码：</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#建立围墙"><span class="post-toc-number">5.</span> <span class="post-toc-text">建立围墙</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#创建碰撞小立方体"><span class="post-toc-number">6.</span> <span class="post-toc-text">创建碰撞小立方体</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新建Cube"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">新建Cube</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#让小立方体旋转起来"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">让小立方体旋转起来</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建Prefab"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">创建Prefab</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#放置更多的立方体"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">放置更多的立方体</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为小立方体涂色"><span class="post-toc-number">6.5.</span> <span class="post-toc-text">为小立方体涂色</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#完成碰撞"><span class="post-toc-number">7.</span> <span class="post-toc-text">完成碰撞</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为PickUp添加标签"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">为PickUp添加标签</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#完成碰撞逻辑"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">完成碰撞逻辑</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于碰撞的简单原理"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">关于碰撞的简单原理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优化"><span class="post-toc-number">7.4.</span> <span class="post-toc-text">优化</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#添加计分机制"><span class="post-toc-number">8.</span> <span class="post-toc-text">添加计分机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#添加计数器"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">添加计数器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#添加UI在游戏界面中显示分数"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">添加UI在游戏界面中显示分数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编辑脚本来显示分数"><span class="post-toc-number">8.3.</span> <span class="post-toc-text">编辑脚本来显示分数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#添加完成提示"><span class="post-toc-number">8.4.</span> <span class="post-toc-text">添加完成提示</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Build游戏"><span class="post-toc-number">9.</span> <span class="post-toc-text">Build游戏</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-从滚球游戏初步体验Unity3D"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">从“滚球游戏”初步体验Unity3D</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-02-10 17:45:39" datetime="2019-02-10T09:45:39.000Z"  itemprop="datePublished">2019-02-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Unity3D/">Unity3D</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="从创建项目开始"><a href="#从创建项目开始" class="headerlink" title="从创建项目开始"></a>从创建项目开始</h1><h2 id="创建一个项目"><a href="#创建一个项目" class="headerlink" title="创建一个项目"></a>创建一个项目</h2><p>打开unity，在Projects中可以查看当前的本地项目或者云端项目，点击New project或者右上角的New都可以新建项目。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C1.png" alt="创建一个项目" title="">
+                </div>
+                <div class="image-caption">创建一个项目</div>
+            </figure>
+<p>然后在1处填写创建项目的名称，2处选择创建地址，3处选择Template（模板），可以选中3D或者2D。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C2.png" alt="创建一个项目" title="">
+                </div>
+                <div class="image-caption">创建一个项目</div>
+            </figure>
+<p>稍等片刻即可进入unity的主页面。</p>
+<h2 id="保存Scene并管理Assets"><a href="#保存Scene并管理Assets" class="headerlink" title="保存Scene并管理Assets"></a>保存Scene并管理Assets</h2><p>进入unity之后，可以看到已经预设的SampleScene和其中的Main Camera（主摄像机）和Directional Light（平行光）组件，如果你不喜欢这些预设的名字，直接点击修改并使用Ctrl+S保存你的修改即可。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C3.png" alt="保存Scene" title="">
+                </div>
+                <div class="image-caption">保存Scene</div>
+            </figure>
+<p>为了使我们的Assets文件夹管理地更加井井有条，推荐对不同的assets进行分文件夹管理，这时一些文件夹的命名可以自己定义，但通常可以遵循一定的不成文的规定，比如通常将场景存放在Scenes目录、将脚本存放在Scripts目录等等，要根据自己来管理好Assets目录，以后对于大量的assets可以很方便快捷。</p>
+<h1 id="创建游戏场景"><a href="#创建游戏场景" class="headerlink" title="创建游戏场景"></a>创建游戏场景</h1><h2 id="创建Plane"><a href="#创建Plane" class="headerlink" title="创建Plane"></a>创建Plane</h2><p>可以使用unity的内置GameObject的Plane（平面）类型来作为游戏场景的“地面”。<br>可以在Hierarchy视窗下右键选择3D Object下找到Plane创建，也可以在顶部菜单栏的GameObject下的3D Object下找到Plane创建。当然也可以看到unity为我们创建了很多预置的Game Object，比如3DO bject、2D Object、Effects、Light、Audio、 Video、UI、Camera等等，当然每一个分类下还有更详细的分类，这些都可以直接拿来使用，非常方便，一些重要的Game Object以后还会慢慢使用。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C4.png" alt="新建GameObject的Plane" title="">
+                </div>
+                <div class="image-caption">新建GameObject的Plane</div>
+            </figure>
+<p>这里只需要创建一个Plane并将其命名为Ground来作为我们游戏的“地面”，可以看到Plane出现在了MainScene中，同时我们可以注意到Hierarchy视窗中的MainScene右上角出现了一个*号，这就表示该Scene处于待保存的状态，可以通过菜单栏的File-&gt;Save或者快捷键Ctrl+S保存Scene。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C5.png" alt="待保存的Scene" title="">
+                </div>
+                <div class="image-caption">待保存的Scene</div>
+            </figure>
+<p>选中刚刚创建的Ground，Inspector视窗中就会出现其所有的Components，这些都是预先被untiy设置给Plane的，点击Transform这一Component的右侧的齿轮状图标，可以选择Reset（重置）选项，这样，刚刚创建的Plane的Transform就会被重置为初始值，它的Position会被设置为（0，0，0），这是整个游戏世界的原点坐标，游戏中的所有GameObject的坐标都是基于此原点进行计算的。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C6.png" alt="初始化Transform" title="">
+                </div>
+                <div class="image-caption">初始化Transform</div>
+            </figure>
+<p>选中任何一个GameObject，比如选中Ground，然后按F键，或者在菜单栏中点击Edit-&gt;Frame Select可以快速地调整Scene的角度，让我们有一个非常合适的角度来观察Ground的全貌。</p>
+<h2 id="改变Transform"><a href="#改变Transform" class="headerlink" title="改变Transform"></a>改变Transform</h2><p>改变Transform的三组值的方法有很多。</p>
+<h3 id="直接赋值"><a href="#直接赋值" class="headerlink" title="直接赋值"></a>直接赋值</h3><p>可以在Inspector面板中对Transform的九个值直接输入数值来设置</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C7.png" alt="在Inspector面板中设置Transform的值" title="">
+                </div>
+                <div class="image-caption">在Inspector面板中设置Transform的值</div>
+            </figure>
+<h3 id="拖动输入框调节"><a href="#拖动输入框调节" class="headerlink" title="拖动输入框调节"></a>拖动输入框调节</h3><p>当我们把鼠标指向每一个值的输入框的左侧边界时，就会发现鼠标成为了一个左右双箭头的形状，此时按下鼠标左键所有拖动，就会发现该输入框变成了蓝色，并可以随着拖动改变它的值。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C8.png" alt="拖动输入框" title="">
+                </div>
+                <div class="image-caption">拖动输入框</div>
+            </figure>
+<h3 id="在Scene窗口中改变"><a href="#在Scene窗口中改变" class="headerlink" title="在Scene窗口中改变"></a>在Scene窗口中改变</h3><p>在左上方有六个按钮，分别表示对Scene中GameObject的操作。<br>这里提一句：不管选中六个按钮中的哪一个，只要按住Alt键在Scene中拖动鼠标就可以转动视角，只要滚动鼠标滚轮即可放大/缩小视角。<br>这六个按钮从左到右依次为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C9.png" alt="六个改变Scene中GameObject的选项" title="">
+                </div>
+                <div class="image-caption">六个改变Scene中GameObject的选项</div>
+            </figure>
+
+<ul>
+<li>第一个：拖动Scene的视角</li>
+<li>第二个：选中后，再选中Scene中的任何一个GameObject，就可以通过拖动它的三个方向箭头（x、y、z）以及三个平面（xy平面、xz平面、yz平面）来改变Position的值。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C10.png" alt="改变Position" title="">
+                </div>
+                <div class="image-caption">改变Position</div>
+            </figure></li>
+<li>第三个：选中后可以在Scene中对选中的GameObject改变其Rotation的值<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C11.png" alt="改变Rotation" title="">
+                </div>
+                <div class="image-caption">改变Rotation</div>
+            </figure></li>
+<li>第四个：选中后在Scene中可以对选中的GameObject进行三个方向的Scale的调整<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C12.png" alt="改变Scale" title="">
+                </div>
+                <div class="image-caption">改变Scale</div>
+            </figure></li>
+<li>第五个：选中后可以在Scene中对选中的GameObject进行顶点的位置调整从而改变Scale的值<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C13.png" alt="改变Scale" title="">
+                </div>
+                <div class="image-caption">改变Scale</div>
+            </figure></li>
+<li>第六个：选中后可以同时改变Position、Rotation、Scale的值，是第二三四个的结合。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C14.png" alt="同时改变所有的Transform" title="">
+                </div>
+                <div class="image-caption">同时改变所有的Transform</div>
+            </figure>
+
+</li>
+</ul>
+<h1 id="创建游戏对象"><a href="#创建游戏对象" class="headerlink" title="创建游戏对象"></a>创建游戏对象</h1><h2 id="创建Sphere"><a href="#创建Sphere" class="headerlink" title="创建Sphere"></a>创建Sphere</h2><p>接下来创建小球，同样地，在MainScene下右键-&gt;3D Object-&gt;Sphere来创建一个unity预置的Sphere（球体），命名为Player，并通过reset其Transform来使其位置重置到原点。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C15.png" alt="新建一个Sphere" title="">
+                </div>
+                <div class="image-caption">新建一个Sphere</div>
+            </figure>
+<p>这样我们看到小球的中心已经被定位到了（0，0，0）处，为了让小球能在平面上滚动，我们需要将小球放到平面上。<br>观察小球的Transform我们可以得到，它的Scale的值为（1，1，1），也就是说它的三个方向的大小都为1单位，为了让小球放到平面上边，显然我们需要将其向上移动半个球的距离，即将Position的Y值设置为0.5，小球就刚好在平面上了。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C16.png" alt="将小球放到平面上" title="">
+                </div>
+                <div class="image-caption">将小球放到平面上</div>
+            </figure>
+
+<h2 id="关于光源"><a href="#关于光源" class="headerlink" title="关于光源"></a>关于光源</h2><p>其实我们可以看到小球是有影子的，这是最开始unity为我们准备的Directional Light作用的结果，我们可以看到Scene中的一个小太阳的标志，这个就是我们的光源，使用Directional Light来模拟太阳的平行光。它的Transform则显示了光源的位置、角度（也就是平行光的照射方向），如果我们将这个GameObject去掉的话就没有了光的效果。<br>当然通过改变Rotation的值就可以调节光源的方向，比如为了效果我将Rotation的Y值改为60。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C17.png" alt="关闭光源后的效果" title="">
+                </div>
+                <div class="image-caption">关闭光源后的效果</div>
+            </figure>
+
+<h2 id="创建Material"><a href="#创建Material" class="headerlink" title="创建Material"></a>创建Material</h2><p>为了使GameObject美观，我们通常会对其表面进行一系列装饰，而其表面的表现是通过为这个GameObject添加Material（材料）来实现的。<br>接下来为我们的Ground和Player添加最简单材料：纯颜色。<br>在Assets下新建Materials目录用于管理各种材料，然后右键该目录选择Create-&gt;Material新建一个材料命名为Background。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C18.png" alt="新建一个Material" title="">
+                </div>
+                <div class="image-caption">新建一个Material</div>
+            </figure>
+<p>选中Background，就可以看到它的Inspector面板了，我们在Albedo（反射率）一栏中可以选择一种颜色，在下方的预览中就可以看到效果了，这里我们选择RGB色（0，32，64）作为我们的Background的颜色。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C19.png" alt="为Material选择颜色" title="">
+                </div>
+                <div class="image-caption">为Material选择颜色</div>
+            </figure>
+<p>想要将创建的Material运用在某个GameObject上，很简单，只需要拖动该Material到Scene中的目标GameObject上或者拖动到Hierarchy的该GameObject上即可。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C20.png" alt="将Material运用到Scene中" title="">
+                </div>
+                <div class="image-caption">将Material运用到Scene中</div>
+            </figure>
+<p>可以看到我们的Ground已经变成了蓝色</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C21.png" alt="成功改变Plane的颜色" title="">
+                </div>
+                <div class="image-caption">成功改变Plane的颜色</div>
+            </figure>
+
+<h2 id="让小球滚动起来"><a href="#让小球滚动起来" class="headerlink" title="让小球滚动起来"></a>让小球滚动起来</h2><h3 id="让小球拥有成为刚体"><a href="#让小球拥有成为刚体" class="headerlink" title="让小球拥有成为刚体"></a>让小球拥有成为刚体</h3><p>为了让小球有滚动的效果，我们需要小球拥有一系列的物理属性，物理属性已经由unity内置，我们只需为需要增加物理属性的GameObject添加一个Rigidbody的Component即可。如上一节中所示，选中Player，在Inspector面板中通过Add Component中找到Physics下的Rigidbody即可。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C22.png" alt="添加Rigidbody属性" title="">
+                </div>
+                <div class="image-caption">添加Rigidbody属性</div>
+            </figure>
+<h3 id="为小球添加控制脚本"><a href="#为小球添加控制脚本" class="headerlink" title="为小球添加控制脚本"></a>为小球添加控制脚本</h3><p>有了刚体属性的小球需要在我们的控制下滚动，比如我们规定使用W，S，A，D四个按键来控制小球的方向，那么对于一个有物理属性的刚体来说，为了能够动起来，当然需要力（Force）作用在物体上，这些有关于如何控制GameObject的方法需要我们使用脚本（Scripts）来完成，假如你已经拥有了一定的C#编程基础。<br>同样我们在Assets下创建Scripts目录来管理脚本，在该目录处右键-&gt;Create-&gt;C# Script创建一个脚本，这里我们命名为PlayerController。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C23.png" alt="新建脚本" title="">
+                </div>
+                <div class="image-caption">新建脚本</div>
+            </figure>
+<p>为了让我们创建的脚本与Player联系起来，可以在Player的Inspector面板下选择Add Component，在其中搜索我们的脚本名字就可以找到该脚本，根据unity的命名规范，喜欢将脚本各个单词使用“驼峰法”并且首字母同样大写的方式，有趣的是，unity对于这些脚本通常都会在每个大写字母处将这些单词分开，我也不知道为什么。简单点儿的话可以直接将Assets中的脚本拖到Inspector面板下，就可以添加成功。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C24.png" alt="将脚本添加给GameObject" title="">
+                </div>
+                <div class="image-caption">将脚本添加给GameObject</div>
+            </figure>
+<h3 id="打开脚本"><a href="#打开脚本" class="headerlink" title="打开脚本"></a>打开脚本</h3><p>编辑脚本需要编辑器，Visual Studio是较好的选择，它和unity之间有很好的合作关系，使用起来也很方便。双击脚本文件或者在Inspector面板中点击脚本的右上角的齿轮图标选择Edit Scrpit都可以打开编辑器对其进行编辑。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C25.png" alt="Unity的预置脚本内容" title="">
+                </div>
+                <div class="image-caption">Unity的预置脚本内容</div>
+            </figure>
+<p>unity已经为我们预置好了脚本的最基本结构，最基本的，我们可以看到所有的unity脚本都继承自MonoBehaviour类，然后有两个预设函数，Start函数是在第一帧开始渲染前调用，Update函数在每一帧刷新前调用，都是非常常用的函数。<br>接下来思考我们要做的事情，我们需要检测用户的输入，并且通过输入的按键来控制小球的滚动方向，检测用户的输入同时也需要识别输入的是哪一个按键，除此之外我们还需要一些物理学有关的逻辑，比如我们需要添加一个力来控制小球的移动，这就是物理学逻辑，这些逻辑当然是每一帧都要进行一次，所以我们需要将这些逻辑写在每一帧更新都要执行的函数中。<br>显然我们可以写到Update函数下，因为Update函数是每一帧刷新前都会调用的，同时我们还有另外的选择，即使用FixedUpdate函数，它在每一次进行物理学运算的时候调用，每次检测到用户输入都需要进行物理学运算，所以我们可以将逻辑写到FixedUpdate函数下。</p>
+<h3 id="开始编写脚本"><a href="#开始编写脚本" class="headerlink" title="开始编写脚本"></a>开始编写脚本</h3><p>首先我们需要创建一个对于这个Player小球的引用，这样才能知道我们控制的是哪个小球，这里小球是刚体，所以我们创建一个刚体（Rigidbody）的引用，并且需要在第一帧开始渲染之前通过GetComponent方法来找到小球创建刚体的引用，这一逻辑自然就需要写到Start函数中了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Rigidbody rigidbodyPlayer;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    rigidbodyPlayer = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来对用户输入的读取就需要写到FiexedUpdate函数中了，我们使用Input类的GetAxis方法来获取水平或者垂直的运动轴，这个方法会返回一个float值作为该轴的移动距离。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> moveHorizontal = Input.GetAxis(<span class="string">"Horizontal"</span>);</span><br><span class="line"><span class="keyword">float</span> moveVertical = Input.GetAxis(<span class="string">"Vertical"</span>);</span><br></pre></td></tr></table></figure>
+<p>通过以上两行代码我们就可以将用户的W，S，A，D输入转化为水平轴和垂直轴的移动距离，分别存储在moveHorizontal和moveVertical两个float类型的变量中。</p>
+<p>接下来通过Rigidbody类的AddForce方法可以为刚体添加作用力，AddForce方法接受一个三维向量（Vector3）参数，这个三维向量就可以表示力，显然我们的三维向量可以用刚才的moveHorizontal和moveVertical两个变量作为X值和Z值，同时我们是不需要小球在Y方向上移动的，也就是将Y方向的力作用设置为0.0f即可，经过调试我们会发现小球的移动速度过慢，为了方便调节小球的速度，只需要在表示力的三维向量前乘以一个倍数即可，为了方便调整，我们设置一个public的float类型的变量speed来调节这个乘积。<br>这里必须说明的是，凡在unity的脚本中被声明为public类型的变量，在unity的Inspector界面中的该脚本的Component下都会出现一个可以设置的值的方框。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">float</span> speed;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FixedUpdate</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Vector3 movement = <span class="keyword">new</span> Vector3(moveHorizontal,<span class="number">0.0f</span>,moveVertical);</span><br><span class="line">    rigidbodyPlayer.AddForce(movement*speed);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C26.png" alt="更改public的Speed的值" title="">
+                </div>
+                <div class="image-caption">更改public的Speed的值</div>
+            </figure>
+<p>此处我们将speed的值设为10比较合理，运行游戏就会发现通过W，S，A，D的控制，小球动了起来。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C27.png" alt="让小球滚动起来" title="">
+                </div>
+                <div class="image-caption">让小球滚动起来</div>
+            </figure>
+
+<h3 id="完整的代码："><a href="#完整的代码：" class="headerlink" title="完整的代码："></a>完整的代码：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PlayerController</span> :</span> MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> Rigidbody rigidbodyPlayer;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> speed;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        rigidbodyPlayer = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">FixedUpdate</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">float</span> moveHorizontal = Input.GetAxis(<span class="string">"Horizontal"</span>);</span><br><span class="line">        <span class="keyword">float</span> moveVertical = Input.GetAxis(<span class="string">"Vertical"</span>);</span><br><span class="line"></span><br><span class="line">        Vector3 movement = <span class="keyword">new</span> Vector3(moveHorizontal,<span class="number">0.0f</span>,moveVertical);</span><br><span class="line"></span><br><span class="line">        rigidbodyPlayer.AddForce(movement*speed);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然你也会发现，小球超出了Plane的边界居然掉了下去，其实这是合理的，因为小球为刚体，也就拥有物理引擎，当然受到重力的影响，在没有Plane的向上的作用力的情况下自然会下落。</p>
+<h1 id="设置摄像机"><a href="#设置摄像机" class="headerlink" title="设置摄像机"></a>设置摄像机</h1><p>可以发现，我们的Camera的角度和位置都比较刁钻，这导致我们的游戏看到的画面并不完整，接下来我们对Camera进行设置，使其能够跟随我们的小球滚动来同时移动。<br>首先调节Main Camera的Position和Rotation使得画面和角度比较合适，比如这里将Position的Y值设为6，Z值设为-6，将Rotation的X值设为45得到了一个较为合适的位置。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C28.png" alt="改变摄像机的Transform" title="">
+                </div>
+                <div class="image-caption">改变摄像机的Transform</div>
+            </figure>
+<p>接下来通过脚本控制Main Camera跟随小球Player一同移动，即在Position上保持相对静止。<br>可能你会想到，只需要将Main Camera拖动给Player使其成为Player的子物体不就可以保持两者相对位置不变化了吗？但是问题在于球体Player是滚动的，如果两者的位置完全相对静止，就会导致球滚动时Main Cmaera也会跟着球滚动，有一种天旋地转的感觉。感兴趣的话可以尝试一下。<br>新建脚本CameraController并添加给Main Camera做一个Component。为了使Main Camera的Transform的Position和Player的保持相对静止，Rotation并不和其保持一致，可以想到一个办法：设置一个偏移量，这个值初始化为游戏开始时Main Camera和Player之间的Position的差值，然后在球滚动时，每一次滚动都改变Main Cmaera的Position，使其新的Position等于现在球的Position的值加上刚才的偏移量，这样就会在每次球的位置改变时Main Camera都会跟上它的步骤。<br>显然，偏移量的设置需要在Start函数中完成，每一次球的位置发生变化时的逻辑可以在Update函数中完成，但还有一个更好的选择，就是LateUpdate函数，该函数在每次有GameObject发生变动时才会调用。<br>同时，我们的脚本使加在Main Camera上的，所以Main Camera的Transform可以直接调用，但是球的Transform则需要单独获取，这里我们设置一个public的GameObject量，然后在unity中将球Player拖动到这个量处作为参数即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Vector3 offset;</span><br><span class="line"><span class="keyword">public</span> GameObject player;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    offset = transform.<span class="built_in">position</span> - player.transform.<span class="built_in">position</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LateUpdate</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    transform.<span class="built_in">position</span> = player.transform.<span class="built_in">position</span> + offset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C29.png" alt="添加Player实例" title="">
+                </div>
+                <div class="image-caption">添加Player实例</div>
+            </figure>
+<p>这时候运行游戏就可以发现Main Camera的位置随着球的改变而发生了改变。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C30.png" alt="MainCamera成功跟随小球变化位置" title="">
+                </div>
+                <div class="image-caption">MainCamera成功跟随小球变化位置</div>
+            </figure>
+<h2 id="完整的代码：-1"><a href="#完整的代码：-1" class="headerlink" title="完整的代码："></a>完整的代码：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CameraController</span> :</span> MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> Vector3 offset;</span><br><span class="line">    <span class="keyword">public</span> GameObject player;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        offset = transform.<span class="built_in">position</span> - player.transform.<span class="built_in">position</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">LateUpdate</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        transform.<span class="built_in">position</span> = player.transform.<span class="built_in">position</span> + offset;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="建立围墙"><a href="#建立围墙" class="headerlink" title="建立围墙"></a>建立围墙</h1><p>为了不让小球总是滚落到Plane之外，可以在其四周围建立起一圈儿围墙，很简单，使用预设的Cube就可以了。<br>为了更好的管理四个围墙，我们可以先创建一个空的GameObject，将其命名为Walls，Reset使其重置位置，然后在其上右键新建一个Cube，并命名为WestWall，这样这个Cube就成为了Walls的子物体。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C31.png" alt="新建Cube" title="">
+                </div>
+                <div class="image-caption">新建Cube</div>
+            </figure>
+<p>接下来如何调整这面墙的大小、位置就很简单了，可以在Inspector中直接输入具体数值，也可以直接在Scene中拖动和缩放，最好我们可以得到这个墙体结构。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C32.png" alt="改变Cube的Transform" title="">
+                </div>
+                <div class="image-caption">改变Cube的Transform</div>
+            </figure>
+<p>为了简单方便，只要选中WestWall，在菜单栏的Edit中选择Duplicate（复制）（快捷键：Ctrl+D）即可，然后将复制好的墙拖动到适合的地点，在复制，最后可以得到四面墙。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C33.png" alt="复制Cube建立围墙" title="">
+                </div>
+                <div class="image-caption">复制Cube建立围墙</div>
+            </figure>
+<p>接下来测试游戏，墙起作用了！</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C34.png" alt="围墙正常运行" title="">
+                </div>
+                <div class="image-caption">围墙正常运行</div>
+            </figure>
+
+<h1 id="创建碰撞小立方体"><a href="#创建碰撞小立方体" class="headerlink" title="创建碰撞小立方体"></a>创建碰撞小立方体</h1><h2 id="新建Cube"><a href="#新建Cube" class="headerlink" title="新建Cube"></a>新建Cube</h2><p>我们在游戏场地中加入一些旋转的小方块儿，然后由球来碰撞这些小方块儿，碰撞之后就加一定的分数。<br>很简单地，创建一个Cube，并命名为PickUp，使其Reset，然后我们调整一下它的Rotation和Scale，使得其变成一个斜放的小立方体，（为了方便看，这里暂时隐藏了Player，只要在Player的Inspector面板中将其前边的对勾打掉它就会隐藏）。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C35.png" alt="建立小立方体并改变其角度" title="">
+                </div>
+                <div class="image-caption">建立小立方体并改变其角度</div>
+            </figure>
+
+<h2 id="让小立方体旋转起来"><a href="#让小立方体旋转起来" class="headerlink" title="让小立方体旋转起来"></a>让小立方体旋转起来</h2><p>为了让小方块儿更有趣，我们来添加一个脚本让他旋转起来，新建脚本Rotator，并添加给PickUp，编辑此脚本。<br>这个逻辑中是不需要Start函数的，我们只需要每一帧都让小方块儿转动一下，所以将逻辑写到Update函数中，这里使用Ratate方法，需要一个Vector3作为参数，为了不让旋转过快，我们给每一帧都乘以一个小的时间量。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Vector3 rotation = <span class="keyword">new</span> Vector3(<span class="number">15</span>,<span class="number">30</span>,<span class="number">45</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    transform.Rotate(rotation * Time.deltaTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>保存脚本，运行游戏可以看到小方块旋转起来了。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C36.png" alt="让小立方体旋转起来" title="">
+                </div>
+                <div class="image-caption">让小立方体旋转起来</div>
+            </figure>
+
+<h2 id="创建Prefab"><a href="#创建Prefab" class="headerlink" title="创建Prefab"></a>创建Prefab</h2><p>接下来我们需要多放置一些立方体在游戏的平面上，在此之前，我们需要把这个设计好的立方体生成一个Prefab（预设体），让它变成一个asset，这样我们可以从prefab创建这个立方体的实例，这样我们才能分别控制每一个由prefab生成的实例或者控制prefab本身，在这个游戏中，被小球碰撞到的小立方体会消失，这也就是我们需要更新每一个小立方体的状态，所以我们需要创建一个Prefab。</p>
+<blockquote>
+<p>a prefab is an asset that contains a template, or blueprint of a game object or game object family.<br>（预设体是包含游戏对象或游戏对象族的模板或设计大纲的一种资源。）</p>
+</blockquote>
+<p>在Assets下新建Prefabs目录来管理预设体，只需要将MainScene中的PickUp拖拽到新建的目录下就可以生成对应的asset了，这时也会看到MainScene中的PickUp变成了一个蓝色的图标。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C37.png" alt="创建一个Prefab" title="">
+                </div>
+                <div class="image-caption">创建一个Prefab</div>
+            </figure>
+<p>此时在MainScene中新建一个空的GameObject来管理所有的小立方体，命名为PickUps，将刚刚的第一个PickUp拖拽到它的上边使其成为其子物体。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C38.png" alt="调整父子GameObject的关系" title="">
+                </div>
+                <div class="image-caption">调整父子GameObject的关系</div>
+            </figure>
+
+<h2 id="放置更多的立方体"><a href="#放置更多的立方体" class="headerlink" title="放置更多的立方体"></a>放置更多的立方体</h2><p>接下来放置小立方体，为了调整一个好的视角，我们可以点击Scene中右上角的方位标志的Y轴的小锥体，就会调整视角到俯视的角度，这是一个便捷的小技巧。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C39.png" alt="调整视角成俯视" title="">
+                </div>
+                <div class="image-caption">调整视角成俯视</div>
+            </figure>
+<p>由于我们的小立方体是一个斜放的立方体，在原本的坐标轴下很难调整立方体在水平面上的位置，这里还有一个小技巧，我们点击右上角的Local变成Global，这样就会在Global的坐标中对小立方体进行调整了，可以看到，小立方体的三个坐标轴变成了只有两个方向的轴，非常方便就可以调整了。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C40.png" alt="将坐标改为Global" title="">
+                </div>
+                <div class="image-caption">将坐标改为Global</div>
+            </figure>
+<p>接下来只需要Duplicate几个或者使用Ctrl+D来重复放置一些小立方体即可。这里粗略地摆放了八个小立方体。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C41.png" alt="摆放8个小立方体" title="">
+                </div>
+                <div class="image-caption">摆放8个小立方体</div>
+            </figure>
+
+<h2 id="为小立方体涂色"><a href="#为小立方体涂色" class="headerlink" title="为小立方体涂色"></a>为小立方体涂色</h2><p>让后再通过添加一种Material的方式将他们涂成黄色。<br>这里可以通过两种方式完成。<br>第一种，将Material拖拽给任意一个PickUp立方体，然后再该PickUp的Inspector的Prefab的Overrides（重载）下选择Apply All来让所有PickUp都被涂成黄色。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C42.png" alt="为小立方体涂色" title="">
+                </div>
+                <div class="image-caption">为小立方体涂色</div>
+            </figure>
+
+<p>第二种方法会更加简单，直接将Material用于Assets中的小立方体的Prefab就可以啦，找到Assets中的PickUp的Prefab，点击Inspector面板中的Open Prefab，就会在Scene窗口中预览该Prefab，这是再拖动黄色的Material到他上边，这个Prefab就会被染成黄色了。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C43.png" alt="为小立方体涂色" title="">
+                </div>
+                <div class="image-caption">为小立方体涂色</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C44.png" alt="为小立方体涂色" title="">
+                </div>
+                <div class="image-caption">为小立方体涂色</div>
+            </figure>
+
+<h1 id="完成碰撞"><a href="#完成碰撞" class="headerlink" title="完成碰撞"></a>完成碰撞</h1><h2 id="为PickUp添加标签"><a href="#为PickUp添加标签" class="headerlink" title="为PickUp添加标签"></a>为PickUp添加标签</h2><p>如果小球碰撞了旋转的立方体，那么小立方体就会消失。那么如何识别我们的小球Player碰撞的是小立方体呢？我们通过为PickUp添加特定的标签来识别。添加标签再Prefab上，在Assets中找到我们的Prefab并打开它，可以在它的Inspector面板中发现它还没有添加标签（Untagged），点击Tag后的按钮选择Add Tag…，来添加一个名为PickUp的标签，然后再回到最开始的面板处选择新添加的这个标签，这样PickUp的标签就添加好了。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C45.png" alt="新建并添加PickUp标签" title="">
+                </div>
+                <div class="image-caption">新建并添加PickUp标签</div>
+            </figure>
+
+<h2 id="完成碰撞逻辑"><a href="#完成碰撞逻辑" class="headerlink" title="完成碰撞逻辑"></a>完成碰撞逻辑</h2><p>重新编辑PlayerController的脚本，这里我们将碰撞发生的逻辑写到函数OnTriggerEnter中，这个函数在发生碰撞事件的时候调用，而且用碰到的Collider（碰撞机）作为参数，也就是我们的Player碰到的Collider。可见，如果要检测到的碰撞，被碰撞的物体需要由碰撞引擎，也就是要有Collider的属性，其实我们会发现，作为Cube保存的一个Prefab在创建之初就已经有Box Collider的这一Component了，所以不再需要我们自己添加。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C46.png" alt="Box Collider属性" title="">
+                </div>
+                <div class="image-caption">Box Collider属性</div>
+            </figure>
+<p>OnTriggerEnter函数用其碰撞到的Collider作为参数，现在就需要我们识别这个碰到的Collider是不是一个PickUp了，显然可以使用Tag来鉴别，这里使用gameObject的CompareTag方法来完成，该方法以一个字符串作为参数，返回一个布尔值，如果gameObject的Tag和字符串一致，就返回true。<br>接下来完成控制小立方体消失的逻辑，很简单，使用gameObject的方法SetActive来完成，这个方法控制的就是我们在Inspector面板中看到的每一个GameObject前的小对勾，该方法接受一个布尔值作为参数来控制GameObject的消失与显现。<br>完整的代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter</span><span class="params">(Collider other)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (other.gameObject.CompareTag(<span class="string">"PickUp"</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        other.gameObject.SetActive(<span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="关于碰撞的简单原理"><a href="#关于碰撞的简单原理" class="headerlink" title="关于碰撞的简单原理"></a>关于碰撞的简单原理</h2><p>此时运行游戏，在小球碰到小立方体的时候小立方体并没有像我们像的那样消失，这里的原因需要我们了解一定的Unity对与碰撞到原理。Unity将Collider（碰撞机）分为静态碰撞机（Static Collider）和动态碰撞机（Dynamic Collider）两种。静态的碰撞机比如墙面、地板等一些列静态的物体，与他们碰撞时，不允许两个Collider相互重合，也就是说会发生反弹，而为了让我们的碰撞能够实现，我们需要将立方体设置为动态的（Trigger）触发器，成为Trigger的Collider是可以被穿过的，这样才会引发我们的“碰撞事件”的逻辑。这里我们找到PickUp的Prefab，在它的Box Collider的Component中，勾选Is Trigger选项，这样它就成为了一个触发器。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C47.png" alt="选择Trigger属性" title="">
+                </div>
+                <div class="image-caption">选择Trigger属性</div>
+            </figure>
+<p>此时运行游戏可以发现，小立方体在受到碰撞后完美消失。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C48.png" alt="小立方体被碰撞后消失" title="">
+                </div>
+                <div class="image-caption">小立方体被碰撞后消失</div>
+            </figure>
+
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>这里有一个有关物理引擎的优化，首先我们区分了静态碰撞机和动态碰撞机，Untiy对于静态碰撞机，会将它们的体积记录在一个缓存中，这是很合理的，因为静态即不动，所以并不需要在每一帧都计算器和重新绘制它的体积，而动态的则不同，因为它是运动的，所以必须在每一帧处都计算和绘制，这个过程是需要耗费资源的。</p>
+<blockquote>
+<p>Any game object with a collider and a rigid body is considered dynamic.<br>Any game object with a collider attached but no physics rigid body is expected to be static.<br>（任何同时带有Collider和Rigidbody属性的GameObject称为动态的，任何只有Collider而没有Rigidbody属性的GameObject称为静态的）</p>
+</blockquote>
+<p>为了让PickUp成为动态的，这样不需要每一次都计算它的体积，我们为PickUp的Prefab添加Rigidbody属性，运行游戏，发现神奇的事情发生了，所有的PickUp居然掉了下去，这当然是由于所有的刚体都受到了重力的影响，所以PickUp会下落。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C49.png" alt="小立方体受到重力下落" title="">
+                </div>
+                <div class="image-caption">小立方体受到重力下落</div>
+            </figure>
+<p>为了解决这一问题，移步到PickUp的Prefab下刚刚添加的Rigidbody属性处，会发现有两个选项，分别是Use Gravity和Is Kinematic。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C50.png" alt="更改其成为Kinematic Rigid body" title="">
+                </div>
+                <div class="image-caption">更改其成为Kinematic Rigid body</div>
+            </figure>
+<p>显然，我们可以直接将Use Gravity的对勾打掉，这样它不再受重力，自然不会下落，这是一个解决办法，但是并不完美，因为这里我们只取消了重力，但对于一个刚体来说，还会受到其他的力从而使其改变Transform，所以更好的做法是选中下方的Is Kinematic选项，接下来解释Kinematic：<br>Kinematic Rigid body（运动刚体）的含义是它的Transform也就是位置、角度、大小不会随着力的作用而改变而是单纯地根据Transform设置的值来改变，也就是说我们不能通过对其作用力来改变它的Transfrom，改变的唯一方法是直接调节其Transform下的各个值。<br>运行游戏，完美！</p>
+<h1 id="添加计分机制"><a href="#添加计分机制" class="headerlink" title="添加计分机制"></a>添加计分机制</h1><h2 id="添加计数器"><a href="#添加计数器" class="headerlink" title="添加计数器"></a>添加计数器</h2><p>接下来添加一个计数器，每撞到一个小球就使计数器数值增加一，自然需要编辑PlayerController脚本，声明一个int类型的变量，在Start函数中初始化为0，在每一次碰撞到小立方体后都增加一，这似乎是一个很简单事情，这里还特地将count每次更新后的值都打印到控制台来验证其正确性。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    rigidbodyPlayer = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter</span><span class="params">(Collider other)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (other.gameObject.CompareTag(<span class="string">"PickUp"</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        other.gameObject.SetActive(<span class="literal">false</span>);</span><br><span class="line">        count++;</span><br><span class="line">        Debug.Log(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C51.png" alt="控制台显示计分结果" title="">
+                </div>
+                <div class="image-caption">控制台显示计分结果</div>
+            </figure>
+
+<h2 id="添加UI在游戏界面中显示分数"><a href="#添加UI在游戏界面中显示分数" class="headerlink" title="添加UI在游戏界面中显示分数"></a>添加UI在游戏界面中显示分数</h2><p>显然，将分数显示在游戏界面中才是更好的选择，这里需要用到UI组件。<br>在Hierarchy面板中右键，选择UI-&gt;Text，就会创建一个UI组件，但是我们会发现其实Text外还有一层Canvas（画布），下方还出现了一个EventSystem，这些都是Unity为我们自动创建的，这是因为：</p>
+<blockquote>
+<p>The single most important thing to know about these additional items is that all UI elements must be the child of a canvas to behave correctly.<br>（所有的UI元素都必须是一个Canvas（画布）的子元素才能正常工作）</p>
+</blockquote>
+<p>这里将Text命名为CountText，这时候的CountText处于一个非常奇怪的位置，接下来我们来调整Text的位置。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C52.png" alt="新建Text和Canvas" title="">
+                </div>
+                <div class="image-caption">新建Text和Canvas</div>
+            </figure>
+<p>在Inspector面板中，我们可以调整Text显示的内容，字体的样式，字体颜色以及这个UI组件的位置，先把文字显示改为Count Text，接下来改变其字体颜色为白色。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C53.png" alt="改变字体颜色" title="">
+                </div>
+                <div class="image-caption">改变字体颜色</div>
+            </figure>
+<p>接下来调整Text的位置，找到Inspecctor的Rect Transform，可以看到UI的Transform和一般GameObject的定位方式不同，这个位置的确定是相对于游戏屏幕的，点击左边的这个方框，展开位置选择的面板，根据提示：按住Shift键选择中心轴（pivot），按住Alt键选择位置（position）。我们选择同时按住Shift和Alt键，将Text放到Canvas的左上角：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C54.png" alt="更改Text的位置" title="">
+                </div>
+                <div class="image-caption">更改Text的位置</div>
+            </figure>
+<p>这样就可以看到Count Text放置到了Game窗口的左上角。接下来可以改变Rect Transform的Pos X的值和Pos Y的值让Count Text稍微离左边缘和顶部边缘一段距离：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C55.png" alt="加入偏移量" title="">
+                </div>
+                <div class="image-caption">加入偏移量</div>
+            </figure>
+
+<h2 id="编辑脚本来显示分数"><a href="#编辑脚本来显示分数" class="headerlink" title="编辑脚本来显示分数"></a>编辑脚本来显示分数</h2><p>接下来当然是将分数显示到Text中，继续编辑PlayerController脚本，首先需要添加新的Namespace：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine.UI;</span><br></pre></td></tr></table></figure>
+<p>然后自然需要创建一个Text变量来表示CountText的一个引用，我们将此Text变量声明为public的类型，为了可以在Inspector中对其进行直接的赋值。接下来要初始化CountText中所显示的文字，使用Text的text变量即可，在Start函数中进行初始化，然后再每一次碰撞到小立方体的时候再重新更新Text的内容：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Text countText;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    rigidbodyPlayer = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">    countText.<span class="built_in">text</span> = <span class="string">"Count: "</span> + count.ToString();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter</span><span class="params">(Collider other)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (other.gameObject.CompareTag(<span class="string">"PickUp"</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        other.gameObject.SetActive(<span class="literal">false</span>);</span><br><span class="line">        count++;</span><br><span class="line">        countText.<span class="built_in">text</span> = <span class="string">"Count: "</span> + count.ToString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>保存脚本回到Unity，将CountText拖动到Inspector中新产生的这个Text变量处来实例化它即可。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C56.png" alt="实例化Text" title="">
+                </div>
+                <div class="image-caption">实例化Text</div>
+            </figure>
+<p>运行游戏，完美！</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C57.png" alt="游戏正常运行" title="">
+                </div>
+                <div class="image-caption">游戏正常运行</div>
+            </figure>
+
+<h2 id="添加完成提示"><a href="#添加完成提示" class="headerlink" title="添加完成提示"></a>添加完成提示</h2><p>最后，当所有的小立方体都被收集后，再屏幕中心显示“You Win！”的字样，这看起来就很简单了，同样是：添加一个新的Text组件、命名、改变字体颜色大小和位置、在脚本中新建一个Text变量、在Start函数中将其初始值设为空、满足count值大于等于8的时候即显示“You Win！”、将新的Text拖动到Inspector面板中的变量处。<br>主要的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Text winText;</span><br><span class="line">winText.<span class="built_in">text</span> = <span class="string">""</span>;</span><br><span class="line"><span class="keyword">if</span> (count &gt;= <span class="number">8</span>)</span><br><span class="line">&#123;</span><br><span class="line">    winText.<span class="built_in">text</span> = <span class="string">"You Win!"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行游戏，完美！</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C58.png" alt="添加You Win！的信息" title="">
+                </div>
+                <div class="image-caption">添加You Win！的信息</div>
+            </figure>
+
+<h1 id="Build游戏"><a href="#Build游戏" class="headerlink" title="Build游戏"></a>Build游戏</h1><p>最后就是创建我们的游戏了！Unity创建游戏的平台非常广泛，我们可以无需任何其他插件的前提下创建Windows、Mac和Linux平台下的游戏，但是如果创建诸如Android、IOS端的游戏需要额外的工作，比较复杂，以后会单独提到，这里先创建一个Windows平台的.exe文件。<br>先保存Scene，然后选择File下的Build Settings…。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C59.png" alt="进入Build Settings" title="">
+                </div>
+                <div class="image-caption">进入Build Settings</div>
+            </figure>
+<p>默认即PC，Mac &amp; Linux Standalone，这里还需要我们通过Add Open Scene来选择我们需要创建的Scene，不过本游戏只有一个Scene，不进行选择也是可以的。点击Build，选择要保存到目标目录，然后稍等片刻，就会得到了最终的.exe文件。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C60.png" alt="Build游戏" title="">
+                </div>
+                <div class="image-caption">Build游戏</div>
+            </figure>
+<p>打开文件即可直接运行，整个游戏的所有工程也就全部完成了！</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C61.png" alt="打开游戏程序" title="">
+                </div>
+                <div class="image-caption">打开游戏程序</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/unity3d%E4%BA%8C62.png" alt="游戏完美运行！" title="">
+                </div>
+                <div class="image-caption">游戏完美运行！</div>
+            </figure>
+
+
+
+<p>参考资料：<a href="https://unity3d.com/learn/tutorials/s/roll-ball-tutorial" target="_blank" rel="noopener">https://unity3d.com/learn/tutorials/s/roll-ball-tutorial</a><br>本节内容的完整官方教程视频分享（英文无字幕）：<a href="https://pan.baidu.com/s/1TNMMFjs7pZqLPhGQZ1tPqQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1TNMMFjs7pZqLPhGQZ1tPqQ</a> 提取码:1u70</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-02-20T03:09:08.000Z" itemprop="dateUpdated">2019-02-20 11:09:08</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity3D/" rel="tag">Unity3D</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/&title=《从“滚球游戏”初步体验Unity3D》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/&title=《从“滚球游戏”初步体验Unity3D》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《从“滚球游戏”初步体验Unity3D》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">超详细！Win10（UEFI启动）安装Ubuntu18.04双系统</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/02/09/%E5%85%A5%E9%97%A8Unity3d/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">入门Unity3d</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/&title=《从“滚球游戏”初步体验Unity3D》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/&title=《从“滚球游戏”初步体验Unity3D》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《从“滚球游戏”初步体验Unity3D》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEjUlEQVR42u3aS27cQAwFQN//0g6QtUd+JFuAKJdWwXimpS4FaP6+vuLr+/91/ddP16dvJusknydPXv1V88KECRMmTI9kSjZ5veF8S9dA+au6fhmTdT6uiQkTJkyYljMlyyVM+Xfmh/SnFZInz/eOCRMmTJj+DlN+qPcO/t4Bf73+dVCCCRMmTJgwJbevpqM5xKmwo1omxoQJEyZM72NKlquGBfNGZjXdTf56ey0cEyZMmDA9jOmOcuqWfx++MGHChAnTw5i+W1e1TdgLOHoF4mopOdovJkyYMGFayzRvIl4XVSfl3fyMznfRa21iwoQJE6Z3MCULJQ/aexmTJuh9n/8QEGDChAkTplVM85HQaiuxmohWG595C7awd0yYMGHC9AqmvPBaLdEmZeLqlvLnOfBqMWHChAnTWqY7Use85TlpUt73bL+0MzFhwoQJ0yqm3nhNNRE9VdidPG01Yf6hyIsJEyZMmBYy9Uq9yaLVNLg3oFMF6pWVMWHChAnTO5iSJXotyfmBPRkMOpZaY8KECROmhUx5stobgrk7LKgGJdXX8EOFABMmTJgwrWLqFVJ7ZdPqavPEOAkI8u9gwoQJE6aNTHlamB+3+Ws4m8ROarO/7B0TJkyYMC1nOjWOUz1688Gg+ShPvpePVXBMmDBhwvQKpuSh583O/PPqlqroUdEZEyZMmDCtZcpTxPkBn69WTacnyXC5NIwJEyZMmFYxTW6W37J86B4KAib3woQJEyZMb2WqjuZUB27OlpXnLzJK+zFhwoQJ01qms43DJMjIR1rzdLe61XxfmDBhwoTpTUz5z/KmYHLM5wFB9ZPJvgr/pzBhwoQJ04OZ8oP81LFaveO8OTrfHSZMmDBh2s6UJ6vVMdNJmbVaFK6WicsBASZMmDBhWsjUG5eZpJF54bVXuk22OgkUMGHChAnTLqa88JojTr7Ta3D2xoAKAQomTJgwYVrONEll89Zm7/if0/QKwb8UeTFhwoQJ0xKmvLBb/WZ1G6e2nW++F8RgwoQJE6ZdTHkDr1rwvU41c7izDctqYFGoB2DChAkTpkcyVR/31HjNvLE6SXGbiJgwYcKEaSFTLyCoBhN5cFAttk5GiwpPiAkTJkyYljNVk968GZlHJdXX00uAmwVfTJgwYcK0likvziaL9pLMswNDvbJvFDRgwoQJE6a1TPMCa6+o2nsNvU+qYUqBDBMmTJgwPZgpJ7iWroYLeYu0VybuFZQ//hYTJkyYML2CqRdB5AQ5fXUgNRlvrT4hJkyYMGF6B1O12Fotsx7Ivwd3L5dr8xUwYcKECdMSpt6RnBdYTzUUJ4lxr3n5y3wTJkyYMGFawtSLIPJUs1eiTe513/pfByIITJgwYcL0LKZqEJAfotVEupcS9wrTSWiCCRMmTJjexDQJAvLkcwKRp9YT+o/3xYQJEyZMf5gpLwRXh2yqqXjvVUVFZEyYMGHC9AeYeqOrvQbkvOnYKxA353kxYcKECdPjmZLjudcInIwEJQlqXj6uQjdr4ZgwYcKE6WFMvcbhvLl491BOtZGZ3AsTJkyYMK1i+gdo2Inrq+WtnwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

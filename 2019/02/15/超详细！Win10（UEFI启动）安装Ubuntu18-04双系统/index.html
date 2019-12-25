@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>超详细！Win10（UEFI启动）安装Ubuntu18.04双系统 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,技术指南">
+    <meta name="description" content="Windows10&amp;Ubuntu18.04双系统               UEFI模式首先必须说明的是，有两种不同的启动模式，在安装双系统的时候的操作也不尽相同，本文是针对UEFI启动模式的安装双系统的成功案例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超详细！Win10（UEFI启动）安装Ubuntu18.04双系统">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="Windows10&amp;Ubuntu18.04双系统               UEFI模式首先必须说明的是，有两种不同的启动模式，在安装双系统的时候的操作也不尽相同，本文是针对UEFI启动模式的安装双系统的成功案例">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu0.jpg">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu4.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu5.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu6.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu7.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu8.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu9.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu10.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu11.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu12.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu13.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu14.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu15.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu16.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu17.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu18.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu19.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu20.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu21.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu22.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu23.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu24.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu25.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu26.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu27.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu28.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu29.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu30.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu31.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu32.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu33.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu34.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu35.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu36.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu37.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu38.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu39.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/Ubuntu40.jpg">
+<meta property="article:published_time" content="2019-02-15T12:56:58.000Z">
+<meta property="article:modified_time" content="2019-02-20T03:09:34.000Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="技术指南">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/Ubuntu0.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">超详细！Win10（UEFI启动）安装Ubuntu18.04双系统</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">超详细！Win10（UEFI启动）安装Ubuntu18.04双系统</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-02-15T12:56:58.000Z" itemprop="datePublished" class="page-time">
+  2019-02-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#UEFI模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">UEFI模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何知道自己的电脑是哪种启动模式"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">如何知道自己的电脑是哪种启动模式</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#准备工具"><span class="post-toc-number">2.</span> <span class="post-toc-text">准备工具</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Unbutu18-04-1-LTS镜像"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Unbutu18.04.1 LTS镜像</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UltraIOS"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">UltraIOS</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#装机U盘"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">装机U盘</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#制作装机系统U盘"><span class="post-toc-number">3.</span> <span class="post-toc-text">制作装机系统U盘</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#磁盘分区"><span class="post-toc-number">4.</span> <span class="post-toc-text">磁盘分区</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#设置BIOS"><span class="post-toc-number">5.</span> <span class="post-toc-text">设置BIOS</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#开始安装Ubuntu"><span class="post-toc-number">6.</span> <span class="post-toc-text">开始安装Ubuntu</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-超详细！Win10（UEFI启动）安装Ubuntu18-04双系统"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">超详细！Win10（UEFI启动）安装Ubuntu18.04双系统</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-02-15 20:56:58" datetime="2019-02-15T12:56:58.000Z"  itemprop="datePublished">2019-02-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu0.jpg" alt="Windows10&Ubuntu18.04双系统" title="">
+                </div>
+                <div class="image-caption">Windows10&Ubuntu18.04双系统</div>
+            </figure>
+
+<h1 id="UEFI模式"><a href="#UEFI模式" class="headerlink" title="UEFI模式"></a>UEFI模式</h1><p>首先必须说明的是，有两种不同的启动模式，在安装双系统的时候的操作也不尽相同，本文是针对UEFI启动模式的安装双系统的成功案例。如果您的计算机的启动模式是Legacy，请参考其他文章。</p>
+<h2 id="如何知道自己的电脑是哪种启动模式"><a href="#如何知道自己的电脑是哪种启动模式" class="headerlink" title="如何知道自己的电脑是哪种启动模式"></a>如何知道自己的电脑是哪种启动模式</h2><p>找到“运行” -&gt; 在“运行”中输入：msinfo32 -&gt; 查看右边的信息，找到“BIOS模式”，如果后边是“UEFI”，那么这篇文章就可以应用到你的计算机上啦 -&gt; 顺便看一下计算机的“已安装的物理内存（RAM）”，几下这个数字可能会对你有所帮助。</p>
+<p><img src="http://cdn.littlegenius.xin/Ubuntu1.png" alt="查看电脑的启动模式"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu2.png" alt="查看电脑的启动模式" title="">
+                </div>
+                <div class="image-caption">查看电脑的启动模式</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu3.png" alt="查看电脑的启动模式" title="">
+                </div>
+                <div class="image-caption">查看电脑的启动模式</div>
+            </figure>
+
+<h1 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h1><h2 id="Unbutu18-04-1-LTS镜像"><a href="#Unbutu18-04-1-LTS镜像" class="headerlink" title="Unbutu18.04.1 LTS镜像"></a>Unbutu18.04.1 LTS镜像</h2><p>到Ubuntu官方网站下载最新版Ubuntu LTS镜像：<br><a href="https://www.ubuntu.com/download/desktop" target="_blank" rel="noopener">https://www.ubuntu.com/download/desktop</a></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu4.png" alt="下载Ubuntu18.04镜像" title="">
+                </div>
+                <div class="image-caption">下载Ubuntu18.04镜像</div>
+            </figure>
+
+<h2 id="UltraIOS"><a href="#UltraIOS" class="headerlink" title="UltraIOS"></a>UltraIOS</h2><p>这是一个用于将镜像写入U盘制作系统安装盘，到官方网站下载（试用版足够）：<br><a href="https://cn.ultraiso.net/xiazai.html" target="_blank" rel="noopener">https://cn.ultraiso.net/xiazai.html</a></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu5.png" alt="下载UltraIOS" title="">
+                </div>
+                <div class="image-caption">下载UltraIOS</div>
+            </figure>
+
+<h2 id="装机U盘"><a href="#装机U盘" class="headerlink" title="装机U盘"></a>装机U盘</h2><p>一个大于2G的空U盘，并且提前将U盘内容备份，U盘需要格式化，格式化后其中的所有东西将被删除。<br>之后将U盘格式化：在插入的U盘上右键选择“格式化” -&gt; 文件系统选择FAT32（默认） -&gt; 开始</p>
+<p><img src="http://cdn.littlegenius.xin/Ubuntu6.png" alt="格式化U盘"></p>
+<h1 id="制作装机系统U盘"><a href="#制作装机系统U盘" class="headerlink" title="制作装机系统U盘"></a>制作装机系统U盘</h1><p>插入我们格式化好的U盘，打开UltraIOS，点击上方的“打开”图标，选择刚刚下载的Ubuntu18.04镜像文件</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu7.png" alt="制作装机系统U盘" title="">
+                </div>
+                <div class="image-caption">制作装机系统U盘</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu8.png" alt="制作装机系统U盘" title="">
+                </div>
+                <div class="image-caption">制作装机系统U盘</div>
+            </figure>
+
+<p>看到打开之后的内容大概如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu9.png" alt="制作装机系统U盘" title="">
+                </div>
+                <div class="image-caption">制作装机系统U盘</div>
+            </figure>
+
+<p>点击“启动” -&gt; “写入硬盘映像”</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu10.png" alt="制作装机系统U盘" title="">
+                </div>
+                <div class="image-caption">制作装机系统U盘</div>
+            </figure>
+
+<p>这时可以看到上边出现了我们的U盘选项，如果还有别的选项，千万不要选错，<strong>一定要点击我们的U盘！</strong>下边的写入方式是“USB-HDD+”，右下角是“便捷启动”。检查好这三项之后点击下边的“写入”。经过确认之后会进入等待阶段。</p>
+<p><img src="http://cdn.littlegenius.xin/Ubuntu11.png" alt="制作装机系统U盘"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu12.png" alt="制作装机系统U盘" title="">
+                </div>
+                <div class="image-caption">制作装机系统U盘</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu13.png" alt="制作装机系统U盘" title="">
+                </div>
+                <div class="image-caption">制作装机系统U盘</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu14.png" alt="制作装机系统U盘" title="">
+                </div>
+                <div class="image-caption">制作装机系统U盘</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu15.png" alt="制作装机系统U盘" title="">
+                </div>
+                <div class="image-caption">制作装机系统U盘</div>
+            </figure>
+
+<p>直到出现了“刻录成功”，直接点击“返回”即可。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu16.png" alt="制作装机系统U盘" title="">
+                </div>
+                <div class="image-caption">制作装机系统U盘</div>
+            </figure>
+
+<h1 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h1><p>在“此电脑”上邮件打开“管理” </p>
+<p><img src="http://cdn.littlegenius.xin/Ubuntu17.png" alt="磁盘分区过程"></p>
+<p>点击左边的“磁盘管理” -&gt; 出现右边的磁盘分区详情</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu18.png" alt="磁盘分区过程" title="">
+                </div>
+                <div class="image-caption">磁盘分区过程</div>
+            </figure>
+
+<p>你需要选择将你的一个磁盘分出来一部分空间用来安装双系统，根据你的实际情况选择使用哪个磁盘以及分出多大的空间，我分出了50G（1G=1024M）。在选择好的磁盘上右键，选择“压缩卷”。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu19.png" alt="磁盘分区过程" title="">
+                </div>
+                <div class="image-caption">磁盘分区过程</div>
+            </figure>
+
+<p>填写你要分出的大小，<strong>（这里的图片和后续步骤有差异，因为整个过程笔者做了两遍，第一次分配了如图所示的50G空间发现不够用后来第二次更改成了90G，这和后续步骤一致，请根据自己的需求配置此处数值和后续步骤中的数值，特此说明）</strong>单位是M，点击“压缩”。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu20.png" alt="磁盘分区过程" title="">
+                </div>
+                <div class="image-caption">磁盘分区过程</div>
+            </figure>
+
+<p>只要你刚刚压缩出来的区域显示“未分配”，说明你压缩成功了！</p>
+<p><img src="http://cdn.littlegenius.xin/Ubuntu21.png" alt="磁盘分区过程"></p>
+<h1 id="设置BIOS"><a href="#设置BIOS" class="headerlink" title="设置BIOS"></a>设置BIOS</h1><p>此时可以关机重启，在按下电源后及时按住快捷键进入BIOS（联想拯救者是F2），（不同型号的笔记本进入BIOS的快捷键不同，可以百度一下）。将“安全启动”和“快速启动”都关闭（Disable），将“USB启动”设置为开启（Enable）</p>
+<p><img src="http://cdn.littlegenius.xin/Ubuntu22.png" alt="设置BIOS"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu23.png" alt="设置BIOS" title="">
+                </div>
+                <div class="image-caption">设置BIOS</div>
+            </figure>
+
+<h1 id="开始安装Ubuntu"><a href="#开始安装Ubuntu" class="headerlink" title="开始安装Ubuntu"></a>开始安装Ubuntu</h1><p>关机，插入U盘，（有多个USB接口的请注意，并不是每一个插口都可以作为USB启动，如果进入boot后没有找到USB启动项，可以换一个插口试试），开机后按住快捷键进入boot（联想拯救者是F12），不同型号的笔记本进入boot的快捷键不同，可以百度一下）。然后选择USB启动那一项。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu24.png" alt="选择boot从U盘启动" title="">
+                </div>
+                <div class="image-caption">选择boot从U盘启动</div>
+            </figure>
+
+<p>之后会进入一个黑底白字的页面，可以默认选择第一个（Try Ubuntu）进入Ubuntu的试用页面。此时可以随便体验一下，然后可以点击桌面上的安装程序安装Ubuntu系统。</p>
+<p><img src="http://cdn.littlegenius.xin/Ubuntu25.png" alt="点击桌面的图标开始安装Ubuntu系统"></p>
+<p>选择语言，我这里选择的英语，可以根据自己的需求选择，接下来的教程中也是英语模式，如果你不懂英语，可以直接看位置，每个窗口的分布和每个窗口的位置都是相同的。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu26.png" alt="选择语言" title="">
+                </div>
+                <div class="image-caption">选择语言</div>
+            </figure>
+
+<p>选择键盘模式，我们当然选择English(US)</p>
+<p><img src="http://cdn.littlegenius.xin/Ubuntu27.png" alt="选择键盘模式"></p>
+<p>然后会让你选择连接网络，你可以选择连接与不连接。（如果你有一个比较好的网络环境，我倒是建议你可以直接联网，网上说联网环境下安装需要下载比较多的东西，会卡死或者很慢，不过我现在没有遇到这个问题，Ubuntu在国内的服务线路也比较完善了，应该不必担心）</p>
+<p>安装方式建议选择“最小安装”，因为这样可以安装一个干净整洁的系统，没有多余的软件，而且安装快，不用边安边下载。下边的“其他选项”根据自己的情况选择，如果联网了可以选择第一个，如果没有联网是没有可选项的。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu28.png" alt="选择安装内容以及是否在安装过程中下载" title="">
+                </div>
+                <div class="image-caption">选择安装内容以及是否在安装过程中下载</div>
+            </figure>
+
+<p><strong>安装方式！重中之重！</strong><br><strong>一定要选择最下边的“其他方式”（Something else）！</strong><br><strong>一定要选择最下边的“其他方式”（Something else）！</strong><br><strong>一定要选择最下边的“其他方式”（Something else）！</strong><br><strong>否则你可能会删除原有的Win10系统！</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu29.png" alt="选择安装方式" title="">
+                </div>
+                <div class="image-caption">选择安装方式</div>
+            </figure>
+
+<p>再三确认之后，进入下一步，可以在这里找到你刚刚分出来的“空闲空间”，对照一下后边的大小是否是你分出来的大小，选好它之后点击下边的“+”号。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu30.png" alt="设置Ubuntu的分区空间" title="">
+                </div>
+                <div class="image-caption">设置Ubuntu的分区空间</div>
+            </figure>
+
+<p>接下来就是分区了，每一次分区有四到五个可选项。</p>
+<ol>
+<li>挂载“/”，类型为“EXT4日志文件系统”，选中“主分区”和“空间起始位置”。这个空间可以理解成共用空间，尽量大一些，因为有些软件是无法更改他的安装位置到自己的个人目录下的，只能放在这个空间里边。 </li>
+</ol>
+<p><img src="http://cdn.littlegenius.xin/Ubuntu31.png" alt="设置Ubuntu的分区空间"></p>
+<ol start="2">
+<li>swap交换空间，这个也就是虚拟内存的地方，选择“逻辑分区”和“空间起始位置”。其大小最好和你的物理内存相等。</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu32.png" alt="设置Ubuntu的分区空间" title="">
+                </div>
+                <div class="image-caption">设置Ubuntu的分区空间</div>
+            </figure>
+
+<ol start="3">
+<li>新建EFI系统分区，选中“逻辑分区”和“空间起始位置”，大小最好不要小于256MB，系统引导文件都会在里面，可以给512MB。重点！分配完之后去上边的列表里找一下，刚刚这个分区的盘符<del>一会儿会用到哦</del></li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu33.png" alt="设置Ubuntu的分区空间" title="">
+                </div>
+                <div class="image-caption">设置Ubuntu的分区空间</div>
+            </figure>
+
+<ol start="4">
+<li>挂载“/home”，类型为“EXT4日志文件系统”，选中“逻辑分区”和“空间起始位置”，这个相当于你的个人文件夹，类似Windows里的User，建议最好能分配稍微大点，因为你的图片、视频、下载内容、有些自定义的软件安装路径基本都在这里面，这些东西可不像在Win上面你想移动就能移动的。 </li>
+</ol>
+<p><img src="http://cdn.littlegenius.xin/Ubuntu34.png" alt="设置Ubuntu的分区空间"></p>
+<p><strong>重点来了！此时千万不要点“安装”！</strong><br>找到你刚刚EFI分区的盘符（对照一下后边的大小是否是刚刚分配的大小，然后看看上下文是你分出来的其他分区，再三确认！）记住你的分区的名字，比如我的是图中的“/dev/sda8”<br><strong>更改下边的“安装引导启动器的设备”！千万不要用默认的！改为你刚刚记下的EFI分区的盘符！</strong><br><strong>更改下边的“安装引导启动器的设备”！千万不要用默认的！改为你刚刚记下的EFI分区的盘符！</strong><br><strong>更改下边的“安装引导启动器的设备”！千万不要用默认的！改为你刚刚记下的EFI分区的盘符！</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu35.png" alt="设置Ubuntu的分区空间" title="">
+                </div>
+                <div class="image-caption">设置Ubuntu的分区空间</div>
+            </figure>
+
+<p>可以点击“安装”了，再次确认一下你的分区。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu36.png" alt="设置Ubuntu的分区空间" title="">
+                </div>
+                <div class="image-caption">设置Ubuntu的分区空间</div>
+            </figure>
+
+<p>下一步，选择时区</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu37.png" alt="设置时区" title="">
+                </div>
+                <div class="image-caption">设置时区</div>
+            </figure>
+
+<p>最后一步，填一下你的用户名、设备名、密码等等</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu38.png" alt="设置账户与密码" title="">
+                </div>
+                <div class="image-caption">设置账户与密码</div>
+            </figure>
+
+<p>好了，最终进入了你的安装过程</p>
+<p><img src="http://cdn.littlegenius.xin/Ubuntu39.png" alt="进入安装过程"></p>
+<p>一定的等待时间之后，就会提示安装完毕要求重启，点击重启计算机即可。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/Ubuntu40.jpg" alt="安装完毕" title="">
+                </div>
+                <div class="image-caption">安装完毕</div>
+            </figure>
+
+
+<p>等待安装完毕后就可以使用你的Ubuntu啦！<br>此时可以关机重开试试，会在开机后进入引导页面哦<del>然后选择你想进入的系统</del></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-02-20T03:09:34.000Z" itemprop="dateUpdated">2019-02-20 11:09:34</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/" rel="tag">技术指南</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/&title=《超详细！Win10（UEFI启动）安装Ubuntu18.04双系统》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/&title=《超详细！Win10（UEFI启动）安装Ubuntu18.04双系统》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《超详细！Win10（UEFI启动）安装Ubuntu18.04双系统》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/02/20/Unity%E4%B8%AD%E4%BD%BF%E7%94%A8Playground%E6%A1%86%E6%9E%B6%E8%BD%BB%E6%9D%BE%E5%88%B6%E4%BD%9C2D%E6%B8%B8%E6%88%8F/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Unity中使用Playground框架轻松制作2D游戏</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/02/10/%E4%BB%8E%E6%BB%9A%E7%90%83%E6%B8%B8%E6%88%8F%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8CUnity3D/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">从“滚球游戏”初步体验Unity3D</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/&title=《超详细！Win10（UEFI启动）安装Ubuntu18.04双系统》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/&title=《超详细！Win10（UEFI启动）安装Ubuntu18.04双系统》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《超详细！Win10（UEFI启动）安装Ubuntu18.04双系统》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/02/15/%E8%B6%85%E8%AF%A6%E7%BB%86%EF%BC%81Win10%EF%BC%88UEFI%E5%90%AF%E5%8A%A8%EF%BC%89%E5%AE%89%E8%A3%85Ubuntu18-04%E5%8F%8C%E7%B3%BB%E7%BB%9F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAAE+CAAAAAAxUyPsAAAFSElEQVR42u3a0WorRxAEUP//TyeQp4Atq6p6dQnk6MmsrJ2dMwL1VM/XV/z665/Xq+vf3311/dXd/n3l+9+/j9KOmN//sRc+fPjw4cP3Yqqvbvf7lXzgZMLJWK84EqzkS5CY4MOHDx8+fBe+barbI/5O1i7MBSh5940VPnz48OHD9zG+5Gf+E5FBO8olPsCHDx8+fPj+m3xtUZJM+FKg5FeS4AMfPnz48OH7NF8eiLeb+afaAFvD4D7WY70OfPjw4cOHbzqg9n/4++EXPnz48OHDF/w8543t30uE7XhZUo60IUJS0BQa+PDhw4cP36TRBtZtdP6JrXgbHLT/mSwYPnz48OHD1/JtjeG8Hb61qy9LkqPnUf7Yt8eHDx8+fPim220TSIKAdvStDZ8XYXmzHB8+fPjw4dv42se6BPF5iJCXR22RlEf/+bv48OHDhw9fG9Pnt2gDgrbRfonjk1HygikaHR8+fPjw4Zv4LofAtqi9bRVsQXz7nPVxAXz48OHDh2/i20LtdgKXQGFb8qcO270cFx8+fPjw4ZtqgPtmO//ss1v3Lea4HAX44VP48OHDhw9fzHd5oByu3cZf9uZ5QdPO/au9KT58+PDhwzeF3Ukx0W77801++9lLrJ+XU/jw4cOHD9/Gl2zI28Il2a63BdCl0b49WxT348OHDx8+fBNf20LemtD5kbWtMbBh5Qvz8pQBPnz48OHDF/O1A+SRQU75VHR+WZ68Pf8mOMCHDx8+fPjSX+oiRt8KmntDva0W7nCXYAIfPnz48OFL+rxtgP5UK3q7Q7Gxnxr2RViADx8+fPjwxXzthvlzxEmjum0wbM2AqHzBhw8fPnz4Sr5t2klwkMQKn4gM2lZ9G53gw4cPHz58F768ZLm30rcDbe3hubx82VoO9XcHHz58+PDhKzfY+TB5oLCN+xR90shPQhN8+PDhw4dv48uj8wtrW1jcC6lk3O3+b04c4MOHDx8+fC/e3ULzNqA/bcjLMD0perbGwJv+Bj58+PDhwxfzJT/8yc9/vlFvR9z+5xKORLPAhw8fPnz4Sr7t4fJHTw6otS3w3+/TlkdtvoIPHz58+PA9xXd/lLwz0PLlbfLLErbtAXz48OHDh+8pvjyCbxvtlyKpPRLXBgFtQx0fPnz48OFr+e5Hvj5XRhTrfwg12vb5m+8dPnz48OHDF/O1j5hj3Y+mtfFBWzBtxRA+fPjw4cPX8uXFRLsV/1wcv0Ubl9b+mxnhw4cPHz588Uy341w53FOt6G3B8sJrvI4PHz58+PBNfElxsAUESWHUxvr3OCNfjDf3x4cPHz58+Eq+bbve3vQStbd3uEcJedyPDx8+fPjwtXz5x9qpjke+puZ3y3Q5EvdDWI8PHz58+PBNfd4tRLiwjrVVGRAkbfvtS4MPHz58+PC1fO202yAgLyyeCuvvbfLtQB4+fPjw4cPX8rXb+4e7BFMZ0RZG+XPmXyN8+PDhw4cv59tumkfbW2GUTGlrom/F2ctlwIcPHz58+Ca+fEr5Vn8rPtripl3Cy1g/3BkfPnz48OE7810axpfDam2B0m7vt0Nsb5YEHz58+PDhK/kuhULO1Lact0LkPsnxZAE+fPjw4cNX8iXFSn5sK8Ft/z/nvkDkbXV8+PDhw4fvzrf9kF+mlwcKbdmxxQp5+wEfPnz48OH7M3zbsbCcLy9BtneTJ6kXGB8+fPjw4fswX8v6VMN740ja8/lX4eVZA3z48OHDh6/kuwfuW6M9j8WTA2SXGbVFDz58+PDhw7fxbVF4vgw5ShtP5EXGJZ7YngcfPnz48OH7duVv5gnDc4AqyxIAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

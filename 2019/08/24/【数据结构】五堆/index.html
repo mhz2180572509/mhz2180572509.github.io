@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【数据结构】（五）堆 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,C++,数据结构">
+    <meta name="description" content="堆（Heap）堆（Heap）又称为优先队列（priority queue），在队列的基础上，堆允许所有队列中的元素不一定按照先进先出（FIFO）的规则进行，而是使得每个元素有一定的优先级，优先级高的先出队列。  这类数据结构属于计算机科学中最雅致的一种  优先队列至少存在两个重要的操作：  insert：插入，使得数据入队列，是一种有约束的enqueue操作 deleteMin：删除最小项，找出、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【数据结构】（五）堆">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="堆（Heap）堆（Heap）又称为优先队列（priority queue），在队列的基础上，堆允许所有队列中的元素不一定按照先进先出（FIFO）的规则进行，而是使得每个元素有一定的优先级，优先级高的先出队列。  这类数据结构属于计算机科学中最雅致的一种  优先队列至少存在两个重要的操作：  insert：插入，使得数据入队列，是一种有约束的enqueue操作 deleteMin：删除最小项，找出、">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-4.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-5.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-6.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-7.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-8.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-9.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-10.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-11.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-12.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-13.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-14.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-15.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-16.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-17.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-18.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-19.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-20.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure6-21.png">
+<meta property="article:published_time" content="2019-08-24T07:03:50.000Z">
+<meta property="article:modified_time" content="2019-08-24T07:19:43.874Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/DataStructure6-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【数据结构】（五）堆</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【数据结构】（五）堆</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-24T07:03:50.000Z" itemprop="datePublished" class="page-time">
+  2019-08-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#堆（Heap）"><span class="post-toc-number">1.</span> <span class="post-toc-text">堆（Heap）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#堆的简单实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">堆的简单实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉堆"><span class="post-toc-number">3.</span> <span class="post-toc-text">二叉堆</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结构性质"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">结构性质</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#堆序性质"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">堆序性质</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本操作"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">基本操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#insert插入"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">insert插入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#deleteMin删除"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">deleteMin删除</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#decreaseKey"><span class="post-toc-number">3.3.3.</span> <span class="post-toc-text">decreaseKey</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#increaseKey"><span class="post-toc-number">3.3.4.</span> <span class="post-toc-text">increaseKey</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#remove"><span class="post-toc-number">3.3.5.</span> <span class="post-toc-text">remove</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#buildHeap"><span class="post-toc-number">3.3.6.</span> <span class="post-toc-text">buildHeap</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#d堆"><span class="post-toc-number">4.</span> <span class="post-toc-text">d堆</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#左式堆"><span class="post-toc-number">5.</span> <span class="post-toc-text">左式堆</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#左式堆的定义"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">左式堆的定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#左式堆的合并"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">左式堆的合并</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#斜堆"><span class="post-toc-number">6.</span> <span class="post-toc-text">斜堆</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#斜堆的合并"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">斜堆的合并</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二项队列"><span class="post-toc-number">7.</span> <span class="post-toc-text">二项队列</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二项队列的结构"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">二项队列的结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二项队列的合并"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">二项队列的合并</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二项队列的实现"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">二项队列的实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#标准库中的优先队列"><span class="post-toc-number">8.</span> <span class="post-toc-text">标准库中的优先队列</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【数据结构】五堆"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【数据结构】（五）堆</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-24 15:03:50" datetime="2019-08-24T07:03:50.000Z"  itemprop="datePublished">2019-08-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="堆（Heap）"><a href="#堆（Heap）" class="headerlink" title="堆（Heap）"></a>堆（Heap）</h1><p><strong>堆</strong>（Heap）又称为<strong>优先队列</strong>（priority queue），在队列的基础上，堆允许所有队列中的元素不一定按照<strong>先进先出</strong>（FIFO）的规则进行，而是使得每个元素有一定的优先级，优先级高的先出队列。</p>
+<blockquote>
+<p>这类数据结构属于计算机科学中最雅致的一种</p>
+</blockquote>
+<p>优先队列至少存在两个重要的操作：</p>
+<ul>
+<li><code>insert</code>：插入，使得数据入队列，是一种有约束的enqueue操作</li>
+<li><code>deleteMin</code>：删除最小项，找出、返回并删除优先队列中最小的元素，也就是最大优先级的元素，是一种有约束的dequeue操作</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-1.png" alt="优先队列" title="">
+                </div>
+                <div class="image-caption">优先队列</div>
+            </figure>
+
+
+<h1 id="堆的简单实现"><a href="#堆的简单实现" class="headerlink" title="堆的简单实现"></a>堆的简单实现</h1><p>有几种简单而明显的方法实现优先队列。</p>
+<ul>
+<li>简单链表：在表头以O(1)执行插入操作，遍历该链表以O(N)删除最小元</li>
+<li>始终有序的链表：插入代价以O(N)进行，删除操作以O(1)进行</li>
+<li>二叉查找树：对插入和删除两种操作的平均运行时间都是O(log)。尽管插入是随机的，而删除则不是，但是并不影响这个结论，反复除去左子树中的结点（最小值）损害了树的平衡，使得右子树加重。在最坏情形下，即将左子树删空的情形下，右子树拥有的元素最多也就是它应具有的两倍，这只是在其期望的深度上加了一个小常数</li>
+<li>ALV树：可能有些过分，因为它支持大量并不需要的操作</li>
+</ul>
+<h1 id="二叉堆"><a href="#二叉堆" class="headerlink" title="二叉堆"></a>二叉堆</h1><p><strong>二叉堆</strong>（binary heap）是一种对于优先队列的实现，可以简称为堆</p>
+<h2 id="结构性质"><a href="#结构性质" class="headerlink" title="结构性质"></a>结构性质</h2><p>堆是一棵<strong>完全二叉树</strong>（complete binary tree），即所有节点都必须有左右两个子节点，除了最后一排元素从左向右填入，直到没有元素为止。</p>
+<p>很显然，一棵高为h的完全二叉树有 2^h 到 2^(h+1)-1 个节点，即其高度为 logN 向下取整。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-2.png" alt="二叉堆" title="">
+                </div>
+                <div class="image-caption">二叉堆</div>
+            </figure>
+
+<p>完全二叉树的好处在于其规律性，可以使用一个数组而不需要链表来表示</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-3.png" alt="二叉堆的数组表示" title="">
+                </div>
+                <div class="image-caption">二叉堆的数组表示</div>
+            </figure>
+
+<p>对于数组中任一位置 i 上的元素，其左儿子在位置 2i 上，右儿子在左儿子后的单元 (2i+1) 上，它的父亲则在位置 i/2 向下取整上。</p>
+<p>因此，不仅不需要链，而且遍历该树所需要的操作也极简单，在大部分计算机上都可能运行得非常快。唯一问题是最大的堆的大小需要事先估计。</p>
+<h2 id="堆序性质"><a href="#堆序性质" class="headerlink" title="堆序性质"></a>堆序性质</h2><p>使操作可以快速执行的性质是<strong>堆序性质</strong>（heap-order property）：对于每一个节点X，X的父节点中的键小于等于X中的键，除没有父节点根节点外。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-4.png" alt="二叉堆" title="">
+                </div>
+                <div class="image-caption">二叉堆</div>
+            </figure>
+
+
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="insert插入"><a href="#insert插入" class="headerlink" title="insert插入"></a>insert插入</h3><p>将待插入的元素首先放置在最后一个位置上，以保证他是一个完全二叉树，然后将该元素与其父节点（i/2向下取整）比较，如果比其父节点小，就将两者互换，互换后再和新的父节点比较，这种方式称为<strong>上滤</strong>（percolate up），得到一个小顶堆（min heap），如果比较的时候是较大的值向上走，就会得到一个大顶堆（max heap） </p>
+<p>比如向一个小顶堆中插入元素14的操作：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-5.png" alt="小顶堆的插入" title="">
+                </div>
+                <div class="image-caption">小顶堆的插入</div>
+            </figure>
+
+<h3 id="deleteMin删除"><a href="#deleteMin删除" class="headerlink" title="deleteMin删除"></a>deleteMin删除</h3><p>找出、返回并删除最小元非常简单，最小元就是根节点处的元素，将其返回并删除。接下来是处理这个B。首先拿下最后一个元素X，如果元素X比B的两个子节点都小，可以直接将X插入到B的位置，如果X比B的两个子节点中的任意一个大，就不能插入，此时找到两个子节点中较小的那个放到B处，B转而移至这个子结点处。重复如上的步骤直到X可以插入B处为止。这个操作成为<strong>下滤</strong>（percolate down）</p>
+<p>比如从一个小顶堆中删除根节点</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-6.png" alt="从小顶堆中删除" title="">
+                </div>
+                <div class="image-caption">从小顶堆中删除</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-7.png" alt="从小顶堆中删除" title="">
+                </div>
+                <div class="image-caption">从小顶堆中删除</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-8.png" alt="从小顶堆中删除" title="">
+                </div>
+                <div class="image-caption">从小顶堆中删除</div>
+            </figure>
+
+<h3 id="decreaseKey"><a href="#decreaseKey" class="headerlink" title="decreaseKey"></a>decreaseKey</h3><p><code>decreaseKey(p, A)</code> 操作减小在位置p处的元素的值，减少量为A，可以理解为调高了某个元素的优先级。操作破坏了堆的性质，从而需要上滤操作进行堆的调整。</p>
+<h3 id="increaseKey"><a href="#increaseKey" class="headerlink" title="increaseKey"></a>increaseKey</h3><p><code>increaseKey(p, A)</code> 操作增加在位置p处的元素的值，增加量为A，可以理解为降低了某个元素的优先级。操作破坏了堆的性质，从而需要下滤操作进行堆的调整。</p>
+<h3 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h3><p><code>remove(p)</code> 操作删除在堆中位置p处的节点，这种操作可以通过连续执行 <code>decreaseKey(p, ∞)</code> 和 <code>deleteMin()</code> 完成，可以理解马上删除某个一般优先级的元素</p>
+<h3 id="buildHeap"><a href="#buildHeap" class="headerlink" title="buildHeap"></a>buildHeap</h3><p>即将一个原始集合构建成二叉堆，这个构造过程即进行N次连续的<code>insert</code>操作完成</p>
+<p><strong>定理</strong>：包含 2^(h+1)-1 个节点且高度为h的理想二叉树（perfect binary tree）的节点的高度和为 2^(h+1)-1-(h+1)</p>
+<h1 id="d堆"><a href="#d堆" class="headerlink" title="d堆"></a>d堆</h1><p><strong>d堆</strong>（d-Heaps）是二叉堆的简单推广，它与二叉堆很像，但是每个节点都有d个子节点，所以二叉堆是d为2的d堆。d堆是完全d叉树。比如下边的一个3堆。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-9.png" alt="一个3堆" title="">
+                </div>
+                <div class="image-caption">一个3堆</div>
+            </figure>
+
+<p>d堆比二叉堆浅很多，其insert的运行时间改进到 O(logdN) 。但是deleteMin操作比较费时，因为要在d个子节点中找到最小的一个，需要进行d-1次比较。d堆无法进行find操作，而且将两个堆合二为一是很困难的事情，这个附加操作为merge合并。</p>
+<p><strong>注意！</strong>在寻找节点的父节点、子节点的时候，乘法和除法都有因子d。如果d是一个2的幂，则可以通过使用二进制的<strong>移位</strong>操作计算，这在计算机中是非常省时间的。但是如果d不是一个2的幂，则使用一般的乘除法计算，时间开销会急剧增加。有证据显示，实践中，堆可以胜过二叉堆</p>
+<h1 id="左式堆"><a href="#左式堆" class="headerlink" title="左式堆"></a>左式堆</h1><p>这些高级的数据结构很难使用一个数据结构来实现，所以一般都要用到链式数据结构，这种结构可能会使得其操作变慢。</p>
+<h2 id="左式堆的定义"><a href="#左式堆的定义" class="headerlink" title="左式堆的定义"></a>左式堆的定义</h2><p><strong>零路径长</strong>（null path length）npl(X)：定义为从一个X节点到其不具有两个子节点的子节点的最短路径长，即具有0个或者1个子节点的节点npl=0，npl(null)=-1，任意节点的零路径长都比其各个子节点中零路径长最小值多1。</p>
+<p><strong>左式堆</strong>（leftist heap）是指对于任意一个节点X，其左子节点的零路径长都大于等于其右子节点的零路径长。很显然，左式堆趋向于加深左路径。比如下边的两个堆，只有左边的是左式堆，堆的节点标示的是该节点的零路径长。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-10.png" alt="左式堆" title="">
+                </div>
+                <div class="image-caption">左式堆</div>
+            </figure>
+
+<p>左式堆的实现中，需要有四个值：数据、左指针、右指针和零路径长。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">LeftistHeap</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    Object data;</span><br><span class="line">    LeftistHeap* leftChild;</span><br><span class="line">    LeftishHeap* rightChild;</span><br><span class="line">    <span class="keyword">int</span> npl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>定理</strong>：在右路径上有r个节点的左式堆必然至少有 2^r-1 个节点</p>
+<h2 id="左式堆的合并"><a href="#左式堆的合并" class="headerlink" title="左式堆的合并"></a>左式堆的合并</h2><p><code>merge</code>是左式堆的基本操作，<code>insert</code>插入可以看成是一个单节点的堆与一个大堆的<code>merge</code>，<code>deleteMin</code>删除最小值操作可以看成是首先返回、删除根节点，然后将根节点的左右子树进行<code>merge</code>。所以<code>merge</code>是左式堆的基本操作。</p>
+<p>假设现在有两个非空的左式堆H1和H2，merge操作递归地进行如下的步骤：</p>
+<ul>
+<li>将H1和H2中根节点较的堆（比如是H2）与根节点较小的堆（比如是H1）的右子堆进行merge</li>
+<li>让新的merge的堆成为根节点较小的堆（H1）的右字堆</li>
+<li>如果在根结点处出现左右子堆不符合左式堆的条件的情况，互换左右子堆的位置并更新npl的值</li>
+</ul>
+<p>例如如下的两个堆：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-11.png" alt="合并两个左式堆" title="">
+                </div>
+                <div class="image-caption">合并两个左式堆</div>
+            </figure>
+
+<p>将H2与H1的右子树（8–17–26）进行merge操作，此时（8–17–26）和H2的merge操作中又需要（8–17–26）和H2的右子堆（7–37–18）进行merge操作……如此递归得到如下的堆：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-12.png" alt="合并两个左式堆" title="">
+                </div>
+                <div class="image-caption">合并两个左式堆</div>
+            </figure>
+
+<p>然后根据递归的最外层（回到H1和H2的merge的第二步），将上边合并的堆成为H1的右子堆</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-13.png" alt="合并两个左式堆" title="">
+                </div>
+                <div class="image-caption">合并两个左式堆</div>
+            </figure>
+
+<p>此时根节点（3）处出现了左右子堆不符合左式堆的情况，互换左右子堆并更新零路径长的值</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-14.png" alt="合并两个左式堆" title="">
+                </div>
+                <div class="image-caption">合并两个左式堆</div>
+            </figure>
+
+
+<h1 id="斜堆"><a href="#斜堆" class="headerlink" title="斜堆"></a>斜堆</h1><p><strong>斜堆</strong>（skew heap）是左式堆的自调节形式，实现起来极其简单。斜堆和左式堆的关系类似于伸展树和AVL树之间的关系。斜堆是具有堆序的二叉树，但是不存在对树的结构的现限制。不同于左式堆，关于任意结点的零路径长的任何信息都不保留。斜堆的右路径在任何时刻都可以任意长，因此，所有操作的最坏情形运行时间均为O(N)。然而，正如伸展树一样，可以证明对任意M次连续操作，总的最坏情形运行时间是 O(MlogN)。因此，斜堆每次操作的<strong>摊还开销</strong>（amortized cost）为O(logN)</p>
+<h2 id="斜堆的合并"><a href="#斜堆的合并" class="headerlink" title="斜堆的合并"></a>斜堆的合并</h2><p>斜堆的基本操作也是merge合并，和左式堆的合并相同，但是不需要对不满足左右子堆的左式堆条件的节点进行左右子堆的交换。斜堆的交换是无条件的，除右路径上所有节点的最大者不交换它的左右儿子外，都要进行这种交换。</p>
+<p>比如将上述的H1和H2进行merge合并操作</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-15.png" alt="合并两个斜堆" title="">
+                </div>
+                <div class="image-caption">合并两个斜堆</div>
+            </figure>
+
+<p>首先进行第一步，除了交换左右子树的操作与左式堆不同，其他的操作都相同</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-16.png" alt="合并两个斜堆" title="">
+                </div>
+                <div class="image-caption">合并两个斜堆</div>
+            </figure>
+
+<p>将合并的堆作为H1的右子堆并交换左右子堆，得到合并后的斜堆</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-17.png" alt="合并两个斜堆" title="">
+                </div>
+                <div class="image-caption">合并两个斜堆</div>
+            </figure>
+
+
+<h1 id="二项队列"><a href="#二项队列" class="headerlink" title="二项队列"></a>二项队列</h1><p><strong>二项队列</strong>（binomial queue）支持merge、insert和deleteMin三种操作，并且每次操作的最坏情形运行时间为O(logN)，插入操作平均花费常数时间。</p>
+<h2 id="二项队列的结构"><a href="#二项队列的结构" class="headerlink" title="二项队列的结构"></a>二项队列的结构</h2><p>二项队列不是一棵堆序的树，而是堆序的树的集合，成为<strong>森林</strong>（forest）。堆序树中的每一棵都是有约束的<strong>二项树</strong>（binomial tree）。二项树是每一个高度上至多存在一棵二项树。高度为0的二项树是一棵单节点树，高度为k的二项树Bk通过将一棵二项树Bk-1附接到另一棵二项树Bk-1的根上而构成的。如下图的二项树B0、B1、B2、B3和B4。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-18.png" alt="二项树" title="">
+                </div>
+                <div class="image-caption">二项树</div>
+            </figure>
+
+<p>可以看到二项树Bk由一个带有儿子B0，B1，……，Bk-1的根组成。高度为k的二项树恰好有2^k个节点，而在深度d处的节点数为二项系数Cdk。</p>
+<p>我们可以使用二项树的集合唯一地表示任意大小的优先队列。以大小为13的队列为例，13的二进制表示为1101，从而我们可以使用二项树森林B3、B2、B0表示，即二进制表示的数中，第k位为1表示Bk树出现，第k位为0表示Bk树不出现。比如上述的堆H1和堆H2可以表示为如下的两个二项队列：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-19.png" alt="H1和H2的二项队列表示" title="">
+                </div>
+                <div class="image-caption">H1和H2的二项队列表示</div>
+            </figure>
+
+<h2 id="二项队列的合并"><a href="#二项队列的合并" class="headerlink" title="二项队列的合并"></a>二项队列的合并</h2><p>二项队列额merge合并操作非常简单，以上边的二项队列H1、H2为例。需要将其合并成一个大小为13的队列，即B3、B2、B0。</p>
+<p>首先H2中有一个B0，H1中没有，所以H2中的B0可以直接作为新的队列的B0的树</p>
+<p>其次H1和H2中两个B1的树可以合并成一个新的B2的树，只需要将其中根节点较小的堆挂到根节点较大的堆的根节点上。这样就得到了三棵B2堆，将其中根节点最大的堆直接放到新队列中成为它的B2堆。</p>
+<p>最后将两个B2堆合并成一个新队列中的B3堆。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-20.png" alt="二项队列的合并" title="">
+                </div>
+                <div class="image-caption">二项队列的合并</div>
+            </figure>
+
+<p>二项队列的deleteMin很简单，只需要比较队列中所有二项堆的根节点，返回和删除最小的值即可，时间复杂度为O(logN)，然后进行一次merge操作，也可以使用一个单独的空间每次记录最小值，这样就可以以O(1)的时间返回。 </p>
+<h2 id="二项队列的实现"><a href="#二项队列的实现" class="headerlink" title="二项队列的实现"></a>二项队列的实现</h2><p>森林中树的实现采用“左子右兄弟”的表示方法，然后二项队列可以使用一个数组来记录森林中每个树的根节点。</p>
+<p>例如上边的合成的二项队列可以表示成如下的样子：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure6-21.png" alt="二项堆列的实现" title="">
+                </div>
+                <div class="image-caption">二项堆列的实现</div>
+            </figure>
+
+
+<h1 id="标准库中的优先队列"><a href="#标准库中的优先队列" class="headerlink" title="标准库中的优先队列"></a>标准库中的优先队列</h1><p>STL中，二叉堆是通过<code>priority_queue</code>模板类实现的，在头文件<code>queue</code>中，STL实现一个大顶堆而不是小顶堆，其关键的成员函数如下：</p>
+<ul>
+<li><code>void push( const object &amp; x );</code></li>
+<li><code>const Object &amp; top( ) const;</code></li>
+<li><code>void pop( );</code></li>
+<li><code>bool empty( );</code></li>
+<li><code>void clear( );</code></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-24T07:19:43.874Z" itemprop="dateUpdated">2019-08-24 15:19:43</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/&title=《【数据结构】（五）堆》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/&title=《【数据结构】（五）堆》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【数据结构】（五）堆》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/24/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E4%B8%80%E6%8E%92%E5%BA%8F/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">【算法】（一）排序算法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【数据结构】（四）散列</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/&title=《【数据结构】（五）堆》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/&title=《【数据结构】（五）堆》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【数据结构】（五）堆》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAAD4ElEQVR42u3aQXLbQAwEQP//0841VbHpGQCycmieXBZFcpuHEbD4+IiPz3+Ov/+fn/nd8fzd756nfbazAwcOHDhwlEudLeb5QZNPk6V+t8jkvtHVcODAgQPHEUdyg+dUys/cX3nz6Q9rx4EDBw4cb+V4jszn67TLy4u39nXiwIEDB473cnwujqvuXP6ScODAgQPHuziS5mDyrQ1rztS2EV/SK8WBAwcOHF3eDcuw//Pvl8x34MCBAweOsljaB2E+drApz2ZDDF/cHQcOHDhwrDnyQMqLus32VTIA8Uzf3gsHDhw4cNxy5K20ZMEJUL79sxmMm60CBw4cOHBccaxSejH60C57tllVAOHAgQMHjiOOvEnXLqMl3i91VojiwIEDB45bjllLri26kippNqi335T6mKU6Dhw4cOB4zK+8UXjVOsxHHGYvoP0ZgQMHDhw4bjnaDaRZAG9idRbn7UvFgQMHDhx7jnagIQ/X2cZSPqaQjzsUpSYOHDhw4FhwXA00zKJ3VtptCssfzseBAwcOHGuOWYnVDiXMFtMON7SRP7wQDhw4cOAIOGbNwc1/8gXPsGZn4sCBAweOV3O0G0KbCJ8NSeTtyPa14cCBAweOGUd++/0iN3XTPrCj0g4HDhw4cBxxbLaO8m/NxiZmV2ubm8WvBhw4cODAsRhQSMYC2mhsN4SSAYUiSp/XggMHDhw4foUjf6C80JoFedtMfEnQ4sCBAweOxTxY27yblXyvqKra5iAOHDhw4LjlSIJtVtS1QwnPS80DdfacOHDgwIHjiuMqxtptpNvNqpzphx8BOHDgwIFjzZG38zYFUhLkm8blbEjuo33DOHDgwIEjLts2bbg80vabW22s5s+MAwcOHDj2HO2pn8FxtTV1e3495YEDBw4cOEYcszG1fDtnNso2u9psk+mL3x04cODAgWPN0RZmedm2ieSo3DrKRxw4cODAccvRhl8bt/vxu3xrqm13ftEWxIEDBw4ca46rcYHNBtKMowjRJPhx4MCBA8cRx6b11k7k5bF6hZsHNg4cOHDguOJo9/dnIwvRA42GtjdhjAMHDhw4bjnyk/Iwbhcz+24SybPIx4EDBw4cG47P8sijsd2mypt6bUlZBDwOHDhw4Fhz5EfL1IZx25S8un4bzzhw4MCBI+FoN3vaUYb805w1D9E6aHHgwIEDxxHHbPggb73Nmnc5yqwKKz7AgQMHDhy/wpHTXIHmPxFm98WBAwcOHO/laNt8m1ZgUlie7cXhwIEDB46XjTXk4boZO9hvRG22rHDgwIEDxy1H20rLl51vNbUB2W47tWGPAwcOHDhGHH8AAO3t0Azv+SoAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

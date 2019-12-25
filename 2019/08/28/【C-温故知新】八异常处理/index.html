@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【C++温故知新】（八）异常处理 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,C++">
+    <meta name="description" content="异常的抛出与捕获异常是程序在执行期间产生的问题，比如尝试除以零的操作。异常提供了一种转移程序控制权的方式。C++ 异常处理涉及到三个关键字：try、catch、throw。  throw：当问题出现时，程序抛出一个异常 catch：在想要处理问题的地方，通过异常处理程序捕获异常 try：try块中的代码标识将被激活的特定异常。它后面通常跟着一个或多个 catch 块。  使用throw可以在一些特">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C++温故知新】（八）异常处理">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="异常的抛出与捕获异常是程序在执行期间产生的问题，比如尝试除以零的操作。异常提供了一种转移程序控制权的方式。C++ 异常处理涉及到三个关键字：try、catch、throw。  throw：当问题出现时，程序抛出一个异常 catch：在想要处理问题的地方，通过异常处理程序捕获异常 try：try块中的代码标识将被激活的特定异常。它后面通常跟着一个或多个 catch 块。  使用throw可以在一些特">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-28T14:46:56.000Z">
+<meta property="article:modified_time" content="2019-08-28T14:53:16.689Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【C++温故知新】（八）异常处理</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【C++温故知新】（八）异常处理</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-28T14:46:56.000Z" itemprop="datePublished" class="page-time">
+  2019-08-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#异常的抛出与捕获"><span class="post-toc-number">1.</span> <span class="post-toc-text">异常的抛出与捕获</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#定义新的异常"><span class="post-toc-number">2.</span> <span class="post-toc-text">定义新的异常</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【C-温故知新】八异常处理"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【C++温故知新】（八）异常处理</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-28 22:46:56" datetime="2019-08-28T14:46:56.000Z"  itemprop="datePublished">2019-08-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="异常的抛出与捕获"><a href="#异常的抛出与捕获" class="headerlink" title="异常的抛出与捕获"></a>异常的抛出与捕获</h1><p>异常是程序在执行期间产生的问题，比如尝试除以零的操作。异常提供了一种转移程序控制权的方式。C++ 异常处理涉及到三个关键字：<code>try</code>、<code>catch</code>、<code>throw</code>。</p>
+<ul>
+<li><code>throw</code>：当问题出现时，程序抛出一个异常</li>
+<li><code>catch</code>：在想要处理问题的地方，通过异常处理程序捕获异常</li>
+<li><code>try</code>：try块中的代码标识将被激活的特定异常。它后面通常跟着一个或多个 catch 块。</li>
+</ul>
+<p>使用throw可以在一些特定的时候令程序抛出异常，比如当遇到除数是0的时候：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(division == <span class="number">0</span>)</span><br><span class="line">	<span class="keyword">throw</span> <span class="string">"division by zero condition!"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>一个<code>try……catch</code>的写法通常是这这样的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// protected codes</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>( ExceptionName e1 )</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// catch block</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>( ExceptionName e2 )</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// catch block</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果要捕获所有的异常，则需要在<code>catch</code>的括号中使用省略号：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// protected codes</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>( … )</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// catch block</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="定义新的异常"><a href="#定义新的异常" class="headerlink" title="定义新的异常"></a>定义新的异常</h1><p>可以通过继承和重载<code>exception</code>类来定义新的异常，比如像下边这样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MyException</span> :</span> <span class="keyword">public</span> exception</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">const</span> <span class="keyword">char</span> * <span class="title">what</span><span class="params">()</span> <span class="keyword">const</span> <span class="title">throw</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> <span class="string">"New Exception"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">throw</span> MyException();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> ( MyException&amp; e)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"MyException caught"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; e.what() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (exception&amp; e)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// other exceptions</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-28T14:53:16.689Z" itemprop="dateUpdated">2019-08-28 22:53:16</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/&title=《【C++温故知新】（八）异常处理》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/&title=《【C++温故知新】（八）异常处理》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（八）异常处理》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">【C++温故知新】（九）文件的输入与输出</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【C++温故知新】（七）类的继承</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/&title=《【C++温故知新】（八）异常处理》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/&title=《【C++温故知新】（八）异常处理》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（八）异常处理》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEh0lEQVR42u3aQY7bMAwF0Nz/0inQVYGZuJ+kDZjO86pIJpb0VIAiqdcrft5/n+Tz9z9P/pfHv/r57c9/H8/w029PfjBhwoQJ0y2Z3ofP8XR7cMeIOVy+nflYH9+PCRMmTJiWM+WvS8L5BCX/NtmMZPSIGxMmTJgwfQHTJBnOf5unwVWIPA3GhAkTJkzfzJQvMl9MUlntbUZ+cMGECRMmTM9mqr6uGtTzluQ8nPdmdVotHBMmTJgw3YypenHnSf++8H4TJkyYMGG6AdO7+PRKrr22ZfW389V9HAUTJkyYMK1lytPOyUFhEpLzRHSUsibvwYQJEyZMC5mq4TkpuSbl3bwxWQU9ty368dyECRMmTJgewXTuYNWrNvnf5MTNcjAmTJgwYVrLlBdY5wNXL8f0jhfXHRQwYcKECdNGpl6JNk+Dk6nkh4B88fmxIxoXEyZMmDCtZcpD4+QqT37sqB44JteGqpuNCRMmTJg2MuWTrgbRKu5ZJd38iJO8BxMmTJgwbWeaoPSCd7W4nD/nHm7+087EhAkTJkxLmM6C6JViJ+nopMFZ3lpMmDBhwrSWKS+eVpua1c+TxVQPHPMWJiZMmDBhegZTHiB7U8zLtVHfNd6kKO8/HAUTJkyYMD2DKQ/YvdBebWpevezqHDBhwoQJ03amatG2Gv6rCWe19dhrlzaPL5gwYcKEaRXT5EpNTpmH80nI721ztBmYMGHChOlBTHmwz6HzNxeq0cEiJyMW7jdhwoQJE6ZVTHmLsZrcVgNzzn3WWOXUFxMmTJgw3Z6pd1mnmrhWL+icdTFovi5MmDBhwvQNTNWQ3Ltwc27DsjrDqMCNCRMmTJiWM1VDb68onKes1S28oqCMCRMmTJi2M/XKu5NCcI9+XlDuFXwxYcKECdN2piS9zJfRm3R1A/Km5mSsjxqYMGHChGktU/VSTjURzRfWS4nzQ0PvuhImTJgwYdrIVA2ivcsxves4vSZosp3VlBgTJkyYMG1n6i3+ijLrdUXe/P0fa+GYMGHChGktU69IevzqpGA6+bbKkR9QfhkREyZMmDAtZ0om2ktZe4E835K8iBxdyvn0K0yYMGHCtJYpCocx3BVXZ/L2Z6+pmZNhwoQJE6ZnMOWBdnJLaDTdVom5VwjGhAkTJkzbmapAvWLuPIRX35lfNkqgMWHChAnTXqa8UFu9oDMJ6r1lTNqZo/9lmDBhwoTpxky9xmHvcs9xmM8/6aFUNxUTJkyYMD2PqZqg9sqpOWgv3S3UtvPjBSZMmDBhWstULZj2CrW9YDxvZ15xRMCECRMmTLuY3sVnshvJUqsBPk/aq+3PX1JfTJgwYcK0kGkekntpZ16izenz5uW5bVRMmDBhwnR/piuuilYPDfk10+Pt6b0zmi0mTJgwYVrONC+SThqc8yJvztcbERMmTJgwfQNTnkD2AnzvOJIUZye/xYQJEyZM38mUfJ6koNXAP1rq5OCCCRMmTJiWM1VDclIqTb7N59NbarWsfHItHBMmTJgw3YBpUmbtXfGsHhHyNmo1OX+d+2DChAkTpnsx/QHsHLQVLunIDAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

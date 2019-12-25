@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【C++温故知新】（六）类和对象 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,C++">
+    <meta name="description" content="类与接口类是一种将抽象转换为用户定义类型的C++工具，它将数据表示和操作数据的方法组合成一个整洁的包。接口提供给我们从外部访问类与类内的成员和方法的一个途径。 一般对一个类的典型的实现策略是：将接口（类的定义）放在头文件中，将其实现（类方法的代码）放在源代码文件中 类的声明框架12345678class ClassName&amp;#123;private:&#x2F;&#x2F; some private variable">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C++温故知新】（六）类和对象">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="类与接口类是一种将抽象转换为用户定义类型的C++工具，它将数据表示和操作数据的方法组合成一个整洁的包。接口提供给我们从外部访问类与类内的成员和方法的一个途径。 一般对一个类的典型的实现策略是：将接口（类的定义）放在头文件中，将其实现（类方法的代码）放在源代码文件中 类的声明框架12345678class ClassName&amp;#123;private:&#x2F;&#x2F; some private variable">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/CPP6-1.png">
+<meta property="article:published_time" content="2019-08-27T08:41:15.000Z">
+<meta property="article:modified_time" content="2019-08-28T14:39:52.941Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/CPP6-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【C++温故知新】（六）类和对象</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【C++温故知新】（六）类和对象</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-27T08:41:15.000Z" itemprop="datePublished" class="page-time">
+  2019-08-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#类与接口"><span class="post-toc-number">1.</span> <span class="post-toc-text">类与接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类的声明框架"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">类的声明框架</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#访问控制"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">访问控制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类的成员函数的实现"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">类的成员函数的实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类的使用"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">类的使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#类的构造函数和析构函数"><span class="post-toc-number">2.</span> <span class="post-toc-text">类的构造函数和析构函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#构造函数"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">构造函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#析构函数"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">析构函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#const成员函数"><span class="post-toc-number">3.</span> <span class="post-toc-text">const成员函数</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#this指针"><span class="post-toc-number">4.</span> <span class="post-toc-text">this指针</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#对象数组"><span class="post-toc-number">5.</span> <span class="post-toc-text">对象数组</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#运算符重载"><span class="post-toc-number">6.</span> <span class="post-toc-text">运算符重载</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#运算符重载的写法"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">运算符重载的写法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一个运算符重载的例子"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">一个运算符重载的例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#运算符重载的限制"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">运算符重载的限制</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#友元函数"><span class="post-toc-number">7.</span> <span class="post-toc-text">友元函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一个友元函数的例子"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">一个友元函数的例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建友元函数"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">创建友元函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#成员函数和非成员函数的选择"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">成员函数和非成员函数的选择</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#类的自动转换和强制类型转换"><span class="post-toc-number">8.</span> <span class="post-toc-text">类的自动转换和强制类型转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#强制类型转换"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">强制类型转换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用构造函数进行类的自动转换"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">使用构造函数进行类的自动转换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#转换函数"><span class="post-toc-number">8.3.</span> <span class="post-toc-text">转换函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#复制构造函数"><span class="post-toc-number">9.</span> <span class="post-toc-text">复制构造函数</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【C-温故知新】六类和对象"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【C++温故知新】（六）类和对象</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-27 16:41:15" datetime="2019-08-27T08:41:15.000Z"  itemprop="datePublished">2019-08-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="类与接口"><a href="#类与接口" class="headerlink" title="类与接口"></a>类与接口</h1><p>类是一种将抽象转换为用户定义类型的C++工具，它将数据表示和操作数据的方法组合成一个整洁的包。接口提供给我们从外部访问类与类内的成员和方法的一个途径。</p>
+<p>一般对一个类的典型的实现策略是：<strong>将接口（类的定义）放在头文件中，将其实现（类方法的代码）放在源代码文件中</strong></p>
+<h2 id="类的声明框架"><a href="#类的声明框架" class="headerlink" title="类的声明框架"></a>类的声明框架</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassName</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="comment">// some private variables and functions</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="comment">// some public variables and functions</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h2><p>访问限定符有三个：<code>private</code>、<code>public</code>、<code>protected</code>，它们规定了修饰的变量和方法能够被访问的范围，在没有声明时，默认是private的。</p>
+<p>这里先对三个访问限定词做一个比较全面的介绍：</p>
+<ul>
+<li><code>private</code> :<ul>
+<li>类（基类）自身的成员函数</li>
+<li>类（基类）友元的成员函数</li>
+</ul>
+</li>
+<li><code>public</code> :<ul>
+<li>基类自身的成员函数</li>
+<li>基类友元的成员函数</li>
+<li>基类所产生派生类的成员函数</li>
+<li>基类所产生的派生类的友元函数</li>
+<li>其他的全局函数</li>
+</ul>
+</li>
+<li><code>protected</code> :<ul>
+<li>基类的成员函数</li>
+<li>基类的友元函数</li>
+<li>基类派生类的成员函数</li>
+</ul>
+</li>
+</ul>
+<p>例如一个类：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/CPP6-1.png" alt="一个类的结构" title="">
+                </div>
+                <div class="image-caption">一个类的结构</div>
+            </figure>
+
+<h2 id="类的成员函数的实现"><a href="#类的成员函数的实现" class="headerlink" title="类的成员函数的实现"></a>类的成员函数的实现</h2><p>类的成员函数和一般的函数实现基本相同，还要增添如下两点：</p>
+<ul>
+<li>需要使用 <code>::</code> 符号（作用域解析运算符）来标识这个函数是属于哪一个类的，因为不同的类可以有相同名称的函数</li>
+<li>类的方法可以访问类内的 <code>private</code> 的组件</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ClassName::myFunction(<span class="keyword">double</span> a);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>类的成员函数也可以是内联的，只要加上关键词 <code>inline</code> 即可</li>
+<li>类的成员函数可以在类内定义时同时完成逻辑，也可以在类的外部定义</li>
+</ul>
+<h2 id="类的使用"><a href="#类的使用" class="headerlink" title="类的使用"></a>类的使用</h2><p>类的实例化和一般的数据类型相同，调用类实例下的某个成员函数或者变量使用 <code>.</code> 点。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ClassName myClassInstance;</span><br><span class="line">myClassInstance.aFunction();</span><br></pre></td></tr></table></figure>
+
+<h1 id="类的构造函数和析构函数"><a href="#类的构造函数和析构函数" class="headerlink" title="类的构造函数和析构函数"></a>类的构造函数和析构函数</h1><h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>类的构造函数需要和类同名，是在类实例化的时候调用的，在实例化一个类的时候，虽然我们没有显示地声明，但是还是调用了构造函数，而C++对每一个类都有默认的构造函数，就是不接受任何参数，什么都不做，也无返回值。我们可以定义自己的构造函数并且调用它。</p>
+<p>例如一个类MyClass的定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> myInt;</span><br><span class="line">    <span class="keyword">double</span> myDouble;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MyClass(<span class="keyword">int</span> mi, <span class="keyword">double</span> md) &#123; myInt = mi; myDouble = md;&#125;;</span><br><span class="line">    MyClass() &#123; myInt = <span class="number">1</span>; myDouble = <span class="number">0.2</span>;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们使用了一个包含两个参数的构造函数，它的作用是对两个private的成员变量赋值。</p>
+<p>构造函数不能像其他成员函数一样使用对象（类的实例）来用点调用，因为构造函数是在实例化类的时候就调用的，比如如下的调用方式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MyClass myClass = MyClass(<span class="number">1</span>, <span class="number">0.2</span>);</span><br><span class="line"><span class="function">MyClass <span class="title">myClass</span><span class="params">(<span class="number">1</span>, <span class="number">0.2</span>)</span></span>;</span><br><span class="line">MyClass * myClassPoint = <span class="keyword">new</span> MyClass(<span class="number">1</span>, <span class="number">0.2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>如果是使用的默认构造函数或者构造函数没有参数的话，可以直接声明对象而不显示地调用构造函数，比如我们的类中还有一个重载的没有参数的构造函数，它可以这样被调用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MyClass myClass; <span class="comment">// 隐式调用</span></span><br><span class="line">MyClass myClass = MyClass(); <span class="comment">// 显示调用</span></span><br><span class="line">MyClass * myClass = <span class="keyword">new</span> MyClass(); <span class="comment">// 隐式调用</span></span><br><span class="line"><span class="function">MyClass <span class="title">myClassFunction</span><span class="params">()</span></span>; <span class="comment">// 这是一个返回值是MyClass的函数</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h2><p>用构造函数创建对象后，程序负责跟踪该对象，直到其过期为止，对象过期时，程序将自动调用一个特殊的成员函数，即析构函数。</p>
+<p>析构函数用于完成清理工作，所以非常有用，例如如果构造函数用<code>new</code>分配了内存，则可以在析构函数中用<code>delete</code>释放内存。</p>
+<p>默认的析构函数是什么都不做的。我们以可以显示地定义自己析构函数，析构函数是一个~符号加上类名来定义的，析构函数何时调用是取决于编译器的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> myInt;</span><br><span class="line">    <span class="keyword">double</span> myDouble;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MyClass(<span class="keyword">int</span> mi, <span class="keyword">double</span> md) &#123; myInt = mi; myDouble = md;&#125;;</span><br><span class="line">    MyClass() &#123; myInt = <span class="number">1</span>; myDouble = <span class="number">0.2</span>;&#125;;</span><br><span class="line">    ~MyClass() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"bye!"</span>; &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="const成员函数"><a href="#const成员函数" class="headerlink" title="const成员函数"></a>const成员函数</h1><p>const成员函数是指，保证该成员函数不会改变调用的对象，声明和定义const成员函数需要将const限定符加在成员函数的后边：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"><span class="keyword">void</span> MyClass::show() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// function body</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以这种方式声明和定义的类函数即const成员函数，应该尽可能地将成员函数修饰为const，只要该类的方法不修改调用对象。</p>
+<h1 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h1><p><code>this</code>指针在类的成员函数中，用来作为指向<strong>调用类对象自身</strong>的指针，即它指向自己的类的地址。我们上面的构造函数中的 <code>myInt = mi;</code> 这一语句，其实这里的 <code>myInt</code> 就是 <code>this-&gt;myInt</code> 的简写，因为在类中，可以直接用成员变量简单地替换 <code>this-&gt;</code> 成员变量。</p>
+<p>this指针在只操作自身类内成员的时候不会有特别多的作用，因为都可以省略它，但是一旦我们的成员函数涉及到两个及以上的类的对象时，this就发挥了很大的作用。例如我们有一个compare函数，用于比较两个MyClass类的实例的哪一个的myInt值更大，那么我们必然需要另一个MyClass的实例作为参数，然后让它的myInt和自己的myInt比较，然后返回myInt较大的那个MyClass的引用，所以可以这样声明这个函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MyClass &amp; MyClass::compare(<span class="keyword">const</span> MyClass &amp; myClass) <span class="keyword">const</span>;</span><br></pre></td></tr></table></figure>
+
+<p>函数定义中涉及到三个const：</p>
+<ul>
+<li>第一个const：表明返回值是一个MyClass，显然不能被改变，所以可以时const的</li>
+<li>第二个const：传入的MyClass实例只是用于比较的，不需要改变，所以使用const</li>
+<li>第三个const：由于成员函数不改变调用类对象，所以是const的成员函数</li>
+</ul>
+<p>比较myInt的函数可以使用this来这样实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MyClass &amp; MyClass::compare(<span class="keyword">const</span> MyClass &amp; myClass) <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(myClass.myInt &gt; <span class="keyword">this</span>-&gt;myInt)</span><br><span class="line">    	<span class="keyword">return</span> myClass;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    	<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很显然，上边的 <code>this-&gt;myInt</code> 可以使用 <code>myInt</code> 直接简写，而返回自己调用类对象的时候，就只能用 this 来称呼了，而且需要注意的是，返回的是一个MyClass的引用，从而需要使用<code>*this</code>而不是直接返回<code>this</code>，因为<code>this</code>是<strong>指针</strong></p>
+<h1 id="对象数组"><a href="#对象数组" class="headerlink" title="对象数组"></a>对象数组</h1><p>类和其他数据结构一样，都可以创建数组，对象的数组即可以存储多个类对象，只需要像下边这样声明它们：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MyClass myClasses[<span class="number">3</span>];</span><br><span class="line">myClasses[<span class="number">0</span>].show();</span><br><span class="line">myClasses[<span class="number">1</span>].compare(myClasses[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+
+<h1 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h1><p>运算符重载即将C++中的运算符重载扩展到用户自定义的类型，例如，+这个运算符，只能用于整形、浮点型、字符串等基本的数据结构相加，但是我们可以通过用户的定义，将其用于两个类的对象相加，两个数组相加等等，编译器会根据操作数和目的数的类型决定使用哪种定义。</p>
+<h2 id="运算符重载的写法"><a href="#运算符重载的写法" class="headerlink" title="运算符重载的写法"></a>运算符重载的写法</h2><p>运算符重载的格式为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">operator</span> <span class="title">op</span> <span class="params">(arguments)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">operator</span> +( ); <span class="comment">// 重载+运算符</span></span><br><span class="line"><span class="keyword">operator</span> *( ); <span class="comment">// 重载*运算符</span></span><br><span class="line"><span class="keyword">operator</span> [ ]( ); <span class="comment">// 重载[]运算符</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="一个运算符重载的例子"><a href="#一个运算符重载的例子" class="headerlink" title="一个运算符重载的例子"></a>一个运算符重载的例子</h2><p>假设我们有一个时间类Time，由两个私有成员变量 hours、minutes 来代表小时和分钟，我们来实现Time类对象的相加逻辑。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> hours;</span><br><span class="line">    <span class="keyword">int</span> minutes;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Time;</span><br><span class="line">    Time(<span class="keyword">int</span> h, <span class="keyword">int</span> m=<span class="number">0</span>);</span><br><span class="line">    Time <span class="keyword">operator</span> + (<span class="keyword">const</span> Time &amp; t) <span class="keyword">const</span>;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">Time::Time()</span><br><span class="line">&#123;</span><br><span class="line">	hours = minutes = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">Time::Time(<span class="keyword">int</span> h, <span class="keyword">int</span> m)</span><br><span class="line">&#123;</span><br><span class="line">    hours = h;</span><br><span class="line">    minutes = m;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">Time Time::<span class="keyword">operator</span> + (<span class="keyword">const</span> Time &amp; t) <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    Time sum;</span><br><span class="line">    sum.minutes = minutes + t.minutes;</span><br><span class="line">    sum.hours = hours + t.hours + sum.minutes / <span class="number">60</span>;</span><br><span class="line">    sum.minutes %= <span class="number">60</span>;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用这个重载的+运算符可以将两个Time的对象像其他一般数据类型一样进行相加：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Time time1;</span><br><span class="line">Time time2;</span><br><span class="line">Time total = time1 + time2;</span><br></pre></td></tr></table></figure>
+
+<h2 id="运算符重载的限制"><a href="#运算符重载的限制" class="headerlink" title="运算符重载的限制"></a>运算符重载的限制</h2><p>多数C++运算符都可以用这样的方式重载。重载的运算符（有些例外情况）不必是成员函数，但必须至少有一个操作数是用户定义的类型。C++运算符重载的限制如下：</p>
+<ul>
+<li>重载后的运算符必须至少有一个操作数是用户定义的类型，这将防止用户为标准类型重载运算符因此，例如不能将减法运算符重载为计算两个 double 值的和，而不是它们的差。</li>
+<li>使用运算符时不能违反运算符原来的句法规则。例如，不能将求模运算符（%）重载成使用一个操作数的运算</li>
+<li>不能修改运算符的优先级。例如，如果将加号运算符重载成将两个类相加，则新的运算符与原来的加号具有相同的优先级</li>
+<li>不能创建新运算符。例如，不能定义 <code>operator **()</code> 函数来表示求幂</li>
+<li>不能重载下面的运算符<ul>
+<li><code>sizeof</code> ：sizeof 运算符</li>
+<li><code>.</code> ：成员运算符</li>
+<li><code>*</code> ：成员指针运算符</li>
+<li><code>::</code> ：作用域解析运算符</li>
+<li><code>? :</code> ：条件运算符</li>
+<li><code>typeid</code>：一个RTTI运算符</li>
+<li><code>const_cast</code>：强制类型转换运算符</li>
+<li><code>dynamic_cast</code>：强制类型转换运算符</li>
+<li><code>reinterpret_cast</code>：强制类型转换运算符</li>
+<li><code>static_cast</code>：强制类型转换运算符</li>
+</ul>
+</li>
+<li>大多数运算符都可以通过成员函数或者非成员函数进行重载，但是如下的运算符只能通过成员函数进行重载：<ul>
+<li><code>=</code>：赋值运算符</li>
+<li><code>( )</code>：函数调用运算符</li>
+<li><code>[ ]</code>：下标运算符</li>
+<li><code>-&gt;</code>：通过指针访问类成员运算符</li>
+</ul>
+</li>
+</ul>
+<p>可以重载的运算符</p>
+<table>
+<thead>
+<tr>
+<th><code>+</code></th>
+<th><code>-</code></th>
+<th><code>*</code></th>
+<th><code>/</code></th>
+<th><code>%</code></th>
+<th><code>^</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&amp;</code></td>
+<td>`</td>
+<td>`</td>
+<td><code>~=</code></td>
+<td><code>!</code></td>
+<td><code>=</code></td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td><code>+=</code></td>
+<td><code>-=</code></td>
+<td><code>*=</code></td>
+<td><code>/=</code></td>
+<td><code>%=</code></td>
+</tr>
+<tr>
+<td><code>^=</code></td>
+<td><code>&amp;=</code></td>
+<td>`</td>
+<td>=`</td>
+<td><code>&lt;&lt;</code></td>
+<td><code>&gt;&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;&lt;=</code></td>
+<td><code>==</code></td>
+<td><code>!=</code></td>
+<td><code>&lt;=</code></td>
+<td><code>&gt;=</code></td>
+<td><code>&amp;&amp;</code></td>
+</tr>
+<tr>
+<td>`</td>
+<td></td>
+<td>`</td>
+<td><code>++</code></td>
+<td><code>--</code></td>
+<td><code>,</code></td>
+</tr>
+<tr>
+<td><code>()</code></td>
+<td><code>[]</code></td>
+<td><code>new</code></td>
+<td><code>delete</code></td>
+<td><code>new[]</code></td>
+<td><code>delete[]</code></td>
+</tr>
+</tbody></table>
+<h1 id="友元函数"><a href="#友元函数" class="headerlink" title="友元函数"></a>友元函数</h1><p>类的友元函数是非成员函数，其访问权限与成员函数相同。</p>
+<h2 id="一个友元函数的例子"><a href="#一个友元函数的例子" class="headerlink" title="一个友元函数的例子"></a>一个友元函数的例子</h2><p>回到上面的Time类，我们重载<em>运算符：将</em>运算符重载成一个double值乘以一个Time类：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Time Time::<span class="keyword">operator</span> * (<span class="keyword">const</span> <span class="keyword">double</span> d) <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    Time result;</span><br><span class="line">    <span class="keyword">long</span> totalMinutes = hours * d * <span class="number">60</span> + minutes * d;</span><br><span class="line">    result.hours = totalMinutes / <span class="number">60</span>;</span><br><span class="line">    result.minutes = totalMinutes % <span class="number">60</span>;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>显然调用上述<code>*</code>的重载需要这样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Time <span class="title">A</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">Time <span class="title">B</span><span class="params">(<span class="number">1</span>, <span class="number">20</span>)</span></span>;</span><br><span class="line">A = B * <span class="number">2.5</span>;</span><br></pre></td></tr></table></figure>
+
+<p>相当于调用了这样的运算符重载的成员函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A = B.<span class="keyword">operator</span>*(<span class="number">2.5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>但是，问题来了，如果使用 A = 2.5 * B 就无法成功，这似乎违背了乘法的分配律，这一点虽然并不有违于C++的语法，但是貌似并不用户友好，我们需要告诉使用的人只能用第一种方式而不能用第二种方式。解决这个问题有两个方法：</p>
+<ul>
+<li>使用一个非成员函数来定义反写的情况：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Time <span class="keyword">operator</span> * (<span class="keyword">double</span> d, <span class="keyword">const</span> Time &amp; t)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> t * m;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>这种方式不失为是一种非常好的方法，而且如果有所修改，只需要修改类内的运算符重载即可。</p>
+<ul>
+<li>使用友元函数<br>和上述的思想类似，我们可以定义一个非成员函数，然后这样的重载运算符，从而定义一个double乘以一个Time类对象的操作：</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Time <span class="keyword">operator</span> * (<span class="keyword">double</span> d, <span class="keyword">const</span> Time &amp; t);</span><br></pre></td></tr></table></figure>
+
+<p>但是问题在于类外的非成员函数无法访问类的私有变量。所以友元函数的作用在于可以访问类的私有成员，但是他是一个非成员函数。</p>
+<h2 id="创建友元函数"><a href="#创建友元函数" class="headerlink" title="创建友元函数"></a>创建友元函数</h2><p>创建友元函数的第一步是将其原型放在<strong>类声明</strong>中，并在原型声明前加上关键字 friend：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">friend</span> Time <span class="keyword">operator</span>*(<span class="keyword">double</span> m, <span class="keyword">const</span> Time t);</span><br></pre></td></tr></table></figure>
+
+<p>该原型意味着下面两点：</p>
+<ul>
+<li>虽然 <code>operator*()</code> 函数是在类声明中声明的，但它不是成员函数，因此不能使用成员运算符来调用</li>
+<li>虽然 <code>operator*()</code> 函数不是成员函数，但它与成员函数的访问权限相同</li>
+</ul>
+<p>第二步是编写函数定义。因为它不是成员函数，所以不要使用 <code>Time::</code> 限定符。另外，不能在定义中使用关键字 <code>friend</code>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Time <span class="keyword">operator</span> * (<span class="keyword">double</span> d, <span class="keyword">const</span> Time &amp; t)</span><br><span class="line">&#123;</span><br><span class="line">    Time result;</span><br><span class="line">    <span class="keyword">long</span> totalMinutes = hours * d * <span class="number">60</span> + minutes * d;</span><br><span class="line">    result.hours = totalMinutes / <span class="number">60</span>;</span><br><span class="line">    result.minutes = totalMinutes % <span class="number">60</span>;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述定义后即可使用如下的语句来使用乘法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A = <span class="number">2.5</span> * B;</span><br></pre></td></tr></table></figure>
+
+<p>相当于调用友元函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A = <span class="keyword">operator</span>*(<span class="number">2.5</span>, B);</span><br></pre></td></tr></table></figure>
+
+<h2 id="成员函数和非成员函数的选择"><a href="#成员函数和非成员函数的选择" class="headerlink" title="成员函数和非成员函数的选择"></a>成员函数和非成员函数的选择</h2><p>对于一般的运算符重载，比如+和-这种不会出现乘法那种左右交换的问题的，有两种解决方式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Time <span class="keyword">operator</span> + (<span class="keyword">const</span> Time &amp; t) <span class="keyword">const</span>;</span><br><span class="line"><span class="keyword">friend</span> Time <span class="keyword">operator</span> + (<span class="keyword">const</span> Time &amp; t1, <span class="keyword">const</span> Time &amp; t2);</span><br></pre></td></tr></table></figure>
+
+<p>第一种方式是通过this隐式地传递一个参数，另一个使用函数参数显示地传递；第二种方式是两个参数都显示地通过参数传递。在调用 T1 = T2 + T3 时，会分别编译成如下的形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">T1 = T2.<span class="keyword">operator</span>+(T3);</span><br><span class="line">T1 = <span class="keyword">operator</span>+(T2, T3);</span><br></pre></td></tr></table></figure>
+
+<p>但是，<strong>两种方式不能同时定义</strong>，只能选择其中一个，否则会引发二义性的编译错误，基于乘法的例子，显然使用友元函数比较通用。</p>
+<h1 id="类的自动转换和强制类型转换"><a href="#类的自动转换和强制类型转换" class="headerlink" title="类的自动转换和强制类型转换"></a>类的自动转换和强制类型转换</h1><h2 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h2><p>C++允许一些强制类型转换，比如强制将double值转换成int值，把double的2.5转换成int会成为2从而丢失0.5。但是如果用户希望进行强制转换只需要使用如下的方式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">targetType valueName = (targetType) value;</span><br><span class="line">targetType valueName = targetType (value);</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用构造函数进行类的自动转换"><a href="#使用构造函数进行类的自动转换" class="headerlink" title="使用构造函数进行类的自动转换"></a>使用构造函数进行类的自动转换</h2><p>假设我们有一个类</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> myInt;</span><br><span class="line">    <span class="keyword">double</span> myDouble;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MyClass(<span class="keyword">double</span> d);</span><br><span class="line">    MyClass(<span class="keyword">int</span> i, <span class="keyword">double</span> d);</span><br><span class="line">    MyClass();</span><br><span class="line">    ~MyClass();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">MyClass::MyClass(<span class="keyword">double</span> d)</span><br><span class="line">&#123;</span><br><span class="line">    myDouble = d;</span><br><span class="line">    myInt = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">MyClass::MyClass(<span class="keyword">int</span> i, <span class="keyword">double</span> d)</span><br><span class="line">&#123;</span><br><span class="line">    myDouble = d;</span><br><span class="line">    myInt = i;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">MyClass::MyClass()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们尝试将一个double值赋给一个MyClass类对象：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyClass myClass;</span><br><span class="line">myClass = <span class="number">2.5</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这是可以的，首先创建了一个MyClass的对象，然后使用2.5将其初始化，实际上是使用了第一个构造函数 MyClass(double)，这是一个隐式转换的过程，不需要进行强制转换。</p>
+<p>只有接受一个参数的构造函数才能作为转换函数，如果像第二个构造函数那样有两个参数，不能用来转换类型，但是如果第二个参数有默认参数，就可以：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyClass(<span class="keyword">int</span> i, <span class="keyword">double</span> d = <span class="number">1.5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这个可以将一个int值隐式地转换成MyClass类型。</p>
+<p>如果不希望编辑器进行这种隐式转换，可以使用explicit关键词修饰构造函数，这样就无法使用该构造函数进行类型转换：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">MyClass</span><span class="params">(<span class="keyword">double</span> d)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>这样会关闭隐式转换，但依然允许显示转换，即使用显式地强制转换：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MyClass myClass;</span><br><span class="line">myClass = MyClass(<span class="number">2.5</span>);</span><br><span class="line">myClass = (MyClass)<span class="number">2.5</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h2><p>上边提到了隐式或者显式地将基本数据类型的数据转换成类对象，接下来的问题是如何将一个类对象转换成其他的基本数据类型，这一点可以通过转换函数来实现。转换函数是用户定义的强制类型转换，需要这样定义：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">operator dateType()；</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是：</p>
+<ul>
+<li>转换函数必须是类方法</li>
+<li>转换函数不能指定返回类型</li>
+<li>转换函数不能有参数</li>
+</ul>
+<p>比如我们将MyClass转换为一个double类型的变量，需要这样一个成员函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">operator</span> <span class="title">double</span><span class="params">()</span></span>;</span><br><span class="line"> </span><br><span class="line">MyClass::<span class="function"><span class="keyword">operator</span> <span class="title">double</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> myDoble;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以这样使用类型转换了：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">MyClass <span class="title">myClass</span><span class="params">(<span class="number">1</span>, <span class="number">2.5</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> myDouble = (<span class="keyword">double</span>) myClass;</span><br><span class="line"><span class="keyword">double</span> myDouble = <span class="keyword">double</span> (myClass);</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="复制构造函数"><a href="#复制构造函数" class="headerlink" title="复制构造函数"></a>复制构造函数</h1><p>复制构造函数接受其所属类的对象作为参数。例如，MyClass类的复制构造函数的原型如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyClass(<span class="keyword">const</span> MyClass &amp;);</span><br></pre></td></tr></table></figure>
+
+<p>在下述情况下，将使用复制构造函数：</p>
+<ul>
+<li>将新对象初始化为一个同类对象</li>
+<li>按值将对象传递给函数</li>
+<li>函数按值返回对象</li>
+<li>编译器生成临时对象</li>
+</ul>
+<p>如果程序没有使用（显式或隐式）复制构造函数，编译器将提供原型，但不提供函数定义；否则，程序将定义一个执行成员初始化的复制构造函数。也就是说，新对象的每个成员都被初始化为原始对象相应成员的值。如果成员为类对象,则初始化该成员时，将使用相应类的复制构造函数。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-28T14:39:52.941Z" itemprop="dateUpdated">2019-08-28 22:39:52</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/&title=《【C++温故知新】（六）类和对象》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/&title=《【C++温故知新】（六）类和对象》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（六）类和对象》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">【C++温故知新】（七）类的继承</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/24/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E4%B8%80%E6%8E%92%E5%BA%8F/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【算法】（一）排序算法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/&title=《【C++温故知新】（六）类和对象》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/&title=《【C++温故知新】（六）类和对象》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（六）类和对象》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEmElEQVR42u3ay27bMBAF0Pz/T7dAVy1QxffOOK2oHK0Cw6HIQwPkPD4+4ufHryf/+2qE35+rzz9/kjGTN358xYMJEyZMmG7JlEwrmcTV69tvbsa/+qR9y1/+FxMmTJgwHc60mXRyxM424/OZtCj5JQYTJkyYMH1PpuQwzheWLzu/jmxmggkTJkyYMLULSALU2TVin0TGhAkTJkzfjSkZLilYbrjzz9vry6yYigkTJkyYnsH0FY07p/z9n/ubMGHChAnTFzP9KJ/ZId0mi5N0cB6Ev2HVmDBhwoTpWKbZC9qAc3Nbmb1xX0ytp4IJEyZMmG7JlADNljo8dIOtysucbXPPJRkmTJgwYTqcaRbWzoLbfXvQJkRvNwYTJkyYMD2DKQ8jk9Ax4W7HzEebMb34WWDChAkTpkcwJcvYpFDzEfKrSX7Az/LflxkCTJgwYcJ0FFM+iXa6n0909sY8VG5pXrTsYMKECROmA5lmQ2xKhm2TTR4Mt6XWZJwXvylMmDBhwnR7plk7S/L6vPlmn65tg+p6qzBhwoQJ07FMm3Rq+19tg05bdn3X5SbqUcKECRMmTAcy5eXJPGhsG2XaJOystWjYyoMJEyZMmA5kyg/F2Q7kqd435KrXofXlmJgwYcKE6VimPMqbhaPJ9WIWALfLnl16MGHChAnT6Ux5MJknhdtdasuTbTvRPqTHhAkTJkzPYGrD3fxon7XabMqlbdAeZcExYcKECdPhTMkQs3bSJBzN35V8c7auyxliwoQJE6bDmfIGl9kx3H6et+wUSy0T0H98ggkTJkyYjmXaFwvzVpu8ySZv7kne8q4iKCZMmDBhOpGpXfDmQJ2lidttGBYs95cATJgwYcJ0S6ZZynV2uLbp2tnbZwnrN9R+MWHChAnT7ZnqIl9QdHxXWnYDtGkqKmqqmDBhwoTplkybJGweNG5Y20LmbG7R7wgTJkyYMB3OlKRiZ407mzad2fE/++YlKyZMmDBhOpZpX3rMD/i27SZ/42wbZhcjTJgwYcJ0FlPeKDP7/qbkmadl80LpLMjHhAkTJkxPZcqD0hnc5pKxSRPXVyJMmDBhwvQ4pqLUt2imyQ/vWSp5Vsh80biDCRMmTJiOYsoHzQPUvECYp3qTDWg3Jp8PJkyYMGF6BtP+WrCnSVCSa0QblheXCUyYMGHCdBTTbNltO067De9NE0cFy88vQ5gwYcKE6XCmGU07rVk4ml9K9s1Dl+vChAkTJkyPYGqTtsn1oi0WzgLdNsnbXmswYcKECdMzmNoQd5NXToqm7y1h/qP8NyZMmDBhuhnT7EjOITaFyc22bS40UWCPCRMmTJgOYdoctJvwdYY4m1ubth5G2JgwYcKE6ZZM7ZGcFz7bJps8IbspiLbvwoQJEyZMz2DalANnTTNfdyHYpLBfbAMmTJgwYTqcKU96tihtOXPWrBPlsDcJZUyYMGHC9A2YZmnTTVJ4dnjPYv2o0osJEyZMmL4NU5uWzYPqfTvOhgwTJkyYMD2VKQ8p8+N5XwSdFTXzDSvmjwkTJkyYjmVqG3fagDZvAGo3aT/+G3qaMGHChAnTfZl+AlFx6Xr9ogAZAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

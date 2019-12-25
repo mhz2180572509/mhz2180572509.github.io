@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,技术指南,服务器">
+    <meta name="description" content="简单说明本教程针对于在Linux系统的服务器上安装部署服务器环境，如果你恰好有一台服务器（无论是实体服务器还是购买的云服务器），并且使用的是Linux系统，那么你就可以参考本文来安装Apache（Web服务器）、PHP7.2、数据库（MySQL&#x2F;MariaDB），并且进行一些有必要的配置，比如对PHP的加速、安装phpMyAdmin以及获取SSL证书使用https协议等。从而，这几种应用程序的经典">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="简单说明本教程针对于在Linux系统的服务器上安装部署服务器环境，如果你恰好有一台服务器（无论是实体服务器还是购买的云服务器），并且使用的是Linux系统，那么你就可以参考本文来安装Apache（Web服务器）、PHP7.2、数据库（MySQL&#x2F;MariaDB），并且进行一些有必要的配置，比如对PHP的加速、安装phpMyAdmin以及获取SSL证书使用https协议等。从而，这几种应用程序的经典">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP4.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP5.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP6.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP7.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP8.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP9.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP10.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP11.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP12.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP13.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP14.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP15.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP16.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP17.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP18.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP19.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP20.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP21.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP22.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP23.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP24.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP25.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP26.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP27.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP28.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP29.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP30.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/LAMP31.png">
+<meta property="article:published_time" content="2019-03-07T07:40:50.000Z">
+<meta property="article:modified_time" content="2019-03-07T13:10:06.000Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="技术指南">
+<meta property="article:tag" content="服务器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/LAMP1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-07T07:40:50.000Z" itemprop="datePublished" class="page-time">
+  2019-03-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简单说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">简单说明</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#链接服务器"><span class="post-toc-number">2.</span> <span class="post-toc-text">链接服务器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Windows系统"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Windows系统</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux系统"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Linux系统</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装MySQL或MariaDB数据库"><span class="post-toc-number">3.</span> <span class="post-toc-text">安装MySQL或MariaDB数据库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装MySQL-5-7"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">安装MySQL 5.7</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装MariaDB-10"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">安装MariaDB 10</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试MySQL-MariaDB-root登录"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">测试MySQL&#x2F;MariaDB root登录</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装Apache"><span class="post-toc-number">4.</span> <span class="post-toc-text">安装Apache</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装PHP-7-2"><span class="post-toc-number">5.</span> <span class="post-toc-text">安装PHP 7.2</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#部署PHP语言环境"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">部署PHP语言环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#链接PHP与MySQL-MariaDB数据库"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">链接PHP与MySQL&#x2F;MariaDB数据库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装Opcache-APCu-PHP缓存来加速PHP"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">安装Opcache + APCu PHP缓存来加速PHP</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#设置https协议"><span class="post-toc-number">6.</span> <span class="post-toc-text">设置https协议</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在Apache中启用SSL网站"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">在Apache中启用SSL网站</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从Let’s-Encrypt获取免费的SSL证书"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">从Let’s Encrypt获取免费的SSL证书</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置加密自动更新"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">设置加密自动更新</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装phpMyAdmin"><span class="post-toc-number">7.</span> <span class="post-toc-text">安装phpMyAdmin</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置phpMyAdmin"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">配置phpMyAdmin</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对phpMyAdmin创建root权限"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">对phpMyAdmin创建root权限</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#本地与服务器之间的文件传输"><span class="post-toc-number">8.</span> <span class="post-toc-text">本地与服务器之间的文件传输</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux系统-1"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">Linux系统</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Windows系统-1"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">Windows系统</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-07 15:40:50" datetime="2019-03-07T07:40:50.000Z"  itemprop="datePublished">2019-03-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="简单说明"><a href="#简单说明" class="headerlink" title="简单说明"></a>简单说明</h1><p>本教程针对于在Linux系统的服务器上安装部署服务器环境，如果你恰好有一台服务器（无论是实体服务器还是购买的云服务器），并且使用的是Linux系统，那么你就可以参考本文来安装Apache（Web服务器）、PHP7.2、数据库（MySQL/MariaDB），并且进行一些有必要的配置，比如对PHP的加速、安装phpMyAdmin以及获取SSL证书使用https协议等。从而，这几种应用程序的经典组合Linux、Apache、MySQL、PHP即统称为LAMP</p>
+<h1 id="链接服务器"><a href="#链接服务器" class="headerlink" title="链接服务器"></a>链接服务器</h1><p>如果你在服务器本机上操作，直接打开服务器命令行终端即可。</p>
+<p>如果你是购买的云服务器或者使用其他电脑远程连接控制该服务器，那么你首先要做的就是链接到你得服务器。</p>
+<h2 id="Windows系统"><a href="#Windows系统" class="headerlink" title="Windows系统"></a>Windows系统</h2><p>Windows系统不能直接链接Linux系统，需要使用一些辅助工具，这里推荐使用Putty。</p>
+<p>下载地址：<a href="https://www.putty.org/" target="_blank" rel="noopener">https://www.putty.org/</a></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>下载完成后直接安装，然后打开，可以进入登录页面，填写你的服务器IP地址，端口号选择22，连接方式选择SSH，然后链接即可，这里本人使用的云服务器的IP地址为39.106.23.80，全篇都采用次地址。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>进入之后输入用户名，一般是初始值root，然后输入登录密码，密码在输入过程中不会显示任何东西，这是Linux对密码的保护机制，不必惊讶，保证不输错就行。</p>
+<p>一切顺利的话会进入Linux系统，当显示 <code>~#</code> 时则表示可以输入命令了。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="Linux系统"><a href="#Linux系统" class="headerlink" title="Linux系统"></a>Linux系统</h2><p>Linux系统下可以直接链接Linux服务器，在命令行终端下，输入命令 <code>ssh root@39.106.23.80</code> 然后输入服务器的密码即可连接成功，同样出现 <code>~#</code> 的符号</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP5.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h1 id="安装MySQL或MariaDB数据库"><a href="#安装MySQL或MariaDB数据库" class="headerlink" title="安装MySQL或MariaDB数据库"></a>安装MySQL或MariaDB数据库</h1><p>目前有两种广泛使用的MySQL数据库系统可供选择，这是由Oracle开发的经典“MySQL”服务器，现在可以在5.7版本中获得，而MySQL分支名为MariaDB，由原始MySQL开发人员Monty Widenius开发。这两种数据库只需要也只能安装一种，也就是说如下的两个小节“安装MySQL 5.7”和“安装MariaDB 10”只需要参考其一完成即可。</p>
+<h2 id="安装MySQL-5-7"><a href="#安装MySQL-5-7" class="headerlink" title="安装MySQL 5.7"></a>安装MySQL 5.7</h2><p>使用命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install mysql-server mysql-client</span><br></pre></td></tr></table></figure>
+
+<p>整个过程中你可能会被要求填写密码、设置一些东西，按照步骤要求填写即可，第一步是设置数据库密码，然后剩下的可以一路选择 y 表示 yes就行，直到最后会出现 Success. All done! 表示安装成功。</p>
+<h2 id="安装MariaDB-10"><a href="#安装MariaDB-10" class="headerlink" title="安装MariaDB 10"></a>安装MariaDB 10</h2><p>使用命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install mariadb-server mariadb-client</span><br></pre></td></tr></table></figure>
+
+<p>然后为MariaDB设置密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure>
+
+<p>整个过程大概这样：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP6.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>最后出现 <code>Thanks for using MairaDB</code> 即表示成功。</p>
+<h2 id="测试MySQL-MariaDB-root登录"><a href="#测试MySQL-MariaDB-root登录" class="headerlink" title="测试MySQL/MariaDB root登录"></a>测试MySQL/MariaDB root登录</h2><p>使用命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<p>输入刚刚设置的密码，看是否登录到数据库中。</p>
+<p>如果是MySQL数据库，会变成使用 <code>mysql&gt;</code> 开头的符号等待命名输入，如果是MairaDB数据库则会使用 <code>MariaDB&gt;</code> 开头的符号等待命令输入，使用命令 <code>quit</code> 即可退出数据库，下图是MariaDB的图示。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP7.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h1 id="安装Apache"><a href="#安装Apache" class="headerlink" title="安装Apache"></a>安装Apache</h1><p>使用命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install apache2</span><br></pre></td></tr></table></figure>
+
+<p>安装完毕后在浏览器中输入你的IP地址访问服务器，如果看到如下页面则表示Apache安装成功。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP8.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>Ubuntu默认服务器的文档根目录是 <code>/var/www/html</code> ，主配置文件是 <code>/etc/apache2/apache2.conf</code> 配置系统的说明完整记录在 <code>/usr/share/doc/apache2/README.Debian.gz</code> 中</p>
+<h1 id="安装PHP-7-2"><a href="#安装PHP-7-2" class="headerlink" title="安装PHP 7.2"></a>安装PHP 7.2</h1><h2 id="部署PHP语言环境"><a href="#部署PHP语言环境" class="headerlink" title="部署PHP语言环境"></a>部署PHP语言环境</h2><p>使用命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install php7.2 libapache2-mod-php7.2</span><br></pre></td></tr></table></figure>
+
+<p>然后重新启动Apache</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart apache2</span><br></pre></td></tr></table></figure>
+
+<p>测试PHP并获取PHP安装信息<br>在默认网站文档的根目录也就是 <code>/var/www/html</code> 下创建一个小小的php文件，并使用浏览器访问该文件来检测服务器和PHP语言环境是否正常运行。</p>
+<p>使用vim编辑器新建并编辑一个php文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;var&#x2F;www&#x2F;html&#x2F;info.php</span><br></pre></td></tr></table></figure>
+
+<p>就会进入vim编辑器，如果你不会使用vim编辑器，请按照如下步骤进行：<br>在输入上一条命令后在编辑器中按 <code>I</code> 键进入编辑模式，输入如下代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">phpinfo();</span><br></pre></td></tr></table></figure>
+
+<p>然后按 <code>Esc</code> 键退出编辑模式，然后英文状态下输入 <code>:</code> ，会发现左下角出现了一个冒号，输入的光标指向了此处，此时输入 <code>wq</code> 然后按回车，即可返回命令行，同时文件创建编辑完毕。</p>
+<p>回到命令行后，使用命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown www-data:www-data &#x2F;var&#x2F;www&#x2F;html&#x2F;info.php</span><br></pre></td></tr></table></figure>
+
+<p>将 <code>info.php</code> 文件的所有者更改为www-data用户和组</p>
+<p>然后在我们的浏览器中使用IP访问我们的服务器并在后面加入 /info.php 来访问刚刚写的php文件，如果出现如下内容即表示PHP和Apache正确运行。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP9.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+
+<h2 id="链接PHP与MySQL-MariaDB数据库"><a href="#链接PHP与MySQL-MariaDB数据库" class="headerlink" title="链接PHP与MySQL/MariaDB数据库"></a>链接PHP与MySQL/MariaDB数据库</h2><p>使用命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cache search php7.2</span><br></pre></td></tr></table></figure>
+
+<p>和</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cache search php-</span><br></pre></td></tr></table></figure>
+
+<p>注意：因为并非所有PHP软件包的名称中都有版本号7.2，可以选择你需要的，并像这样安装它们：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install php7.2-mysql php7.2-curl php7.2-gd php7.2-intl php-pear php-imagick php7.2-imap php-memcache  php7.2-pspell php7.2-recode php7.2-sqlite3 php7.2-tidy php7.2-xmlrpc php7.2-xsl php7.2-mbstring php-gettext</span><br></pre></td></tr></table></figure>
+
+<p>重启Apache</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart apache2</span><br></pre></td></tr></table></figure>
+
+<p>刷新刚刚的 <code>info.php</code> 页面然后在下方看到数据库的信息后表示成功！</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP10.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="安装Opcache-APCu-PHP缓存来加速PHP"><a href="#安装Opcache-APCu-PHP缓存来加速PHP" class="headerlink" title="安装Opcache + APCu PHP缓存来加速PHP"></a>安装Opcache + APCu PHP缓存来加速PHP</h2><p>PHP 7附带了一个内置的操作码缓存器，用于缓存和优化PHP中间代码，名称为“opcache”，可在包php7.0-opcache中找到。 强烈建议安装Opcache以加快PHP页面的速度。 除了opcache之外，我还将安装APCu，它是opcache的兼容性包装，提供APC缓存的功能，这是PHP 5.x版本中经常使用的缓存系统，许多CMS系统仍然使用它。</p>
+<p>使用命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install php7.2-opcache php-apcu</span><br></pre></td></tr></table></figure>
+
+<p>如果提示已经安装是正常的事情，然后重启Apache</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart apache2</span><br></pre></td></tr></table></figure>
+
+<p>再次刷新 <code>info.php</code> 页面，如果找到下方的相关模块则表示安装成功</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP11.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>完成了刚才的测试后，可以及时删除杠杆创建的 info.php 文件，这个文件中包含了许多关键的信息，不希望被他人看到。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -f &#x2F;var&#x2F;www&#x2F;html&#x2F;info.php</span><br></pre></td></tr></table></figure>
+
+<h1 id="设置https协议"><a href="#设置https协议" class="headerlink" title="设置https协议"></a>设置https协议</h1><h2 id="在Apache中启用SSL网站"><a href="#在Apache中启用SSL网站" class="headerlink" title="在Apache中启用SSL网站"></a>在Apache中启用SSL网站</h2><p>SSL/TLS是一个安全层，用于加密网络浏览器和服务器之间的连接。也就是目前支持的https协议。我们可以在服务器上使用如下命令启用SSL支持：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a2enmod ssl</span><br><span class="line">a2ensite default-ssl</span><br></pre></td></tr></table></figure>
+
+<p>它启用SSL模块并在 <code>/etc/apache2/sites-enabled</code> 文件夹中添加一个符号链接到文件 <code>/etc/apache2/sites-available/default-ssl.conf</code>，用于将其包含到活动的apache配置中。 然后重启Apache：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart apache2</span><br></pre></td></tr></table></figure>
+
+<p>此时在浏览器中使用https协议访问你得IP地址，如我的是：<a href="https://39.106.23.80/" target="_blank" rel="noopener">https://39.106.23.80/</a> ，会出现如下的提示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP12.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+
+<p>此时可以选择忽略警告继续浏览，可以进入我们原本的网站</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP13.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP14.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>为了避免出现类似的不安全警告，我们需要获取SSL证书</p>
+<h2 id="从Let’s-Encrypt获取免费的SSL证书"><a href="#从Let’s-Encrypt获取免费的SSL证书" class="headerlink" title="从Let’s Encrypt获取免费的SSL证书"></a>从Let’s Encrypt获取免费的SSL证书</h2><p>首先安装python3-certbot-apache包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install python3-certbot-apache</span><br></pre></td></tr></table></figure>
+
+<p>使用编辑器打开vhost文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;apache2&#x2F;sites-available&#x2F;000-default.conf</span><br></pre></td></tr></table></figure>
+
+<p>并在“DocumentRoot”下面添加一行：记得将如下的域名替换成自己的域名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServerName www.littlegeniux.xin</span><br></pre></td></tr></table></figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP15.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>保存后回到命令行，使用命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certbot --apache -d www.littlegeniux.xin</span><br></pre></td></tr></table></figure>
+
+<p>然后需要输入一个邮箱地址</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP16.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>然后会经历一些步骤：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP17.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>表示SSL证书配置成功：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP18.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>此时通过 <a href="https://www.littlegenius.xin" target="_blank" rel="noopener">https://www.littlegenius.xin</a> 或者 <a href="https://39.106.23.80" target="_blank" rel="noopener">https://39.106.23.80</a> 访问网站就不再有安全警告出现了。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP19.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="设置加密自动更新"><a href="#设置加密自动更新" class="headerlink" title="设置加密自动更新"></a>设置加密自动更新</h2><p>由于SSL证书只在80天中有效，所以我们运行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certbot --renew</span><br></pre></td></tr></table></figure>
+
+<p>来设置其自动更新</p>
+<h1 id="安装phpMyAdmin"><a href="#安装phpMyAdmin" class="headerlink" title="安装phpMyAdmin"></a>安装phpMyAdmin</h1><p>phpMyAdmin是一个图形化管理数据库的工具，简单说是一个Web页面，你可以在其中可视化地管理你得数据库。</p>
+<h2 id="配置phpMyAdmin"><a href="#配置phpMyAdmin" class="headerlink" title="配置phpMyAdmin"></a>配置phpMyAdmin</h2><p>使用命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install phpmyadmin</span><br></pre></td></tr></table></figure>
+
+<p>整个过程中会经历很多的设置，注意：这种设置是使用键盘的方向键进行选择，当移动到你想选中的位置后一定要按空格键才能将其选中，只移动方向键使它高亮并不是选中，一定要按空格键将其选中！选中后会有一个*号的标识。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP20.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP21.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>之后会有一系列的内容要选择</p>
+<p><img src="http://cdn.littlegenius.xin/LAMP22.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP23.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP24.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP25.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP26.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="对phpMyAdmin创建root权限"><a href="#对phpMyAdmin创建root权限" class="headerlink" title="对phpMyAdmin创建root权限"></a>对phpMyAdmin创建root权限</h2><p>在命令行中使用命令登录到数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root</span><br></pre></td></tr></table></figure>
+
+<p>使用如下代码创建一个名为“admin”密码为“123456”的新用户，根据自己的需求更改下方的账户和密码成为你的，注意命令尾部的分号。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &#39;admin&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;</span><br><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#39;admin&#39;@&#39;localhost&#39; WITH GRANT OPTION;</span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<p>配置上述内容后就可以在浏览器中使用 <a href="http://39.106.23.80/phpmyadmin/" target="_blank" rel="noopener">http://39.106.23.80/phpmyadmin/</a> 访问phpMyAdmin啦：</p>
+<p><img src="http://cdn.littlegenius.xin/LAMP27.png" alt=""></p>
+<p>输入账号密码即可在phpMyAdmin中管理你得数据库！</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP28.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h1 id="本地与服务器之间的文件传输"><a href="#本地与服务器之间的文件传输" class="headerlink" title="本地与服务器之间的文件传输"></a>本地与服务器之间的文件传输</h1><p>服务器的搭建和配置任务全部完成了，最后你可能还需要知道如何实现本机与服务器之间的文件传输。</p>
+<h2 id="Linux系统-1"><a href="#Linux系统-1" class="headerlink" title="Linux系统"></a>Linux系统</h2><p>如果你本机使Linux系统，很简单，使用命令行终端就可以完成：<br>将本地文件 <code>/home/test.txt</code> 传输到服务器的 <code>/var/www/html</code> 目录下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp  &#x2F;home&#x2F;test.txt root@39.106.23.80:&#x2F;var&#x2F;www&#x2F;html</span><br></pre></td></tr></table></figure>
+
+<p>将服务器的 <code>/var/www/html/test.txt</code> 文件传输到本地的 <code>/home</code> 目录下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp  root@39.106.23.80:&#x2F;var&#x2F;www&#x2F;html&#x2F;test.txt &#x2F;home</span><br></pre></td></tr></table></figure>
+
+<p>将本地文件 <code>/home</code> 整个目录传输到服务器的 <code>/var/www/html</code> 目录下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp  &#x2F;home root@39.106.23.80:&#x2F;var&#x2F;www&#x2F;html</span><br></pre></td></tr></table></figure>
+
+<p>将服务器的 <code>/var/www/html</code> 整个目录传输到本地的 <code>/home</code> 目录下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp  root@39.106.23.80:&#x2F;var&#x2F;www&#x2F;html &#x2F;home</span><br></pre></td></tr></table></figure>
+
+<h2 id="Windows系统-1"><a href="#Windows系统-1" class="headerlink" title="Windows系统"></a>Windows系统</h2><p>如果你是用Windows系统，那么你可以使用WinScp工具来完成这个过程.</p>
+<p>下载地址：<a href="https://winscp.net/eng/index.php" target="_blank" rel="noopener">https://winscp.net/eng/index.php</a></p>
+<p>下载好后安装，然后和putty的界面和操作类似，输入IP地址，端口号设置为22，然后输入用户名与密码</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP29.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>如果经常使用可以选择保存将这个IP保存，下次就不需要再输入一次了</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP30.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>连接建立后就会出现如下的界面，很简单，左边是你的Windows目录，右边就是你的服务器目录，需要进行文件传递只需要将文件或者文件夹从左侧拖动到右侧或者从右侧拖动回左侧即可。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/LAMP31.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-03-07T13:10:06.000Z" itemprop="dateUpdated">2019-03-07 21:10:06</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/" rel="tag">技术指南</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/&title=《Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/&title=《Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/04/23/%E3%80%90%E6%8E%A8%E9%80%81%E3%80%91%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%80%E9%94%AE%E7%B2%98%E8%B4%B4-%E8%AF%86%E5%88%AB%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97-%E4%B8%80%E9%94%AE%E5%A4%8D%E5%88%B6%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">【WEB JS PHP】屏幕截图粘贴上传+文字识别+一键复制识别结果</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/02/20/%E5%AE%89%E8%A3%85%E5%A5%BDUbuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">安装好Ubuntu双系统后的一些事情</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/&title=《Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/&title=《Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Ubuntu18.04 服务器部署与安装 Apache，PHP 7.2和MySQL》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/03/07/Ubuntu18.04%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E8%A3%85%20Apache%EF%BC%8CPHP%207.2%E5%92%8CMySQL/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAAE+CAAAAAAxUyPsAAAFPklEQVR42u3cwW7cOBAEUP//T2eBRQ5ZODOuqpZ92adTINsS+TjANKuJfHzE169/r+TOn/d/fbqSv81//9VP348/GeHDFz58+PDhwxcM/f0r76+/v7HFfTXCZOFfzhEfPnz48OGb+PIv+1evbIeV/H5eSLXL3C7Jy/v48OHDhw/ft/HlE0sGl4cL7SLlgcVW4uDDhw8fPnw/w3fZbD8VMVx+emkn4MOHDx8+fM/ybZvqpH3+1FTztv1WZn17rwMfPnz48OGbiob/w78fvvDhw4cPH77g6zm52pJlCx222CIvcTYNfPjw4cOHb5v7JTpPpvQUdNsCf39nW4waAh8+fPjw4YsfnUx+G1w7va1B3rYN8rn8p+7Dhw8fPnz4Yr62Lb0dU0s253kokAcE+V/ly/BFZIAPHz58+PC95btE1T9ziO3Z5kE7niimx4cPHz58+LoEoP4vvbat+FNBQFtkbBl7EWHgw4cPHz58U/qdlyNbq3srI+5xRrsk47vw4cOHDx+++F2XRnWLkgTr2518OS/BxxeRAT58+PDhw1fy5fH9tglvt/p5jJ4H/ff2Pz58+PDhw7fxRW3g8ut8K2XakOL7iqqiRYEPHz58+PCd+bamclug5PFBGwpcDszly/P7Dj58+PDhw/cQXw56QcwLo3udcEEvUn98+PDhw4fvwNdG+dvC5FHFVu58lFcRXuDDhw8fPnwT33ZsK9+i55vwIiifmtwt3BdPw4cPHz58+KYRPlV85M/MgZLdek5wv48PHz58+PBd+La28QMrVpYXW/FxaepHHyZ8+PDhw4ev5Lts9S8b9WdB79FGMoaXv48PHz58+PDFfNtxrrwtnbeut/duze/2OV9EBvjw4cOHD9/EV2ySyzIieVp7BLx9Zl6i1RUfPnz48OHDF/NtEO1P20LkcsStLVwenhE+fPjw4cP39vnJsbP2qFk+uKcKiMuh9kvBhA8fPnz48E17/AfC67b4yAf6VBy/fQgKH3z48OHDhy/2aY9Tb2Rb67p9Tku2tQSiswb48OHDhw/fp2e2gXW+Ra8bzCXQVrjcS5bifB8+fPjw4cP3ds+bYCUP3RoA9+NrbRixNd3x4cOHDx++p/i2LfQWcF+a1lu7vf24FIj48OHDhw/fxHd/3FZSbOVFUuhcWv7JYuPDhw8fPnwt3yXCzlvUF6B2S58v7bac+PDhw4cP34Xv0h5ut/150N8u4WUZni2D8OHDhw8fvmRUW3mRTL5lyhvkbUs7KYNGRHz48OHDhy/m2yZwL1y2JsH29nHDn7Qr8OHDhw8fvpKvHW47jbwQeerKFymP7KMgAx8+fPjw4Qv42m1/XtDkMUTLnYcFbbSRtxPw4cOHDx++ja/YEpfB/SV0yI+XbY3wx7oc+PDhw4cP36N8UdJQgibT3t57PznWRhv48OHDhw/fxndvHm/xdzLhNsK4HI+7aODDhw8fPnyJRrtFb4PvdvudlDttwbQtZKKEDx8+fPjwbXzbKy/Bel1VlVhtiTMWdvjw4cOHD9+ZLyEYv+anUmMrMi4BfVFa4cOHDx8+fCXfPcq/HFZrufORbPcvB+nw4cOHDx++fAz5Vv/SHX52Ge596uRvo08cPnz48OHDN/ElU3of5edT3SqpS6u7jQbexwR/KVzw4cOHDx++H+HLi5I8mm8LnQQxb5nnzQN8+PDhw4fvu/m2QW8lyNawb6ONpPCKwnp8+PDhw4ev5MvLi6Tg2ML0SzM7Z0oKmuKN+PDhw4cPX8mXB9z3eP2pA21tUbUt8CXix4cPHz58+D5d/wDHwpRcw1OeegAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

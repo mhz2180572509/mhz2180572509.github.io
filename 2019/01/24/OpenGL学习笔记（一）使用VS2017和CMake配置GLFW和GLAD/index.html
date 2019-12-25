@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>OpenGL学习笔记（一）使用VS2017和CMake配置GLFW和GLAD | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="OpenGL,学习笔记">
+    <meta name="description" content="简单的介绍OpenGLOpenGL（Open Graphics Library，开放图形库），一般被认为是一个API(Application Programming Interface，应用程序编程接口)，包含了一系列可以操作图形、图像的函数。其实，OpenGL本身并不是一个API，它仅仅是一个由Khronos组织制定并维护的规范(Specification)。OpenGL规范严格规定了每个函数该">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL学习笔记（一）使用VS2017和CMake配置GLFW和GLAD">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="简单的介绍OpenGLOpenGL（Open Graphics Library，开放图形库），一般被认为是一个API(Application Programming Interface，应用程序编程接口)，包含了一系列可以操作图形、图像的函数。其实，OpenGL本身并不是一个API，它仅仅是一个由Khronos组织制定并维护的规范(Specification)。OpenGL规范严格规定了每个函数该">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%801.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%802.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%803.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%804.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%805.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%806.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%807.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%808.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%809.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8010.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8011.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8012.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8013.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8014.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8015.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8018.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8019.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8020.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8021.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8022.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8016.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8017.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8023.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8024.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8025.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8026.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8027.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8028.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8029.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8030.png">
+<meta property="article:published_time" content="2019-01-24T07:48:53.000Z">
+<meta property="article:modified_time" content="2019-02-20T03:08:42.000Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="OpenGL">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%801.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">OpenGL学习笔记（一）使用VS2017和CMake配置GLFW和GLAD</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">OpenGL学习笔记（一）使用VS2017和CMake配置GLFW和GLAD</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-24T07:48:53.000Z" itemprop="datePublished" class="page-time">
+  2019-01-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">OpenGL学习笔记</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简单的介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">简单的介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OpenGL"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">OpenGL</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GLFW"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">GLFW</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GLAD"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">GLAD</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CMake"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">CMake</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#在Windows下使用VS2017的配置过程"><span class="post-toc-number">2.</span> <span class="post-toc-text">在Windows下使用VS2017的配置过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#下载GLFW库"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">下载GLFW库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#下载CMake"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">下载CMake</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用CMake和VS2017生成解决方案"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">使用CMake和VS2017生成解决方案</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#下载GLAD库"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">下载GLAD库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#将所需的文件打包"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">将所需的文件打包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建一个工程并将Packages的内容引入"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">创建一个工程并将Packages的内容引入</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#验证配置是否成功"><span class="post-toc-number">3.</span> <span class="post-toc-text">验证配置是否成功</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-OpenGL学习笔记（一）使用VS2017和CMake配置GLFW和GLAD"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">OpenGL学习笔记（一）使用VS2017和CMake配置GLFW和GLAD</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-24 15:48:53" datetime="2019-01-24T07:48:53.000Z"  itemprop="datePublished">2019-01-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">OpenGL学习笔记</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="简单的介绍"><a href="#简单的介绍" class="headerlink" title="简单的介绍"></a>简单的介绍</h1><h2 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h2><p>OpenGL（Open Graphics Library，开放图形库），一般被认为是一个API(Application Programming Interface，应用程序编程接口)，包含了一系列可以操作图形、图像的函数。其实，OpenGL本身并不是一个API，它仅仅是一个由Khronos组织制定并维护的规范(Specification)。OpenGL规范严格规定了每个函数该如何执行，以及它们的输出值。至于内部具体每个函数是如何实现(Implement)的，将由OpenGL库的开发者自行决定。</p>
+<h2 id="GLFW"><a href="#GLFW" class="headerlink" title="GLFW"></a>GLFW</h2><p>在我们使用OpenGL进行绘制图形之前，首先要做的就是创建一个OpenGL上下文(Context)和一个用于显示的窗口。然而，这些操作在每个系统上都是不一样的，OpenGL有目的地从这些操作抽象(Abstract)出去。这意味着我们不得不自己处理创建窗口，定义OpenGL上下文以及处理用户输入。</p>
+<p>GLFW是一个专门针对OpenGL的C语言库，它提供了一些渲染物体所需的最低限度的接口。它允许用户创建OpenGL上下文，定义窗口参数以及处理用户输入。这也就节省了我们书写操作系统相关代码的时间，提供给我们一个窗口和上下文用来渲染。</p>
+<p>官方网址：<a href="https://www.glfw.org/" target="_blank" rel="noopener">https://www.glfw.org/</a> </p>
+<h2 id="GLAD"><a href="#GLAD" class="headerlink" title="GLAD"></a>GLAD</h2><p>因为OpenGL只是一个标准/规范，具体的实现是由驱动开发商针对特定显卡实现的。由于OpenGL驱动版本众多，它大多数函数的位置都无法在编译时确定下来，需要在运行时查询。所以任务就落在了开发者身上，开发者需要在运行时获取函数地址并将其保存在一个函数指针中供以后使用。取得地址的方法因平台而异，所以非常繁琐。幸运的是，有些库能简化此过程，其中GLAD是目前最新，也是最流行的库，它是一个开源库，可以在其提供的在线服务中配置。</p>
+<h2 id="CMake"><a href="#CMake" class="headerlink" title="CMake"></a>CMake</h2><p>CMake是一个工程文件生成工具。用户可以使用预定义好的CMake脚本，根据自己的选择生成不同IDE的工程文件。这也就允许我们从GLFW源码里创建一个Visual Studio 2017工程文件，之后进行编译。</p>
+<p>官方网址：<a href="https://cmake.org/" target="_blank" rel="noopener">https://cmake.org/</a></p>
+<h1 id="在Windows下使用VS2017的配置过程"><a href="#在Windows下使用VS2017的配置过程" class="headerlink" title="在Windows下使用VS2017的配置过程"></a>在Windows下使用VS2017的配置过程</h1><p><strong>注：为了给大家提供方便，我已经将前几步整合好的Packages包打包，需要的话可以直接下载：</strong></p>
+<p>下载链接：<a href="https://pan.baidu.com/s/1iwJhRHecTnn6GtVYSewrQg" target="_blank" rel="noopener">https://pan.baidu.com/s/1iwJhRHecTnn6GtVYSewrQg</a> 提取码：s733</p>
+<p><strong>如果你已拥有了这个包，可以直接跳到“创建一个工程并将Packages的内容引入”一节，如果你想亲手经理一边整个配置过程，就可以继续从头阅读下去。</strong></p>
+<h2 id="下载GLFW库"><a href="#下载GLFW库" class="headerlink" title="下载GLFW库"></a>下载GLFW库</h2><p>下载页面：<a href="https://www.glfw.org/download.html" target="_blank" rel="noopener">https://www.glfw.org/download.html</a></p>
+<p>在下载页面，我们下载其源码，然后使用CMake自己进行编译，以获得Visual Studio 2017可用的工程文件。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%801.png" alt="下载GLFW" title="">
+                </div>
+                <div class="image-caption">下载GLFW</div>
+            </figure>
+
+<p>下载后解压得到的文件如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%802.png" alt="GLFW解压文件" title="">
+                </div>
+                <div class="image-caption">GLFW解压文件</div>
+            </figure>
+
+<h2 id="下载CMake"><a href="#下载CMake" class="headerlink" title="下载CMake"></a>下载CMake</h2><p>下载页面：<a href="https://cmake.org/download/" target="_blank" rel="noopener">https://cmake.org/download/</a></p>
+<p>这里下载的是3.13.3版本的Windows64位安装包：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%803.png" alt="下载CMake" title="">
+                </div>
+                <div class="image-caption">下载CMake</div>
+            </figure>
+
+<h2 id="使用CMake和VS2017生成解决方案"><a href="#使用CMake和VS2017生成解决方案" class="headerlink" title="使用CMake和VS2017生成解决方案"></a>使用CMake和VS2017生成解决方案</h2><p>下载完成后正常安装，并且打开已经安装成功的CMake。这里我们可以选择用GUI打开或者通过Command Line使用，为了简单直观，使用GUI来运行CMake。</p>
+<p>将源代码一栏定位到刚刚下载好的GLFW源码文件夹下，然后选择一个生成的目标文件夹，之后点击下方的“Configure”进行设置。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%804.png" alt="使用CMake生成VS2017工程文件" title="">
+                </div>
+                <div class="image-caption">使用CMake生成VS2017工程文件</div>
+            </figure>
+
+<p>默认其选项即可：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%805.png" alt="使用CMake生成VS2017工程文件" title="">
+                </div>
+                <div class="image-caption">使用CMake生成VS2017工程文件</div>
+            </figure>
+
+<p>然后依次点击Configure、Generate：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%806.png" alt="使用CMake生成VS2017工程文件" title="">
+                </div>
+                <div class="image-caption">使用CMake生成VS2017工程文件</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%807.png" alt="使用CMake生成VS2017工程文件" title="">
+                </div>
+                <div class="image-caption">使用CMake生成VS2017工程文件</div>
+            </figure>
+
+<p>看到最后输出成功即可。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%808.png" alt="使用CMake生成VS2017工程文件" title="">
+                </div>
+                <div class="image-caption">使用CMake生成VS2017工程文件</div>
+            </figure>
+
+<p>此时可以在刚刚设置的目标文件夹下找到已经生成的.sln文件，双击使用Visual Studio 2017打开该解决方案，即可直接进行编译。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%809.png" alt="找到生成的.sln文件" title="">
+                </div>
+                <div class="image-caption">找到生成的.sln文件</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8010.png" alt="使用Visual Studio 2017生成解决方案" title="">
+                </div>
+                <div class="image-caption">使用Visual Studio 2017生成解决方案</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8011.png" alt="使用Visual Studio 2017生成解决方案" title="">
+                </div>
+                <div class="image-caption">使用Visual Studio 2017生成解决方案</div>
+            </figure>
+
+<p>编译成功后，可以在刚刚目录的build\src\Debug\目录下找到编译后的文件：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8012.png" alt="找到编译后的文件" title="">
+                </div>
+                <div class="image-caption">找到编译后的文件</div>
+            </figure>
+
+<h2 id="下载GLAD库"><a href="#下载GLAD库" class="headerlink" title="下载GLAD库"></a>下载GLAD库</h2><p>GLAD提供了一个在线服务地址，用来配置和生成GLAD库。</p>
+<p>在线服务网址：<a href="https://glad.dav1d.de/" target="_blank" rel="noopener">https://glad.dav1d.de/</a></p>
+<p>可以按照如下的内容配置，在GL的版本上，只要选择一个3.3以上的版本即可，这里选择的最新版本4.6，Profile处要选择Core模式。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8013.png" alt="GLAD的在线配置" title="">
+                </div>
+                <div class="image-caption">GLAD的在线配置</div>
+            </figure>
+
+<p>生成好后直接下载对应的压缩包即可。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8014.png" alt="下载GLAD包" title="">
+                </div>
+                <div class="image-caption">下载GLAD包</div>
+            </figure>
+
+<p>解压后得到如下文件：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8015.png" alt="解压GLAD包得到的文件" title="">
+                </div>
+                <div class="image-caption">解压GLAD包得到的文件</div>
+            </figure>
+
+<h2 id="将所需的文件打包"><a href="#将所需的文件打包" class="headerlink" title="将所需的文件打包"></a>将所需的文件打包</h2><p>为了方便，这一步我们将所有OpenGL用到的依赖包打包在一个文件夹下，这样这一个文件夹就包含了所有所需的外部依赖。当然你也可以跳过这一步，但是接下来你的每一个新工程的引入都还需要在所有地点将各个包引入。</p>
+<p>新建一个文件夹，这里将其命名为Packages。</p>
+<p>分别找到GLFW源码中include\文件夹下的GLFW文件夹、下载的GLAD库放到一个新建的Packages\include\文件夹下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8018.png" alt="创建Packages依赖包" title="">
+                </div>
+                <div class="image-caption">创建Packages依赖包</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8019.png" alt="创建Packages依赖包" title="">
+                </div>
+                <div class="image-caption">创建Packages依赖包</div>
+            </figure>
+
+<p>将GLFW编译后的.lib库文件放在新建的Packages\lib\文件夹下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8020.png" alt="创建Packages依赖包" title="">
+                </div>
+                <div class="image-caption">创建Packages依赖包</div>
+            </figure>
+
+<p>将下载的GLAD库中的src文件夹中的文件放入Packages\src\文件夹下（你也可以直接将glad下的src文件夹放置在Packages文件夹下）：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8021.png" alt="创建Packages依赖包" title="">
+                </div>
+                <div class="image-caption">创建Packages依赖包</div>
+            </figure>
+
+<p>最后得到的这个Packages即是我们整合好的包，这个包的最终结构大概如下面这个样子，接下来只需要将这个包进行引入即可。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8022.png" alt="Packages依赖包的结构" title="">
+                </div>
+                <div class="image-caption">Packages依赖包的结构</div>
+            </figure>
+
+<p><strong>注：为了给大家提供方便，我已经将整合好的Packages包打包，需要的话可以直接下载：<a href="https://pan.baidu.com/s/1iwJhRHecTnn6GtVYSewrQg" target="_blank" rel="noopener">https://pan.baidu.com/s/1iwJhRHecTnn6GtVYSewrQg</a> 提取码：s733</strong></p>
+<h2 id="创建一个工程并将Packages的内容引入"><a href="#创建一个工程并将Packages的内容引入" class="headerlink" title="创建一个工程并将Packages的内容引入"></a>创建一个工程并将Packages的内容引入</h2><p>这里使用Visual Studio 2017，创建一个C++的空项目。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8016.png" alt="创建一个C++空项目" title="">
+                </div>
+                <div class="image-caption">创建一个C++空项目</div>
+            </figure>
+
+<p>接下来配置是为了是我们的GLFW库和GLAD库在我们新建的项目中起作用。在项目处右键，选择属性，先切换到“VC++目录”下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8017.png" alt="引入GLFW库和GLAD库" title="">
+                </div>
+                <div class="image-caption">引入GLFW库和GLAD库</div>
+            </figure>
+
+<p>先引入“包含目录”：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8023.png" alt="引入GLFW库和GLAD库" title="">
+                </div>
+                <div class="image-caption">引入GLFW库和GLAD库</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8024.png" alt="引入GLFW库和GLAD库" title="">
+                </div>
+                <div class="image-caption">引入GLFW库和GLAD库</div>
+            </figure>
+
+<p>再引入“库目录”包：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8025.png" alt="引入GLFW库和GLAD库" title="">
+                </div>
+                <div class="image-caption">引入GLFW库和GLAD库</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8026.png" alt="引入GLFW库和GLAD库" title="">
+                </div>
+                <div class="image-caption">引入GLFW库和GLAD库</div>
+            </figure>
+
+<p>最后转到“链接器”的“输入”选项，添加附加依赖项：<strong>opengl32.lib</strong>和<strong>glfw3.lib</strong>，这个地方直接输入即可：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8027.png" alt="引入GLFW库和GLAD库" title="">
+                </div>
+                <div class="image-caption">引入GLFW库和GLAD库</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8028.png" alt="引入GLFW库和GLAD库" title="">
+                </div>
+                <div class="image-caption">引入GLFW库和GLAD库</div>
+            </figure>
+
+<p>最后在项目的“源文件”中添加Packages包中的src\glad.c：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8029.png" alt="引入GLFW库和GLAD库" title="">
+                </div>
+                <div class="image-caption">引入GLFW库和GLAD库</div>
+            </figure>
+
+<p>找到Packages\src\glad.c，将其加入即可：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8030.png" alt="引入GLFW库和GLAD库" title="">
+                </div>
+                <div class="image-caption">引入GLFW库和GLAD库</div>
+            </figure>
+
+<h1 id="验证配置是否成功"><a href="#验证配置是否成功" class="headerlink" title="验证配置是否成功"></a>验证配置是否成功</h1><p>以上，一切准备工作都做好了！如果你想检测一下配置的结果是否可用，可以新建一个main.cpp文件，然后在头文件处加入：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glad/glad.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GLFW/glfw3.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>如果没有报错，很大程度上讲应该是成功了！</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-02-20T03:08:42.000Z" itemprop="dateUpdated">2019-02-20 11:08:42</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/" rel="tag">OpenGL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/&title=《OpenGL学习笔记（一）使用VS2017和CMake配置GLFW和GLAD》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/&title=《OpenGL学习笔记（一）使用VS2017和CMake配置GLFW和GLAD》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《OpenGL学习笔记（一）使用VS2017和CMake配置GLFW和GLAD》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/01/31/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AA%97%E5%8F%A3/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">OpenGL学习笔记（二）创建一个窗口</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/01/22/%E4%BD%BF%E7%94%A8vscode%E7%BC%96%E5%86%99markdown%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8F%92%E4%BB%B6/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">使用vscode编写markdown的一些小插件</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/&title=《OpenGL学习笔记（一）使用VS2017和CMake配置GLFW和GLAD》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/&title=《OpenGL学习笔记（一）使用VS2017和CMake配置GLFW和GLAD》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《OpenGL学习笔记（一）使用VS2017和CMake配置GLFW和GLAD》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/01/24/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%BF%E7%94%A8VS2017%E5%92%8CCMake%E9%85%8D%E7%BD%AEGLFW%E5%92%8CGLAD/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,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" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【数据结构】（六）不相交集类 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,C++,数据结构">
+    <meta name="description" content="等价关系在离散数学（Discrete Mathematics）中提到过等价关系（equivalence relation）,等价关系是对于任意一对元素 (a,b)，存在一个关系R满足以下三个属性：  自反性：对于所有的元素a，a R a 对称性：a R b &#x3D;&#x3D; b R a 传递性：若 a R b 且 b R c 则 a R c  比如空间中的相互平行的线就满足等价关系，线与自身平行、两条平行线相">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【数据结构】（六）不相交集类">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="等价关系在离散数学（Discrete Mathematics）中提到过等价关系（equivalence relation）,等价关系是对于任意一对元素 (a,b)，存在一个关系R满足以下三个属性：  自反性：对于所有的元素a，a R a 对称性：a R b &#x3D;&#x3D; b R a 传递性：若 a R b 且 b R c 则 a R c  比如空间中的相互平行的线就满足等价关系，线与自身平行、两条平行线相">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure7-1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure7-2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure7-3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure7-4.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure7-5.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure7-6.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure7-7.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure7-8.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure7-9.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure7-10.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure7-11.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure7-12.png">
+<meta property="article:published_time" content="2019-08-29T04:14:30.000Z">
+<meta property="article:modified_time" content="2019-08-29T05:12:25.643Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/DataStructure7-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【数据结构】（六）不相交集类</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【数据结构】（六）不相交集类</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-29T04:14:30.000Z" itemprop="datePublished" class="page-time">
+  2019-08-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#等价关系"><span class="post-toc-number">1.</span> <span class="post-toc-text">等价关系</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基本实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">基本实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#从union操作改进"><span class="post-toc-number">3.</span> <span class="post-toc-text">从union操作改进</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#按大小求并（union-by-size）"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">按大小求并（union-by-size）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#按高度求并（union-by-height）"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">按高度求并（union-by-height）</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#从find操作改进"><span class="post-toc-number">4.</span> <span class="post-toc-text">从find操作改进</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【数据结构】六不相交集类"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【数据结构】（六）不相交集类</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-29 12:14:30" datetime="2019-08-29T04:14:30.000Z"  itemprop="datePublished">2019-08-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="等价关系"><a href="#等价关系" class="headerlink" title="等价关系"></a>等价关系</h1><p>在离散数学（Discrete Mathematics）中提到过<strong>等价关系</strong>（equivalence relation）,等价关系是对于任意一对元素 (a,b)，存在一个关系R满足以下三个属性：</p>
+<ul>
+<li>自反性：对于所有的元素a，a R a</li>
+<li>对称性：a R b == b R a</li>
+<li>传递性：若 a R b 且 b R c 则 a R c</li>
+</ul>
+<p>比如空间中的相互平行的线就满足等价关系，线与自身平行、两条平行线相互平行，如果a平行于b，b平行于c，a也就平行于c，所以平行关系是等价关系。</p>
+<p>一个集合S上的元素之间存在的等价关系是对集合S的一个划分，相互等价的元素可以划分到一个子集中，而没有等价关系的两个元素肯定不会被分到同一个子集中，所以按照等价关系划分可以将S划分为多个子集，每个子集中的元素都相互等价，这些子集是不相交的，而且他们的并正好是集合S。具有这种特性的集合可以视为一个<strong>不相交集类</strong>（The Disjoint Sets Class）</p>
+<p>不相交集类的适合用于查找，有两个重要的操作：<code>find</code>和<code>union</code>：</p>
+<ul>
+<li><code>find</code>：查找操作，<code>find(x)</code>是返回x所在的子集的名字</li>
+<li><code>union</code>：合并操作，如果我们发现两个元素a和b相互等价，但是他们没有在同一个子集中，那么很显然，a所在的子集和b所在的子集中的所有元素都相互等价，我们可以将其合并成一个新的子集</li>
+</ul>
+<h1 id="基本实现"><a href="#基本实现" class="headerlink" title="基本实现"></a>基本实现</h1><p>如果不要求find操作返回任意特定的名字，而是要求当且仅当两个元素属于相同的子集时，则作用在这两个元素上的find操作能返回相同的明自。那么我就需要对集合S进行划分，并且每一个子集都有唯一的名字。</p>
+<p>一种简单的实现方式时是哟个森林，森林中的树就是一个子集，节点就是元素，同一棵树上的所有节点就都属于这个子集，显然可以将子集的名字存储到树的根节点中。这种方式很简单，使用数组就可以实现。比如我们有一个8元素的集合，他们分别是0 1 2 3 4 5 6 7，最初始的时候就是每个节点都单独成树，根节点中存储-1来代表这个时根节点，然后使用union方法来合并集合。像下边这样（union(a,b)默认将b挂到a上）：</p>
+<p>初始的一个森林</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure7-1.png" alt="一个不相交集类的基本实现" title="">
+                </div>
+                <div class="image-caption">一个不相交集类的基本实现</div>
+            </figure>
+
+<p>进行<code>union(4,5)</code>操作：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure7-2.png" alt="一个不相交集类的基本实现" title="">
+                </div>
+                <div class="image-caption">一个不相交集类的基本实现</div>
+            </figure>
+
+<p>进行<code>union(6,7)</code>操作：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure7-3.png" alt="一个不相交集类的基本实现" title="">
+                </div>
+                <div class="image-caption">一个不相交集类的基本实现</div>
+            </figure>
+
+<p>进行<code>union(4,6)</code>操作：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure7-4.png" alt="一个不相交集类的基本实现" title="">
+                </div>
+                <div class="image-caption">一个不相交集类的基本实现</div>
+            </figure>
+
+<p>最终的存储这个不相交集类的数组如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure7-5.png" alt="一个不相交集类的基本实现" title="">
+                </div>
+                <div class="image-caption">一个不相交集类的基本实现</div>
+            </figure>
+
+
+<h1 id="从union操作改进"><a href="#从union操作改进" class="headerlink" title="从union操作改进"></a>从union操作改进</h1><h2 id="按大小求并（union-by-size）"><a href="#按大小求并（union-by-size）" class="headerlink" title="按大小求并（union-by-size）"></a>按大小求并（union-by-size）</h2><p>这个思想是打破随意将一个集合接到另一个集合上的做法，而是根据大小将树合并，即永远将小的集合挂到大的集合上，这种实现方式很简单，并且使得森林中树的结构都不会特别复杂，避免了最坏情况的发生，存储时，<strong>将树的根节点的内容存储为此时树的大小的负数</strong>，比如继续上边的不相交集类，进行<code>union(3,4)</code>操作：</p>
+<p>依旧按照原来的union方式合并：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure7-6.png" alt="依照一般的union方式合并" title="">
+                </div>
+                <div class="image-caption">依照一般的union方式合并</div>
+            </figure>
+
+<p>按照小树并大树的方式进行union合并：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure7-7.png" alt="按照大小合并" title="">
+                </div>
+                <div class="image-caption">按照大小合并</div>
+            </figure>
+
+<p>按照大小合并后的存储数组：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure7-8.png" alt="按照大小合并的存储数组" title="">
+                </div>
+                <div class="image-caption">按照大小合并的存储数组</div>
+            </figure>
+
+<h2 id="按高度求并（union-by-height）"><a href="#按高度求并（union-by-height）" class="headerlink" title="按高度求并（union-by-height）"></a>按高度求并（union-by-height）</h2><p>根据高度将树合并，即永远将矮的集合挂到高的集合上，存储时，<strong>将树的根节点的内容存储为此时树的高度的负数</strong>，比如继续上边的不相交集类，进行按照高度的<code>union(3,4)</code>操作会得到：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure7-9.png" alt="按照高度合并" title="">
+                </div>
+                <div class="image-caption">按照高度合并</div>
+            </figure>
+
+<p>存储数据的数组内容：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure7-10.png" alt="按照高度合并的存储数组" title="">
+                </div>
+                <div class="image-caption">按照高度合并的存储数组</div>
+            </figure>
+
+
+<h1 id="从find操作改进"><a href="#从find操作改进" class="headerlink" title="从find操作改进"></a>从find操作改进</h1><p>在对union进行改进后可以对find进行改进，find改进的一种典型方式是<strong>路径压缩</strong>（Pass Compression）。即在每一次find后，将find的数据到根节点的沿途的每个节点都挂到根节点上，从而对路径进行压缩，而下次查找同一个元素或者其同子集下的元素就会非常省时间。</p>
+<p>例如一个不相交集类如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure7-11.png" alt="一个不相交集类" title="">
+                </div>
+                <div class="image-caption">一个不相交集类</div>
+            </figure>
+
+<p>在这个不太好的结构上进行find(14)后进行路径压缩可以得到：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure7-12.png" alt="对这个不相交集类进行路径压缩" title="">
+                </div>
+                <div class="image-caption">对这个不相交集类进行路径压缩</div>
+            </figure>
+
+<p>这样就使得整棵树的高度、一些数据的路径深度（12、13、14、15）都得到了降低。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-29T05:12:25.643Z" itemprop="dateUpdated">2019-08-29 13:12:25</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/&title=《【数据结构】（六）不相交集类》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/&title=《【数据结构】（六）不相交集类》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【数据结构】（六）不相交集类》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B9%9D%E6%96%87%E4%BB%B6%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【C++温故知新】（九）文件的输入与输出</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/&title=《【数据结构】（六）不相交集类》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/&title=《【数据结构】（六）不相交集类》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【数据结构】（六）不相交集类》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEhklEQVR42u3ayW7bQBAFQP//TztATgliSe91jwGPUjwJWshhUcD09vERH5+/j39f//nOv0fy6aPzPLrW8/U8X9vzcx44MGHChAnTj2T6fHo8Wkqy0Oe/enTbCUp+5vxsLx4kJkyYMGG6nGm26c7I8ndmYUp+3eKxYcKECROm/4ApSXqT77ep9QyufaiYMGHChAlTu3m3WElltf1OntJjwoQJE6b3Zspbksk7SVux5dgn4XmrFRMmTJgwvRPTd5RTb3l9+MCECRMmTD+M6XN05AXWzcbcFpFziPp+MWHChAnTtUxJUtpynN2S2xGctoFarAoTJkyYMF3LlA++tNt83sJMbvLUFZMi74s1Y8KECROmS5hm223bqmw37LzxuSdIQgpMmDBhwnQ7UzvIMtvy8w3+1KftY3t4BkyYMGHCdDlTm/RuGo2zlDgvE29Kui+6vpgwYcKE6S2Y8uAgL8vOkti2yJtfqy0lY8KECROme5n2i26HddpBmU1yfooYEyZMmDDdzpQngTOOtiy7CUqK/8UsFMCECRMmTNcy5UXe2UbenmHYeiw5kr8LJkyYMGG6lyn5Qf6dpJCaDwO158yT8/qxYcKECROmy5lmozZ50rgfuGnXnwQ6RciCCRMmTJiuZdrXMGdl2aTU26K3A0bDJismTJgwYbqKaXZLm4Zlnga3iW4bmhQhAiZMmDBhupZptsUmZdnNGE3b7JwlzHUwhAkTJkyYLmQ6O9yZlH33cHlOfwodEyZMmDDdy9SWazepaTvWcyrUyK9Vl3oxYcKECdOFTO3AzWxAZz/c076eVWsxYcKECdPtTPkYzb5smrc/kzZkGxy0gc5fn2LChAkTpmuZTpVEN7c3CzLaQaJNFRcTJkyYMN3L1JY7E+92gPVsUbgt/kZpMyZMmDBhupZps7jni24blvvm5WaINkrpMWHChAnTGzElCWReIE5ANw3O9rHN7hETJkyYMN3LNLv8qWXNNulNMrxJ7DFhwoQJ011M+aY7824T0c2wziz1jYrOmDBhwoTpcqa8nLrZ2vP0NQ9HTo3+vEh3MWHChAnTWzC1BdnZ9jxrUu5Dltkf4ouAABMmTJgwXcXUthhP3UDdOFx8M//+i/NjwoQJE6YLmdomX0ucj+PsU+g2PS5SaEyYMGHC9BZMm824Xdb+KrOAoH3YmDBhwoTpnZjyUmkeCmxGUdumYx581K1ZTJgwYcL0RkxtortpK86KyLOholn6XdwYJkyYMGH68Uw5R5uOtlfJi8WboKQY68GECRMmTNcy7YHa4Zj9r9qG67ccmDBhwoTpEqbZtposNAkC2uAgP9vsWg9/iwkTJkyYrmWajewkl98UVWdN1pY+Lx9jwoQJE6bbmfLyaAv6/J1ZmzNvoG6asl/8FhMmTJgwXc6ULGITa5xCbzf7WRKLCRMmTJgwtU3HPJdsodvh1GG4gwkTJkyY/gOmpIx7irIdOc2T8OHaMGHChAnT5Uz5gvYl4PwqSVH4O674sX9umDBhwoTpxzBtGodtUzNvIp4dAJo9QkyYMGHCdDnTL80BGWpf3vR2AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

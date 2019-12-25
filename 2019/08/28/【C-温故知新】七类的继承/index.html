@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【C++温故知新】（七）类的继承 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,C++">
+    <meta name="description" content="类继承的语法类的继承允许通过继承的方式生成新类，继承自的类为基类，继承自基类的类成为派生类，类的继承写法如下： 1234class derivedClass : public&#x2F;protect&#x2F;private baseClass&amp;#123;&#x2F;&#x2F; statements&amp;#125;  其中基类前有一个访问限定符，不写的时候默认为private，但是我们主要使用public，又称作公有继承，三个不同的访问">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C++温故知新】（七）类的继承">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="类继承的语法类的继承允许通过继承的方式生成新类，继承自的类为基类，继承自基类的类成为派生类，类的继承写法如下： 1234class derivedClass : public&#x2F;protect&#x2F;private baseClass&amp;#123;&#x2F;&#x2F; statements&amp;#125;  其中基类前有一个访问限定符，不写的时候默认为private，但是我们主要使用public，又称作公有继承，三个不同的访问">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/CPP7-1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/CPP7-2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/CPP7-3.png">
+<meta property="article:published_time" content="2019-08-28T14:39:06.000Z">
+<meta property="article:modified_time" content="2019-08-28T14:54:17.937Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/CPP7-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【C++温故知新】（七）类的继承</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【C++温故知新】（七）类的继承</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-28T14:39:06.000Z" itemprop="datePublished" class="page-time">
+  2019-08-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#类继承的语法"><span class="post-toc-number">1.</span> <span class="post-toc-text">类继承的语法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基类和派生类的关系"><span class="post-toc-number">2.</span> <span class="post-toc-text">基类和派生类的关系</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多态公有继承"><span class="post-toc-number">3.</span> <span class="post-toc-text">多态公有继承</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#抽象基类"><span class="post-toc-number">4.</span> <span class="post-toc-text">抽象基类</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#私有继承"><span class="post-toc-number">5.</span> <span class="post-toc-text">私有继承</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多重继承"><span class="post-toc-number">6.</span> <span class="post-toc-text">多重继承</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#虚基类"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">虚基类</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【C-温故知新】七类的继承"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【C++温故知新】（七）类的继承</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-28 22:39:06" datetime="2019-08-28T14:39:06.000Z"  itemprop="datePublished">2019-08-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="类继承的语法"><a href="#类继承的语法" class="headerlink" title="类继承的语法"></a>类继承的语法</h1><p>类的继承允许通过继承的方式生成新类，继承自的类为<strong>基类</strong>，继承自基类的类成为派生类，类的继承写法如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">derivedClass</span> :</span> <span class="keyword">public</span>/protect/<span class="keyword">private</span> baseClass</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">// statements</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中基类前有一个访问限定符，不写的时候默认为private，但是我们主要使用public，又称作公有继承，三个不同的访问限定词的区别在于：</p>
+<ul>
+<li>公有继承（<code>public</code>）：当一个类派生自公有基类时，基类的公有成员也是派生类的公有成员，基类的保护成员也是派生类的保护成员，基类的私有成员不能直接被派生类访问，但是可以通过调用基类的公有和保护成员来访问</li>
+<li>保护继承（<code>protecte</code>）：      当一个类派生自保护基类时，基类的公有和保护成员将成为派生类的保护成员</li>
+<li>私有继承（<code>private</code>）：当一个类派生自私有基类时，基类的公有和保护成员将成为派生类的私有成员</li>
+</ul>
+<p>例如我们定义一个基类再定义一个派生类：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">baseClass</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    baseInt;</span><br><span class="line">    baseDouble;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    baseClass(<span class="keyword">const</span> <span class="keyword">int</span> pInt = <span class="number">1</span>, cosnt <span class="keyword">double</span> pDouble = <span class="number">2.5</span>);</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">function</span><span class="params">(<span class="keyword">double</span> d)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">baseClass :: baseClass(<span class="keyword">const</span> <span class="keyword">int</span> pInt = <span class="number">1</span>, cosnt <span class="keyword">double</span> pDouble = <span class="number">2.5</span>)</span><br><span class="line">&#123;</span><br><span class="line">    baseInt = pInt;</span><br><span class="line">    baseDouble = pDouble;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">baseClass :: function(<span class="keyword">double</span> d)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; d;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">derivedClass</span> :</span> <span class="keyword">public</span> baseClass</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	derivedChar;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    derivedClass(<span class="keyword">const</span> <span class="keyword">int</span> pInt, <span class="keyword">const</span> <span class="keyword">double</span> pDouble, <span class="keyword">const</span> <span class="keyword">char</span> pChar);</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">anotherFunction</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">derivedClass :: derivedClass(<span class="keyword">const</span> <span class="keyword">int</span> pInt, <span class="keyword">const</span> <span class="keyword">double</span> pDouble, <span class="keyword">const</span> <span class="keyword">char</span> pChar) : baseClass(pInt,pDouble)</span><br><span class="line">&#123;</span><br><span class="line">	derivedChar = pChar;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">void</span> derivedClass :: anotherFunction()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"I am the derived class."</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从这个例子中，我们可以看到，基类有两个私有变量，<code>baseInt</code>和<code>baseDouble</code>，两个方法，一个构造函数用于给两个私有变量赋值，一个用于充数。派生类继承自基类，于是派生类<code>derivedClass</code>就拥有了基类的两个公有方法，但是它不能访问基类的两个私有变量。派生类又定义了自己的一个新私有变量，同时有自己的构造函数和一个用于充数的函数。可见继承的作用在于方便地进行代码的重用以及组织管理项目设计。</p>
+<h1 id="基类和派生类的关系"><a href="#基类和派生类的关系" class="headerlink" title="基类和派生类的关系"></a>基类和派生类的关系</h1><p>类的继承是“is-a”的关系，或者说是“is-a-kind-of”，即派生类对象也是一个基类对象。</p>
+<ul>
+<li>派生类是可以调用基类的<code>protected</code>和<code>public</code>修饰的成员变量和方法的，而派生类也可以定义自己的变量和方法。</li>
+<li>同时，派生类还可以重载基类的方法，即声明一个和基类中相同名称的成员变量，但是在派生类中对其进行重新的定义。如果基类和派生类同时拥有同名同变量参数同返回值但是定义不同的函数，在使用基类对象调用该函数时，调用的是基类的函数，在使用派生类的对象调用该函数时，调用的是派生类的定义。</li>
+<li>基类指针可以在不进行显式类型转换的情况下指向派生类对象；基类引用可以在不进行显式类型转换的情况下引用派生类对象。C++要求的引用和指针类型与赋给的类型匹配的规则对继承来说例外。然而，这种例外只是单向的，不可以将基类对象和地址赋给派生类引用和指针。基类指针或引用只能用于调用基类方法。</li>
+</ul>
+<h1 id="多态公有继承"><a href="#多态公有继承" class="headerlink" title="多态公有继承"></a>多态公有继承</h1><p>多态即一个派生类继承自一个基类后，希望可以定义一个和基类中相同名称、参数列表、返回值的函数，但这个函数的定义却与基类中的不同，即一种派生类对基类方法的重载。</p>
+<p>首先，派生类可以重载基类的方法，如果派生类使用基类相同的函数和函数定义，那么就不需要再在派生类中声明该函数，即共有的函数需要放在基类中。如果派生类想对基类的函数进行新的定义，则需要在派生类中对其再次进行声明并定义，定义时也需要表明定义的是那个类的函数。如 <code>baseClass::function()</code> 和 <code>derivedClass::function()</code> 这样。</p>
+<p><strong>虚方法</strong>（virtual method），需要使用关键词 <code>virtual</code> 修饰基类中的函数，如下面这样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">(<span class="keyword">int</span> i)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>它的作用如下：当基类和派生类都有定义过某个相同方法后，我们需要确定调用的是哪个类下的方法，特别是当方法是通过引用或指针而不是对象调用的。</p>
+<ul>
+<li>如果没有使用关键字 <code>virtual</code> ，程序将根据引用类型或指针类型选择方法</li>
+<li>如果使用了关键字 <code>virtual</code> ，程序将根据引用或指针指向的对象的类型来选择方法</li>
+<li>如果有派生类重载了基类的方法，一般需要将基类的析构函数设置成virtual的以保证释放派生类对象时能够按照正确的顺序调用析构函数</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不使用virtual</span></span><br><span class="line"><span class="function">BaseClass <span class="title">baseClass</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">DerivedClass <span class="title">derivedClass</span><span class="params">()</span></span>;</span><br><span class="line">BaseClass &amp; reference1 = baseClass; <span class="comment">// 指向baseClass的类型是BaseClass的引用变量</span></span><br><span class="line">BaseClass &amp; reference2 = derivedClass; <span class="comment">// 指向derivedClass的但是类型是BaseClass的引用变量</span></span><br><span class="line">reference1.function(); <span class="comment">// 会根据引用的类型即BaseClass调用BaseClass下的function方法</span></span><br><span class="line">reference2.function(); <span class="comment">// 会根据引用的类型即BaseClass调用BaseClass下的function方法</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 使用virtual</span></span><br><span class="line"><span class="function">BaseClass <span class="title">baseClass</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">DerivedClass <span class="title">derivedClass</span><span class="params">()</span></span>;</span><br><span class="line">BaseClass &amp; reference1 = baseClass; <span class="comment">// 指向baseClass的类型是BaseClass的引用变量</span></span><br><span class="line">BaseClass &amp; reference2 = derivedClass; <span class="comment">// 指向derivedClass的但是类型是BaseClass的引用变量</span></span><br><span class="line">reference1.function(); <span class="comment">// 会根据引用指向的类型即BaseClass调用BaseClass下的function方法</span></span><br><span class="line">reference2.function(); <span class="comment">// 会根据引用指向的类型即DerivedClass调用BaseClass下的function方法</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="抽象基类"><a href="#抽象基类" class="headerlink" title="抽象基类"></a>抽象基类</h1><p><strong>抽象基类</strong>（abstract base class，ABC）是一种特殊的基类，从概念上讲，将所有派生类的公用的方法进行抽象汇总声明（定义）到的一个类中，这种设计下的类可以视作一个抽象基类。但是真正的抽象基类应该是至少包含了一个<strong>纯虚函数</strong>（pure virtual function）的类，<strong>这种类不能声明对应的对象</strong>，只能作为基类。</p>
+<p>纯虚函数是一种只在抽象基类中给出原型，但是部给出定义的函数，更像是一个接口，由所有的派生类对纯虚函数根据自己类的需求来实现其定义。纯虚函数的写法是在虚函数后面以 =0 结尾</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">double</span> <span class="title">pureVirtualFunction</span><span class="params">(<span class="keyword">int</span> i)</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>应用这种方式，可以将所有派生类共有但是却又各自有着不同实现的方法抽象到一个基类中，提供其原型但是不对其进行定义（也只有纯虚函数C++允许不给出定义），然后使得各个派生类自己给出其定义。</p>
+<h1 id="私有继承"><a href="#私有继承" class="headerlink" title="私有继承"></a>私有继承</h1><p>私有继承即继承的基类使用private修饰符修饰的继承，如果没有访问限定符的修饰，默认也是私有继承，私有继承是一种“has-a”的关系。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DerivedClass</span> :</span> <span class="keyword">private</span> BaseClass&#123; &#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DerivedClass</span> :</span> BaseClass&#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>私有继承使得基类的公有成员、保护成员都被成为派生类的私有成员，这就使得基类的那些方法都不能再被派生类的实例化对象使用，而只能被派生类的成员函数在类内部使用。即派生类部继承基类的接口。</p>
+<p>这里比较了三种继承之间的区别：</p>
+<table>
+<thead>
+<tr>
+<th align="center">特征</th>
+<th align="center">公有继承</th>
+<th align="center">保护继承</th>
+<th align="center">私有继承</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">公有成员变成</td>
+<td align="center">派生类的公有成员</td>
+<td align="center">派生类的保护成员</td>
+<td align="center">派生类的私有成员</td>
+</tr>
+<tr>
+<td align="center">保护成员变成</td>
+<td align="center">派生类的保护成员</td>
+<td align="center">派生类的保护成员</td>
+<td align="center">派生类的私有成员</td>
+</tr>
+<tr>
+<td align="center">私有成员变成</td>
+<td align="center">只能通过基类接口访问</td>
+<td align="center">只能通过基类接口访问</td>
+<td align="center">只能通过基类接口访问</td>
+</tr>
+<tr>
+<td align="center">能否隐式向上转换</td>
+<td align="center">能</td>
+<td align="center">只能在派生类中</td>
+<td align="center">不能</td>
+</tr>
+</tbody></table>
+<h1 id="多重继承"><a href="#多重继承" class="headerlink" title="多重继承"></a>多重继承</h1><p><strong>多重继承</strong>（Multiple Inheritance）也是“is-a”的关系，它允许一个类继承自多个类，只需要将继承的类使用逗号隔开即可，像下面这样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DerivedClass</span> :</span> <span class="keyword">public</span> BaseClass1, <span class="keyword">public</span> BaseClass2 &#123;……&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DerivedClass</span> :</span> <span class="keyword">public</span> BaseClass1, BaseClass2 &#123;……&#125; <span class="comment">// BaseClass2 is a private base</span></span><br></pre></td></tr></table></figure>
+
+<p>多重继承中每一个被继承的基类都需要设置访问限定符，根据需要可以使用不同的访问限定符，不写默认为<code>private</code></p>
+<p>例如设置一个基类Worker表示工人，然后工人可以是歌手也可以是服务员，我们使用两个类继承自这个基类，Singer和Waiter，最后，我们可以定义一个既是歌手有时服务员的类，所以它同时继承自Singer和Waiter，他们的关系就像下边这样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Worker</span> &#123;</span>……&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singer</span> :</span> <span class="keyword">public</span> Worker &#123;……&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Waiter</span> :</span> <span class="keyword">public</span> Worker &#123;……&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingingWaiter</span> :</span> <span class="keyword">public</span> Singer, <span class="keyword">public</span> Waiter &#123;……&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/CPP7-1.png" alt="一个多重继承" title="">
+                </div>
+                <div class="image-caption">一个多重继承</div>
+            </figure>
+
+<h2 id="虚基类"><a href="#虚基类" class="headerlink" title="虚基类"></a>虚基类</h2><p>首先多重继承导致了一个问题就是，当一个SingingWaiter的实例继承自Singer和Waiter时，也就间接地两次继承了Worker，也就是说一个SingingWaiter的实例结构应该是如下这样的：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/CPP7-2.png" alt="在不使用虚基类的时候" title="">
+                </div>
+                <div class="image-caption">在不使用虚基类的时候</div>
+            </figure>
+
+<p>这样引发的问题就是，当我们把派生类对象的地址赋给一个基类的指针时就无法区分是赋给哪个基类，导致二义性：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SingingWaiter sw；</span><br><span class="line">Worker * psw = &amp;sw;</span><br></pre></td></tr></table></figure>
+
+<p>因为sw中包含两个Worker对象，从而有两给地址可以选择，于是正确的写法应该是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Worker * psw1 = (Waiter *) &amp;sw;</span><br><span class="line">Worker * psw2 = (Singer *) &amp;sw;</span><br></pre></td></tr></table></figure>
+
+<p>所以<strong>虚基类</strong>（Virtual Base Classes）将解决这个问题。虚基类使得从多个类派生出的对象只继承一个基类对象，需要在类继承的声明中使用virtual关键词，virtual和public的次序无所谓：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singer</span> :</span> <span class="keyword">virtual</span> <span class="keyword">public</span> Worker &#123;……&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Waiter</span> :</span> <span class="keyword">public</span> <span class="keyword">virtual</span> Worker &#123;……&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingingWaiter</span> :</span> <span class="keyword">public</span> Singer, <span class="keyword">public</span> Waiter &#123;……&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在，SingingWaiter对象就只包含Worker对象的一个副本，从本质上说是，继承的Singer和Waiter共享一个Worker对象，而不是各自引入一个Worker对象的副本，从而可以使用多态。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/CPP7-3.png" alt="在使用虚基类的时候" title="">
+                </div>
+                <div class="image-caption">在使用虚基类的时候</div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-28T14:54:17.937Z" itemprop="dateUpdated">2019-08-28 22:54:17</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/&title=《【C++温故知新】（七）类的继承》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/&title=《【C++温故知新】（七）类的继承》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（七）类的继承》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AB%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">【C++温故知新】（八）异常处理</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/27/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%85%AD%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【C++温故知新】（六）类和对象</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/&title=《【C++温故知新】（七）类的继承》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/&title=《【C++温故知新】（七）类的继承》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（七）类的继承》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/28/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%83%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEjElEQVR42u3a3WrjQAwG0Lz/S2dhrxa6Tj5JE4jc46vSJp7xcWH093jE1/Pvlfz++c+Vf/Ln9fNbVz9f3e1qP1fPcuDChAkTJkxfyZRv94qgCpcgvv5ub29X3K+fHRMmTJgw3YMpv93rBfLDO79PApGAJnu7/D0mTJgwYfoFTHPc/PjvpcpJwowJEyZMmDDlBdYkBa1iTYrLkyIyJkyYMGG6N9Mklc2ZJsSTxmT1/pgwYcKE6U5M1cGdO/38wfkmTJgwYcL0BUzP4vW6fdi7/6S8Ww1QehcmTJgwYdrLlKemk7Zir7ybv4zqJ5v3wYQJEyZMC5mqD5k0KXtBQz4wVG18Vv8V/vNXTJgwYcJ0a6ZeKJAEBNUXk9D3hnLelIMxYcKECdNapjyzy7eSj+ZMjvBeoDBKzjFhwoQJ00KmfLRlkiRX71l9VdWUuLwuJkyYMGFayzRfJj/Iq4lrL7yo7up1qIEJEyZMmLYz9VqV1dAhT63nJd08xEnugwkTJkyYtjMlB2c1Pc7RT43G5i+yF0ZgwoQJE6a9TDlKlenU6E/15VWv6NViwoQJE6blTL2SaJ409gq+ebt0Pgb0ZleYMGHChGktU3UrvS1OmqCT4myvafpmt5gwYcKEaTlTApcf+fkD9H7T+2S+h+YcEyZMmDBh+jKmTySreagxSap77dJq8RcTJkyYMO1lylPWalNzPmQzDxd6IU6hFo4JEyZMmJYw9YZg8sVODdbkSfVk3f/cARMmTJgw3YipVxKdjPhUy8fV4my+1uW3MGHChAnTWqbXyWcyrJMnrq8P7E8MBlV/xoQJEyZMv5MpP5InozlnG5an1sKECRMmTHdiOlsY7cHlzc48vDjVuMWECRMmTBuZehvthQg9jh5KNSV+8yIxYcKECdNapupGe8lktQjbe4Bkh3mD8/JZMGHChAnTWqZ8cKc3XpOnmvMwpbefZiEAEyZMmDB9PVPvaK8OxFTHcfLVe6+zvENMmDBhwrSQKd9unljmD5YHE2eLvPlrw4QJEyZM25mqR29+rOaDO71VThWRk9eACRMmTJj2MuUb7aWs+UGeBwSTnef/HJgwYcKE6X5M81S2OjozaaDOk+TCi8GECRMmTLdgqgYESctzXiDOE9dqkbcQcGDChAkTprVMn7t1zlcdvumFEb00+FGtK2PChAkTplVMkwGdyaFePpjH7cwmHyZMmDBh+nqmyXGeF397wcSkYdlLpy8/gwkTJkyYbsGUJ6i9hmLywHkKmuyqF1hc1sIxYcKECdNCpmrBNDlQky1Wi6q9duYnQgRMmDBhwrSL6Vm8TpV0q2HB2ZAib51eTvJiwoQJE6YlTL0jOU9r563H/GXk4cuk5YkJEyZMmDYynRoV7YUF+SE9LzdXAwhMmDBhwnQnpmqRtJegPlrXPG2er4gJEyZMmH4DU2/QZ3JVVz/VfC10OzFhwoQJ062ZkmN4MgyUD+jMB4PefAsTJkyYMC1nqh7JSam099ekpFtNkvMS8OFaOCZMmDBh+gKmU8vnB3M1RMhbj/kY66TojAkTJkyYljD9AVvbdjcVBwYmAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

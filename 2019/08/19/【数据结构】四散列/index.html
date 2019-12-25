@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【数据结构】（四）散列 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,C++,数据结构">
+    <meta name="description" content="哈希（hashing）又称散列，是实现散列表的技术。散列是一种用于以常数平均时间执行插入、删除和查找的技术，因此涉及到元素间排序信息的操作不会得到支持，如树的findMin、findMax以及按照顺序打印列表这些操作散列是不支持的。 散列的基本思想散列是一个固定大小的数组，存储的是键值对（Key–Value），键一般是好操作的数据，值一般存储比较大的实际意义强的数据，键的存在是便于使用键进行数据的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【数据结构】（四）散列">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="哈希（hashing）又称散列，是实现散列表的技术。散列是一种用于以常数平均时间执行插入、删除和查找的技术，因此涉及到元素间排序信息的操作不会得到支持，如树的findMin、findMax以及按照顺序打印列表这些操作散列是不支持的。 散列的基本思想散列是一个固定大小的数组，存储的是键值对（Key–Value），键一般是好操作的数据，值一般存储比较大的实际意义强的数据，键的存在是便于使用键进行数据的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure5-1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure5-2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure5-3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure5-4.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure5-5.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure5-6.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure5-7.png">
+<meta property="article:published_time" content="2019-08-19T15:22:06.000Z">
+<meta property="article:modified_time" content="2019-08-19T15:30:28.470Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/DataStructure5-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【数据结构】（四）散列</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【数据结构】（四）散列</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-19T15:22:06.000Z" itemprop="datePublished" class="page-time">
+  2019-08-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#散列的基本思想"><span class="post-toc-number">1.</span> <span class="post-toc-text">散列的基本思想</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#散列函数"><span class="post-toc-number">2.</span> <span class="post-toc-text">散列函数</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决冲突的方法"><span class="post-toc-number">3.</span> <span class="post-toc-text">解决冲突的方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分离链接法"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">分离链接法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#探测散列表"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">探测散列表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线性探测（Linear-Probing）"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">线性探测（Linear Probing）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#平方探测（Quadratic-Probing）"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">平方探测（Quadratic Probing）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#双散列（Double-Hashing）"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">双散列（Double Hashing）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#再散列（Rehashing）"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">再散列（Rehashing）</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【数据结构】四散列"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【数据结构】（四）散列</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-19 23:22:06" datetime="2019-08-19T15:22:06.000Z"  itemprop="datePublished">2019-08-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><strong>哈希</strong>（hashing）又称散列，是实现散列表的技术。散列是一种用于以常数平均时间执行插入、删除和查找的技术，因此涉及到元素间排序信息的操作不会得到支持，如树的<code>findMin</code>、<code>findMax</code>以及按照顺序打印列表这些操作散列是不支持的。</p>
+<h1 id="散列的基本思想"><a href="#散列的基本思想" class="headerlink" title="散列的基本思想"></a>散列的基本思想</h1><p>散列是一个固定大小的数组，存储的是键值对（Key–Value），键一般是好操作的数据，值一般存储比较大的实际意义强的数据，键的存在是便于使用键进行数据的查找。</p>
+<p>散列的基本思想是使用一个对应关系（映射关系），这里称之为<strong>散列函数</strong>（hashing function），将哈希表的存储位置（0到TableSize-1）与键做一个对应，理想情况下是得到一个一一映射。但是这是不可能的，从而还需要确定一个方案来解决当两个键都被对应到同一个存储位置上时的情况，这个过程叫做解决冲突（collision）</p>
+<h1 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h1><ul>
+<li>如果键时整数，一般使用 <code>Key mod TableSize</code> 作为对应的索引。通常，为了使哈希的分布均匀，通常采取素数大小的哈希表，当输入的键是随机整数的时候，散列函数不仅运算简单而且键的分配也很均匀</li>
+<li>如果键时字符串<ul>
+<li>一种策略是将字符串中字符的ASCLL码值求和，然后使用整数策略，这种方式不够均匀</li>
+<li>一种策略是取字符串的前几位的ASCLL码值求和，然后使用整数策略，这种方式不够均匀</li>
+<li>一种较好的策略是递归地求 <code>h = k0+37 k1+37^2 k2</code> 作为键，或者对一些选取的字符（而不是整个字符串）采用如上的策略</li>
+</ul>
+</li>
+</ul>
+<h1 id="解决冲突的方法"><a href="#解决冲突的方法" class="headerlink" title="解决冲突的方法"></a>解决冲突的方法</h1><p>无论如何设计散列函数，都能保证对于任何一个键都可以找到唯一的存储索引而不发生冲突，所以解决冲突是哈希实现的关键</p>
+<h2 id="分离链接法"><a href="#分离链接法" class="headerlink" title="分离链接法"></a>分离链接法</h2><p>分离链接法（separate chaining）将散列到同一个值的所有元素保存到一个链表中</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure5-1.png" alt="分离链接法" title="">
+                </div>
+                <div class="image-caption">分离链接法</div>
+            </figure>
+
+<p>这种方式的缺点是使用了一些链表，所以给新单元分配地址需要较多的时间开销。</p>
+<h2 id="探测散列表"><a href="#探测散列表" class="headerlink" title="探测散列表"></a>探测散列表</h2><p>一般为了减少使用链表带来的较大的时间开销，通常避免使用链表，而将所有的数据都放入表内，所以这种方式需要散列表要比较大才行。一般要求装填的数据和总数据含量之比小于0.5，这样的表成为探测散列表（probing hash tables）。</p>
+<p>探测散列表的散列函数为 h(x)=(hash(x)+f(i)) mod TableSize 且 f(0)=0，说白了就是如果应该在的位置冲突了，就按照一定的规律去找下一个空位置，以此类推。根据寻找下一个空位置的方式不同可以分为如下的几种探测方式。</p>
+<h3 id="线性探测（Linear-Probing）"><a href="#线性探测（Linear-Probing）" class="headerlink" title="线性探测（Linear Probing）"></a>线性探测（Linear Probing）</h3><p>f(i)=i，当一个位置出现冲突时，顺序查找下一个位置，直到找到一个空位置为止</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure5-2.png" alt="线性探测" title="">
+                </div>
+                <div class="image-caption">线性探测</div>
+            </figure>
+
+<h3 id="平方探测（Quadratic-Probing）"><a href="#平方探测（Quadratic-Probing）" class="headerlink" title="平方探测（Quadratic Probing）"></a>平方探测（Quadratic Probing）</h3><p>f(i)=i^2，即冲突函数为二次函数的探测方法</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure5-3.png" alt="二次探测" title="">
+                </div>
+                <div class="image-caption">二次探测</div>
+            </figure>
+
+<p>关于二次探测，这里有一个<strong>定理</strong>：如果表的大小是素数，那么当表至少有一半是空的时候，总能够插入一个新的元素</p>
+<h2 id="双散列（Double-Hashing）"><a href="#双散列（Double-Hashing）" class="headerlink" title="双散列（Double Hashing）"></a>双散列（Double Hashing）</h2><p>双散列（Double Hashing）也是一种解决冲突的方式，对于双散列，一种流行的方式是选择 f(i)=i*hash’(x), hash’(x)=R-(x  mod R), 其中R通常选取一个素数。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure5-4.png" alt="双散列" title="">
+                </div>
+                <div class="image-caption">双散列</div>
+            </figure>
+
+<h2 id="再散列（Rehashing）"><a href="#再散列（Rehashing）" class="headerlink" title="再散列（Rehashing）"></a>再散列（Rehashing）</h2><p>再散列（Rehashing）的思想是当一个散列表将要被耗尽时，建立一个新的比原来的表大约两倍的表并且使用新的散列函数，将原表中的数据通过新的散列函数安排到新表中。例如下边的例子：</p>
+<p>首先有一个大小为7的散列表：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure5-5.png" alt="再散列例子" title="">
+                </div>
+                <div class="image-caption">再散列例子</div>
+            </figure>
+
+<p>向这个表中插入数据23，得到了如下的表，由于此时数据已占用超过70%，从而创建一个新的大小为17的散列表。新的表的选取，是按照原来的散列表的二倍的后边第一个素数来规定。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure5-6.png" alt="再散列例子" title="">
+                </div>
+                <div class="image-caption">再散列例子</div>
+            </figure>
+
+<p>将原来哈希表中的五个数据根据 key mod 17 再重新计算位置，添加到新的散列中去</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure5-7.png" alt="再散列例子" title="">
+                </div>
+                <div class="image-caption">再散列例子</div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-19T15:30:28.470Z" itemprop="dateUpdated">2019-08-19 23:30:28</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/&title=《【数据结构】（四）散列》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/&title=《【数据结构】（四）散列》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【数据结构】（四）散列》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/24/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%94%E5%A0%86/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">【数据结构】（五）堆</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%89%E6%A0%91/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【数据结构】（三）树</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/&title=《【数据结构】（四）散列》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/&title=《【数据结构】（四）散列》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【数据结构】（四）散列》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%9B%9B%E6%95%A3%E5%88%97/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEj0lEQVR42u3ay2rjQBAF0Pz/T2dgVjMQK/dWyeC2j1YmcVqto0C9+usrvr7/Xo9+/u9vr795vUJyPVrz0W/zHd5wYcKECROml2RKtnW9dPIA1w+cP2pOltwlXx8TJkyYMJ3OlC/XhuTr8DzbyWbNYfqCCRMmTJg+gKktkttyd1ZObxIFTJgwYcKE6foG15u73lZLnwT+ZJ+YMGHChOkzmfIgnYfhJNjPitj2BcyeCxMmTJgwvQfTpqA9/fMTzzdhwoQJE6YXYPour1lrNQ/hbcP33tbww+fChAkTJkzHMiVHW2ZpQcvUxuVZ0b7BxYQJEyZMJzIlDc18hJmsnLdT24fJX0zyUv9bExMmTJgwvQXThqwN5PnQcZaabF7nD58xYcKECdOxTG15OUsLcrh7D+XM7ntDFY4JEyZMmF6MaRN08zXz8ec+LchHpMVQFhMmTJgwHci0uU3+ef9IbdN5k9b8cmQHEyZMmDAdxdSWf/cWlvlRntnfzgal0fNiwoQJE6ajmPJDNvnoMdlK3jjOC+O2rVwkBJgwYcKE6UCm7+DaHMrJH7ieu8aDz3xv0W0wYcKECdNRTLOxX4uVr3bvC0v4CkpMmDBhwnQsU9ve3TRn7x1tzsac7SAWEyZMmDC9B9OsHL2rcG0Hlpv2br7yL1NfTJgwYcL08kx5UGwPd27Gk7PUId9bnRxgwoQJE6ZjmWYDziT0PqO4nd2xbRljwoQJE6b3Ztoc92kL2v3BoNkOkztiwoQJE6b3Y5qVkZsiuW34zkahm3QEEyZMmDCdzjTbULu5PPAXbzVOLzboqyUwYcKECdOLMbUJwaxYnZ0qan87u9dDbkyYMGHCdDjTvvE6o3lGc3l/3x/Wx4QJEyZMxzJtystko/kAsh12tq3b2c+jG2PChAkTphdmarfVhuG8sZsUsc8ofYv/IEyYMGHCdCDTasgXf3N29Of6+7MzSjekL5gwYcKE6SimZItJyLz+q7xdOxtA7keqdWMXEyZMmDAdyJT/cf7zTXhug3dbJBcjUkyYMGHC9HZMs8Mubds3L27zYnvWIP5lt5gwYcKE6VimTWs1Cd6z0ek+vWjL9ZwVEyZMmDCdxTRry+aDw1nw3pS1eXKTF8aYMGHChOlcpk3btP1cNFVHrd7ZkDVPUDBhwoQJ0+lMs0JxU2puDtMk68xa0g9fAyZMmDBhOpBpc/sk3LbbbY8K5S97+B+ECRMmTJjeiCm/TR62Z2lHO/5sh6wtOiZMmDBheg+m2aGW9oHzUWjbmE4K7GGJjgkTJkyYjmW6K2zn4bkYHz754E7eCMCECRMmTOcybQL/JqAmhXSbmrTJx+rIDiZMmDBhOoQpvzalbN6Wbe+V7KQdZ674MGHChAnTSzLlgTYvbvNwvjma07aGN0d8MGHChAnT6Uz7JKDdyiw3yVeeNZQf7hATJkyYMH0AU7LoDOXeZm6evuQFOSZMmDBh+jSmPAC3oElTuP1+nig8/A4mTJgwYTqcaRaA8zCcv5I2jZgVvXXSgAkTJkyYjmVqG6D3XvuSNU8gnnKmCRMmTJgwvS7TH5w4JgY3Eka7AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

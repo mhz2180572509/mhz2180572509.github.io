@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【C++温故知新】（五）多文件架构与名称空间 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,C++">
+    <meta name="description" content="头文件与源文件一般我们将大量公用的代码段存放在头文件中，然后使用其他源文件引用这个头文件，从而使得很多代码段不需要在每个源文件中都书写一遍。一种推荐的策略是这样的，将整个项目&#x2F;程序包分为三个部分：  头文件（.h）：包含结构体等数据类型的声明，类的框架、函数原型等等抽象而公用的部分 源代码文件（.cpp）：负责头文件中的抽象部分的具体化，如函数的主体、类的实现等 源代码文件（.cpp）：负责调用头">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C++温故知新】（五）多文件架构与名称空间">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/08/18/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%94%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="头文件与源文件一般我们将大量公用的代码段存放在头文件中，然后使用其他源文件引用这个头文件，从而使得很多代码段不需要在每个源文件中都书写一遍。一种推荐的策略是这样的，将整个项目&#x2F;程序包分为三个部分：  头文件（.h）：包含结构体等数据类型的声明，类的框架、函数原型等等抽象而公用的部分 源代码文件（.cpp）：负责头文件中的抽象部分的具体化，如函数的主体、类的实现等 源代码文件（.cpp）：负责调用头">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/CPP5-1.png">
+<meta property="article:published_time" content="2019-08-18T03:21:51.000Z">
+<meta property="article:modified_time" content="2019-08-18T03:27:18.194Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/CPP5-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【C++温故知新】（五）多文件架构与名称空间</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【C++温故知新】（五）多文件架构与名称空间</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-18T03:21:51.000Z" itemprop="datePublished" class="page-time">
+  2019-08-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#头文件与源文件"><span class="post-toc-number">1.</span> <span class="post-toc-text">头文件与源文件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#名称空间"><span class="post-toc-number">2.</span> <span class="post-toc-text">名称空间</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#名称空间的创建"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">名称空间的创建</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#名称空间的使用"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">名称空间的使用</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【C-温故知新】五内存模型与名称空间"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【C++温故知新】（五）多文件架构与名称空间</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-18 11:21:51" datetime="2019-08-18T03:21:51.000Z"  itemprop="datePublished">2019-08-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="头文件与源文件"><a href="#头文件与源文件" class="headerlink" title="头文件与源文件"></a>头文件与源文件</h1><p>一般我们将大量公用的代码段存放在头文件中，然后使用其他源文件引用这个头文件，从而使得很多代码段不需要在每个源文件中都书写一遍。一种推荐的策略是这样的，将整个项目/程序包分为三个部分：</p>
+<ul>
+<li>头文件（.h）：包含结构体等数据类型的声明，类的框架、函数原型等等抽象而公用的部分</li>
+<li>源代码文件（.cpp）：负责头文件中的抽象部分的具体化，如函数的主体、类的实现等</li>
+<li>源代码文件（.cpp）：负责调用头文件中的函数以及实例化类模型等从而完成项目逻辑</li>
+</ul>
+<p>头文件中不要包含函数的定义或者变量的声明，头文件中一般只包含如下的部分：</p>
+<ul>
+<li>函数原型</li>
+<li>使用 #define 或 const 定义的符号常量</li>
+<li>结构声明</li>
+<li>类声明</li>
+<li>模板声明</li>
+<li>内联函数</li>
+</ul>
+<p>头文件通常的书写架构如下，例如我们创建了一个命名为 headFile.h 的头文件：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> HEADFILE_H_</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HEADFILE_H_</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// the head file</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>对头文件与源代码文件编译时是单独编译的，编译器会创建每个源代码文件的目标代码文件，生成 <strong>.o</strong> 后缀的文件，然后使用连接器将两个部分连接起来，将库代码和启动代码合并，生成一个 <strong>.out</strong> 后缀的文件，进而生成 <strong>.exe</strong> 后缀的可执行文件。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/CPP5-1.png" alt="多文件编译的过程" title="">
+                </div>
+                <div class="image-caption">多文件编译的过程</div>
+            </figure>
+
+
+<h1 id="名称空间"><a href="#名称空间" class="headerlink" title="名称空间"></a>名称空间</h1><p>名称空间可以理解为为了区分不同的库类不同的厂商的代码中所包含的同命名的变量、函数等来问题的。例如我的程序包含了两个厂家开发的库，但这两个库中都有一个名为 List 的类，为了区分使用哪个厂家的类，就需要这两个厂家将自己的 List 类封装在自己的名称空间中，从而方便区分。 </p>
+<h2 id="名称空间的创建"><a href="#名称空间的创建" class="headerlink" title="名称空间的创建"></a>名称空间的创建</h2><p>我们自己也可以创建名称空间，例如我们声明一个int类型的变量myInt，将其放在我们定义的一个名称空间MHZ中，可以这样写：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> MHZ</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">int</span> myInt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="名称空间的使用"><a href="#名称空间的使用" class="headerlink" title="名称空间的使用"></a>名称空间的使用</h2><p>如果我想在我的程序中调用名称空间<code>MHZ</code>中的<code>myInt</code>变量，需要使用该名称空间，有以下的一些方式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 编译使用整个名称空间</span></span><br><span class="line"><span class="comment">// 这种方式最不安全</span></span><br><span class="line"><span class="comment">// 因为会将整个名称空间的内容全部编译使用</span></span><br><span class="line"><span class="comment">// 很容易出现不同名称空间重名的问题</span></span><br><span class="line"><span class="keyword">using</span> MHZ;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; myInt;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 指定编译使用名称空间中的某个变量/函数等</span></span><br><span class="line"><span class="comment">// 这种方式相对安全</span></span><br><span class="line"><span class="comment">// 使用哪个因素就声明那个因素</span></span><br><span class="line"><span class="keyword">using</span> MHZ::myInt;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; myInt;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 在调用的时候指明名称空间</span></span><br><span class="line"><span class="comment">// 这种方式虽然繁琐，但是最不容易出错</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; MHZ::myInt;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-18T03:27:18.194Z" itemprop="dateUpdated">2019-08-18 11:27:18</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/08/18/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%94%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/08/18/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%94%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/18/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%94%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/&title=《【C++温故知新】（五）多文件架构与名称空间》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/18/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%94%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/&title=《【C++温故知新】（五）多文件架构与名称空间》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/18/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%94%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（五）多文件架构与名称空间》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/18/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%94%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/18/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%94%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/19/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%89%E6%A0%91/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">【数据结构】（三）树</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/12/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E5%9B%9B%E5%87%BD%E6%95%B0/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【C++温故知新】（四）函数</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/18/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%94%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/&title=《【C++温故知新】（五）多文件架构与名称空间》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/18/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%94%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/&title=《【C++温故知新】（五）多文件架构与名称空间》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/18/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%94%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【C++温故知新】（五）多文件架构与名称空间》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/18/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%94%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/18/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%BA%94%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,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" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

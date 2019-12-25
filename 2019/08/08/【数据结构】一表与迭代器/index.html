@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【数据结构】（一）表与迭代器 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,C++,数据结构">
+    <meta name="description" content="抽象数据类型（abstract data type，ADT）是带有一组操作的一些对象的集合。An abstract data type (ADT) is a set of objects together with a set of operations.    标准模板库（Standard Template Library，SLT）。实现了ADT等数据结构，这些数据结构被称为集合（collec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【数据结构】（一）表与迭代器">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%80%E8%A1%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="抽象数据类型（abstract data type，ADT）是带有一组操作的一些对象的集合。An abstract data type (ADT) is a set of objects together with a set of operations.    标准模板库（Standard Template Library，SLT）。实现了ADT等数据结构，这些数据结构被称为集合（collec">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure1-1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure1-2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure1-3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/DataStructure1-4.png">
+<meta property="article:published_time" content="2019-08-08T10:18:26.000Z">
+<meta property="article:modified_time" content="2019-08-27T11:44:33.768Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/DataStructure1-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.littlegenius.xin" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                个人网站
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【数据结构】（一）表与迭代器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【数据结构】（一）表与迭代器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-08T10:18:26.000Z" itemprop="datePublished" class="page-time">
+  2019-08-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#表（List）"><span class="post-toc-number">1.</span> <span class="post-toc-text">表（List）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#表的实现方式"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">表的实现方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#表的常用操作"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">表的常用操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#表的两种简单形式"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">表的两种简单形式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#表的两种重要操作"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">表的两种重要操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#时间复杂度"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">时间复杂度</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#STL中的向量和表"><span class="post-toc-number">2.</span> <span class="post-toc-text">STL中的向量和表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#表AST的实现方式"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">表AST的实现方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#迭代器"><span class="post-toc-number">3.</span> <span class="post-toc-text">迭代器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获得迭代器"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">获得迭代器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#迭代器方法"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">迭代器方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#需要迭代器的表方法"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">需要迭代器的表方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#迭代器的分类"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">迭代器的分类</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【数据结构】一表与迭代器"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【数据结构】（一）表与迭代器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-08 18:18:26" datetime="2019-08-08T10:18:26.000Z"  itemprop="datePublished">2019-08-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p><strong>抽象数据类型</strong>（abstract data type，<strong>ADT</strong>）是带有一组操作的一些对象的集合。An abstract data type (ADT) is a set of objects together with a set of operations. </p>
+</blockquote>
+<blockquote>
+<p><strong>标准模板库</strong>（Standard Template Library，<strong>SLT</strong>）。实现了ADT等数据结构，这些数据结构被称为集合（collection）或者容器（container）</p>
+</blockquote>
+<h1 id="表（List）"><a href="#表（List）" class="headerlink" title="表（List）"></a>表（List）</h1><h2 id="表的实现方式"><a href="#表的实现方式" class="headerlink" title="表的实现方式"></a>表的实现方式</h2><ul>
+<li>静态表：利用数组实现</li>
+<li>动态表：利用链表实现</li>
+</ul>
+<h2 id="表的常用操作"><a href="#表的常用操作" class="headerlink" title="表的常用操作"></a>表的常用操作</h2><ul>
+<li>printList：遍历、打印整个表</li>
+<li>makeEmpty：将整个表清空</li>
+<li>find：在表中查找某个元素</li>
+<li>insert：向表中插入某个元素</li>
+<li>remove：从表中移除某个元素</li>
+<li>findKth：查找表中的第k个元素</li>
+<li>next：返回某个元素的下一个元素</li>
+<li>previous：返回某个元素的上一个元素</li>
+</ul>
+<h2 id="表的两种简单形式"><a href="#表的两种简单形式" class="headerlink" title="表的两种简单形式"></a>表的两种简单形式</h2><p>简单链表实现</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure1-1.png" alt="简单链表" title="">
+                </div>
+                <div class="image-caption">简单链表</div>
+            </figure>
+
+<p>双向链表</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure1-2.png" alt="双向链表" title="">
+                </div>
+                <div class="image-caption">双向链表</div>
+            </figure>
+
+<h2 id="表的两种重要操作"><a href="#表的两种重要操作" class="headerlink" title="表的两种重要操作"></a>表的两种重要操作</h2><p>链表的插入</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure1-3.png" alt="链表的插入" title="">
+                </div>
+                <div class="image-caption">链表的插入</div>
+            </figure>
+
+<p>链表的删除</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/DataStructure1-4.png" alt="链表的删除" title="">
+                </div>
+                <div class="image-caption">链表的删除</div>
+            </figure>
+
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><table>
+<thead>
+<tr>
+<th align="center">基本操作</th>
+<th align="center">静态 数组实现</th>
+<th align="center">动态 链表实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">printList</td>
+<td align="center">O(n)</td>
+<td align="center">O(n)</td>
+</tr>
+<tr>
+<td align="center">makeEmpty</td>
+<td align="center">O(n)</td>
+<td align="center">O(1)</td>
+</tr>
+<tr>
+<td align="center">find</td>
+<td align="center">O(1)</td>
+<td align="center">O(i)</td>
+</tr>
+<tr>
+<td align="center">insert</td>
+<td align="center">O(n)</td>
+<td align="center">O(1)</td>
+</tr>
+<tr>
+<td align="center">remove</td>
+<td align="center">O(n)</td>
+<td align="center">O(1)</td>
+</tr>
+<tr>
+<td align="center">findKth</td>
+<td align="center">O(1)</td>
+<td align="center">O(i)</td>
+</tr>
+<tr>
+<td align="center">next</td>
+<td align="center">O(1)</td>
+<td align="center">O(1)</td>
+</tr>
+<tr>
+<td align="center">previous</td>
+<td align="center">O(1)</td>
+<td align="center">O(i)</td>
+</tr>
+</tbody></table>
+<h1 id="STL中的向量和表"><a href="#STL中的向量和表" class="headerlink" title="STL中的向量和表"></a>STL中的向量和表</h1><h2 id="表AST的实现方式"><a href="#表AST的实现方式" class="headerlink" title="表AST的实现方式"></a>表AST的实现方式</h2><p>表ADT有两种流行的实现：</p>
+<ul>
+<li><p><code>vector</code>：给出了表ADT的可增长的数组实现</p>
+<ul>
+<li>优点：利于索引（常量时间）</li>
+<li>缺点：插入新项或删除已有项代价昂贵（除非操作发生在vector的末尾）；查找效率低</li>
+</ul>
+</li>
+<li><p><code>list</code>：提供了表ADT的双向链表实现</p>
+<ul>
+<li>优点：如果发生变化的位置已知，插入新项和删除已有项代价很小</li>
+<li>缺点：不容易索引；查找效率低</li>
+</ul>
+</li>
+</ul>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ul>
+<li>所有STL容器都适用的方法<ul>
+<li><code>int size() const</code>：返回容器内的元素个数</li>
+<li><code>void clear()</code>：删除容器中所有的元素</li>
+<li><code>bool empty()</code>：如果容器没有元素，返回 <code>true</code>，否则返回 <code>false</code></li>
+</ul>
+</li>
+<li><code>vector</code> 和 <code>list</code> 同时支持的方法<ul>
+<li><code>void push_back(const Object &amp; x)</code>：在表的末尾添加 <code>x</code></li>
+<li><code>void pop_back( )</code>：删除表的末尾的对象</li>
+<li><code>const Object &amp; back( ) const</code>：返回表的末尾的对象（也提供返回引用的修改函数）</li>
+<li><code>const Object &amp; front( ) const</code>：返回表的前端的对象（也提供返回引用的修改函数）</li>
+</ul>
+</li>
+<li>vector 单独支持的方法<ul>
+<li><code>Object &amp; operator [ ] (int idx)</code>：返回 <code>vector</code> 中 <code>idx</code> 索引位置的对象，不包含边界检测（也提供返回常量引用的访问函数）</li>
+<li><code>Object &amp; at (int iax)</code>：返回 <code>vector</code> 中 <code>i</code> 索引位置的对象，包含边界检测（也提供返回常量引用的访问函数）</li>
+<li><code>int capacity( ) const</code>：返回 <code>vector</code> 的内部容量</li>
+<li><code>void reserve(int new Capacity)</code>：设定 <code>vector</code> 的新容量。如果已有良好的估计的话，这可以避免对 <code>vector</code> 进行扩展</li>
+</ul>
+</li>
+<li><code>list</code> 单独支持的方法<ul>
+<li><code>void push_front(const Object &amp; x)</code>：在<code>list</code>的前端添加<code>x</code></li>
+<li><code>void pop_front()</code>：在<code>list</code>的前端删除对象</li>
+</ul>
+</li>
+</ul>
+<h1 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h1><p>在STL中，使用迭代器（内置类型 iterator）给出数据在表中的位置。通常可以使用对应的模板来声明 iterator：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">STLType&lt;dataType&gt;::iterator</span><br></pre></td></tr></table></figure>
+
+<h2 id="获得迭代器"><a href="#获得迭代器" class="headerlink" title="获得迭代器"></a>获得迭代器</h2><p>SLT的所有容器都拥有如下的方法可以获得容器中指向的第一个和终止标志的迭代器：</p>
+<ul>
+<li><code>iterator begin()</code>：返回指向容器的第一项的一个适当的迭代器</li>
+<li><code>iterator end()</code>：返回指向容器的终止标志（容器中最后一项的后面的位置）的一个适当的迭代器。（这里比较特殊，是指向的容器的“边界之外”）</li>
+</ul>
+<p>两种方法均可以根据所指向的容器类型返回一个恰当的迭代器，所以可以使用 <code>auto</code> 来声明它们，当你不知道应该如何声明的时候：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> myIterator = STLCollection.<span class="built_in">begin</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="迭代器方法"><a href="#迭代器方法" class="headerlink" title="迭代器方法"></a>迭代器方法</h2><p>迭代器很多方法都来自于运算符的重载</p>
+<ul>
+<li><code>=</code>：赋值</li>
+<li><code>itr++</code>和<code>++itr</code>：推进迭代器itr至下一个位置，前缀和后缀两种形式都允许</li>
+<li><code>*itr</code>：返回存储在迭代器itr指定位置的对象的引用。</li>
+<li><code>itr1==itr2</code>：如果itr1和itr2都指向同一个位置就返回true，否则，返回fa1se</li>
+<li><code>itr1!=itr2</code>：如果ix1和itr2都指向不同位置就返回true，否则，返回fase</li>
+</ul>
+<p>从而，利用迭代器打印STL容器的方式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator itr=v.<span class="built_in">begin</span>(); itr != v.<span class="built_in">end</span>(); ++itr)</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;*itr&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator itr=v.<span class="built_in">begin</span>();</span><br><span class="line"><span class="keyword">while</span>(itr!=v.<span class="built_in">end</span>())</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;*itr&lt;&lt;<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="需要迭代器的表方法"><a href="#需要迭代器的表方法" class="headerlink" title="需要迭代器的表方法"></a>需要迭代器的表方法</h2><p>一些表中常用的需要使用迭代器的容器方法：</p>
+<ul>
+<li><code>iterator insert(iterator pos, const Object &amp; x)</code>：添加x到表中迭代器pos所指向的位置之前的位置。对1ist是常量时间操作，对vector则不是。返回值是一个指向插入项位置的迭代器</li>
+<li><code>iterator  erase(iterator pos)</code>：删除迭代器所给出位置的对象。对1ist是常量时间操作，对vector不是。返回值是调用之前pos所指向元素的下一个元素的位置。这个操作使pos失效。pos不再有用，因为它所指向的容器变量已经被删除了</li>
+<li><code>iterator erase(iterator start, iterator end)</code>：删除所有的从位置start开始直到位置end(但是不包括end)的所有元素</li>
+</ul>
+<h2 id="迭代器的分类"><a href="#迭代器的分类" class="headerlink" title="迭代器的分类"></a>迭代器的分类</h2><ul>
+<li>正向迭代器：<code>containerType::iterator itr</code>;</li>
+<li>常量正向迭代器（不可更改）：<code>containerType::const_iterator itr</code>;</li>
+<li>反向迭代器：<code>containerType::reverse_iterator itr</code>;</li>
+<li>常量反向迭代器：<code>containerType::const_reverse_iterator itr</code>;</li>
+</ul>
+<p>迭代器的参考：<a href="http://www.cplusplus.com/reference/iterator/" target="_blank" rel="noopener">http://www.cplusplus.com/reference/iterator/</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-08-27T11:44:33.768Z" itemprop="dateUpdated">2019-08-27 19:44:33</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%80%E8%A1%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%80%E8%A1%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%80%E8%A1%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/&title=《【数据结构】（一）表与迭代器》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%80%E8%A1%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/&title=《【数据结构】（一）表与迭代器》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%80%E8%A1%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【数据结构】（一）表与迭代器》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%80%E8%A1%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%80%E8%A1%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BA%8C%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">【数据结构】（二）栈与队列</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%89%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%88%86%E6%94%AF/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【C++温故知新】（三）循环与分支</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%80%E8%A1%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/&title=《【数据结构】（一）表与迭代器》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%80%E8%A1%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/&title=《【数据结构】（一）表与迭代器》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%80%E8%A1%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【数据结构】（一）表与迭代器》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%80%E8%A1%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/08/08/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%B8%80%E8%A1%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEjklEQVR42u3aS27jMBAFwNz/0h5gVgMklt9jMwPRLq2CQJbI0qLZn6+v+Hr8vf79+/v1/f7vv3r25Gf3P3t+cs/1k79+48KECRMmTLdkelxeySavQfPFXW/4+o3Jx8s/+Q+/xYQJEyZMhzPlj0uY9p5WrulzlPzjYcKECROmz2RaS1zXDh9rb09QMGHChAkTpvZA0CbP1yG8Lea2xWJMmDBhwvSZTG2Qbku3uyCS0N4m5Jtr4ZgwYcKE6WZM8zLruX9vvjBhwoQJ082YHuXVBtc2nLcF372l4ae7xoQJEyZMxzIloy3PXpCP6ewKzGuJa1tufroqTJgwYcJ0LNPaaE7y0EkJtd3MriGhUe8XEyZMmDDdnmmyjUkLc97aXBvTaduimDBhwoTpRKbJQMwknLcJdjuUs5a9bjihYMKECROm2zDlqWkSSvNUOW92rh0L2rbri1VhwoQJE6ZjmdokdlJmbVPWfD15C3Ptt5gwYcKE6T2Y2tDbbjhvf+ajRWuF5sV2JiZMmDBhOpYpH7vJX9Mu+n8mugl3Xs7GhAkTJkz3Z/q9wJkfI9pF5yl6PjBUdGgxYcKECdMhTJMg3YbYNjFu/16jj3aBCRMmTJjeiGltA/ODQp6Ez5/T0mPChAkTpndiSpY4T5UnbdS1VY3asZgwYcKE6XCmdnDzOnWcL6sdV50MrUZ/Y8KECROmw5naou08uW2HbPJidP4ZivQYEyZMmDAdy5RvO0lxW/T2Xfk6W5o2ncaECRMmTKcwrYXtdmhmckSYP6c9jvzwXkyYMGHCdCzTrjGXtqi6lirPG6L1yE5yYcKECROm2zO1Jde1EnA9LlMeF/JWaJuuY8KECROmc5kmp4Z5k3LtgNJCtLv74fmYMGHChOlwpknamZBN6H/vIxXHAkyYMGHCdCzTpDGZjIEmV5KarrUw2+NCVOTFhAkTJkxHMeVbzYN3jt4ithz5mM6LNWPChAkTpsOZdgXUJPXNU+I8Tc2brIupPiZMmDBhegumXQRtaXVyEJmP5kRtV0yYMGHC9NZMeWTMtzpJgHd9sOKggwkTJkyYjmVqN1+MdS7dkw+k7ipSF58ZEyZMmDAdy9SOy0wWnQfjvCict0vzX9V1cUyYMGHCdEumNlgmgzttOTUv4CaNzEli/PS3mDBhwoTpcKZJ0G0XOvlP++R8JOgFHyZMmDBhOpYp2Xby0DXQfNSmbbW2R438w2PChAkTprOYJgMua5TJVtcCfH6kqD8JJkyYMGF6C6Z5cJ2E3rUCbr7y0cECEyZMmDAdy7R4UxzCJ6XY68bq5ONtKGRjwoQJE6ZDmB7l1dKsjYcmT0vub9+1+K0wYcKECdONmfJrrRw8KcK25dp5U3YDHyZMmDBhuiXT2iFgLY3MA39+fCmmkyYlbEyYMGHCdDjTrjGaSVNz1ybXTkAv9osJEyZMmD6Aadf4Tpse5/dPkttoWAcTJkyYMH0M0y7oXSXaZMN5go0JEyZMmN6PqS3C5olxPkyTb7UtJU+egwkTJkyYTmfaW7TNF5okxm2DM2+stocSTJgwYcJ0INMfLZC/UNLUxIUAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
