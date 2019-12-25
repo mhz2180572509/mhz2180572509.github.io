@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【机器学习】（一）机器学习基础 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,机器学习">
+    <meta name="description" content="基本概念机器学习（Machine Learning）机器学习研究的内容是关于在计算机上从数据&#x2F;经验（data&#x2F;experience）中产生模型（model）的算法，即学习算法（learning algorithm）。 Mitchell于1997年给出的定义：假设用P来评估计算机程序在某任务类T上的性能，若一个程序通过利用经验E在T中任务上获得了性能改善，则我们就说关于T和P，该程序对E进行了学习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【机器学习】（一）机器学习基础">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="基本概念机器学习（Machine Learning）机器学习研究的内容是关于在计算机上从数据&#x2F;经验（data&#x2F;experience）中产生模型（model）的算法，即学习算法（learning algorithm）。 Mitchell于1997年给出的定义：假设用P来评估计算机程序在某任务类T上的性能，若一个程序通过利用经验E在T中任务上获得了性能改善，则我们就说关于T和P，该程序对E进行了学习。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-1-1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-1-2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-1-3.png">
+<meta property="article:published_time" content="2019-12-25T09:22:24.000Z">
+<meta property="article:modified_time" content="2019-12-25T09:31:24.596Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/ML-1-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【机器学习】（一）机器学习基础</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【机器学习】（一）机器学习基础</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-25T09:22:24.000Z" itemprop="datePublished" class="page-time">
+  2019-12-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基本概念"><span class="post-toc-number">1.</span> <span class="post-toc-text">基本概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#机器学习（Machine-Learning）"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">机器学习（Machine Learning）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本术语"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">基本术语</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#机器学习的分类"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">机器学习的分类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基于学习任务"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">基于学习任务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基于训练数据是否拥有标签"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">基于训练数据是否拥有标签</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#假设空间"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">假设空间</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#归纳偏好"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">归纳偏好</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#奥卡姆剃刀原则（Occam’s-razor）"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">奥卡姆剃刀原则（Occam’s razor）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#没有免费的午餐定理（No-Free-Lunch-Theorem，NFL）"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">没有免费的午餐定理（No Free Lunch Theorem，NFL）</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【ML】1机器学习基础"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【机器学习】（一）机器学习基础</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-25 17:22:24" datetime="2019-12-25T09:22:24.000Z"  itemprop="datePublished">2019-12-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="机器学习（Machine-Learning）"><a href="#机器学习（Machine-Learning）" class="headerlink" title="机器学习（Machine Learning）"></a>机器学习（Machine Learning）</h2><p>机器学习研究的内容是关于在计算机上从<strong>数据/经验</strong>（data/experience）中产生<strong>模型</strong>（model）的算法，即<strong>学习算法</strong>（learning algorithm）。</p>
+<p>Mitchell于1997年给出的定义：假设用P来评估计算机程序在某任务类T上的性能，若一个程序通过利用经验E在T中任务上获得了性能改善，则我们就说关于T和P，该程序对E进行了学习。</p>
+<h2 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h2><ul>
+<li>数据集（data set）：数据的集合，数据是若干条属性与其取值，记录关于对一个事件或对象的描述</li>
+<li>示例（instance）/样本（sample）：数据集中的每一条数据</li>
+<li>属性（attribute）/特征（feature）：反映事件或对象在某方面的表现或性质的事项</li>
+<li>属性值（attribute value）：属性上的取值</li>
+<li>属性空间（attribute space）/样本空间（sample space）/输入空间（input space）</li>
+<li>特征向量（feature vector）：属性空间中任何一点所对应的向量</li>
+<li>标记（lable）：表示示例结果的信息</li>
+<li>样例（example）：带有标记的信息示例</li>
+<li>标记空间（lable space）/输出空间（output space）：所有的标签的集合</li>
+<li>测试样本（testing sample）：用于对学习模型进行测试的样本数据</li>
+</ul>
+<p>一般地，令 D={x1, x2, …, xm} 表示包含 m 个示例的数据集，每个示例由 d 个属性描述，则每个示例 xi=(xi1, xi2, …, xid) 是 d 维样本空间 X 中的一个向量，xi∈X，其中 xij 是 xi 在第 j 个属性上的取值，d 称为样本 xi 的<strong>维数</strong>(dimensionality)。用(xi,yi)表示第i个样例及其标签yi，yi∈Y。</p>
+<ul>
+<li>泛化（generalization）：将学习得到的模型应用于新的数据集（测试集）的能力成为泛化能力</li>
+</ul>
+<p>通常假设样本空间中全体样本服从一个未知<strong>分布</strong>（distribution）D，我们获得的每个样本都是独立地从这个分布上采样获得的，即<strong>独立同分布</strong>（independent and identically distributed，简称<strong>iid</strong>）。一般而言，训练样本越多，我们得到的关于D的信息越多，这样就越有可能通过学习获得具有<strong>强泛化能力</strong>的模型。</p>
+<h2 id="机器学习的分类"><a href="#机器学习的分类" class="headerlink" title="机器学习的分类"></a>机器学习的分类</h2><h3 id="基于学习任务"><a href="#基于学习任务" class="headerlink" title="基于学习任务"></a>基于学习任务</h3><ul>
+<li>分类（classification）：预测值是离散的<ul>
+<li>二分类（binary      classification）：预测值只有两个类别，通常将其中一个成为正类（positive class），另一个成为反类/负类（negative class）</li>
+<li>多分类（mutil-class      classification）：预测值是多个离散的类别</li>
+</ul>
+</li>
+<li>回归（regression）：预测值是连续值，其标记空间为实数集</li>
+<li>聚类（clustering）：将训练集中的数据分成若干个簇，通常情况下这种学习的数据集是<strong>无标签的</strong></li>
+</ul>
+<h3 id="基于训练数据是否拥有标签"><a href="#基于训练数据是否拥有标签" class="headerlink" title="基于训练数据是否拥有标签"></a>基于训练数据是否拥有标签</h3><ul>
+<li>监督学习（supervised learning）：训练数据有标签，比如分类和回归</li>
+<li>无监督学习（unsupervised learning）：训练数据无标签，比如聚类</li>
+</ul>
+<h2 id="假设空间"><a href="#假设空间" class="headerlink" title="假设空间"></a>假设空间</h2><p>我们把学习过程看作一个在所有<strong>假设</strong>（hypothesis）组成的空间（<strong>假设空间</strong>（hypothesis space））中进行搜索的过程，搜索目标是找到与训练集<strong>匹配</strong>（fit）的假设。假设的表示一旦确定，假设空间及其规模大小就确定了。</p>
+<p>现实问题中我们常面临很大的假设空间，但学习过程是基于有限样本训练集进行的，因此，可能有多个假设与训练集一致，即存在着一个与训练集一致的假设集合，称之为<strong>版本空间</strong>（version space）</p>
+<h2 id="归纳偏好"><a href="#归纳偏好" class="headerlink" title="归纳偏好"></a>归纳偏好</h2><p>机器学习算法在学习过程中对某种类型假设的偏好，称为<strong>归纳偏好</strong>（inductive bias），简称为偏好。</p>
+<p>任何一个有效的机器学习算法必有其归纳偏好。归纳偏好可看作学习算法自身在一个可能很庞大的假设空间中对假设进行选择的启发式或价值观。</p>
+<h3 id="奥卡姆剃刀原则（Occam’s-razor）"><a href="#奥卡姆剃刀原则（Occam’s-razor）" class="headerlink" title="奥卡姆剃刀原则（Occam’s razor）"></a>奥卡姆剃刀原则（Occam’s razor）</h3><p>奥卡姆剃刀原则称“若有多个假设与观察一致，则选最简单的那个”。比如我们通过训练得到有两条可以描述训练样本的曲线，平滑的A曲线可能意味着更加简单。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-1-1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h3 id="没有免费的午餐定理（No-Free-Lunch-Theorem，NFL）"><a href="#没有免费的午餐定理（No-Free-Lunch-Theorem，NFL）" class="headerlink" title="没有免费的午餐定理（No Free Lunch Theorem，NFL）"></a>没有免费的午餐定理（No Free Lunch Theorem，NFL）</h3><p>没有免费的午餐定理指机器学习的模型总误差与学习算法无关，即学习算法的期望性能相同</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-1-2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>但是显然NFL定理是基于一个前提的：所有问题出现的机会相同、或所有问题同等重要。但实际情形并不是这样。</p>
+<p>NFL的意义在于让我们更加清楚的认识到，脱离具体问题空泛地比较学习算法的好坏毫无意义</p>
+<p><strong>学习算法自身的归纳偏好与问题是否相配，往往会起到决定性的作用</strong></p>
+<blockquote>
+<p>NFL 定理的简单证明过程</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-1-3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<blockquote>
+<p>全文参考：周志华 著 《机器学习》</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-25T09:31:24.596Z" itemprop="dateUpdated">2019-12-25 17:31:24</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/&title=《【机器学习】（一）机器学习基础》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/&title=《【机器学习】（一）机器学习基础》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【机器学习】（一）机器学习基础》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/29/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E5%85%AD%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86%E7%B1%BB/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【数据结构】（六）不相交集类</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/&title=《【机器学习】（一）机器学习基础》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/&title=《【机器学习】（一）机器学习基础》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【机器学习】（一）机器学习基础》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAAD3klEQVR42u3aS27kMAwFwNz/0jPbAQLb75FyJwOUV0F3W5bKC4afr6/4+vPPdf/J92+T6+qu7yvff3J/17ELBw4cOHDER803mm8xedb9XVcHbl9V8nQcOHDgwHGK4+rx+d9tuG0PPwvz+Rlx4MCBA8fPcmwC3ux4+xeDAwcOHDh+P0deyGtLdXmy1+4fBw4cOHB8hiM/ZLKJNgzvA/msuIkDBw4cON7gyMPe//v3K/MdOHDgwIGjnAqbjR0kT7n/PFl/MzxxeTocOHDgwLHmyA+Wp3anSoSzsmAbaHHgwIEDxxscSWOp/U3blNqPUOTfRq8EBw4cOHCMOPI2f9sKmrWL8oA9K/89PBEHDhw4cKw5NuF2Fs/b4YNNuTBJ2B4SSxw4cODAUXLkh5mNqSWB/I1BtzbY1zEcBw4cOHDEHHl4y4uGm7CaB9cZIg4cOHDg+DzHhiYv2LVpXvsKoxVw4MCBA8dHOBKmFjTh2xC0jSscOHDgwPEGR3KklibZ0D49y7nr+Q4cOHDgwLHmuL9t1qDKi4b5HjYhucgmceDAgQNHyfFGM2mf8u0bSMPiIA4cOHDgWHPk6U0ekvNtbUJsO8oQxVMcOHDgwLHmODWCcOrbtry4CfCXLxsHDhw4cBzlmIXePFi2689C+Czc4sCBAweOPcepgbM2uUrWb1doX/NDcRAHDhw4cIw4ZoHqbJKWj00kvzzwfwcOHDhw4Diawu1LhHnLavaS8jRyeGocOHDgwLHYfz5S0KZbCUSbgM2aT0VZEwcOHDhwrDnaot6s/dMmirPyYpLC5ekiDhw4cOA4xTHb0Cxtm421zYJ6siYOHDhw4DjFMQuieVo1aw5tksb8LA95LQ4cOHDgGHG0Cc/mSLOCYDvKcKABhgMHDhw4FhxnBw5yyrxQuAmfdSkTBw4cOHAc4mjHF/YJWDKs0BK3n0QZLQ4cOHDgWHDMEqR8oGFT+MvTzvxcOHDgwIHjDY5NYNukWG2ZclbTO1AixIEDBw4cMccseWuLd+1YQ1J8bIuD0Z5x4MCBA8chjrallCRjm4MlNLNg/HAKHDhw4MCx5tg0ftpRhs2mW6DZKAYOHDhw4Nhz1ElOGW5njaVZAynBGk524MCBAweOmCO/2vbPZqwhD/ltw2nVl8OBAwcOHDHHLLjm5bZkK3kxMU/bhoEWBw4cOHAc4sgDVRuM23Xaw8zSsMu7cODAgQPHxzny0NX+fart1A7Y4cCBAweOn+XYB7xZKbBtgM3oceDAgQPHKY58DC55/Knfb4qPOSgOHDhw4DjLsSmlJe2iNmQmjaX9OrOSJQ4cOHDguP3lXy0d4pWcMc22AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
