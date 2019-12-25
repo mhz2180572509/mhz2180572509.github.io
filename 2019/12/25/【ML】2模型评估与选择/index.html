@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【机器学习】（二）模型估计与选择 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,机器学习">
+    <meta name="description" content="误差与过拟合误差假设m个样本中有a个样本分类错误  错误率（error rate）：分类错误的样本数占样本总数的比例，E&#x3D;a&#x2F;m 精度（accuracy）：分类正确的样本数占样本总数的比例，1-a&#x2F;m 精度&#x3D;1-错误率 误差（error）：学习器的实际预测输出与样本的真实输出之间的差异 学习器在训练集上的误差称为训练误差（training error）&#x2F;经验误差（empirical error）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【机器学习】（二）模型估计与选择">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="误差与过拟合误差假设m个样本中有a个样本分类错误  错误率（error rate）：分类错误的样本数占样本总数的比例，E&#x3D;a&#x2F;m 精度（accuracy）：分类正确的样本数占样本总数的比例，1-a&#x2F;m 精度&#x3D;1-错误率 误差（error）：学习器的实际预测输出与样本的真实输出之间的差异 学习器在训练集上的误差称为训练误差（training error）&#x2F;经验误差（empirical error）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-4.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-5.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-6.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-7.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-8.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-9.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-10.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-11.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-12.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-13.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-14.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-15.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-16.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-17.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-18.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-19.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-20.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-21.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-22.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-23.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-24.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-25.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-26.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-27.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-28.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-29.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-30.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-31.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-32.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-33.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-34.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-35.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-36.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-2-37.png">
+<meta property="article:published_time" content="2019-12-25T13:35:26.000Z">
+<meta property="article:modified_time" content="2019-12-25T14:14:33.683Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/ML-2-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【机器学习】（二）模型估计与选择</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【机器学习】（二）模型估计与选择</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-25T13:35:26.000Z" itemprop="datePublished" class="page-time">
+  2019-12-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#误差与过拟合"><span class="post-toc-number">1.</span> <span class="post-toc-text">误差与过拟合</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#误差"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">误差</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#过拟合与欠拟合"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">过拟合与欠拟合</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#评估方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">评估方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#留出法（hold-out）"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">留出法（hold-out）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#交叉验证法（cross-validation）"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">交叉验证法（cross validation）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#留一法（Leave-One-Out，LOO）"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">留一法（Leave-One-Out，LOO）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自助法（bootstrapping）"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">自助法（bootstrapping）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#调参（parameter-tuning）"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">调参（parameter tuning）</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#性能度量"><span class="post-toc-number">3.</span> <span class="post-toc-text">性能度量</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#均方误差"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">均方误差</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#错误率与精度"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">错误率与精度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查准率、查全率与F1"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">查准率、查全率与F1</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#PR曲线与PR图"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">PR曲线与PR图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多个二分类混淆矩阵下的查准率、查全率与F1"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">多个二分类混淆矩阵下的查准率、查全率与F1</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ROC与AUC"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">ROC与AUC</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代价敏感错误率与代价曲线"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">代价敏感错误率与代价曲线</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#比较检验"><span class="post-toc-number">4.</span> <span class="post-toc-text">比较检验</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#假设检验"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">假设检验</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#McNemar-检验"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">McNemar 检验</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Friedman-检验-与-Nemenyi-后续检验"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">Friedman 检验 与 Nemenyi 后续检验</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#偏差与方差"><span class="post-toc-number">5.</span> <span class="post-toc-text">偏差与方差</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【ML】2模型评估与选择"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【机器学习】（二）模型估计与选择</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-25 21:35:26" datetime="2019-12-25T13:35:26.000Z"  itemprop="datePublished">2019-12-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="误差与过拟合"><a href="#误差与过拟合" class="headerlink" title="误差与过拟合"></a>误差与过拟合</h1><h2 id="误差"><a href="#误差" class="headerlink" title="误差"></a>误差</h2><p>假设m个样本中有a个样本分类错误</p>
+<ul>
+<li>错误率（error rate）：分类错误的样本数占样本总数的比例，E=a/m</li>
+<li>精度（accuracy）：分类正确的样本数占样本总数的比例，1-a/m</li>
+<li>精度=1-错误率</li>
+<li>误差（error）：学习器的实际预测输出与样本的真实输出之间的差异</li>
+<li>学习器在训练集上的误差称为<strong>训练误差</strong>（training error）/<strong>经验误差</strong>（empirical error）</li>
+<li>学习器在新样本上的误差称为<strong>泛化误差</strong>（generalization error）</li>
+<li>机器学习的目标是得到泛化误差小的学习器，但是实际能做的是努力使经验误差最小化</li>
+</ul>
+<h2 id="过拟合与欠拟合"><a href="#过拟合与欠拟合" class="headerlink" title="过拟合与欠拟合"></a>过拟合与欠拟合</h2><p>当学习器把训练样本学得太好的时候，很可能已经把训练样本自身的一些特点当作了所有潜在样本都会具有的一般性质，这样就会导致泛化性能下降。这种现象在机器学习中称为<strong>过拟合</strong>（overfitting）。与过拟合相对的是<strong>欠拟合</strong>（underfitting），这是指对训练样本的一般性质尚未学好。</p>
+<ul>
+<li>过拟合是机器学习中的<strong>关键障碍</strong></li>
+</ul>
+<h1 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h1><p>通常，通过实验测试来对学习器的泛化误差进行评估。为此，需使用一个<strong>测试集</strong>（testing set）来测试学习器对新样本的判别能力，然后以测试集上的<strong>测试误差</strong>（testing error）作为泛化误差的近似。</p>
+<ul>
+<li>通常我们假设测试样本也是从样本真实分布中独立同分布采样而得</li>
+<li>测试集应该尽可能与训练集互斥</li>
+<li>验证集（validation set）指用于评估模型的不包含在训练样本与测试样本的其他真实数据</li>
+</ul>
+<p>评估方法即通过适当的处理，从包含m个样例的数据集D中产生出训练集S和测试集T</p>
+<h2 id="留出法（hold-out）"><a href="#留出法（hold-out）" class="headerlink" title="留出法（hold-out）"></a>留出法（hold-out）</h2><p>留出法（hold-out）直接将数据集D划分为两个<strong>互斥</strong>的集合，其中一个集合作为训练集S，另一个作为测试集T，即 D=SUT，S∩T=。在S上训练出模型后，用T来评估其测试误差，作为对泛化误差的估计。</p>
+<ul>
+<li>划分过程中需要采取均匀的分层取样（stratified sampling）</li>
+<li>一般单次留出法往往不可靠，需要反复多次进行留出法产生不同的训练集与测试集，对评估结果取均值</li>
+<li>常见的分法是训练集占总数据集的2/3~4/5</li>
+</ul>
+<h2 id="交叉验证法（cross-validation）"><a href="#交叉验证法（cross-validation）" class="headerlink" title="交叉验证法（cross validation）"></a>交叉验证法（cross validation）</h2><p>交叉验证法（cross validation）先将数据集D划分为k个大小相似的互斥子集，即 D=D1 U D2 U … U Dn，Di ∩ Dj =  (i≠j)。每个子集都尽可能保持数据分布的一致性，即通过分层采样得到。每次用 k-1 个子集的并集作为训练集，余下的那个子集作为测试集。这样就可获得 k 组训练测试集，从而可进行 k 次训练和测试，最终返回的是这 k 个测试结果的均值。</p>
+<ul>
+<li>通常把交叉验证法称为<strong>k**</strong>折交叉验证**（k-fold cross validation）。k最常用的取值是10，此时称为10折交叉验证</li>
+<li>k折交叉验证通常也要随机使用不同的划分重复p次，最终会得到p×k次结果并取均值</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h3 id="留一法（Leave-One-Out，LOO）"><a href="#留一法（Leave-One-Out，LOO）" class="headerlink" title="留一法（Leave-One-Out，LOO）"></a>留一法（Leave-One-Out，LOO）</h3><p>假定数据集D中包含m个样本，当k=m，则得到了交叉验证法的一个特例：留一法（Leave-One-Out，LOO）</p>
+<ul>
+<li>在绝大多数情况下，留一法中被实际评估的模型与期望评估的用D训练出的模型很相似。因此，留一法的评估结果往往被认为<strong>比较准确</strong></li>
+<li>缺点：在数据集比较大时运算量无法接受</li>
+</ul>
+<h2 id="自助法（bootstrapping）"><a href="#自助法（bootstrapping）" class="headerlink" title="自助法（bootstrapping）"></a>自助法（bootstrapping）</h2><p>自助法（bootstrapping）直接以自助采样法（bootstrap sampling）为基础。</p>
+<p>给定包含m个样本的数据集D，我们对它进行采样产生数据集D’。每次随机从D中挑选一个样本，将其拷贝放入D′，然后再将该样本放回初始数据集D中，使得该样本在下次采样时仍有可能被到。这个过程重复执行m次后，我们就得到了包含m个样本的数据集D’，即自助采样的结果。</p>
+<p>D中有一部分样本会在D’中多次出现，而另一部分样本不出现。可以做一个简单的估计，样本在m次采样中始终不被采到的概率是(1-1/m)^m，取极限得到</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>即通过自助采样，初始数据集D中约有36.8%的样本未出现在采样数据集D中。于是可将D’用作训练集，D\D’用作测试集。这样，实际评估的模型与期望评估的模型都使用m个训练样本，而我们仍有数据总量约1/3的、没在训练集中出现的样本用于测试这样的测试结果，亦称包外估计（out-of-bag-estimate） </p>
+<ul>
+<li>自助法在数据集较小、难以有效划分训练/测试集时很有用</li>
+<li>在初始数据量足够时，留出法和交叉验证法更常用一些</li>
+</ul>
+<h2 id="调参（parameter-tuning）"><a href="#调参（parameter-tuning）" class="headerlink" title="调参（parameter tuning）"></a>调参（parameter tuning）</h2><ul>
+<li>在进行模型评估与选择时，除了要对适用学习算法进行选择，还需对算法参数进行设定，这就是通常所说的<strong>参数调节/调参</strong>（parameter tuning）</li>
+<li>实际操作中一般会对每个参数选定一个范围或者步长</li>
+<li>在研究对比不同算法的泛化性能时，用测试集上的判别效果来估计模型在实际使用时的泛化能力，而把训练数据另外划分为训练集和验证集，基于验证集上的性能来进行模型选择和调参</li>
+</ul>
+<h1 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h1><p>性能度量（performance measure）即模型泛化能力的评价标准</p>
+<p>给定样例集 D={(x1,y1), (x2,y2), …, (xm,ym)}，其中的 yi 是 xi 的真实标记，评估学习器 f 的性能，即比较 f(xi) 与 yi</p>
+<h2 id="均方误差"><a href="#均方误差" class="headerlink" title="均方误差"></a>均方误差</h2><p>均方误差（mean squared error）：回归任务最常用</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>对于数据分布D和概率密度函数p(·)，均方误差为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="错误率与精度"><a href="#错误率与精度" class="headerlink" title="错误率与精度"></a>错误率与精度</h2><p>错误率与精度适用于分类任务</p>
+<ul>
+<li>错误率（error rate）<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-5.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+对于数据分布D和概率密度函数p(·)，误差为：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-6.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>精度（accuracy）<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-7.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+对于数据分布D和概率密度函数p(·)，精度为：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-8.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+</li>
+</ul>
+<h2 id="查准率、查全率与F1"><a href="#查准率、查全率与F1" class="headerlink" title="查准率、查全率与F1"></a>查准率、查全率与F1</h2><p>查准率（precision）又称精确度，二分类（0，1分类）中，代表预测为1的所有结果中，预测正确的比例。</p>
+<p>查全率（recall）又称召回率，二分类（0，1分类）中，代表真实情况为1的所有样本中，预测结果同样为1的比例</p>
+<p>对于二分类问题，可以将真实情况与预测情况组合为如下四种：真正例（true positive）、假正例（false positive）、真反例（true negative）、假反例（false negative）四种情形，令TP、FP、TN、FN分别表示其对应的样例数，则显然有TP+FP+TN+FN=样例总数。分类结果的<strong>混淆矩阵</strong>（confusion matrix）如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-9.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>查准率P与查全率R分别定义为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-10.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>查准率和查全率是一对矛盾的度量。一般来说，查准率高时，查全率往往偏低；查全率高时，查准率往往偏低。</p>
+<h3 id="PR曲线与PR图"><a href="#PR曲线与PR图" class="headerlink" title="PR曲线与PR图"></a>PR曲线与PR图</h3><p>在很多情形下，可根据学习器的预测结果对样例进行排序，排在前面的是学习器认为最可能是正例的样本，排在最后的则是学习器认为最不可能是正例的样本。（或者理解为，对分类结果是否更加被认为是正例给定一个概率，0-1，按照该概率从高到低排序，确定一个阈值（threshold）来控制正例与反例的划分）。按此顺序逐个把样本作为正例进行预测，则每次可以计算出当前的查全率、查准率。以查准率为纵轴、查全率为横轴作图，就得到了<strong>査准率-查全率曲线</strong>，简称<strong>PR曲线</strong>，该曲线的图称为<strong>PR图</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-11.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<ul>
+<li>如果有曲线完全包住了另一条曲线，如A包住了C，则A比C优秀</li>
+<li>如果两条曲线有交叉，如A和B<ul>
+<li>比较各自曲线下的包裹面积，面积大的优于面积小的</li>
+<li>使用平衡点比较：平衡点（Break-Event Point，BEP）为查准率=查全率时对应的取值，该值大的优于小的。如A优于B</li>
+</ul>
+</li>
+</ul>
+<p>由于平衡的BEP过于简化，更常用Fβ度量</p>
+<ul>
+<li>F1度量：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-12.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+其实F1是基于查准率与查全率的调和平均（harmonic mean）定义的：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-13.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>Fβ度量：当对查准率和查全率的重视程度不同时可以调节β的值体现这一差异：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-14.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+其实Fβ是基于查准率与查全率的加权调和平均（harmonic mean）定义的：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-15.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+</li>
+</ul>
+<p>与算术平均和几何平均相比，调和平均更重视较小值</p>
+<p>其中β&gt;0度量了查全率对查准率的相对重要性。<strong>β=1时退化为标准的F1，β&gt;1时查全率有更大影响，β&lt;1时查准率有更大影响</strong></p>
+<h3 id="多个二分类混淆矩阵下的查准率、查全率与F1"><a href="#多个二分类混淆矩阵下的查准率、查全率与F1" class="headerlink" title="多个二分类混淆矩阵下的查准率、查全率与F1"></a>多个二分类混淆矩阵下的查准率、查全率与F1</h3><p>当对一个二分类问题多次重复训练得到多个二分类混淆矩阵，或者当对多分类任务下，两两类别组合都对应一个二分零混淆矩阵等情况时，需要在n个二分类混淆矩阵上计算查准率、查全率与F1</p>
+<ul>
+<li>先在各混淆矩阵上分别计算出查准率和查全率，再计算平均值，得到<strong>宏查准率</strong>（macro-P）、<strong>宏查全率</strong>（macro-R），以及相应的<strong>宏F1</strong>（macro-F1）<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-16.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>先将各混淆矩阵的对应元素进行平均，得到TP、FP、TN、FN的平均值，再基于这些平均值计算出<strong>微查准率</strong>（micro-P）、<strong>微査全率</strong>（micro-R）和<strong>微F1</strong>（micro-F1）<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-17.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+</li>
+</ul>
+<h2 id="ROC与AUC"><a href="#ROC与AUC" class="headerlink" title="ROC与AUC"></a>ROC与AUC</h2><p>当采用阈值（threshold）对分类概率进行排序的时候，阈值可以看成是按照预测概率从大到小排列的样本数据的一个截断点（cut point），截断点前是正例，后是反例。</p>
+<p>ROC（受试者工作特性（Receiver Operating Characteristic））曲线，和PR曲线意义相似，横纵坐标表示不同，ROC横轴为假正例率（False Positive Rate，FPR），纵轴是真正例率（True Positive Rate，TPR）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-18.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<ul>
+<li>ROC图中，对角线对应于<strong>随机猜想</strong>模型，而点（0,1）对应将所有正例排在所有反例之前的<strong>理想模型</strong></li>
+<li>现实任务中，根据学习器预测结果对样例进行排序，先把分类阈值设为最大，即把所有样例均预测为反例，此时真正例率和假正例率均为0，在坐标(0,0)处标记一个点；然后，将分类阈值依次设为每个样例的预测值，分别计算真正例率和假正例率，然后画点</li>
+<li>若一条ROC曲线能够完全包裹另一条ROC曲线，则前者优于后者</li>
+<li>AUC（Area Under ROC Curve）即ROC曲线下包裹的面积，面积大的一般为优</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-19.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>图b中有限样例绘制的ROC曲线计算AUC即：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-20.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>给定m+个正例，m-个反例时，排序损失（rank loss）定义为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-21.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>即考虑每一对正、反例，若正例的预测值小于反例，则记一个罚分，若相等，则记0.5个罚分。lrank对应的是ROC曲线之上的面积，因此有：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-22.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="代价敏感错误率与代价曲线"><a href="#代价敏感错误率与代价曲线" class="headerlink" title="代价敏感错误率与代价曲线"></a>代价敏感错误率与代价曲线</h2><p>非均等代价（unequal cost），权衡不同类型错误所造成的不同损失</p>
+<p>代价矩阵（cost matrix）比较所有分类的两两比较中，相对的损失大小，costij表示i对j类造成的损失大小。一般costii=0，costij&gt;costji表示i对j损失更大</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-23.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>非均等代价下希望得到最小化的总体代价（total cost），例如m个样例的D集中，D+和D-分别表示正例集和反例集，则<strong>代价敏感</strong>（cost-sensitive）错误率为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-24.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>代价曲线（cost curve）可以反应学习器的期望总体代价。</p>
+<p>代价曲线图的横轴时取值为[0,1]的正例概率代价，其中p是样例为正例的概率</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-25.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>纵轴是取值为[0,1]的归一化代价，其中FPR为假正例率，FNR=1-TPR是假反利率</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-26.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>代价曲线的绘制：ROC曲线上每一点对应了代价平面上的一条线段，设ROC曲线上点的坐标为(TPR,FPR)，则可相应计算出FNR，然后在代价平面上绘制条从(0,FPR)到(1,FNR)的线段，线段下的面积即表示了该条件下的期望总体代价；将ROC曲线上的每个点转化为代价平面上的一条线段，然后取所有线段的下界，围成的面积即为在所有条件下学习器的期望总体代价</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-27.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h1 id="比较检验"><a href="#比较检验" class="headerlink" title="比较检验"></a>比较检验</h1><p>比较检验即确定多个学习器之间的关系，孰强孰弱。</p>
+<h2 id="假设检验"><a href="#假设检验" class="headerlink" title="假设检验"></a>假设检验</h2><p>统计假设检（hypothesis test）为进行学习器性能比较提供了重要依据。基于假设检验结果可推断出，若在测试集上观察到学习器A比B好，则A的泛化性能是否在统计意义上优于B，以及这个结论的把握有多大。如果二者接近的可能性比较大，则可以根据测试错误率推出泛化错误率（即检验“测试错误率和泛化错误率相等”此假设在多大的置信区域内是成立的）</p>
+<p>常用的假设检验方法</p>
+<ul>
+<li>二项检验（binomial test）：对于验证假设“泛化错误率&lt;=给定错误率（一般是测试错误率）”此假设能否被拒绝</li>
+<li>t检验（t-test）：对于多次留出法得到的测试错误率做估计</li>
+<li>交叉验证t检验<ul>
+<li>对于k折交叉验证法得到的测试错误率使用成对t检验（paired t-tests）</li>
+<li>由于进行有效的假设检验的重要前提是测试错误率均为泛化错误率的独立采样。然而，通常情况下由于样本有限，在使用交叉验证等实验估计方法时不同轮次的训练集会有一定程度的重叠。为缓解这一问题，可采用 <strong>5×2交叉验证</strong> 法</li>
+</ul>
+</li>
+</ul>
+<h2 id="McNemar-检验"><a href="#McNemar-检验" class="headerlink" title="McNemar 检验"></a>McNemar 检验</h2><p>McNemar检验用于对二分类问题，使用留出法估计学习器的测试错误率的情况。</p>
+<p>二分类问题下的留出法可获得两学习器分类结果的差别，即两者都正确、都错误、一个正确另一个错误的样本数，得到一个<strong>列联表</strong>（contingency table）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-28.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>若假设“两个学习器的性能相同”，则应有 e01=e10，从而 |e01-e10| 应服从正态分布，且均值为1，方差为 e10+e01。从而变量</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-29.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>服从自由度为1的卡方分布，即标准正态分布变量的平方，给定显著度α可以做假设检验</p>
+<h2 id="Friedman-检验-与-Nemenyi-后续检验"><a href="#Friedman-检验-与-Nemenyi-后续检验" class="headerlink" title="Friedman 检验 与 Nemenyi 后续检验"></a>Friedman 检验 与 Nemenyi 后续检验</h2><p>交叉验证t检验和McNemar检验都是在一个数据集上比较两个算法的性能。当在一组数据集上对多个算法进行比较时，一种做法是在每个数据集上分别列出两两比较的结果，在两两比较时可使用以上方法；另一种方法是使用基于算法排序的 Friedman 检验。</p>
+<p>Friedman 检验可以判断“所有算法的性能相同”此假设是否可以被拒绝，如果不可以，则需要进行后续检验（post-hoc test）进一步区分算法，常用Nemenyi后续检验。</p>
+<p>Friedman检验图可以直观地展示检验结果，其纵轴是各个算法，横轴为平均序值。对每个算法，用一个圆点显示其平均序值，以圆点为中心的横线段表示临界值域的大小。若两个算法的横线段有交叠，则说明这两个算法没有显著差别，否则即说明有显著差别。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-30.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h1 id="偏差与方差"><a href="#偏差与方差" class="headerlink" title="偏差与方差"></a>偏差与方差</h1><p>偏差-方差分解（bias-variance decomposition）试图对学习算法的期望泛化错误率进行拆解，是解释学习算法泛化性能的重要工具。</p>
+<p>对测试样本x，令yD为x在数据集中的标记，y为x的真是标记，f(x;D)为训练集D上学得模型f在x上的预测输出，在回归任务中</p>
+<p>学习算法的期望预测为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-31.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>使用样本数相同的不同训练集产生的方差为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-32.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>噪声为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-33.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>期望输出与真实标记的差别称为偏差（bias）：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-34.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>在假定噪声期望为零的情况下，有：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-35.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>即<strong>泛化误差可分解为偏差、方差与噪声之和</strong></p>
+<p>推导过程： </p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-36.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>偏差度量了学习算法的期望预测与与选择真实结果的偏离程度，即刻画了学习算法本身的拟合能力；方差度量了同样大小的训练集的变动所导致的学习性能的变化，即刻画了数据扰动所造成的影响；噪声表达了在当前任务上任何学习算法所能达到的期望泛化误差的下界，即刻画了学习问题本身的难度。</p>
+<p>偏差-方差分解说明，泛化性能是由<strong>学习算法的能力</strong>、<strong>数据的充分性</strong>以及<strong>学习任务本身的难度</strong>所共同决定的。</p>
+<p> 一般来说，偏差与方差是有冲突的，称之为偏差-方差窘境（bias-variance dilemma）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-2-37.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-25T14:14:33.683Z" itemprop="dateUpdated">2019-12-25 22:14:33</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/&title=《【机器学习】（二）模型估计与选择》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/&title=《【机器学习】（二）模型估计与选择》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【机器学习】（二）模型估计与选择》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/25/%E3%80%90ML%E3%80%911%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【机器学习】（一）机器学习基础</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/&title=《【机器学习】（二）模型估计与选择》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/&title=《【机器学习】（二）模型估计与选择》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【机器学习】（二）模型估计与选择》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEhElEQVR42u3aQXLjMAwEQP//09lrDrEzA8hbptI6pRRZIpsHgAAfj/j6+nZ9v/PsyfYNz/67uf/6ycc7LkyYMGHC9JFMs1e3H36N0j6T389H8mzumDBhwoTpHkzt615/ZpNG/DLc0djaBcaECRMmTJhefzLnSwL8/rpgA48JEyZMmP4AU1vMzUu677tmBV9MmDBhwnQ/pjaUtvfzkm773auev6wWjgkTJkyYPowpD6v3+/st2QcmTJgwYfoYpk3B9PXb/ueGOWl85knADyPBhAkTJkzHMrVBdNaSTIaeJCKbwvRsm40JEyZMmO7BNNvx5Z/Pw3/bgLzqmXwZMGHChAnTiUz5Rne2Kc2TgAQ632DPtsqYMGHChOkvMOWTz1HaX+Vfz1lXi4QJEyZMmI5laoukszCcl3o3gTyf16b5igkTJkyYTmHKA/amPNpuoWet0PxoTj0LTJgwYcJ0I6bNZrUN/JsW5mZUNRwmTJgwYboRUxJQ81ZisgCzyWzu5+P5ZeuLCRMmTJgOYbo2xM5okgm3LdX2v0+/jgkTJkyYjmXaHJ3ZH+tp95Wb+5ukBxMmTJgwnc60aRlugnSSQOwTgnw582YnJkyYMGE6i+mrvPL256wEPFuG2fNFMoQJEyZMmA5kaoNuW37NE4v2bW35eLUYmDBhwoTpcKZZY7L9cFJsnZWe28M6eQkbEyZMmDCdznTV1TZEi3rzOrTn067bmZgwYcKE6eOZ8kB71eGe9n7eepwlENHIMWHChAnTsUxtmG8bmbM35MF7k7K0TVNMmDBhwnQPplngvJZ1Bpo0O9tvYcKECROmezDNiqF5IE+Gvi/1tu3SOuHAhAkTJkwHMiWNxrYl2ZZrr/3i65HkrI//OWhMmDBhwvQ2pnZr2gLlTcc25Of0SUIQHTbChAkTJkwHMrWDaCcfrVK5qjPEPDko9vqYMGHChOlwpmRKswG1cHkC0W56V6d+MGHChAnTIUzJZ2aF3de/nQX1/H4706fvxIQJEyZMxzK1AXIWyGcHbjYRuYWLlg0TJkyYMB3I1BZeZ6G9nd7m0M+mSF30ezFhwoQJ07FMyVRnKPkCXLX1bTOjXzImTJgwYcJ0IFPS2nw9mc0xnXZK7UGfzbGhp1iYMGHChOkopquKpG0SMHvn5vjRG7u+mDBhwoTp45na3CEpxW7SiyTVyBuTm2M9mDBhwoTpTkz5q/NftQeD8vZkW4CepTuYMGHChOlOTEWAHBVY24Rgf5Bodujnh5FjwoQJE6Zjmdrm4n6ruSngFiH80gXAhAkTJkznMn2VV94C3DdH9wvZLurTMWDChAkTpmOZ2sLrZQ3C+PDN/lvtJnlWmMaECRMmTJ/MtE8C8kleu+XO77cb9Tp7woQJEyZMH8+UB+lrj+A8Lr327/yl1IsJEyZMmG7NlITta/na40FtM7Uo8mLChAkTpj/A1JZN261vspV9HbzbAz0X5BqYMGHChOkQplmwnG2bZyH8qnJwkij8MHJMmDBhwnQs0yxgJ4lF3hzNA/z7xnBB6oAJEyZMmD6L6R9lIoFyDkKWxQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
