@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【机器学习】（三）线性模型 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,机器学习">
+    <meta name="description" content="基本形式给定由d个属性描述的示例x&#x3D;(x1; x2; …; xd)，其中xi是x在第i个属性上的取值，线性模型（linear model）试图学得一个通过属性的线性组合来进行预测的函数，即">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【机器学习】（三）线性模型">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="基本形式给定由d个属性描述的示例x&#x3D;(x1; x2; …; xd)，其中xi是x在第i个属性上的取值，线性模型（linear model）试图学得一个通过属性的线性组合来进行预测的函数，即">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-4.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-5.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-6.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-7.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-8.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-9.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-10.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-11.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-12.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-13.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-14.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-15.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-16.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-17.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-18.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-19.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-20.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-21.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-22.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-23.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-24.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-25.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-26.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-3-27.png">
+<meta property="article:published_time" content="2019-12-26T12:09:17.000Z">
+<meta property="article:modified_time" content="2019-12-26T12:25:18.369Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/ML-3-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【机器学习】（三）线性模型</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【机器学习】（三）线性模型</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-26T12:09:17.000Z" itemprop="datePublished" class="page-time">
+  2019-12-26
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基本形式"><span class="post-toc-number">1.</span> <span class="post-toc-text">基本形式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#线性回归"><span class="post-toc-number">2.</span> <span class="post-toc-text">线性回归</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多元线性回归"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">多元线性回归</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#广义线性模型"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">广义线性模型</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#对数几率回归"><span class="post-toc-number">3.</span> <span class="post-toc-text">对数几率回归</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#确定w与b"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">确定w与b</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#线性判别分析"><span class="post-toc-number">4.</span> <span class="post-toc-text">线性判别分析</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多分类学习"><span class="post-toc-number">5.</span> <span class="post-toc-text">多分类学习</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一对一-与-一对其余"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">一对一 与 一对其余</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多对多"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">多对多</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常用的编码方式"><span class="post-toc-number">5.2.1.</span> <span class="post-toc-text">常用的编码方式</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#类别不平衡问题"><span class="post-toc-number">6.</span> <span class="post-toc-text">类别不平衡问题</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【ML】3线性模型"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【机器学习】（三）线性模型</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-26 20:09:17" datetime="2019-12-26T12:09:17.000Z"  itemprop="datePublished">2019-12-26</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="基本形式"><a href="#基本形式" class="headerlink" title="基本形式"></a>基本形式</h1><p>给定由d个属性描述的示例x=(x1; x2; …; xd)，其中xi是x在第i个属性上的取值，<strong>线性模型</strong>（linear model）试图学得一个通过属性的线性组合来进行预测的函数，即</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>写成向量形式即</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<ul>
+<li>确定w与b后模型即随之确定</li>
+<li><strong>非线性模型</strong>（nonlinear model）可在线性模型基础上通过引入层级结构或高维映射得到</li>
+<li>线性模型具有很好的<strong>解释性</strong>（comprehensibility）</li>
+</ul>
+<h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><p>线性回归（linear regression）目的即确定一个w和b，是的f(x)与y的均方误差最小化。</p>
+<ul>
+<li>均方误差对应欧几里得距离即欧氏距离（Euclidean distance）</li>
+<li>基于均方误差最小化进行模型求解的方法称最小二乘法（least square method）</li>
+<li>最小二乘法即试图找到一条直线，使所有样本到直线上的欧氏距离之和最小</li>
+</ul>
+<p>w和b最优解的闭式（closed-form）解为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="多元线性回归"><a href="#多元线性回归" class="headerlink" title="多元线性回归"></a>多元线性回归</h2><p>更一般的情形是对于d个属性描述的变量，进行多元线性回归（multivariate linear regression）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>为便于讨论，令w’=(w;b)，数据集D表示为一个m×(d+1)大小的矩阵X，器每一行对应一个示例，每行前d个元素对应于示例的d个属性值，最后一个元素恒置为1，即</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-5.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>标记向量为y，则有</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-6.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>令</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-7.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>并将其对w’求导得到：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-8.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>令其为0可以得到w’的最优解的闭式解</p>
+<ul>
+<li>若XTX为满秩矩阵（full-rank matrix）或正定矩阵（positive definite     matrix）时，则求得<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-9.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+线性回归模型为<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-10.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>若XTX不是满秩矩阵（往往不是），则会得到多个可行解，由归纳偏好选择哪一组解为输出，常见的做法为引入正则化（regularization）项</li>
+</ul>
+<h2 id="广义线性模型"><a href="#广义线性模型" class="headerlink" title="广义线性模型"></a>广义线性模型</h2><p>广义线性模型（generalized linear model）即当f与x不是标准的线性关系时，可以选取一个恰当的单调可微函数g，令</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-11.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>得到广义线性模型，g称为联系函数（link function）</p>
+<p>例如当g(·)=ln(·)时可以得到对数线性回归（log-linear regression）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-12.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h1 id="对数几率回归"><a href="#对数几率回归" class="headerlink" title="对数几率回归"></a>对数几率回归</h1><p>对于二分类任务，可以通过将输出标记y归到0或1，从而使用线性回归的方法，即将预测值转换成0/1值，可以使用单位阶跃函数（unit-step function）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-13.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>但是由于其不连续，可以使用单位阶跃函数的替代函数（surrogate function）并希望其单调可微，从而可以选取对数几率函数（logistic function），一种Sigmoid函数（即形似S的函数）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-14.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-15.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>它可以将z值转换成一个0/1值，从而</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-16.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>将y视为样本x作为正例的可能性，则1-y是其反例可能性，两者的比值成为几率（odds），反映了x作为正例的相对可能性，对其取对数即对数几率（log odds，或logit）</p>
+<h2 id="确定w与b"><a href="#确定w与b" class="headerlink" title="确定w与b"></a>确定w与b</h2><p>通过<strong>极大似然法</strong>（maximum likelihood method）估计w和b，给定数据集(xi,yi)，对率回归模型最大化对数似然（log-likelihood）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-17.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>上式最大化等价于最小化下式</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-18.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>该式是关于β的高阶可导连续凸函数，根据<strong>凸优化理论</strong>可以使用梯度下降法、牛顿法等求其最优解得到：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-19.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h1 id="线性判别分析"><a href="#线性判别分析" class="headerlink" title="线性判别分析"></a>线性判别分析</h1><p>线性判别分析（Linear Discriminant Analysis，LDA）是一种经典的线性学习方法，适用于二分类问题。</p>
+<p>LDA的<strong>思想</strong>为：给定训练样例集，设法将样例投影到一条直线上，使得同类样例的投影点尽可能接近、异类样例的投影点尽可能远离；在对新样本进行分类时，将其投影到同样的这条直线上，再根据投影点的位置来确定新样本的类别。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-20.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<ul>
+<li>类内散度矩阵（within-class scatter matrix）用于表示每一个类内的分散程度，希望其越小越好<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-21.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>类间三度矩阵（between-class scatter     matrix）用于表示类与类之间的分散程度，希望其越大越好<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-22.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+</li>
+</ul>
+<p>LDA欲最大化的目标即Sb和Sw的广义瑞利商（generalized Rayleigh quotient）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-23.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>求算方式：由于不失一般性（J式中分子和分母都是关于w的二次项，因此J的解与w的长度无关，只与其方向有关），可以设分母为1，等价于等式条件约束下的凸优化问题：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-24.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>使用拉格朗日乘子可以求解其对偶问题，从而求解该优化问题，考虑到数值解的稳定性，一般会将Sw进行奇异值分解</p>
+<ul>
+<li>LDA可从贝叶斯决策理论的角度来阐释，并可证明，当两类数据同先验、满足高斯分布且协方差相等时，LDA可达到最优分类</li>
+<li>LDA可以推广到多分类任务中，需要定义全局散度矩阵</li>
+<li>LDA也常被视为一种经典的监督降维技术</li>
+</ul>
+<h1 id="多分类学习"><a href="#多分类学习" class="headerlink" title="多分类学习"></a>多分类学习</h1><p>多分类学习的基本思路是拆解法，即将多分类任务拆为若干个二分类任务求解。先对问题进行拆分，然后为拆出的每个二分类任务训练一个分类器；在测试时，对这些分类器的预测结果进行集成以获得最终的多分类结果。</p>
+<p>经典的拆分策略有</p>
+<ul>
+<li>一对一（One vs. One，OvO)</li>
+<li>一对其余（One vs. Rest，OvR)</li>
+<li>多对多（Many vs. Many，MvM）</li>
+</ul>
+<h2 id="一对一-与-一对其余"><a href="#一对一-与-一对其余" class="headerlink" title="一对一 与 一对其余"></a>一对一 与 一对其余</h2><p>假设有N个类别。</p>
+<ul>
+<li>OvO将这N个类别两两配对，从而产生N(N-1)/2个二分类任务。在测试阶段，新样本将同时提交给所有分类器，于是将得到N(N-1)/2个分类结果，最终结果可通过投票产生：即把被预测得最多的类别作为最终分类结果。</li>
+<li>OvR每次将一个类的样例作为正例、所有其他类的样例作为反例来训练N个分类器。在测试时若仅有一个分类器预测为正类，则对应的类别标记作为最终分类结果。若有多个分类器预测为正类，则通常考虑各分类器的预测置信度,选择置信度最大的类别标记作为分类结果。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-25.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<ul>
+<li>OvR只需训练N个分类器，而OvO需训练N(N-1)/2个分类器。因此，OvO的存储开销和测试时间开销通常比OvR更大</li>
+<li>在训练时，OvR的每个分类器均使用全部训练样例，而OvO的每个分类器仅用到两个类的样例，因此，在类别很多时，OvO的训练时间开销通常比OvR更小</li>
+</ul>
+<h2 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h2><p>MvM是每次将若干个类作为正类，若干个其他类作为反类（OvO和OvR是MvM的特例）。MvM的正、反类构造可以使用最常用的纠错输出码（Error Correcting Output Codes，ECOC)技术。</p>
+<p>ECOC是将编码的思想引入类别拆分，并尽可能在解码过程中具有容错性。ECOC工作过程主要分为两步</p>
+<ul>
+<li>编码：对N个类别做M次划分，每次划分将一部分类别划为正类，一部分划为反类，从而形成一个二分类训练集；这样一共产生M个训练集，可训练出M个分类器</li>
+<li>解码：M个分类器分别对测试样本进行预测，这些预测标记组成一个编码。将这个预测编码与每个类别各自的编码进行比较，返回其中距离最小的类别作为最终预测结果</li>
+</ul>
+<h3 id="常用的编码方式"><a href="#常用的编码方式" class="headerlink" title="常用的编码方式"></a>常用的编码方式</h3><ul>
+<li>二元码，每个类别分别指定为正类和反类</li>
+<li>三元码，每个类别可以指定为正类、反类或者停用类 </li>
+</ul>
+<p><img src="http://cdn.littlegenius.xin/ML-3-26.png" alt=""></p>
+<p>纠错输出码具有一定的容错能力</p>
+<h1 id="类别不平衡问题"><a href="#类别不平衡问题" class="headerlink" title="类别不平衡问题"></a>类别不平衡问题</h1><p>类别不平衡（class-imbalance）指分类任务中不同类别的训练样例数目差别很大的情况。一般的应对方式是再缩放（rescaling）</p>
+<ul>
+<li>直接对训练集里的多的一类样例进行欠采样（undersampling），即去除一些多的一类样例，使得正、反例数目接近，然后再进行学习</li>
+<li>直接对训练集里的少的一类样例进行过采样（oversampling），即增加一些少的一类样例，使得正、反例数目接近，然后再进行学习</li>
+<li>直接基于原始训练集进行学习，但在用训练好的分类器进行预测时，将样例数量比例嵌入决策过程，称为阙值移动（threshold-moving）<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-3-27.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+</li>
+</ul>
+<p><strong>注意！</strong></p>
+<ul>
+<li>欠采样法的时间开销通常远小于过采样法，因为前者丢弃了很多样例，使得分类器训练集远小于初始训练集，而过采样法增加了很多样例，其训练集大于初始训练集</li>
+<li>过采样法不能简单地对初始样例进行重复采样，否则会招致严重的过拟合；过采样法的代表性算法SMOTE是通过对训练集里的一类样例进行插值来产生额外的样例</li>
+<li>欠采样法若随机丢弃样例，可能丢失一些重要信息；欠采样法的代表性算法Easy Ensemble则是利用集成学习机制，将少的一类样例划分为若干个集合供不同学习器使用，这样对每个学习器来看都进行了欠采样，但在全局来看却不会丢失重要信息</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-26T12:25:18.369Z" itemprop="dateUpdated">2019-12-26 20:25:18</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/&title=《【机器学习】（三）线性模型》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/&title=《【机器学习】（三）线性模型》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【机器学习】（三）线性模型》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/25/%E3%80%90ML%E3%80%912%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【机器学习】（二）模型估计与选择</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/&title=《【机器学习】（三）线性模型》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/&title=《【机器学习】（三）线性模型》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【机器学习】（三）线性模型》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJklEQVR42u3aS47iQBAFQO5/6Z7tSCPDe1kwwtnhFaKNq6K8yM7P4xFfP8H1951Xv7q652qt599f3fm2CxsbG/sm7ByTbKg9iOf3/7tK8vn587GxsbG3smfLfO5QTiLOcws2NjY2dvurnJE8P09ysLGxsbHzAJZvNAG3wQ8bGxsbe/Yvfl6Uz7eVb/q/1tKwsbGxv559svVv+/yR/jY2Njb2F7N/yuv8CXlobBvPxbrY2NjYi9h5AEiauG0IzIPQrDH8Yp/Y2NjYi9hJ63RWuMlD4ElJ6ChFwcbGxr45u23Z5g2DNuS0zYakbXwZJrGxsbGXsvPyTXsQbarQlrfasR5sbGzsTey8DPSJEtLJgSavarZzbGxs7Duy22JQWwaaAU7CWJIsYWNjY+9jvyvNaINT/k1+fzGyg42NjX1z9kmZpk05TlKXWeJx+StsbGzsRex8c/nYTdu4nT0tp74oKmFjY2PfnN2W3fM27Ulbt01p6heGjY2NvY6dpxl52pAHlTYVOS9yYWNjY29izx533o5tC0wngz6XK2JjY2OvYOfbnaUibToxW70dM8LGxsbexD4p9LRbyUNmXqhqm77Y2NjY+9ht2X12KC1gdk8eRLGxsbE3sfMwNksezu/MWwh5iwIbGxt7E3s2CnOy/Cz45YEqOkRsbGzsdezzAZq2kJQP8bQFo+gVYmNjY69jzwZu8uCXJzazUZ76WLGxsbHXsfPy+qx5cFKimh30i9QFGxsbexF71hJIJoDycn8CzkNaXg7DxsbG3sRui0pt2EuCUBsI87092pPDxsbGviF7ljAkjYHkye8dFSoOAhsbG3spuw1LyV8/cax5yoGNjY39e9izUnueopw0lduWcJSWYGNjY69gv3db58M07R6GBSxsbGzsRez8mqUf5+2EJIC17WdsbGzsfex26+0Cbbn/JFAVR4mNjY29jt3WomYH1JaQ2sZAkRRhY2Nj/2J2Ur5JEpJ3JSdFc/ckgGFjY2MvYs8qVbNxnyEpGQbCxsbGXsd+77ZmJf523bx5fNQewMbGxv569myQcTbEMxuvyZ+QhDFsbGzsRew/4aS797WVExUAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
