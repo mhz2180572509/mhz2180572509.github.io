@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【机器学习】（四）决策树 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,机器学习">
+    <meta name="description" content="基本流程决策树（decision tree）是基于树结构进行决策的，是一种符合人类面临决策问题时的思考方式。采用了分而治之（divide-and-conquer）的策略。 决策树建立的基本流程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【机器学习】（四）决策树">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="基本流程决策树（decision tree）是基于树结构进行决策的，是一种符合人类面临决策问题时的思考方式。采用了分而治之（divide-and-conquer）的策略。 决策树建立的基本流程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-4.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-5.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-6.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-7.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-8.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-9.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-10.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-11.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-12.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-13.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-14.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-15.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-17.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-4-16.png">
+<meta property="article:published_time" content="2019-12-30T13:36:20.000Z">
+<meta property="article:modified_time" content="2019-12-30T13:43:54.889Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/ML-4-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【机器学习】（四）决策树</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【机器学习】（四）决策树</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-30T13:36:20.000Z" itemprop="datePublished" class="page-time">
+  2019-12-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基本流程"><span class="post-toc-number">1.</span> <span class="post-toc-text">基本流程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#划分选择"><span class="post-toc-number">2.</span> <span class="post-toc-text">划分选择</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#信息增益"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">信息增益</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#增益率"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">增益率</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基尼指数"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">基尼指数</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#剪枝处理"><span class="post-toc-number">3.</span> <span class="post-toc-text">剪枝处理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#连续与缺失值"><span class="post-toc-number">4.</span> <span class="post-toc-text">连续与缺失值</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#连续值处理"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">连续值处理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#缺失值处理"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">缺失值处理</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多变量决策树"><span class="post-toc-number">5.</span> <span class="post-toc-text">多变量决策树</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【ML】4决策树"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【机器学习】（四）决策树</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-30 21:36:20" datetime="2019-12-30T13:36:20.000Z"  itemprop="datePublished">2019-12-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h1><p><strong>决策树</strong>（decision tree）是基于树结构进行决策的，是一种符合人类面临决策问题时的思考方式。采用了<strong>分而治之</strong>（divide-and-conquer）的策略。</p>
+<p>决策树建立的基本流程</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>决策树的构建是一个递归的 过程，决策树生成算法中有三种情形会导致递归：</p>
+<ul>
+<li>当前结点包含的样本全属于同一类别，无需划分</li>
+<li>当前属性集为空，或是所有样本在所有属性上取值相同，无法划分</li>
+<li>当前结点包含的样本集合为空，不能划分</li>
+</ul>
+<h1 id="划分选择"><a href="#划分选择" class="headerlink" title="划分选择"></a>划分选择</h1><p>一般而言，随着划分过程不断进行，希望决策树的分支结点所包含的样本尽可能属于同一类别，即结点的“纯度”（purity）越来越高。有一些用来衡量和选择划分方式的基准与方法。 </p>
+<h2 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h2><p><strong>信息熵</strong>（information entropy）是度量样本集合纯度最常用的一种指标。</p>
+<p>假定当前样本集合D中第k类样本所占的比例为pk(k=1,2,…, |y|)，则D的信息熵定义为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>Ent(D)的值越小，D的纯度越高</p>
+<p>假设离散属性a有V个可能的取值{a1, a2, a3, …, aV}，若使用a来对样本集D进行划分，则会产生V个分支节点。可以计算用属性a对样本集D进行划分所获得的<strong>信息增益</strong>（information gain）为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>一般而言，信息增益越大，则意味着使用属性a来进行划分所获得的纯度提升越大，因此，如果选择信息增益进行决策树划分属性的选择，则选择属性满足：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p><strong>信息增益准则对可取值数目较多的属性有所偏好</strong></p>
+<h2 id="增益率"><a href="#增益率" class="headerlink" title="增益率"></a>增益率</h2><p>为了减少信息增益准则对可取值数目较多的属性有所偏好而带来的不利影响，可以使用<strong>增益率</strong>（gain ratio）来选择最优化分属性。增益率定义为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-5.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>其中</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-6.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>成为属性a的<strong>固有值</strong>（intrinsic value）。属性a的可能取值数目越多，IV(a)的值通常也会越大。</p>
+<p>基于增益率的属性划分采用一个启发式判定：<strong>先从候选划分属性中找出信息增益高于平均水平的属性，再从中选择增益率最高的属性</strong></p>
+<p><strong>信息增益率准则对可取值数目较少的属性有所偏好</strong></p>
+<h2 id="基尼指数"><a href="#基尼指数" class="headerlink" title="基尼指数"></a>基尼指数</h2><p><strong>CART**</strong>决策树<strong>（Classfication and Regression Tree）使用</strong>基尼指数<strong>（Gini index）选择划分属性。数据集D的纯度可以使用</strong>基尼值**来衡量：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-7.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>Gini(D)反映了从数据集D中随机抽取两个样本，其类别标记不一致的概率，因此Gini(D)越小，数据集D的纯度越高。 </p>
+<p>属性a的基尼指数定义：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-8.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>属性划分时选择：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-9.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h1 id="剪枝处理"><a href="#剪枝处理" class="headerlink" title="剪枝处理"></a>剪枝处理</h1><p><strong>剪枝</strong>（pruning）是决策树学习算法对付“过拟合”的主要手段。</p>
+<ul>
+<li><strong>预剪枝</strong>（prepruning）：在决策树生成过程中，对每个结点在划分前先进行估计，若当前结点的划分不能带来决策树泛化性能提升，则停止划分并将当前结点标记为叶结点。</li>
+<li><strong>后剪枝</strong>（postpruning）：先从训练集生成一棵完整的决策树，然后自底向上地对非叶结点进行考察，若将该结点对应的子树替换为叶结点能带来决策树泛化性能提升，则将该子树替换为叶结点。</li>
+</ul>
+<p>两种剪枝处理的优缺点比较：</p>
+<ul>
+<li>预剪枝显著减少了决策树的训练时间开销和测试时间开销；后剪枝的训练时间开销比未剪枝和预剪枝都大得多</li>
+<li>预剪枝基于贪心算法本质禁止一些分支展开，给预剪枝决策树带来了欠拟合的风险；后剪枝决策树通常比预剪枝决策树保留了更多的分支，且其欠拟合风险很小，泛化性能往往优于预剪枝</li>
+</ul>
+<h1 id="连续与缺失值"><a href="#连续与缺失值" class="headerlink" title="连续与缺失值"></a>连续与缺失值</h1><h2 id="连续值处理"><a href="#连续值处理" class="headerlink" title="连续值处理"></a>连续值处理</h2><p>由于连续属性的可取值数目不在有限，所以需要进行<strong>连续属性的离散化技术</strong>。</p>
+<p>连续值处理的最常用方式：<strong>二分法</strong>（bi-partition）</p>
+<p>将连续属性值使用一个划分点t进行划分，划分成Dt+和Dt-两个子集，对于相邻的两个属性值ai和ai+1，t可以去其中间值，对于连续属性a，可以考察包含n-1个元素的候选划分点集合：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-10.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>然后像离散属性值一样考察这些划分点，选取最优的划分点进行样本集合的划分，例如Gain公式可以修改成：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-11.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>计算后选择使得Gain(D, a, t)最大化的划分点 </p>
+<h2 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h2><p>当样本数据中有些样本在某些属性下出现数据缺失的情况是，需要有两个问题进行解决：</p>
+<ul>
+<li>如何在属性值缺失的情况下进行划分属性选择？</li>
+<li>给定划分属性，若样本在该属性上的值缺失，如何对样本进行划分？</li>
+</ul>
+<p>给定训练集D和属性a，令D’a表示D中在属性a上没有缺失值的样本子集。对于问题第一点，仅可根据D’a来判断属性a的优劣。</p>
+<p>假定我们为每个样本x赋予一个权重wx，并定义：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-12.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>从而可以将信息增益推广为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-13.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>其中</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-14.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>对于问题的第二点，若样本x在划分属性a上的取值已知，则将x划入与其取值对应的子结点，且样本权值在子结点中保持为wx，若样本x在划分属性a上的取值未知，则将x同时划入所有子结点，且样本权值在与属性值av对应的子结点中调整为 rv×wx，即让同一个样本以不同的概率划入到不同的子结点中去。</p>
+<h1 id="多变量决策树"><a href="#多变量决策树" class="headerlink" title="多变量决策树"></a>多变量决策树</h1><p>当把每个属性视为坐标空间中的一个坐标轴，则d个属性描述的样本就对应了d维空间中的一个数据点，对样本分类则意味着在这个坐标空间中寻找不同类样本之间的分类边界。决策树所形成的分类边界有一个明显的特点：轴平行（axis-parallel），即它的分类边界由若干个与坐标轴平行的分段组成：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-15.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>若使用斜线划分边界，则可以视为<strong>多变量决策树</strong>（multivariate decision tree），实现“斜划分”甚至更复杂的划分，即每个非叶节点变为属性的线性组合，形如</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-17.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>的一个线性分类器，学习的过程也是确定wi的过程</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-4-16.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+
+<blockquote>
+<p>全文参考：周志华 著 《机器学习》</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-30T13:43:54.889Z" itemprop="dateUpdated">2019-12-30 21:43:54</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/" target="_blank" rel="external">https://blogs.littlegenius.xin/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/&title=《【机器学习】（四）决策树》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/&title=《【机器学习】（四）决策树》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【机器学习】（四）决策树》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/26/%E3%80%90ML%E3%80%913%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【机器学习】（三）线性模型</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/&title=《【机器学习】（四）决策树》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/&title=《【机器学习】（四）决策树》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【机器学习】（四）决策树》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADKElEQVR42u3aQZKDMAwEwPz/09kH7EJGEltFRHNKJZRxOwfhkV+v+Hr/un7/ev45/+bouUfjn48wurCxsbG/hP0+var3nC/H0T0JIFncZJ7Y2NjYW9n5Y6oF5vz+BDlZ+sPvsbGxsR/MzgtVUkjyqSdlDxsbGxu79+pf3VrkG498g4SNjY2Nnb/i5zHQZEvTG/NfsjRsbGzs27Pnj7nP53/pb2NjY2PfmP0uXnmolDxl3gboXdjY2Nib2L04vkfqhUHVcQrzx8bGxl7Ergb9eViTtwomkdBoi4KNjY29gt0rA3lLNSk5eVnK/4YPZRIbGxt7Ebs3xeQBkwXNi1k1tMLGxsbezb5sZ9MKpM4LYT5+8ldhY2Njb2L3Xt97oXy1KCabjSoeGxsbexN7EgzlkdNkW9IreNFJJWxsbOwHsCdlo3fIphf0V5cAGxsbex+7d1AmLxt5ptWDlf8MbGxs7EXsax85iYoK5afY6/hwDzY2NvaXs6ut1mq0lC9obzmaURQ2Njb2InbSsp0Up2pUVG0/VDckhU41NjY29lexe3HPJKzvkfL2cL6U2NjY2JvYySTOwZPW76S+VCMwbGxs7E3sa1/rz8G9wzrV2SZzwMbGxt7Eztu3kwipR6o2ifMih42Njb2JXW3x5qF/vhyTmVQbEtjY2Nj72NVWbi/6qS7lJDAqKLCxsbEXsfOYPm8t9MKgfORJ0cXGxsbexK5OqNdCqMb6eUmrNoOxsbGxt7Krh3hexetdvPJjPeUgqVeNsbGxsW/Mzid67SGeHJC3KPLFwsbGxt7HrpaTXqyTjJZvVHrbp8ODO9jY2Ngr2L1ykhetvP2QHOtJgiRsbGzsp7EnoUy+KPkTE/akMYyNjY29g90L7ucRz7XIpOBd0K/AxsbGviW71zDIf50f6KkWy3zDg42Njb2J3TtAk5e63rJWmw3lEoiNjY29jt0M2eNWQb5hqLZvm1EXNjY29uPZ8wM681ApD7D+GAcbGxv7wezJ1qJ3HCcvpXnzABsbG3sfu7phqJa6vG2cL8ek8YyNjY29iZ0XpLzVWsVXl7VKarYusLGxse/O/gG+AnLekLYjswAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
