@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【机器学习】（五）神经网络 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,机器学习">
+    <meta name="description" content="神经元模型神经网络（neural networks）定义为：神经网络是由具有适应性的简单单元组成的广泛并行互连的网络，它的组织能够模拟生物神经系统对真实世界物体所作出的交互反应。 神经网络中最基本的成分是神经元（neuron）模型，其中最典型的是“M-P神经元模型”，其由多个输入信号，神经元模型通过将输入信号在加权求和，然后与该神经元阈值比较，通过激活函数（activation function）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【机器学习】（五）神经网络">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2020/01/02/%E3%80%90ML%E3%80%915%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="神经元模型神经网络（neural networks）定义为：神经网络是由具有适应性的简单单元组成的广泛并行互连的网络，它的组织能够模拟生物神经系统对真实世界物体所作出的交互反应。 神经网络中最基本的成分是神经元（neuron）模型，其中最典型的是“M-P神经元模型”，其由多个输入信号，神经元模型通过将输入信号在加权求和，然后与该神经元阈值比较，通过激活函数（activation function）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-5-1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-5-2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-5-3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-5-4.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-5-5.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-5-7.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-5-8.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-5-9.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-5-10.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/ML-5-11.png">
+<meta property="article:published_time" content="2020-01-02T11:17:32.000Z">
+<meta property="article:modified_time" content="2020-01-02T11:32:55.353Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/ML-5-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【机器学习】（五）神经网络</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【机器学习】（五）神经网络</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-02T11:17:32.000Z" itemprop="datePublished" class="page-time">
+  2020-01-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#神经元模型"><span class="post-toc-number">1.</span> <span class="post-toc-text">神经元模型</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#感知机与多层网络"><span class="post-toc-number">2.</span> <span class="post-toc-text">感知机与多层网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多层前馈神经网络（multi-layer-feedforward-neural-networks）"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">多层前馈神经网络（multi-layer feedforward neural networks）</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#误差逆传播算法"><span class="post-toc-number">3.</span> <span class="post-toc-text">误差逆传播算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#标准BP算法"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">标准BP算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#链式求导法则"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">链式求导法则</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#积累误差逆传播算法"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">积累误差逆传播算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#BP神经网络的过拟合问题"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">BP神经网络的过拟合问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#局部极小与全局最小"><span class="post-toc-number">4.</span> <span class="post-toc-text">局部极小与全局最小</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【ML】5神经网络"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【机器学习】（五）神经网络</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-02 19:17:32" datetime="2020-01-02T11:17:32.000Z"  itemprop="datePublished">2020-01-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="神经元模型"><a href="#神经元模型" class="headerlink" title="神经元模型"></a>神经元模型</h1><p><strong>神经网络</strong>（neural networks）定义为：神经网络是由具有适应性的简单单元组成的广泛并行互连的网络，它的组织能够模拟生物神经系统对真实世界物体所作出的交互反应。</p>
+<p>神经网络中最基本的成分是<strong>神经元</strong>（neuron）模型，其中最典型的是“M-P神经元模型”，其由多个输入信号，神经元模型通过将输入信号在加权求和，然后与该神经元阈值比较，通过<strong>激活函数</strong>（activation function）处理后产生结果输出。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-5-1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>理想的激活函数为阶跃函数，但是为避免其不连续不光滑的性质，常用Sigmoid函数代替作为激活函数，由于其将输入值挤压到了(0,1)的输出范围，因此也称<strong>挤压函数</strong>（squashing function）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-5-2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>把许多个这样的神经元按一定的层次结构连接起来,就得到了神经网络 </p>
+<h1 id="感知机与多层网络"><a href="#感知机与多层网络" class="headerlink" title="感知机与多层网络"></a>感知机与多层网络</h1><p><strong>感知机</strong>（Perceptron）由两层神经元组成，输入层接收外界输入信号后传递给输出层，输岀层是M-P神经元，亦称阈值<strong>逻辑单元</strong>（threshold logic unit）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-5-3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<ul>
+<li>感知机能够很简单的实现逻辑与、或、非运算</li>
+<li>通过训练集可以对感知机进行训练，训练的过程即对阈值参数、权重参数进行调整的过程，其中η称<strong>学习率</strong>（learning rate）</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-5-4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>感知机只拥有单层<strong>功能神经元</strong>（functional neuron），只能解决<strong>线性可分</strong>（linearly separable）问题，感知机在处理线性可分问题的过程中一定会<strong>收敛</strong>（converge），对于非线性可分问题则会发生<strong>振荡</strong>（fluctuation）：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-5-5.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>要解决非线性可分问题，需要考虑多层功能神经元，输出层与输入层之间的层神经元，称<strong>隐层</strong>或<strong>隐含层</strong>（hidden layer），隐含层和输出层神经元都是拥有激活函数的功能神经元。比如使用两层功能神经元解决异或问题：</p>
+<h2 id="多层前馈神经网络（multi-layer-feedforward-neural-networks）"><a href="#多层前馈神经网络（multi-layer-feedforward-neural-networks）" class="headerlink" title="多层前馈神经网络（multi-layer feedforward neural networks）"></a>多层前馈神经网络（multi-layer feedforward neural networks）</h2><p><strong>多层前馈神经网络</strong>（multi-layer feedforward neural networks）由输入层、输入层和隐层组成，其中输入层神经元接收外界输入，隐层与输出层神经元对信号进行加工，最终结果由输出层神经元输出。每层神经元与下层神经元全互连，神经元之间不存在同层连接，也不存在跨层连接。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-5-7.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>多层前馈神经网络的训练过程即调整各个神经元结构中的阈值与神经元之间的<strong>连接权</strong>（connection weight）的过程</p>
+<h1 id="误差逆传播算法"><a href="#误差逆传播算法" class="headerlink" title="误差逆传播算法"></a>误差逆传播算法</h1><p><strong>误差逆传播</strong>（error BackPropagation，BP）算法是一种多层网络的训练过程的调整参数的算法，一般的神经网络大多是使用BP算法训练的，因此也称BP网络</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-5-8.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>上图中的网络有(d+l+1)q+l个参数需确定：输入层到隐层的d×q个权值、隐层到输出层的q×l个权值、q个隐层神经元的阈值、l个输出层神经元的阈值。</p>
+<h2 id="标准BP算法"><a href="#标准BP算法" class="headerlink" title="标准BP算法"></a>标准BP算法</h2><p>标准BP算法每次仅针对一个训练样例更新连接权和阈值，其更新规则是基于单个的均方误差推导而得。</p>
+<p>对于训练样例(xk,yk)，设神经网络的输出为</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-5-9.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>则该网络在样例(xk,yk)上的均方误差为</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-5-10.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>BP是一个迭代学习算法，在迭代的每一轮中采用广义的感知机学习规则对参数进行更新估计，任意参数v的更新估计式为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/ML-5-11.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="链式求导法则"><a href="#链式求导法则" class="headerlink" title="链式求导法则"></a>链式求导法则</h2><p>BP算法基于<strong>梯度下降</strong>（gradient descent）策略，以目标的负梯度方向对参数进行调整。因此对于任意参数v，均方误差Ek均可以对其求偏导从而得到梯度，当v与输出层有多个层次间隔时，需要使用链式求导法则求得梯度。</p>
+<h2 id="积累误差逆传播算法"><a href="#积累误差逆传播算法" class="headerlink" title="积累误差逆传播算法"></a>积累误差逆传播算法</h2><p>累积误差逆传播（accumulated error backpropagation）算法是基于累积误差最小化的更新规则。</p>
+<ul>
+<li>标准BP算法每次更新只针对单个样例，参数更新得非常频繁，对不同样例进行更新的效果可能出现“抵消”现象。为了达到同样的累积误差极小点，标准BP算法往往需进行更多次数的迭代。</li>
+<li>累积BP算法直接针对累积误差最小化，在读取整个训练集D一遍后才对参数进行更新，其参数更新的频率低得多。</li>
+<li>在很多任务中，累积误差下降到一定程度之后，进步下降会非常缓慢，标准BP往往会更快获得较好的解，尤其是在训练集D非常大时更明显。 </li>
+</ul>
+<h2 id="BP神经网络的过拟合问题"><a href="#BP神经网络的过拟合问题" class="headerlink" title="BP神经网络的过拟合问题"></a>BP神经网络的过拟合问题</h2><p>可以使用两种策略缓解BP网络的过拟合问题：</p>
+<ul>
+<li>早停（early stopping）：将数据分成训练集和验证集，训练集用来计算梯度、更新连接权和阙值，验证集用来估计误差，若训练集误差降低但验证集误差升高，则停止训练，同时返回具有最小验证集误差的连接权和阈值</li>
+<li>正则化（regularization）：在误差目标函数中增加一个用于描述网络复杂度的部分</li>
+</ul>
+<h1 id="局部极小与全局最小"><a href="#局部极小与全局最小" class="headerlink" title="局部极小与全局最小"></a>局部极小与全局最小</h1><p>当在寻找函数的全局最小值时，由于算法问题被困在了局部极小值处，无法跳出局部极小的情况称为“参数寻优陷入了局部极小”，为了跳出局部极小，可以有以下一些解决方案：</p>
+<ul>
+<li>以多组不同参数值初始化多个神经网络，按标准方法训练后，取其中误差最小的解作为最终参数。</li>
+<li>使用模拟退火（simulated annealing）技术，模拟退火在每一步都以一定的概率接受比当前解更差的结果，从而有助于跳出局部极小。</li>
+<li>使用随机梯度下降。随机梯度下降法在计算梯度时加入了随机因素。即便陷入局部极小点，计算出的梯度仍可能不为零，有机会跳出局部极小继续搜索。</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-01-02T11:32:55.353Z" itemprop="dateUpdated">2020-01-02 19:32:55</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2020/01/02/%E3%80%90ML%E3%80%915%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" target="_blank" rel="external">https://blogs.littlegenius.xin/2020/01/02/%E3%80%90ML%E3%80%915%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2020/01/02/%E3%80%90ML%E3%80%915%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/&title=《【机器学习】（五）神经网络》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2020/01/02/%E3%80%90ML%E3%80%915%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/&title=《【机器学习】（五）神经网络》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2020/01/02/%E3%80%90ML%E3%80%915%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【机器学习】（五）神经网络》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2020/01/02/%E3%80%90ML%E3%80%915%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2020/01/02/%E3%80%90ML%E3%80%915%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/30/%E3%80%90ML%E3%80%914%E5%86%B3%E7%AD%96%E6%A0%91/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【机器学习】（四）决策树</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2020/01/02/%E3%80%90ML%E3%80%915%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/&title=《【机器学习】（五）神经网络》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2020/01/02/%E3%80%90ML%E3%80%915%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/&title=《【机器学习】（五）神经网络》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2020/01/02/%E3%80%90ML%E3%80%915%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【机器学习】（五）神经网络》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2020/01/02/%E3%80%90ML%E3%80%915%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2020/01/02/%E3%80%90ML%E3%80%915%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADMUlEQVR42u3a0W6kMAwF0P7/T3dfV6oG7nWo1PEcnkYIQk6QxtjO11d8fP93vDpzfeXP39dnfp5/NdqrKx84sLGxsd+E/X15JJhktORZLfh6IW7GxMbGxl7Hzh+T33uNv77+JOJE88TGxsbGDtKVNtjMnoWNjY2Nff7pnwSh/MrfS5CwsbGxd7NPkofZks1GSwLYw7U0bGxs7D/Pzruif//3r/S3sbGxsf8w+7s82jbAeasgOVMrsLGxsRexnyr9X5eQrotKyRwScD1/bGxs7BXsZ4NE3o5tSe2i3CwlNjY29jp2ngzkpfz23uRM/npuZoKNjY29iD37P29TiDZVaINlW7TCxsbG3sQ+//RvJ902FWaLe/MKsbGxsRex23J8u0Umv3cWwNp5YmNjY29lt7nLSahrQ2D+3LrNgI2Njb2C3ZZp8pL9rKiU/G4DFTY2NvZudp5atO3VHNkuREt9+QKwsbGxV7DPk408/MzypDw5KZrN2NjY2OvYN/GtTAlm5ftZgtGmQy8zMGxsbOy3ZZ8UcfJifXv+2Y0+L8MbNjY29jr2bNA2YTiaaFz2il4DNjY29gr2yfaXpyZxUthqExhsbGzsrezzUHESwE6uGW70wcbGxl7EzoebhbTzK08aBjfXYGNjYy9ltxtx2lZxvrhJQzcPWjcBDBsbG3sRuz2izY7xJptkQZMxj+I2NjY29luxr4tKswJQkroky1QkFXGow8bGxt7HTqg54KnmQZICtc2MmxGwsbGx35ydJw9JyMkDWNsMmDUVopuxsbGxV7BnBaZZEEpSoLb1Wy8cNjY29jp2kjC0gXDWVGiTnLblgI2Njb2VPfu4z9uxbWlptjT5ZiNsbGzsT2DPWq2/kWa07Ki1gI2Njb2CPSsh5aQkRTkv+ufPxcbGxt7Hbje+JJ/47ZWzlKbeizTb9IONjY39JuzzxOB6RfNC0qzw1J7HxsbG3sqelZBONlwmi9U2jPMxsbGxsT+Z3W6UyZOQIvyUSU6RjmFjY2N/AHtWqUpSnRNq27TAxsbG3sc+mVYeeNqCURvMipYDNjY29iJ23uhtC0OzxONkhLxRjY2Njb2C/Q8ivQ2YZqYP7AAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
