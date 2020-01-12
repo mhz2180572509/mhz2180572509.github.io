@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blogs.littlegenius.xin/"/>
-  <updated>2020-01-04T08:12:13.610Z</updated>
+  <updated>2020-01-12T09:49:19.479Z</updated>
   <id>https://blogs.littlegenius.xin/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>强化学习（一）强化学习的基本概念、e贪心算法、Softmax算法</title>
+    <link href="https://blogs.littlegenius.xin/2020/01/12/RLNotes-1/"/>
+    <id>https://blogs.littlegenius.xin/2020/01/12/RLNotes-1/</id>
+    <published>2020-01-12T09:41:18.000Z</published>
+    <updated>2020-01-12T09:49:19.479Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>强化学习</strong>（reinforcement learning，RL）是机器学习的一个领域，主要通过在<strong>环境</strong>（environment）中采取<strong>动作</strong>（action），来最大化某些指标，例如<strong>累计奖赏</strong>（cumulative reward）的一种学习方法。<strong>强化学习</strong>、<strong>有监督学习</strong>（supervised learning）与<strong>无监督学习</strong>（unsupervised learning）三者共同构成了机器学习的三个重要方面</p><blockquote><p>Reinforcement learning (RL) is an area of machine learning concerned with how software agents ought to take actions in an environment in order to maximize some notion of cumulative reward. Reinforcement learning is one of three basic machine learning paradigms, alongside supervised learning and unsupervised learning. (WikiPedia)</p></blockquote><h1 id="任务与奖赏"><a href="#任务与奖赏" class="headerlink" title="任务与奖赏"></a>任务与奖赏</h1><p>一个简单的强化学习模型如图所示</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://cdn.littlegenius.xin/RL/1/1.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>强化学习任务通常用<strong>马尔可夫决策过程</strong>（Markov Decision Process，MDP）来描述：机器处于<strong>环境</strong>E中，<strong>状态空间</strong>为X，其中每个状态x∈X是机器感知到的环境的描述，机器能采取的动作构成了<strong>动作空间</strong>A，若某个动作a∈A作用在当前状态x上，则潜在的转移函数P将使得环境从当前状态按某种概率转移到另一个状态，同时，环境会根据潜在的奖赏函数R反馈给机器一个奖赏。综合起来，强化学习任务对应了四元组E=&lt;X,A,P,R&gt;，其中P:X×A×X→R指定了状态转移概率，R:X×A×X→R（或者R:X×X→R）指定了奖赏。</p><p>如下图所示是一个在培育农作物的过程中，浇水与否（两个动作：浇水与不浇水）与农作物的状态（健康、缺水、溢水、凋亡）的马尔可夫决策过程：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://cdn.littlegenius.xin/RL/1/2.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>在强化学习中，机器要做的即通过在环境中不断尝试而学得一个<strong>策略</strong>（policy）π，根据这个策略，在状态x下得到要执行的动作或者以多少概率执行动作空间中的任意动作。</p><p>在强化学习中，并没有监督学习中的有标记样本，动作是否正确以及接下来要做哪些动作，需要机器通过反思之前的动作与累积奖赏进行学习。因此，强化学习在某种意义上可看作<strong>具有延迟标记信息</strong>的监督学习问题。</p><h1 id="探索与利用"><a href="#探索与利用" class="headerlink" title="探索与利用"></a>探索与利用</h1><p>强化学习的任务的最终奖赏是多部动作之后才能观察到的，所以对于每次的动作选择，可以分成两种情况：</p><ul><li><strong>探索</strong>（exploration）：若只想获得每个动作的期望奖赏是多少，则采用“仅探索”（exploration-only）策略，即将所有的尝试机会都均匀的分到每个可以执行的动作中去，从而根据最后每个动作多次尝试得到的奖赏来计算每个动作的期望奖赏。“探索”可以很好地估计每个动作的奖赏期望，但是却失去了很多选择最优动作的机会。</li><li><strong>利用</strong>（exploitation）：若只想通过执行动作得到最大的奖赏，则采用“仅利用”（exploitation-only）策略，即根据到目前为止已知的经验中得到平均奖赏最大的动作（若有多个这样的动作就随机选取一个），将所有的机会都用在这个动作上从而得到奖赏。“利用”没有很好地估计各个动作所带来的奖赏，执着于重复<strong>已知的</strong>奖赏最大的动作，从而可能经常选不到最优的动作。</li></ul><p>事实上,“探索”和“利用”两者是矛盾的，因为尝试次数有限，加强了一方则会自然削弱另一方，这就是强化学习所面临的<strong>探索-利用窘境</strong>（Exploration-Exploitation dilemma），所以必须在探索与利用之间达成较好的折中。</p><h1 id="ϵ-贪心算法"><a href="#ϵ-贪心算法" class="headerlink" title="ϵ-贪心算法"></a>ϵ-贪心算法</h1><p>ϵ-贪心算法基于一个概率来对探索和利用进行折中：每次尝试时以ϵ的概率进行探索，以1-ϵ的概率进行利用。</p><p>令Q(k)表示n次动作所得到的平均奖赏，每次得到的奖赏为v1, v2, v2, …, vn，则平均奖赏为：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://cdn.littlegenius.xin/RL/1/3.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>使用<strong>增量式计算</strong>平均奖赏的方式即每次通过单次奖赏与前边所有次的平均奖赏来计算本次动作后的平均奖赏：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://cdn.littlegenius.xin/RL/1/4.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>在增量计算下，每次动作仅需记录两个值：已尝试次数n-1和最近平均奖赏Qn-1即可。</p><p>ϵ-贪心算法描述如下：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://cdn.littlegenius.xin/RL/1/5.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><ul><li>若每个动作奖赏的不确定性较大，如概率分布较宽时，则需更多的探索，此时需要较大的ϵ值</li><li>若每个动作奖赏的不确定性较小，如概率分布较集中时，则少量的尝试就能很好地近似真实奖赏，此时需要的ϵ较小</li><li>通常令ϵ取一个较小的常数，如0.1或0.01</li><li>若尝试次数非常大，则在一段时间后，奖赏都能很好地近似出来，不再需要探索，这种情形下可让ϵ随着尝试次数的增加而逐渐减小，例如 ϵ=1∕√t</li></ul><h1 id="Softmax算法"><a href="#Softmax算法" class="headerlink" title="Softmax算法"></a>Softmax算法</h1><p>Softmax算法基于当前已知的动作的平均奖赏来对探索和利用进行折中。若个动作的平均奖赏相当，则选取各摇臂的概率也相当；若某些动作的平均奖赏明显高于其他动作，则它们被选取的概率也明显更高。</p><p>Softmax算法中动作概率的分配是基于Boltzmann分布：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://cdn.littlegenius.xin/RL/1/6.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>其中，Q(i)记录当前动作完成后的平均奖赏，τ&gt;0称为“温度”，τ越小则平均奖赏高的动作被选取的概率越高，τ趋近于0时Softmax算法趋于仅利用，τ趋于无穷大时Softmax算法趋于仅探索，算法描述如下：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://cdn.littlegenius.xin/RL/1/7.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>以上两种算法的好坏很难对比，也和其所取的参数有关，比如下图是一个在 2-摇臂赌博机上的性能比较：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://cdn.littlegenius.xin/RL/1/8.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;强化学习&lt;/strong&gt;（reinforcement learning，RL）是机器学习的一个领域，主要通过在&lt;strong&gt;环境&lt;/strong&gt;（environment）中采取&lt;strong&gt;动作&lt;/strong&gt;（action），来最大化某些指标，例
+      
+    
+    </summary>
+    
+    
+      <category term="强化学习" scheme="https://blogs.littlegenius.xin/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="学习笔记" scheme="https://blogs.littlegenius.xin/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="强化学习" scheme="https://blogs.littlegenius.xin/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="https://blogs.littlegenius.xin/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>【机器学习】（六）支持向量机</title>
@@ -561,34 +591,6 @@
       <category term="C++" scheme="https://blogs.littlegenius.xin/tags/C/"/>
     
       <category term="数据结构" scheme="https://blogs.littlegenius.xin/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【C++温故知新】（三）循环与分支</title>
-    <link href="https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%89%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%88%86%E6%94%AF/"/>
-    <id>https://blogs.littlegenius.xin/2019/08/05/%E3%80%90C-%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%E3%80%91%E4%B8%89%E5%BE%AA%E7%8E%AF%E4%B8%8E%E5%88%86%E6%94%AF/</id>
-    <published>2019-08-05T03:28:16.000Z</published>
-    <updated>2019-08-05T03:47:48.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h1><h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(init; condition; increment)</span><br><span class="line">&#123;</span><br><span class="line">conditional code;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="foreach循环"><a href="#foreach循环" class="headerlink" title="foreach循环"></a>foreach循环</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> myArray[<span class="number">5</span>] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">int</span> i : myArray) </span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(condition) </span><br><span class="line">&#123;</span><br><span class="line">statement(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="do-while循环"><a href="#do-while循环" class="headerlink" title="do-while循环"></a>do-while循环</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">statement(s);</span><br><span class="line">&#125;<span class="keyword">while</span>( condition );</span><br></pre></td></tr></table></figure><h2 id="循环控制语句"><a href="#循环控制语句" class="headerlink" title="循环控制语句"></a>循环控制语句</h2><ul><li>break</li><li>continue</li><li>goto<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">goto</span> label; </span><br><span class="line">label: statement;</span><br></pre></td></tr></table></figure></li></ul><h1 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h1><h2 id="if和else语句"><a href="#if和else语句" class="headerlink" title="if和else语句"></a>if和else语句</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(boolean_expression) </span><br><span class="line">&#123;</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">&#123; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(expression)</span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">case</span> constant-expression : </span><br><span class="line">statement(s); </span><br><span class="line"><span class="keyword">break</span>; </span><br><span class="line"><span class="keyword">case</span> constant-expression : </span><br><span class="line">statement(s);</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">default</span> : </span><br><span class="line">statement(s); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;循环&quot;&gt;&lt;a href=&quot;#循环&quot; class=&quot;headerlink&quot; title=&quot;循环&quot;&gt;&lt;/a&gt;循环&lt;/h1&gt;&lt;h2 id=&quot;for循环&quot;&gt;&lt;a href=&quot;#for循环&quot; class=&quot;headerlink&quot; title=&quot;for循环&quot;&gt;&lt;/a&gt;for循
-      
-    
-    </summary>
-    
-    
-      <category term="C++" scheme="https://blogs.littlegenius.xin/categories/C/"/>
-    
-    
-      <category term="学习笔记" scheme="https://blogs.littlegenius.xin/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="C++" scheme="https://blogs.littlegenius.xin/tags/C/"/>
     
   </entry>
   
