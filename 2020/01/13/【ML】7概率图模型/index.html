@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【机器学习】（七）概率图模型 | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习笔记,机器学习">
+    <meta name="description" content="概率模型与概率图模型概率模型概率模型（probabilistic model）提供了一种描述框架，将学习任务归结于计算变量的概率分布。在概率模型中，利用已知变量推测未知变量的分布称为推断（inference），其核心是如何基于可观测变量推测出未知变量的条件分布。假定所关心的变量集合为Y，可观测变量集合为O，其他变量的集合为R。  生成式（generative）模型考虑联合分布P(Y,R,O) 判别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【机器学习】（七）概率图模型">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2020/01/13/%E3%80%90ML%E3%80%917%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="概率模型与概率图模型概率模型概率模型（probabilistic model）提供了一种描述框架，将学习任务归结于计算变量的概率分布。在概率模型中，利用已知变量推测未知变量的分布称为推断（inference），其核心是如何基于可观测变量推测出未知变量的条件分布。假定所关心的变量集合为Y，可观测变量集合为O，其他变量的集合为R。  生成式（generative）模型考虑联合分布P(Y,R,O) 判别">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-f5780ebf445eed7f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-54130215644cf0d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-1d07fe8bdc046da2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-3759dd0e8c8618fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-e8695206412acd95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-043e59b97e3907e6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-5292ae90e810bc52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-58a1872d1834a940.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-8cd4cd78f4192e97.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-357288c5d7ad8230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-76a3d08eb2796834.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-aae8cfbd63248d36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-7689389de19be650.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-5ff6c7e17c50b356.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-af166955163f398a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-c83a8a1c3bab8ea9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-cb39e2228229d6d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6966151-f19f0dabcf63bd11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-01-13T12:49:09.000Z">
+<meta property="article:modified_time" content="2020-01-13T13:15:38.346Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6966151-f5780ebf445eed7f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【机器学习】（七）概率图模型</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【机器学习】（七）概率图模型</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-13T12:49:09.000Z" itemprop="datePublished" class="page-time">
+  2020-01-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#概率模型与概率图模型"><span class="post-toc-number">1.</span> <span class="post-toc-text">概率模型与概率图模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概率模型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概率模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概率图模型"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">概率图模型</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#隐马尔可夫模型"><span class="post-toc-number">2.</span> <span class="post-toc-text">隐马尔可夫模型</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#马尔可夫随机场"><span class="post-toc-number">3.</span> <span class="post-toc-text">马尔可夫随机场</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#马尔可夫随机场计算联合分布"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">马尔可夫随机场计算联合分布</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#马尔可夫随机场中的条件独立性"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">马尔可夫随机场中的条件独立性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#势函数"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">势函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#条件随机场"><span class="post-toc-number">4.</span> <span class="post-toc-text">条件随机场</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【ML】7概率图模型"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【机器学习】（七）概率图模型</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-13 20:49:09" datetime="2020-01-13T12:49:09.000Z"  itemprop="datePublished">2020-01-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="概率模型与概率图模型"><a href="#概率模型与概率图模型" class="headerlink" title="概率模型与概率图模型"></a>概率模型与概率图模型</h1><h2 id="概率模型"><a href="#概率模型" class="headerlink" title="概率模型"></a>概率模型</h2><p><strong>概率模型</strong>（probabilistic model）提供了一种描述框架，将学习任务归结于计算变量的概率分布。在概率模型中，利用已知变量推测未知变量的分布称为<strong>推断</strong>（inference），其核心是如何基于可观测变量推测出未知变量的条件分布。假定所关心的变量集合为Y，可观测变量集合为O，其他变量的集合为R。</p>
+<ul>
+<li><strong>生成式</strong>（generative）模型考虑联合分布P(Y,R,O)</li>
+<li><strong>判别式</strong>（discriminative）模型考虑条件分布P(Y,R|O)</li>
+</ul>
+<p>给定一组观测变量值，推断就是要由P(Y,R,O)或P(Y,R|O)得到条件概率分布P(Y|O)</p>
+<h2 id="概率图模型"><a href="#概率图模型" class="headerlink" title="概率图模型"></a>概率图模型</h2><p><strong>概率图模型</strong>（probabilistic graphical model）是一类用图来表达变量相关关系的概率模型。它以图为表示工具，最常见的是用一个结点表示一个或一组随机变量，结点之间的边表示变量间的概率相关关系，即变量关系图。</p>
+<p>根据边的性质不同，概率图模型可大致分为两类</p>
+<ul>
+<li><strong>贝叶斯网</strong>（Bayesian network）：使用<strong>有向无环图</strong>表示变量间的依赖关系</li>
+<li><strong>马尔可夫网</strong>（Markovnetwork）：使用<strong>无向图</strong>表示变量间的相关关系，又称为无向图模型</li>
+</ul>
+<h1 id="隐马尔可夫模型"><a href="#隐马尔可夫模型" class="headerlink" title="隐马尔可夫模型"></a>隐马尔可夫模型</h1><p><strong>隐马尔可夫模型</strong>（Hidden Markov Model，HMM）是结构最简单的<strong>动态贝叶斯网</strong>（dynamic Bayesian network），主要用于时序数据建模。</p>
+<p>隐马尔可夫模型中的变量可以分为两组：</p>
+<ul>
+<li>状态变量：状态变量yi表示第i时刻的系统状态，通常假定状态变量是隐藏的、不可被观测的，因此也称<strong>隐变量</strong>（hidden variable）。隐马尔可夫模型中，系统的状态通常在多个状态之间互相转化，因此一般认为状态变量的取值是有限的离散值。</li>
+<li>观测变量：观测变量xi表示第i时刻的观测值。它可以是离散型也可以是连续型。</li>
+</ul>
+<p>隐马尔可夫模型各变量的依赖关系如下图。在任一时刻，观测变量的取值仅依赖于状态变量，即 xt 仅由 yt 确定；任一时刻的状态变量仅依赖于其上一时刻的状态变量，即 yt 仅依赖于 y(t-1)。这就是<strong>马尔可夫链</strong>（Markov chain），即：系统下一时刻的状态仅由当前状态决定，不依赖于以往的任何状态。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-f5780ebf445eed7f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>基于马尔可夫链，所有变量的联合概率分布为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-54130215644cf0d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p> 为确定一个隐马尔可夫模型，需要以下三组参数：</p>
+<ul>
+<li>状态转移概率：模型在各个状态间转换的概率，通常记为矩阵A=[aij]N×N，其中<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-1d07fe8bdc046da2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+表示在任意时刻t，若状态为si，则在下一时刻状态为sj的概率</li>
+<li>输出观测概率：模型根据当前状态获得各个观测值的概率，通常记为矩阵B=[bij]N×M，其中<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-3759dd0e8c8618fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+表示在任意时刻t，若状态为si，则观测值oj被获取的概率</li>
+<li>初始状态概率：模型在初始时刻各状态出现的概率，通常记为π=(π1, π2, …, πN)，其中<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-e8695206412acd95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+表示模型的初始状态为si的概率</li>
+</ul>
+<p>从而，隐马尔可夫模型通常使用 λ=[A, B, π] 来表示。</p>
+<h1 id="马尔可夫随机场"><a href="#马尔可夫随机场" class="headerlink" title="马尔可夫随机场"></a>马尔可夫随机场</h1><p><strong>马尔可夫随机场</strong>（Markov Random Field，MRF）是典型的马尔可夫网，这是一种无向图模型。图中每个结点表示一个或一组变量，结点之间的边表示两个变量之间的依赖关系。马尔可夫随机场有一组<strong>势函数</strong>（potential functions），亦称<strong>因子</strong>（factor），这是定义在变量子集上的<strong>非负实函数</strong>，主要用于定义概率分布函数。</p>
+<p>如下图即一个简单的马尔可夫随机场：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-043e59b97e3907e6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="马尔可夫随机场计算联合分布"><a href="#马尔可夫随机场计算联合分布" class="headerlink" title="马尔可夫随机场计算联合分布"></a>马尔可夫随机场计算联合分布</h2><p>在一个马尔可夫随机场中定义如下概念：</p>
+<ul>
+<li><strong>团</strong>（clique）：对于图中结点的一个子集，若其中任意两个结点之间都有边连接，则称该子集为一个团</li>
+<li><strong>极大团</strong>（maximal clique）：若某个团加入另外任何一个结点都不能再够成团，则称该团为极大团，即极大团就是不能被其他团所包含的团</li>
+</ul>
+<p>马尔可夫随机场中，所有变量的联合概率可以通过团来定义，每个因子仅与一个团相关。若所有的团构成集合C，与团Q相关的变量集合记为xQ，则联合概率定义为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-5292ae90e810bc52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>其中ψQ为与团Q对应的势函数，用于对团Q中的变量关系进行建模</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-58a1872d1834a940.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>称为规范化因子，一般很难计算，所以往往不需要Z的精确值</p>
+<p>为了减少团的数量同时保证满足每个因子仅与一个团相关这个条件，通常使用极大团Q*来计算，使用极大团定义的联合概率为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-8cd4cd78f4192e97.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="马尔可夫随机场中的条件独立性"><a href="#马尔可夫随机场中的条件独立性" class="headerlink" title="马尔可夫随机场中的条件独立性"></a>马尔可夫随机场中的条件独立性</h2><p>定义如下概念：</p>
+<p>若马尔可夫随机场中，结点集A中的结点到B中的结点都必须经过结点集C中的结点，则称结点集A和B被结点集C分离，结点集C称为分离集（separating set），如图所示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-357288c5d7ad8230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<ul>
+<li>全局马尔可夫性（global Markov     property）：给定两个变量子集的分离集，则这两个变量子集条件独立，如上图中，xA和xB在给定xC的条件下独立，记为：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-76a3d08eb2796834.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>局部马尔可夫性（local Markov property）：给定某变量的邻接变量，则该变量条件独立于其他变量。例如，令V为图的结点集，n(v)为结点v在图上的邻接结点，n*(v)=n(v)U{v}，有：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-aae8cfbd63248d36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>成对马尔可夫性（pairwise Markov property）：给定所有其他变量，两个非邻接变量条件独立。例如，令图的结点集和边集分别为V和E，对图中的两个结点u和v，若⟨n,v⟩∉E，则：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-7689389de19be650.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+</li>
+</ul>
+<h2 id="势函数"><a href="#势函数" class="headerlink" title="势函数"></a>势函数</h2><p>势函数定量地刻画变量集xQ中变量之间的相关关系，是非负函数，且在所偏好的变量取值上有较大的函数值，势函数常用指数函数定义：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-5ff6c7e17c50b356.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>HQ(xQ)是一个定义在变量xQ上的实值函数，常见形式为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-af166955163f398a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h1 id="条件随机场"><a href="#条件随机场" class="headerlink" title="条件随机场"></a>条件随机场</h1><p><strong>条件随机场</strong>（Conditional Random Field，CRF）是一种判别式无向图模型，对条件分布进行建模。隐马尔可夫模型和马尔可夫随机场为生成式模型，直接对联合分布进行建模。</p>
+<p>条件随机场试图对多个变量在给定观测值后的条件概率进行建模。具体来说，若令x={x1, x2, …, xn}为观测序列，y={y1, y2, …, yn} 为与之相应的标记序列，则条件随机场的目标是构建条件概率模型P(y|x)。</p>
+<p>令G=&lt;V,E&gt;表示结点与标记变量y中元素一一对应的无向图，yv表示与结点v对应的标记变量，n(v)表示结点v的邻接结点，若图G的每个变量yv都满足马尔可夫性，即：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-c83a8a1c3bab8ea9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>则G=&lt;V,E&gt;构成一个条件随机场</p>
+<p>理论上来说，图G可具有任意结构，只要能表示标记变量之间的条件独立性关系即可。但在现实应用中，尤其是对标记序列建模时，最常用的仍是如下图所示的链式结构，即<strong>链式条件随机场</strong>（chain-structured CRF）：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-cb39e2228229d6d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>条件随机场中，通过选用指数势函数并引入<strong>特征函数</strong>（feature function），条件概率被定义为：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload-images.jianshu.io/upload_images/6966151-f19f0dabcf63bd11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>其中tj是定义在观测序列的两个相邻标记位置上的<strong>转移特征函数</strong>（transition feature function），用于刻画相邻标记变量之间的相关关系以及观测序列对它们的影响，sk是定义在观测序列的标记位置i上的<strong>状态特征函数</strong>（status feature function），用于刻画观测序列对标记变量的影响，λj和μk为参数，Z为规范化因子。</p>
+<ul>
+<li>条件随机场和马尔可夫随机场均使用团上的势函数定义概率，两者在形式上没有显著区别</li>
+<li>条件随机场处理的是条件概率，而马尔可夫随机场处理的是联合概率</li>
+</ul>
+<blockquote>
+<p>全文参考：周志华 著 《机器学习》</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-01-13T13:15:38.346Z" itemprop="dateUpdated">2020-01-13 21:15:38</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2020/01/13/%E3%80%90ML%E3%80%917%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/" target="_blank" rel="external">https://blogs.littlegenius.xin/2020/01/13/%E3%80%90ML%E3%80%917%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2020/01/13/%E3%80%90ML%E3%80%917%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/&title=《【机器学习】（七）概率图模型》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2020/01/13/%E3%80%90ML%E3%80%917%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/&title=《【机器学习】（七）概率图模型》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2020/01/13/%E3%80%90ML%E3%80%917%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【机器学习】（七）概率图模型》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2020/01/13/%E3%80%90ML%E3%80%917%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2020/01/13/%E3%80%90ML%E3%80%917%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/01/12/RLNotes-1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">强化学习（一）强化学习的基本概念、e贪心算法、Softmax算法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2020/01/13/%E3%80%90ML%E3%80%917%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/&title=《【机器学习】（七）概率图模型》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2020/01/13/%E3%80%90ML%E3%80%917%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/&title=《【机器学习】（七）概率图模型》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2020/01/13/%E3%80%90ML%E3%80%917%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【机器学习】（七）概率图模型》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2020/01/13/%E3%80%90ML%E3%80%917%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2020/01/13/%E3%80%90ML%E3%80%917%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAAD8klEQVR42u3aSZLCQAwEwPn/p5kHAKZKahMc0qcJFruVcxBa/v7i6/F0bd599/nrd5/v+e4p7z5z7MKBAwcOHGWoyUGfH3kdQB5wC3R92jxGHDhw4MBxluM6mc0OvU+Hm08m38WBAwcOHL/AkSTj/D55EZin/JwSBw4cOHD8AkfbektKu31TcpakceDAgQPHfRxJczAPtW0m5gk7Lx1v75XiwIEDB455vivKsN/8+5b9Dhw4cODAEa8XtAlpPxxqS8Tk83V0OHDgwIFjzZEnpNmCQru+cLYtOIwLBw4cOHCsOZLkNEtg0ZgnXkdIgp+tPtRFHQ4cOHDgCDjaBbV2pNQOh/JT7dcjoi0PHDhw4MARcLRLA6sVtPWUZ5bCi+hw4MCBA8fNHJsUOHulfXr+OyJayMOBAwcOHEc5ZqsM+VAqSZD5ukM+4irWJnDgwIEDx1GONh3mj8zLtiIpBq/nifZtCYcDBw4cOEqOdkJ14DFlezEnyO8fDa5w4MCBA8eIY9b+S0JNQE+VZ+2/M1powIEDBw4chzjyYyWFU7u+sFmJ2yw61PkfBw4cOHCUKHmodw+rZs+afRIHDhw4cHyHIy+B2vHP2TWItkFZb3ngwIEDB46y3qlLndFR8qe0bcpZ8B8WGnDgwIEDR8mxT3h5Wp2l7baBuEm3OHDgwIHjFMd1MMm7+R2SRYd2QaGN7kOixYEDBw4ca458pJQ3+GZjpDZt56HWvztw4MCBA8e6Ztm0CGepum0+5ml7dlocOHDgwHGKI0m0bUmW33/WqcvbiMWZceDAgQPHIY7ZAKl9fVYQzsq85AwvvoUDBw4cOA5xbA7ajnlm5eKpEg4HDhw4cNzNkY9qHsE1azi27b/ZkkRxKhw4cODAcRtHu44wa8/lDcHZKkPyXBw4cODAcZYjP3SeFGch7ZcYjg3GcODAgQPHiOO+gi1vMs7u0y7qRW1KHDhw4MCx5phdj/jK0+dmVS4524wJBw4cOHC0HEnqOlYjlsFfh7Q57YeBEw4cOHDgOMTRhpoHsBlH5SsLtzQHceDAgQPHiGO2xNbWgrMEPFuhyHcVXpRwOHDgwIFjwZGvIyRwZ8NOKPcobzc7cODAgQPHiONRXrOxU9J8zFN+/g9L7o8DBw4cOM5yzJYY2qPkjbz8WZuViGIQhQMHDhw4RhxtspwdKFlcmC1b7D9T9CBx4MCBA0fM0SaqpKzKw9sHPKvCijdw4MCBA8dXONrhUB5G+8RZs/JwosWBAwcOHCOOJB3mybgt8/Lv5j8RXjQHceDAgQPHmmOzxNAeZdPC2yxMRCkfBw4cOHCsOdpW2iyAPNXl785o8p8ROHDgwIGj5PgHDKhoOkFPgvwAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
