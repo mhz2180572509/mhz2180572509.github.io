@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>OpenGL-1 A Brief Introduction To Modern OpenGL | 小天才的杂货铺</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="OpenGL,English Notes">
+    <meta name="description" content="Core Profile and Compatibility ProfileThe Key Versions to Revolute The OpenGL OpenGL 3.0 introduced deprecation model to gradually remove legacy functions. OpenGL 3.1 removed the deprecated functions">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL-1 A Brief Introduction To Modern OpenGL">
+<meta property="og:url" content="https://blogs.littlegenius.xin/2020/01/19/OpenGL-1/index.html">
+<meta property="og:site_name" content="小天才的杂货铺">
+<meta property="og:description" content="Core Profile and Compatibility ProfileThe Key Versions to Revolute The OpenGL OpenGL 3.0 introduced deprecation model to gradually remove legacy functions. OpenGL 3.1 removed the deprecated functions">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL-1/1.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL-1/2.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL-1/3.png">
+<meta property="og:image" content="http://cdn.littlegenius.xin/OpenGL-1/4.png">
+<meta property="article:published_time" content="2020-01-19T03:25:39.000Z">
+<meta property="article:modified_time" content="2020-01-19T04:22:55.219Z">
+<meta property="article:author" content="MA Haozhe">
+<meta property="article:tag" content="OpenGL">
+<meta property="article:tag" content="English Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.littlegenius.xin/OpenGL-1/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小天才的杂货铺" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MA Haozhe</h5>
+          <a href="mailto:mhz2180572509@163.com" title="mhz2180572509@163.com" class="mail">mhz2180572509@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/mhz2180572509" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">OpenGL-1 A Brief Introduction To Modern OpenGL</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">OpenGL-1 A Brief Introduction To Modern OpenGL</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-19T03:25:39.000Z" itemprop="datePublished" class="page-time">
+  2020-01-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OpenGL/">OpenGL</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Core-Profile-and-Compatibility-Profile"><span class="post-toc-number">1.</span> <span class="post-toc-text">Core Profile and Compatibility Profile</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#The-Key-Versions-to-Revolute-The-OpenGL"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">The Key Versions to Revolute The OpenGL</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Core-Profile-OpenGL"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Core Profile OpenGL</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#OpenGL-Pipeline"><span class="post-toc-number">2.</span> <span class="post-toc-text">OpenGL Pipeline</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Vertex-Shading"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Vertex Shading</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Tesssllation"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Tesssllation</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Geometry-Shading"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Geometry Shading</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Primitive-Assembly-etc"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Primitive Assembly, etc.</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Rasterization"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">Rasterization</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Fragment-Shading"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">Fragment Shading</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Per-Fragment-Operations"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">Per-Fragment Operations</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Framebuffer"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">Framebuffer</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Modern-OpenGL"><span class="post-toc-number">3.</span> <span class="post-toc-text">Modern OpenGL</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OpenGL-4-5"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">OpenGL 4.5</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Some-OpenGL-Libraries"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Some OpenGL Libraries</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GLUT-OpenGL-Utility-Toolkit"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">GLUT (OpenGL Utility Toolkit)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FreeGLUT"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">FreeGLUT</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GLEW-OpenGL-Extension-Wrangler"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">GLEW (OpenGL Extension Wrangler)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GLM-OpenGL-Mathematics"><span class="post-toc-number">3.2.4.</span> <span class="post-toc-text">GLM (OpenGL Mathematics)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GLFW"><span class="post-toc-number">3.2.5.</span> <span class="post-toc-text">GLFW</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Modern-OpenGL-1"><span class="post-toc-number">4.</span> <span class="post-toc-text">Modern OpenGL</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-OpenGL-1"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">OpenGL-1 A Brief Introduction To Modern OpenGL</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-19 11:25:39" datetime="2020-01-19T03:25:39.000Z"  itemprop="datePublished">2020-01-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OpenGL/">OpenGL</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Core-Profile-and-Compatibility-Profile"><a href="#Core-Profile-and-Compatibility-Profile" class="headerlink" title="Core Profile and Compatibility Profile"></a>Core Profile and Compatibility Profile</h1><h2 id="The-Key-Versions-to-Revolute-The-OpenGL"><a href="#The-Key-Versions-to-Revolute-The-OpenGL" class="headerlink" title="The Key Versions to Revolute The OpenGL"></a>The Key Versions to Revolute The OpenGL</h2><ul>
+<li>OpenGL 3.0 introduced deprecation model to gradually remove legacy functions.</li>
+<li>OpenGL 3.1 removed the deprecated functions and the remaining part forms the <strong>Core Profile</strong>.</li>
+<li>OpenGL 3.2 introduced <strong>Compatibility Profile</strong> to maintain backwards compatibility.</li>
+</ul>
+<h2 id="Core-Profile-OpenGL"><a href="#Core-Profile-OpenGL" class="headerlink" title="Core Profile OpenGL"></a>Core Profile OpenGL</h2><ul>
+<li>Have access to later OpenGL functionalities</li>
+<li>More suitable for modern GPU</li>
+<li>Many familiar functionalities removed</li>
+<li><strong>All rendering must use shaders</strong><ul>
+<li>A shader is a program loaded and executed in a stage of the rendering pipeline</li>
+<li>The shader is a user program which means that the users have to/can define their own shaders to realize the rendering</li>
+</ul>
+</li>
+</ul>
+<h1 id="OpenGL-Pipeline"><a href="#OpenGL-Pipeline" class="headerlink" title="OpenGL Pipeline"></a>OpenGL Pipeline</h1><p>A simplified view of OpenGL Graphics Pipeline is shown as follows:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL-1/1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="Vertex-Shading"><a href="#Vertex-Shading" class="headerlink" title="Vertex Shading"></a>Vertex Shading</h2><ul>
+<li>Excuted per vertex</li>
+<li>Produces vertex NDC (normalized device coordinates) coordinates</li>
+</ul>
+<h2 id="Tesssllation"><a href="#Tesssllation" class="headerlink" title="Tesssllation"></a>Tesssllation</h2><ul>
+<li><strong>Tessellation Control Shader</strong> (TCS)<ul>
+<li>Executed per patch vertex</li>
+<li>Receives patch vertices (control points) from vertex shader</li>
+<li>Generates tessellation output patch vertices to pass to the <strong>Tessellation Evaluation Shader</strong> (TES)</li>
+<li>Specifies tessellation level factors</li>
+<li><strong>Optional</strong></li>
+</ul>
+</li>
+<li><strong>Tessellation Primitive Generator</strong> (TPG)<ul>
+<li>Receives tessellation level factors from TCS</li>
+<li>Performs tessellation and generates tessellation coordinates for the resulting primitives and pass them to the Tessellation Evaluation Shader (TES)</li>
+<li>not programmable</li>
+</ul>
+</li>
+<li><strong>Tessellation Evaluation Shader</strong> (TES)<ul>
+<li>Executed per tessellation coordinate</li>
+<li>Receives patch vertices (control points) from TCS</li>
+<li>Computes vertex position from tessellation coordinate</li>
+<li><strong>Optional</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="Geometry-Shading"><a href="#Geometry-Shading" class="headerlink" title="Geometry Shading"></a>Geometry Shading</h2><ul>
+<li>Executed per <strong>primitive</strong></li>
+<li>Receives complete primitive (as arrays of vertices/attributes) from earlier stage</li>
+<li>Outputs zero primitive (culling) or more primitives (geometry amplification)</li>
+<li>Can output primitive type different from input</li>
+<li><strong>Optional</strong></li>
+</ul>
+<h2 id="Primitive-Assembly-etc"><a href="#Primitive-Assembly-etc" class="headerlink" title="Primitive Assembly, etc."></a>Primitive Assembly, etc.</h2><p>This part is <strong>fixed</strong>, cannot be programmed</p>
+<ul>
+<li>Primitive assembly<ul>
+<li>Vertex data is collected into complete primitives</li>
+<li><strong>Necessary for clipping and back-face culling</strong></li>
+</ul>
+</li>
+<li>Clipping</li>
+<li>Perspective division<ul>
+<li>To <strong>normalized device coordinate</strong> (NDC) space</li>
+</ul>
+</li>
+<li>Viewport transformation<ul>
+<li>To windows space</li>
+<li>Include depth range scaling</li>
+</ul>
+</li>
+<li>Back-face culling</li>
+</ul>
+<h2 id="Rasterization"><a href="#Rasterization" class="headerlink" title="Rasterization"></a>Rasterization</h2><ul>
+<li>If geometric primitive is not clipped out, the appropriate pixels in the frame buffer must be assigned colors</li>
+<li>Rasterizer produces a set of framgements for each primitive<ul>
+<li>Fragments are “potential pixels”, they have pixel/fragment locations (in window space) and have color and depth attributes (and others) </li>
+</ul>
+</li>
+</ul>
+<p><img src="http://cdn.littlegenius.xin/OpenGL-1/2.png" alt=""></p>
+<h2 id="Fragment-Shading"><a href="#Fragment-Shading" class="headerlink" title="Fragment Shading"></a>Fragment Shading</h2><ul>
+<li>Executed per fragment</li>
+<li>Each generated fragment is processed to determine the color of the corresponding pixel in the framebuffer </li>
+</ul>
+<h2 id="Per-Fragment-Operations"><a href="#Per-Fragment-Operations" class="headerlink" title="Per-Fragment Operations"></a>Per-Fragment Operations</h2><p>After fragment shading, each resulting fragment is submitted to a set of simple operations before reaching the framebuffer</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL-1/3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="Framebuffer"><a href="#Framebuffer" class="headerlink" title="Framebuffer"></a>Framebuffer</h2><p>A framebuffer (frame buffer or framestore) is a portion of random-access memory (RAM) containing a bitmap that drives a video display. It is a memory buffer containing a complete frame of data.</p>
+<h1 id="Modern-OpenGL"><a href="#Modern-OpenGL" class="headerlink" title="Modern OpenGL"></a>Modern OpenGL</h1><h2 id="OpenGL-4-5"><a href="#OpenGL-4-5" class="headerlink" title="OpenGL 4.5"></a>OpenGL 4.5</h2><ul>
+<li>Khronos OpenGL Registry<ul>
+<li><a href="https://www.khronos.org/registry/OpenGL/index_gl.php" target="_blank" rel="noopener">https://www.khronos.org/registry/OpenGL/index_gl.php</a></li>
+</ul>
+</li>
+<li>OpenGL Wiki<ul>
+<li><a href="https://www.khronos.org/opengl/wiki/" target="_blank" rel="noopener">https://www.khronos.org/opengl/wiki/</a></li>
+</ul>
+</li>
+<li>OpenGL 4.5 Reference Pages<ul>
+<li><a href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/" target="_blank" rel="noopener">https://www.khronos.org/registry/OpenGL-Refpages/gl4/</a></li>
+</ul>
+</li>
+<li>OpenGL 4.5 API Reference Card <ul>
+<li><a href="https://www.khronos.org/files/opengl45-quick-referencecard.pdf" target="_blank" rel="noopener">https://www.khronos.org/files/opengl45-quick-referencecard.pdf</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Some-OpenGL-Libraries"><a href="#Some-OpenGL-Libraries" class="headerlink" title="Some OpenGL Libraries"></a>Some OpenGL Libraries</h2><h3 id="GLUT-OpenGL-Utility-Toolkit"><a href="#GLUT-OpenGL-Utility-Toolkit" class="headerlink" title="GLUT (OpenGL Utility Toolkit)"></a>GLUT (OpenGL Utility Toolkit)</h3><ul>
+<li>Too Old</li>
+</ul>
+<h3 id="FreeGLUT"><a href="#FreeGLUT" class="headerlink" title="FreeGLUT"></a>FreeGLUT</h3><ul>
+<li>Based on GLUT API</li>
+<li>Open source</li>
+<li>Many tutorials and examples out there use GLUT/freeGLUT</li>
+<li>Fully compatible with GLUT</li>
+<li>More bugs sometimes</li>
+</ul>
+<p><a href="http://freeglut.sourceforge.net/" target="_blank" rel="noopener">http://freeglut.sourceforge.net/</a></p>
+<h3 id="GLEW-OpenGL-Extension-Wrangler"><a href="#GLEW-OpenGL-Extension-Wrangler" class="headerlink" title="GLEW (OpenGL Extension Wrangler)"></a>GLEW (OpenGL Extension Wrangler)</h3><ul>
+<li>Cross platform</li>
+<li>Open source</li>
+<li>C/C++ extension loading library</li>
+</ul>
+<p><a href="http://glew.sourceforge.net/" target="_blank" rel="noopener">http://glew.sourceforge.net/</a></p>
+<h3 id="GLM-OpenGL-Mathematics"><a href="#GLM-OpenGL-Mathematics" class="headerlink" title="GLM (OpenGL Mathematics)"></a>GLM (OpenGL Mathematics)</h3><ul>
+<li>A header only C++ mathematics library for graphics software based on the OpenGL Shading Language (GLSL) specifications</li>
+</ul>
+<p><a href="https://glm.g-truc.net/0.9.9/index.html" target="_blank" rel="noopener">https://glm.g-truc.net/0.9.9/index.html</a></p>
+<h3 id="GLFW"><a href="#GLFW" class="headerlink" title="GLFW"></a>GLFW</h3><ul>
+<li>Open source</li>
+<li>Multi platform</li>
+<li>Provides a simple API for creating windows, contexts and surface, receiving input and events.</li>
+<li>Similar to GLUT/FreeGLUT</li>
+</ul>
+<p><a href="https://www.glfw.org/" target="_blank" rel="noopener">https://www.glfw.org/</a></p>
+<h1 id="Modern-OpenGL-1"><a href="#Modern-OpenGL-1" class="headerlink" title="Modern OpenGL"></a>Modern OpenGL</h1><p>User can design their own shaders in modern OpenGL.</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://cdn.littlegenius.xin/OpenGL-1/4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-01-19T04:22:55.219Z" itemprop="dateUpdated">2020-01-19 12:22:55</time>
+</span><br>
+
+
+        
+        转载请注明出处，本文永久更新链接：<a href="/2020/01/19/OpenGL-1/" target="_blank" rel="external">https://blogs.littlegenius.xin/2020/01/19/OpenGL-1/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://blogs.littlegenius.xin">
+            <img src="/img/avatar.jpeg" alt="MA Haozhe">
+            MA Haozhe
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/English-Notes/" rel="tag">English Notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/" rel="tag">OpenGL</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2020/01/19/OpenGL-1/&title=《OpenGL-1 A Brief Introduction To Modern OpenGL》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2020/01/19/OpenGL-1/&title=《OpenGL-1 A Brief Introduction To Modern OpenGL》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2020/01/19/OpenGL-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《OpenGL-1 A Brief Introduction To Modern OpenGL》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2020/01/19/OpenGL-1/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2020/01/19/OpenGL-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/01/17/Uncertainty-0/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Uncertainty-1 Quantifying Uncertainty</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "UazTKjXspk5Wqs8bdqcysAcV-gzGzoHsz",
+            appKey: "Mp3bAKe3Phzr2OKV4XSNcQza",
+            avatar: "mm",
+            placeholder: "请多多指教！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "20"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="bottom">
+        <p><span>MA Haozhe &copy; 2019 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> Server <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blogs.littlegenius.xin/2020/01/19/OpenGL-1/&title=《OpenGL-1 A Brief Introduction To Modern OpenGL》 — 小天才的杂货铺&pic=https://blogs.littlegenius.xin/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blogs.littlegenius.xin/2020/01/19/OpenGL-1/&title=《OpenGL-1 A Brief Introduction To Modern OpenGL》 — 小天才的杂货铺&source=仰望星空，脚踏实地" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blogs.littlegenius.xin/2020/01/19/OpenGL-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《OpenGL-1 A Brief Introduction To Modern OpenGL》 — 小天才的杂货铺&url=https://blogs.littlegenius.xin/2020/01/19/OpenGL-1/&via=https://blogs.littlegenius.xin" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blogs.littlegenius.xin/2020/01/19/OpenGL-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3aQXKEMAwEwP3/pzfXTSWwIwkO2O1TKiHg5jCFLL1e8Xp/rL+/OVqfV57f+fw3ly0MDIzHMvKt5JijbR1tsXr/f+6DgYGxAeM8CnvXfHlwEMHJczEwMDB62+0FNwYGBsZ9jGp1mRTGGBgYGL0iNj8gy2M3eWUX1+IYGBgPZEwKy7t/vqW/gYGB8SjGu7iqTc2jK+fN0V//hYGBsTQjD7h8kCL/uExeQT78gYGBsQOjd7ifbLE3alYeFMPAwFiUkR+xVWM3D9kccHg9BgbG0ow8BCcPS1oI+fUYGBgYvQP6HJ8c3uXHcxgYGDswqkdgeRtgMoRxQbxiYGBsw8gHv+Yfc70gjgIXAwNjIUbeJKgOeJ1/YvYC9/DTEAMDYzlG9WH5x9zk+60Z3BgYGIsyemE6aRX0eOVhCwwMjIUYvQI1bzpWD+mS5sGX2MXAwFia0Qu7akzPC9rDv2JgYGzAeBVXdXii+mrKd8bAwNiG8S6uSTT3RsGiwMXAwNiA0QvBwnhE3DQtHMNhYGBswOitfOu9YM1bnhgYGDswJsMTeVs0P3rLXzcGBsbajEm8Vscm8oGM6nMxMDDWZvTCrjfCNW9kJk/HwMBYldEL2fwQ7RxZbX82a3EMDIwlGJPgu6qsnewWAwMDo/oJmMdutRmAgYGBUe0J5kVp9cp8mAMDA2MfRnUwqzo8kQTrefF82XEbBgbGAxm90rFagvYO7HplMwYGxkKMH7/6iYeN60PEAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '为什么不看我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!你回来啦!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
